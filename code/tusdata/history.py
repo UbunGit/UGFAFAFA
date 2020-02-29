@@ -90,7 +90,6 @@ def fitter(data):
         counts.append(count)
         amounts.append(tamount)
         stores.append(tstore)
-        print(i)
     return btypes,scress,counts,amounts,stores
 
 
@@ -115,5 +114,5 @@ df['buy'],df['scress'],df['counts'],df['amounts'], df['store'] = fitter(df)
 # diff, dea, macd  = tl.MACD(df.close, fastperiod=12, slowperiod=26, signalperiod=9)
 # macd = macd * 2
 # df['DIFF'], df['DEA'], df['macd'] = [diff,dea,macd]
-print(df)
+print(df.to_dict(orient='records'))
 
