@@ -143,6 +143,7 @@ def init(loop):
     app = web.Application(loop=loop, middlewares=[
         logger_factory, auth_factory, response_factory
     ])
+    cors = aiohttp_cors.setup(app)
     cors = aiohttp_cors.setup(app, defaults={
         '*': aiohttp_cors.ResourceOptions(
             allow_credentials=True,

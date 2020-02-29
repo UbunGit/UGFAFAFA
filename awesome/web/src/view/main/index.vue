@@ -8,10 +8,10 @@
         </el-aside>
         <el-main>
           <el-card>
-            <setting-form></setting-form>
+            <setting-form v-model="result"></setting-form>
           </el-card>
           <el-card>
-            <result-view></result-view>
+            <result-view v-model="result"></result-view>
           </el-card>
           <el-card></el-card>
         </el-main>
@@ -28,10 +28,16 @@ export default {
      created() {
       this.onSubmit();
     },
+    data() {
+        return {
+          result:[]
+        }
+    },
     methods:{
      onSubmit(){
         configlistAll().then(response => {
-          
+          this.result = response.data.data
+
         });
      },
     }
