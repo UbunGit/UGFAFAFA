@@ -20,6 +20,9 @@ app = Flask(__name__)
  
 def Response_headers(content):
     resp = Response(content)
+    resp.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,session_id')
+    resp.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEAD')
+    resp.headers.add('Content-Type', 'text/plain')
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
  
@@ -32,10 +35,23 @@ def hello_world():
 @app.route('/run', methods=['POST'])
 def run():
     if request.method == 'POST' and request.form['code']:
+        tcode = '000100'
+        amount = 10000
+        start = None
+        end  = None
+        parms =  request.form.to_dict()
+        if 'tcode' in parms:
+            tcode = parms['tcode']
+        if 'amount' in parms:
+            amount = parms['amount']
+        if 'start' in parms:
+            start = parms['start']
+        if 'end' in parms:
+            end = parms['end']
         code = request.form['code']
-        print(code)
         jsondata = zxby.main(code)
-        return Response_headers(str(jsondata))
+        return json.dumps(jsondata)
+    return Response_headers(str("jsondata"))
  
  
 @app.errorhandler(403)

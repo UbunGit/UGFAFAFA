@@ -40,7 +40,8 @@ def buy(price,buycount=buy_def*100):
         isScress = True
     amount = tamount
     store = tstore
-    return isScress,buycount,tamount,tstore
+    sumAmount = tstore*price + amount
+    return isScress,buycount,tamount,tstore,sumAmount
 
 # sell
 def sell(price,buycount=0):
@@ -60,7 +61,8 @@ def sell(price,buycount=0):
         isScress = True
     amount = tamount
     store = tstore
-    return isScress,buycount,tamount,tstore
+    sumAmount = tstore*price + amount
+    return isScress,buycount,tamount,tstore,sumAmount
 
 ## 如果收盘价低于开盘价 买入
 def fitter(data):
@@ -69,6 +71,7 @@ def fitter(data):
     counts = []
     amounts = []
     stores = []
+    sumAmounts = []
     open_prices = numpy.array(data['open'])
     close_prices = numpy.array(data['close'])
     for i in range(len(df)):
@@ -77,20 +80,21 @@ def fitter(data):
         tamount = amount
         tstore = store
         # 开盘价高于收盘价0.2 卖出
-        if (open_prices[i]-close_prices[i])>0.5: 
+        if (open_prices[i]-close_prices[i])>0.1: 
             btypes.append(-1)
-            isScress ,count,tamount,tstore = sell(close_prices[i])
+            isScress ,count,tamount,tstore,sumAmount = sell(close_prices[i])
             
-        elif (close_prices[i]-open_prices[i])>0.5:
+        elif (close_prices[i]-open_prices[i])>0.1:
             btypes.append(1)
-            isScress ,count,tamount,tstore = buy(close_prices[i])
+            isScress ,count,tamount,tstore,sumAmount = buy(close_prices[i])
         else:
             btypes.append(0)
         scress.append(isScress)
         counts.append(count)
         amounts.append(tamount)
         stores.append(tstore)
-    return btypes,scress,counts,amounts,stores
+        sumAmounts.append(sumAmount)
+    return btypes,scress,counts,amounts,stores,sumAmounts
 
 
 # step1 获取股票列表
@@ -102,17 +106,8 @@ df =  ts.get_k_data(code='000652') #一次性获取全部日k线数据
 # engine = create_engine('mysql://user:passwd@127.0.0.1/FAFA?charset=utf8')
 
 # step3 添加过滤，确定买卖方案
-df['buy'],df['scress'],df['counts'],df['amounts'], df['store'] = fitter(df)
-
-# # step3 遍历下单
-# print(len(df))
-# for i in range(len(df)):
-#     buy(df,i)
-#     sell(df,i)
-
-# df.sort_index(inplace=True)
-# diff, dea, macd  = tl.MACD(df.close, fastperiod=12, slowperiod=26, signalperiod=9)
-# macd = macd * 2
-# df['DIFF'], df['DEA'], df['macd'] = [diff,dea,macd]
-print(df.to_dict(orient='records'))
+df['buy'],df['scress'],df['counts'],df['amounts'], df['store'] ,df['sumAmount']= fitter(df)
+file = '../../file/000652.csv'
+df.to_csv(file)
+print(df.to_json(orient='records'))
 

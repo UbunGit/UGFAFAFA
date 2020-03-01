@@ -1,3 +1,5 @@
 import sys
+from tradeAPI import  amount
 
-return "sys.api_version"
+
+print(amount)
