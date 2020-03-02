@@ -49,7 +49,7 @@ def run():
         if 'end' in parms:
             end = parms['end']
         code = request.form['code']
-        jsondata = zxby.main(code)
+        jsondata = zxby.main(code= code,tcode = tcode,amount = amount,start = start,end = end)
         return json.dumps(jsondata)
     return Response_headers(str("jsondata"))
  

@@ -24,6 +24,8 @@
                 <el-form-item label="开始时间">
                   <el-date-picker
                     type="date"
+                    format="yyyy-MM-dd"
+                    value-format="yyyy-MM-dd HH:mm"
                     placeholder="选择日期"
                     v-model="formdata.star"
                     style="width: 100%;"
@@ -34,6 +36,8 @@
                 <el-form-item label="结束时间">
                   <el-date-picker
                     type="date"
+                    format="yyyy-MM-dd"
+                    value-format="yyyy-MM-dd HH:mm"
                     placeholder="选择日期"
                     v-model="formdata.end"
                     style="width: 100%;"
@@ -86,12 +90,13 @@ export default {
       this.formdata.code = code
       const params = new URLSearchParams();
       params.append('code', this.formdata.code);
-      params.append('star', this.formdata.star);
+      params.append('start', this.formdata.star);
       params.append('end', this.formdata.end);
       params.append('amount', this.formdata.amount);
       params.append('tcode', this.formdata.tcode);
+
       runexit(params).then(response => {
-        alert(response);
+ 
         this.result = response.data.data;
         this.loading = false;
       });

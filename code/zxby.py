@@ -56,7 +56,7 @@ def main(code,tcode = '000100',amount=10000,start = None,end = None):
     try:
         # subprocess.check_output 是 父进程等待子进程完成，返回子进程向标准输出的输出结果
         # stderr是标准输出的类型
-
+        print(str(tcode) +' '+ str(amount) +' ' +str(start)+' '+ str(end))
         outdata = decode(subprocess.check_output([EXEC, fpath, str(tcode), str(amount), str(start),str(end)], stderr=subprocess.STDOUT, timeout=15))
     except subprocess.CalledProcessError as e:
         # e.output是错误信息标准输出
@@ -67,6 +67,7 @@ def main(code,tcode = '000100',amount=10000,start = None,end = None):
         return r
     else:
         # 成功返回的数据
+        print(outdata)
         r['data'] = json.loads(outdata)
         r["code"] = "Success"
         return r

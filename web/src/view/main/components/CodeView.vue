@@ -5,7 +5,7 @@
     <el-button type="primary" > save </el-button>
     <el-button type="primary" @click="runexit()"> run </el-button>
   </el-button-group>
-  <textarea ref="mycode" class="codesql" v-model="code" style="height:200px;width:600px;"></textarea>
+  <textarea ref="mycode" class="codesql" v-model="code" style="height:600pt; width:600px;"></textarea>
   </div>
 </template>
 
