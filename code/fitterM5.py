@@ -4,6 +4,12 @@ import sys
 import logging
 import os
 
+#
+# 根据5日均线买卖策略
+# 当日收盘价如果在5日均线上方%1位置买入
+# 当日收盘价如果在5日均线下方%1位置买出
+#
+
 os.remove('./trade.log')
 logging.basicConfig(format='%(asctime)s %(message)s ',filename='./trade.log')
 logging.getLogger().setLevel(logging.DEBUG)
@@ -33,13 +39,13 @@ def fitter(data):
         open_p = open_prices[i]
         ma5_p = ma5s[i]
         sellof = (close_prices[i]/ma5s[i])-1
-        buylog = (open_prices[i]/ma5s[i])-1
-        if (sellof)<-0.01: 
+        buylog = (close_prices[i]/ma5s[i])-1
+        if (sellof)<-0.005: 
             btypes.append(-1)
             isscre, msg ,count= cent.sell(close_prices[i], times[i], cent.store)
             logging.debug("trade "+'sell '+str(times[i])+" " +str(close_prices[i])+" " +msg)
    
-        elif (buylog)>0.01:
+        elif (buylog)>0.005:
             btypes.append(1)
             isscre, msg, count = cent.buy(close_prices[i], times[i], count=2000)
             logging.debug("trade: "+' buy '+str(times[i]) +" "+str(close_prices[i])+" " +msg)
