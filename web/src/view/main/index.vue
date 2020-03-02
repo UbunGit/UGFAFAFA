@@ -94,7 +94,7 @@ export default {
       params.append('end', this.formdata.end);
       params.append('amount', this.formdata.amount);
       params.append('tcode', this.formdata.tcode);
-
+      this.result= null
       runexit(params).then(response => {
  
         this.result = response.data.data;

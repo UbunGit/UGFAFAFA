@@ -14,15 +14,16 @@ class trade:
         self.balance = float(balance)
  
         if begin is None:
-            begin = ''
-        if begin == 'None' or begin == 'null':
-            begin = ''
+            begin = None
+        if begin == 'None' or begin == 'null' or begin == '':
+            begin = None
         if end is None :
-            end = ''
-        if end == 'None' or end == 'null':
-            end = ''
+            end = None
+        if end == 'None' or end == 'null' or end == '':
+            end = None
 
-        self.data =  ts.get_k_data(code=code,start=begin,end=end) #一次性获取全部日k线数据
+        self.data =  ts.get_hist_data(code=code,start=begin,end=end) #一次性获取全部日k线数据
+        self.data.sort_index(inplace=True)
 
     def buy(self, price, time, count=100):
         if price <= 0:
@@ -58,4 +59,5 @@ class trade:
         self.store -= count
         self.lastTime = time
         return True,'OK ',count
+    
       
