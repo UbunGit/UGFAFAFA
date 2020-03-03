@@ -4,21 +4,21 @@ import sys
 from flask import Flask
 from flask import request
 from flask import Response
-from flask_sqlalchemy import SQLAlchemy
 import json
 import zxby
+from models import create_app;
 
-from flask.ext.sqlalchemy import SQLAlchemy 
 
 logging.basicConfig(format='%(asctime)s %(message)s ')
 logging.getLogger().setLevel(logging.DEBUG)
 logging.debug(sys.version)
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] ='hard to guess'
+app =  create_app()
+
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://jianshu:jianshu@127.0.0.1:3306/jianshu'
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN']=True
-db=SQLAlchemy(app)
+db.init_app(app)
+de.cre
  
 def Response_headers(content):
     resp = Response(content)
@@ -32,7 +32,6 @@ def Response_headers(content):
 @app.route('/')
 def hello_world():
     return Response_headers('hello world!!!')
- 
  
 @app.route('/run', methods=['POST'])
 def run():
@@ -55,6 +54,9 @@ def run():
         return json.dumps(jsondata)
     return Response_headers(str("jsondata"))
  
+@app.route('/tactics')
+def tactics():
+    return json.dumps(jsondata)
  
 @app.errorhandler(403)
 def page_not_found(error):

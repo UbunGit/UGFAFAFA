@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 '''
-Models for user, blog, comment.
 '''
 
 from main import db
@@ -15,4 +14,11 @@ class Tactics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     categories = db.Column(db.Integer)
-    title = db.Column(db.String(512))
+    remark = db.Column(db.String(512))
+
+    def __init__(self, name, categories,remark):
+        self.name = name
+        self.categories = categories
+        self.remark = remark
+
+   
