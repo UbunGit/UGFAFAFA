@@ -4,19 +4,21 @@ import sys
 from flask import Flask
 from flask import request
 from flask import Response
+from flask_sqlalchemy import SQLAlchemy
 import json
 import zxby
 
-# logging.basicConfig(format='%(asctime)s %(message)s ', filename='sequoia.log')
+from flask.ext.sqlalchemy import SQLAlchemy 
 
 logging.basicConfig(format='%(asctime)s %(message)s ')
 logging.getLogger().setLevel(logging.DEBUG)
-
 logging.debug(sys.version)
 
- 
 app = Flask(__name__)
- 
+app.config['SECRET_KEY'] ='hard to guess'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://jianshu:jianshu@127.0.0.1:3306/jianshu'
+app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN']=True
+db=SQLAlchemy(app)
  
 def Response_headers(content):
     resp = Response(content)
@@ -97,4 +99,6 @@ def page_not_found(error):
  
  
 if __name__ == '__main__':
+    
     app.run(debug=True)
+

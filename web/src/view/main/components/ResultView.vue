@@ -35,7 +35,6 @@ export default {
       chartSettings: {
         showMA: true,
         showVol: true,
-        // showDataZoom: true,
         metrics:["date", "open", "close", "low", "high", "volume", "amount"]
       },
       chartData: {

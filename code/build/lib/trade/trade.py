@@ -59,4 +59,5 @@ class trade:
         self.store -= count
         self.lastTime = time
         return True,'OK ',count
+    
       
