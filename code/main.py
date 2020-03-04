@@ -33,10 +33,7 @@ def Response_headers(content):
  
 @app.route('/')
 def hello_world():
-    # id = db.Column(db.Integer, primary_key=True)
-    # name = db.Column(db.String(50))
-    # categories = db.Column(db.Integer)
-    # remark = db.Column(db.String(512))
+
     admin = Tactics(name='admin', categories='1', remark='admin@example.com')
     db.session.add(admin)
     db.session.commit()

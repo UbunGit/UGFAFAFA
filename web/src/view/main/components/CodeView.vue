@@ -1,21 +1,10 @@
 <template>
   <div>
-    <el-button-group style="right">
-      <el-button type="primary">import</el-button>
-      <el-button type="primary">save</el-button>
-      <el-button type="primary" @click="runexit()">run</el-button>
-    </el-button-group>
-    <el-upload
-      class="upload-demo"
-      :show-file-list="false"
-      :on-change="handlePreview"
-      action="https://jsonplaceholder.typicode.com/posts/"
-      :auto-upload="false"
-    >
-      <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-    </el-upload>
-    <textarea ref="mycode" class="codesql" v-model="code" style="height:600pt; width:600px;"></textarea>
-    <div>{{ code }}</div>
+
+    <el-card>
+      <textarea ref="mycode" class="codesql" v-model="code" style="height:500pt; width:100%;"></textarea>
+    </el-card>
+
   </div>
 </template>
 
@@ -45,7 +34,7 @@ export default {
   },
   data() {
     return {
-      code: null
+      code: null,
     };
   },
   //   mounted() {
@@ -78,16 +67,6 @@ export default {
     runexit() {
       this.$emit("runexit", this.code);
     },
-    handlePreview(file) {
-      
-      var reader = new FileReader();
-      reader.onload = function(evt) {
-        this.code = '23u892734726578364578'
-        // this.code = evt.target.result;
-        // this.$forceUpdate()
-      };
-      reader.readAsText(file.raw);
-    }
   }
 };
 </script>
