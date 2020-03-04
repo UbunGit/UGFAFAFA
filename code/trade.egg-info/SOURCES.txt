@@ -1,8 +1,0 @@
-setup.py
-trade/__init__.py
-trade/trade.py
-trade/trade1.py
-trade.egg-info/PKG-INFO
-trade.egg-info/SOURCES.txt
-trade.egg-info/dependency_links.txt
-trade.egg-info/top_level.txt

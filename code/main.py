@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import logging
 import time
 import sys
@@ -6,20 +9,19 @@ from flask import request
 from flask import Response
 import json
 import zxby
-from models import create_app;
+from flask_sqlalchemy import SQLAlchemy
+
 
 
 logging.basicConfig(format='%(asctime)s %(message)s ')
 logging.getLogger().setLevel(logging.DEBUG)
 logging.debug(sys.version)
 
-app =  create_app()
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
+db = SQLAlchemy(app)
 
-app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://jianshu:jianshu@127.0.0.1:3306/jianshu'
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN']=True
-db.init_app(app)
-de.cre
- 
 def Response_headers(content):
     resp = Response(content)
     resp.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,session_id')
@@ -31,7 +33,20 @@ def Response_headers(content):
  
 @app.route('/')
 def hello_world():
-    return Response_headers('hello world!!!')
+    # id = db.Column(db.Integer, primary_key=True)
+    # name = db.Column(db.String(50))
+    # categories = db.Column(db.Integer)
+    # remark = db.Column(db.String(512))
+    admin = Tactics(name='admin', categories='1', remark='admin@example.com')
+    db.session.add(admin)
+    db.session.commit()
+    Tactics.query.all()
+    data =  Tactics.query.filter_by(name='admin')
+    users_output = []
+    for user in data:
+        users_output.append(user.to_json())
+    print(users_output)
+    return  dict(data = str(users_output))
  
 @app.route('/run', methods=['POST'])
 def run():
@@ -98,6 +113,25 @@ def page_not_found(error):
     content = json.dumps({"error_code": "500"})
     resp = Response_headers(content)
     return resp
+
+
+
+# 定义策略Tactics对象:
+class BaseModel(object):
+    def to_json(self):
+        fields = self.__dict__
+        if "_sa_instance_state" in fields:
+            del fields["_sa_instance_state"]
+        
+        return fields
+class Tactics(db.Model,BaseModel):
+    __tablename__ = 'tactics'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    categories = db.Column(db.Integer)
+    remark = db.Column(db.String(512))
+
+
  
  
 if __name__ == '__main__':
