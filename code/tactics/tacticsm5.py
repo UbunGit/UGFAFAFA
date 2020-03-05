@@ -4,14 +4,17 @@ import sys
 import logging
 import os
 
-#
+##
 # 根据5日均线买卖策略
 # 当日收盘价如果在5日均线上方%1位置买入
 # 当日收盘价如果在5日均线下方%1位置买出
-#
+##
 
-os.remove('./trade.log')
-logging.basicConfig(format='%(asctime)s %(message)s ',filename='./trade.log')
+# logpath = './log/'+os.path.split(__file__)[-1].split(".")[0]+'.log'
+logpath = './log/tacticsm5.log'
+if os.path.isfile(logpath):
+    os.remove(logpath)
+logging.basicConfig(format='%(asctime)s %(message)s ',filename= logpath )
 logging.getLogger().setLevel(logging.DEBUG)
 
 logging.debug("trade"+sys.version)

@@ -1,11 +1,15 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 from trade import trade
 import numpy
 import sys
 
-
-## 如果收盘价低于开盘价 买入
+##
+# 交易策略
+# 如果收盘价低于开盘价 买入
+## 
 def fitter(data):
-
 
     btypes = [] #交易类型 -1卖出 0 没操作 1 买入
     scress = []
@@ -16,7 +20,7 @@ def fitter(data):
     
     open_prices = numpy.array(data['open'])
     close_prices = numpy.array(data['close'])
-    times = numpy.array(data['date'])
+    times = numpy.array(data.index)
 
     for i in range(len(df)):
         isscre = False
@@ -55,4 +59,6 @@ if len(sys.argv)>4:
 cent = trade(tcode, begin=start, end=end, balance=amount)
 df = cent.data
 df['buy'],df['scress'],df['counts'],df['amounts'], df['store'] ,df['sumAmount']= fitter(df)
+df['date'] = numpy.array(df.index)
+
 print(df.to_json(orient='records'))

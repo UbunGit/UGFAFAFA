@@ -1,26 +1,18 @@
 <template>
   <div>
     <el-container>
-      <el-header>
-          <el-upload
-            class="upload-demo"
-            :show-file-list="false"
-            :on-change="handlePreview"
-            action=""
-            :auto-upload="false"
-            style="float: left;"
-            size="small"
-          >
-            <el-button slot="trigger" icon="el-icon-wallet" ></el-button>
-            <el-button icon="el-icon-s-help" @click="drawer = true" ></el-button>
-          </el-upload>
-          <el-button-group style="float: right;" size="small">
-            <el-button @click="runexit()">运行</el-button>
-          </el-button-group>
+      <el-header>  
       </el-header>
       <el-container>
         <el-aside width="32%">
-          <code-view ref="codeView" type="primary" v-model="formdata.code"></code-view>
+                 <el-card>
+    <el-tabs  style="height: 200px;">
+    <el-tab-pane label="股价">股价</el-tab-pane>
+    <el-tab-pane label="MACD">MACD</el-tab-pane>
+    <el-tab-pane label="KDJ">KDJ</el-tab-pane>
+    <el-tab-pane label="其他">其他</el-tab-pane>
+  </el-tabs>
+    </el-card>
         </el-aside>
         <el-main >
           <el-card>
@@ -37,16 +29,7 @@
                 </el-form-item>
               </el-col>
               <el-col :span="6">
-                <el-form-item label="开始时间">
-                  <el-date-picker
-                    type="date"
-                    format="yyyy-MM-dd"
-                    value-format="yyyy-MM-dd HH:mm"
-                    placeholder="选择日期"
-                    v-model="formdata.star"
-                    style="width: 100%;"
-                  ></el-date-picker>
-                </el-form-item>
+               
               </el-col>
               <el-col :span="6">
                 <el-form-item label="结束时间">
@@ -68,7 +51,6 @@
             </el-form>
           </el-card>
           <el-card>
-            <result-view v-model="result" v-loading="loading"></result-view>
           </el-card>
           <el-card>{{result}}</el-card>
         </el-main>
@@ -81,25 +63,16 @@
       :direction="direction"
       :before-close="handleClose"
     >
-     <el-card>
-    <el-tabs style="height: 200px;">
-    <el-tab-pane label="股价">股价</el-tab-pane>
-    <el-tab-pane label="MACD">MACD</el-tab-pane>
-    <el-tab-pane label="KDJ">KDJ</el-tab-pane>
-    <el-tab-pane label="其他">其他</el-tab-pane>
-  </el-tabs>
-    </el-card>
+
     </el-drawer>
   </div>
 </template>
 <script>
-// import SettingForm from "./components/SettingForm";
-import ResultView from "./components/ResultView";
-import CodeView from "./components/CodeView";
+
 
 import { runexit } from "@/api/share";
 export default {
-  components: { ResultView, CodeView },
+  components: {  },
   created() {},
   data() {
     return {
