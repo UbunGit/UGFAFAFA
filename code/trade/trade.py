@@ -4,7 +4,7 @@ import talib as tl
 import numpy
 
 
-class trade:
+class share:
     data = None # 股票数据
     balance = 0.00  # 余额
     store = 0   #持股数量
