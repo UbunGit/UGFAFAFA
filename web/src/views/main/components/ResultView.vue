@@ -1,11 +1,17 @@
   <template>
   <div>
     <div style="wigth=100%">
-      <ve-candle :data="chartData" :settings="chartSettings">
+      <ve-candle :data="chartData" 
+      :settings="chartSettings"
+      @ready-once="readyOnve">
       </ve-candle>
     </div>
     <div style="wigth=100%, height=120px">
-      <ve-line :data="amountdata" :settings="amountSettings" height="180pt"></ve-line>
+      <ve-line :data="amountdata" 
+      :settings="amountSettings"
+      @ready-once="readyOnve"
+>
+       height="180pt"></ve-line>
     </div>
   </div>
 </template>
@@ -44,7 +50,8 @@ export default {
             { 'date': '2004-01-07', open: 10535.46, close: 10529.03, low: 10432.12, high: 10587.55, volume: 225490000 },
             { 'date': '2004-01-08', open: 10530.07, close: 10592.44, low: 10480.59, high: 10651.99, volume: 237770000 },
             { 'date': '2004-01-09', open: 10589.25, close: 10458.89, low: 10420.52, high: 10603.48, volume: 223250000 },
-          ]
+          ],
+          selectedDepIndex: 1,
       },
       amountdata: {
           columns: ['date', 'amounts','store','sumAmount'],
@@ -62,9 +69,28 @@ export default {
           },
       
       },
+      selectData:Object,
+      linechartEvents : {
+        click: function (e) {
+          console.log(e)
+          alert(JSON.stringify(e.data))
+          this.selectData = e.data
+
+        }
+      },
+
       
     };
+
+  },
+  methods:{
+    readyOnve(echart, options, echartsLib){
+      echart.group = "group1";
+      echartsLib.connect("group1");
+      alert("")
+    }
   }
+  
 };
 </script>
 <style>
