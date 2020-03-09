@@ -20,7 +20,8 @@ class share:
         tsda['date'] = tsda.index
         tsda = self.macd(tsda)
         self.save(tsda)
-        self.cdata = tsda[tsda['date']>=begin]
+        self.cdata = tsda[tsda['date'] >= begin]
+        self.cdata = tsda[tsda['date']<= end]
 
     def macd(self,data):
 

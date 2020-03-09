@@ -5,9 +5,9 @@ import logging
 import os
 
 ##
-# 根据5日均线买卖策略
-# 当日收盘价如果在5日均线上方%1位置买入
-# 当日收盘价如果在5日均线下方%1位置买出
+# 根据macd买卖策略
+# diff>0 and dea>0 and macd>0买入
+# diff<dea or macd<0买出
 ##
 logpath = './tacticsm5.log'
 if os.path.isfile(logpath):
@@ -30,7 +30,7 @@ def fitter(data):
 
     macds = numpy.array(data['MACD'])
     diffs = numpy.array(data['DIFF'])
-    defs = numpy.array(data['DEA'])
+    deas = numpy.array(data['DEA'])
     closes = numpy.array(data['close'])
     times = numpy.array(data.index)
 
@@ -40,15 +40,15 @@ def fitter(data):
         # 收盘价macd
         macd = macds[i]
         diff = diffs[i]
-   
-        if macd<0.01 and diff<0.01: 
+        dea = deas[i]
+        if diff<dea or macd<0: 
             btypes.append(-1)
             isscre, msg ,count= cent.sell(closes[i], times[i], cent.store)
             logging.debug("trade "+'sell '+str(times[i])+" " +str(closes[i])+" " +msg)
    
-        elif macd<0.01 or diff<0.01:
+        elif diff>0 and dea>0 and macd>0:
             btypes.append(1)
-            isscre, msg, count = cent.buy(closes[i], times[i], count=200)
+            isscre, msg, count = cent.buy(closes[i], times[i], count=cent.balance/closes[i])
             logging.debug("trade: "+' buy '+str(times[i]) +" "+str(closes[i])+" " +msg)
         
         else:
@@ -65,7 +65,7 @@ def fitter(data):
 
 amount = 10000
 start = '2019-10-18'
-end = 'null'
+end = '2020-10-18'
 tcode = '515050'
 
 if len(sys.argv)>1:

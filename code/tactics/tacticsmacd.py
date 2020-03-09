@@ -5,9 +5,9 @@ import logging
 import os
 
 ##
-# 根据5日均线买卖策略
-# 当日收盘价如果在5日均线上方%1位置买入
-# 当日收盘价如果在5日均线下方%1位置买出
+# 根据macd买卖策略
+# diff>0 and dea>0 and macd>0买入
+# diff<dea or macd<0买出
 ##
 logpath = './tacticsm5.log'
 if os.path.isfile(logpath):
@@ -65,7 +65,7 @@ def fitter(data):
 
 amount = 10000
 start = '2019-10-18'
-end = 'null'
+end = '2020-10-18'
 tcode = '515050'
 
 if len(sys.argv)>1:
