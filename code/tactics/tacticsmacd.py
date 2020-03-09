@@ -27,29 +27,29 @@ def fitter(data):
     stores = []
     amounts = []
     sumAmounts = []
-    open_prices = numpy.array(data['open'])
-    close_prices = numpy.array(data['close'])
-    ma5s = numpy.array(data['ma5'])
+
+    macds = numpy.array(data['MACD'])
+    diffs = numpy.array(data['DIFF'])
+    defs = numpy.array(data['DEA'])
+    closes = numpy.array(data['close'])
     times = numpy.array(data.index)
 
     for i in range(len(df)):
         isscre = False
         count = 0
-        # 收盘价低于五日线 
-        close_p = close_prices[i]
-        open_p = open_prices[i]
-        ma5_p = ma5s[i]
-        sellof = (close_prices[i]/ma5s[i])-1
-        buylog = (close_prices[i]/ma5s[i])-1
-        if (sellof)<-0.005: 
-            btypes.append(-1)
-            isscre, msg ,count= cent.sell(close_prices[i], times[i], cent.store)
-            logging.debug("trade "+'sell '+str(times[i])+" " +str(close_prices[i])+" " +msg)
+        # 收盘价macd
+        macd = macds[i]
+        diff = diffs[i]
    
-        elif (buylog)>0.005:
+        if macd<0.01 and diff<0.01: 
+            btypes.append(-1)
+            isscre, msg ,count= cent.sell(closes[i], times[i], cent.store)
+            logging.debug("trade "+'sell '+str(times[i])+" " +str(closes[i])+" " +msg)
+   
+        elif macd<0.01 or diff<0.01:
             btypes.append(1)
-            isscre, msg, count = cent.buy(close_prices[i], times[i], count=2000)
-            logging.debug("trade: "+' buy '+str(times[i]) +" "+str(close_prices[i])+" " +msg)
+            isscre, msg, count = cent.buy(closes[i], times[i], count=200)
+            logging.debug("trade: "+' buy '+str(times[i]) +" "+str(closes[i])+" " +msg)
         
         else:
             logging.debug("trade "+str(times[i]) +'无交易')
@@ -58,7 +58,7 @@ def fitter(data):
         counts.append(count)
         amounts.append(cent.balance)
         stores.append(cent.store)
-        sumAmount = float(cent.balance) + float(cent.store)*float(close_prices[i])
+        sumAmount = float(cent.balance) + float(cent.store)*float(closes[i])
         sumAmounts.append(sumAmount)
         logging.debug(str(tcode)+"资产"+str(sumAmount)+"持仓"+str(cent.store))
     return btypes,scress,counts,amounts,stores,sumAmounts
@@ -78,7 +78,7 @@ if len(sys.argv)>4:
     end = sys.argv[4]
 
 cent = trade(tcode, begin=start, end=end, balance=amount)
-df = cent.data
+df = cent.cdata
 df['buy'],df['scress'],df['counts'],df['amounts'], df['store'] ,df['sumAmount']= fitter(df)
 df['date'] = numpy.array(df.index)
 print(df.to_json(orient='records'))

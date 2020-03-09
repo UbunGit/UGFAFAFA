@@ -121,6 +121,7 @@ class BaseModel(object):
             del fields["_sa_instance_state"]
         
         return fields
+        
 class Tactics(db.Model,BaseModel):
     __tablename__ = 'tactics'
     id = db.Column(db.Integer, primary_key=True)
