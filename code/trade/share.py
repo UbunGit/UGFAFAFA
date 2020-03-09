@@ -15,23 +15,27 @@ class share:
     def __init__(self, code, begin= None, end= None):
         #根据股票编码初始化数据
         self.code = code
-        self.cdata = ts.get_hist_data(code,start=begin, end=begin)
-        self.cdata.sort_index(inplace=True)
-       
+        tsda = ts.get_hist_data(code)
+        tsda.sort_index(inplace=True)
+        tsda['date'] = tsda.index
+        tsda = self.macd(tsda)
+        self.save(tsda)
+        self.cdata = tsda[tsda['date']>=begin]
 
-    def macd(self):
+    def macd(self,data):
 
-        closes = numpy.array(self.cdata['close'])
+        closes = numpy.array(data['close'])
         diff, dea, macd= tl.MACD(closes,
                             fastperiod=12, slowperiod=26, signalperiod=9 )
         
-        self.cdata['MACD']= macd*2
-        self.cdata['DEA'] = dea
-        self.cdata['DIFF'] = diff
+        data['MACD']= macd*2
+        data['DEA'] = dea
+        data['DIFF'] = diff
+        return data
    
 
-    def save(self):
-        self.cdata.to_csv('~/share/data/'+str(self.code)+'.csv')
+    def save(self,data):
+        data.to_csv('~/share/data/'+str(self.code)+'.csv')
        
 
 ###
@@ -70,6 +74,6 @@ if __name__ == '__main__':
     # center.run()
     # print(center.fitter("industry","纺织"))
 
-    temdata = share('002239')
-    temdata.macd()
+    temdata = share('002239','2018-01-02')
+    # print(temdata.cdata)
  

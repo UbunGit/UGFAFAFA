@@ -63,6 +63,9 @@ def run():
             end = parms['end']
         code = request.form['code']
         jsondata = zxby.main(code= code,tcode = tcode,amount = amount,start = start,end = end)
+        print("======run======")
+        print(jsondata)
+        print("============")
         return json.dumps(jsondata)
     return Response_headers(str("jsondata"))
  
@@ -121,7 +124,7 @@ class BaseModel(object):
             del fields["_sa_instance_state"]
         
         return fields
-        
+
 class Tactics(db.Model,BaseModel):
     __tablename__ = 'tactics'
     id = db.Column(db.Integer, primary_key=True)

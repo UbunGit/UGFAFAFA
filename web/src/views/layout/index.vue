@@ -17,6 +17,10 @@
           <i class="el-icon-setting"></i>
           <span slot="title">设置</span>
         </el-menu-item>
+             <el-menu-item index="/test">
+          <i class="el-icon-setting"></i>
+          <span slot="title">测试</span>
+        </el-menu-item>
       </el-menu>
     </el-aside>
     <el-container>

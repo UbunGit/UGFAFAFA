@@ -19,7 +19,14 @@ export const constantRouterMap = [
       component: Layout,
       name: 'choose',
       component: () => import('@/views/choose'),
-    },]
+    },
+    {
+      path: '/test',
+      component: Layout,
+      name: 'test',
+      component: () => import('@/views/test'),
+    },
+  ]
   },
 
 ]

@@ -65,7 +65,7 @@ def fitter(data):
 
 amount = 10000
 start = '2019-10-18'
-end = ''
+end = 'null'
 tcode = '515050'
 
 if len(sys.argv)>1:
@@ -81,4 +81,4 @@ cent = trade(tcode, begin=start, end=end, balance=amount)
 df = cent.cdata
 df['buy'],df['scress'],df['counts'],df['amounts'], df['store'] ,df['sumAmount']= fitter(df)
 df['date'] = numpy.array(df.index)
-# print(df.to_json(orient='records'))
+print(df.to_json(orient='records'))

@@ -54,6 +54,7 @@ export default {
       amountSettings: {
         showDataZoom: true,
         scale:[true,true],
+        smooth: false,
         labelMap: {
             "sumAmount":"总资产",
             "amounts":"余额",

@@ -41,7 +41,7 @@
                   <el-date-picker
                     type="date"
                     format="yyyy-MM-dd"
-                    value-format="yyyy-MM-dd HH:mm"
+                    value-format="yyyy-MM-dd"
                     placeholder="选择日期"
                     v-model="formdata.star"
                     style="width: 100%;"
@@ -53,7 +53,7 @@
                   <el-date-picker
                     type="date"
                     format="yyyy-MM-dd"
-                    value-format="yyyy-MM-dd HH:mm"
+                    value-format="yyyy-MM-dd"
                     placeholder="选择日期"
                     v-model="formdata.end"
                     style="width: 100%;"

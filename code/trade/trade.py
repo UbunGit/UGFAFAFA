@@ -23,7 +23,6 @@ class trade:
         if end == 'None' or end == 'null' or end == '':
             end = None
         self.cshare = share(code=code,begin=begin,end=end)
-        self.cshare.macd()
         self.cdata = self.cshare.cdata
         
 
