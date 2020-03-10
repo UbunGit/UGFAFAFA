@@ -4,8 +4,10 @@
 import tushare as ts
 import numpy
 import pandas
-import os
+import os,time
 import talib as tl
+
+formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
 ###
 ## 单个股票
 ###
@@ -15,13 +17,19 @@ class share:
     def __init__(self, code, begin= None, end= None):
         #根据股票编码初始化数据
         self.code = code
-        tsda = ts.get_hist_data(code)
+        tsda = self.load()
+        if tsda is None:
+            tsda = ts.get_hist_data(code)
+        if(tsda is None):
+            return
         tsda.sort_index(inplace=True)
         tsda['date'] = tsda.index
         tsda = self.macd(tsda)
+        tsda = self.kdj(tsda)
         self.save(tsda)
         self.cdata = tsda[tsda['date'] >= begin]
-        self.cdata = tsda[tsda['date']<= end]
+        if end is not None:
+            self.cdata = tsda[tsda['date']<= end]
 
     def macd(self,data):
 
@@ -33,10 +41,31 @@ class share:
         data['DEA'] = dea
         data['DIFF'] = diff
         return data
-   
+
+    def kdj(self, data, fastk_period=9, slowk_period=3, slowd_period=3):
+        indicators={}
+        #计算kd指标
+        closes = numpy.array(data['close'])
+        highs = numpy.array(data['high'])
+        lows = numpy.array(data['low'])
+        k, d = tl.STOCH(highs, lows, closes, fastk_period=9, slowk_period=3, slowd_period=3)
+        data['k']= k
+        data['d'] = d
+        data['j'] = 3 * k - 2 * d
+        return data
 
     def save(self,data):
         data.to_csv('~/share/data/'+str(self.code)+'.csv')
+
+    def load(self):
+        sharefile = '~/share/data/'+str(self.code)+'.csv'
+        if os.path.exists(sharefile):
+            temdata = pandas.read_csv(sharefile)
+            dates = numpy.array(temdata['date'])
+            if(dates[-1:])>=formattime:
+                return temdata
+        time.sleep(1)
+        return None
        
 
 ###
@@ -70,11 +99,27 @@ class shares:
             temshare.save()
 
 
-if __name__ == '__main__':
-    # center = shares()
-    # center.run()
-    # print(center.fitter("industry","纺织"))
+def run():
+    l_shares = shares()
+    fitters = l_shares.basics
+    codes = numpy.array(fitters.index)
+    sharlist = pandas.DataFrame()
+    sharecodes = []
+    for i in range(len(codes)):
+        temshare = share(codes[i],'2020-01-01', formattime)
+        if temshare.cdata is not None:
+            sharlist = sharlist.append(temshare.cdata[-1:])
+            sharecodes.append(codes[i])
+        sharlist["code"]= sharecodes 
+        print(codes[i],"[",i,"/",len(codes),"]")
+        sharlist.to_csv("~/share/tem/todyshare.csv")
+        
+    
+    print(sharlist)
+        
 
-    temdata = share('002239','2018-01-02')
-    # print(temdata.cdata)
+if __name__ == '__main__':
+    run()
+
+    
  

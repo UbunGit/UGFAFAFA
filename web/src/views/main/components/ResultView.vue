@@ -6,12 +6,13 @@
       @ready-once="readyOnve">
       </ve-candle>
     </div>
-    <div style="wigth=100%, height=120px">
+    <div style="wigth=100%, height=160px">
       <ve-line :data="amountdata" 
       :settings="amountSettings"
       @ready-once="readyOnve"
->
-       height="180pt"></ve-line>
+      height="160pt"
+      >
+       ></ve-line>
     </div>
   </div>
 </template>
@@ -41,6 +42,9 @@ export default {
       chartSettings: {
         showMA: true,
         showVol: true,
+        // showDataZoom: true,
+        downColor:"#00da3c",
+        upColor:"#ec0000",
       },
       chartData: {
         columns: ["date", "open", "close", "low", "high", "volume"],
@@ -56,6 +60,7 @@ export default {
       amountdata: {
           columns: ['date', 'amounts','store','sumAmount'],
           rows: [],
+          showDataZoom: true,
           
       },
       amountSettings: {
@@ -69,17 +74,6 @@ export default {
           },
       
       },
-      selectData:Object,
-      linechartEvents : {
-        click: function (e) {
-          console.log(e)
-          alert(JSON.stringify(e.data))
-          this.selectData = e.data
-
-        }
-      },
-
-      
     };
 
   },

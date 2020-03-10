@@ -5,3 +5,5 @@ Shares/default.realm.management/access_control.write.mx
 .DS_Store
 .DS_Store
 *.pyc
+*.egg
+*.log
