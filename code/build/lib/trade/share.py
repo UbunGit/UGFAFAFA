@@ -4,8 +4,11 @@
 import tushare as ts
 import numpy
 import pandas
-import os
+import os,time
 import talib as tl
+
+formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
+# formattime = ('2020-03-10')
 ###
 ## 单个股票
 ###
@@ -15,28 +18,90 @@ class share:
     def __init__(self, code, begin= None, end= None):
         #根据股票编码初始化数据
         self.code = code
-        tsda = ts.get_hist_data(code)
-        tsda.sort_index(inplace=True)
-        tsda['date'] = tsda.index
-        tsda = self.macd(tsda)
-        self.save(tsda)
-        self.cdata = tsda[tsda['date'] >= begin]
-        self.cdata = tsda[tsda['date']<= end]
+        tsda = self.load()
+        if tsda is None:
+            tsda = ts.get_hist_data(code)
+            if(tsda is None):
+                return
+            tsda.sort_index(inplace=True)
+            tsda['date'] = tsda.index
+            tsda = self.macd(tsda)
+            tsda = self.kdj(tsda)
+            tsda = self.real(tsda)
+            self.save(tsda)
+        if(tsda is None):
+            return
+
+        self.cdata = tsda
+        if begin is not None:
+            self.cdata = tsda[tsda['date'] >= begin]
+        if end is not None:
+            self.cdata = tsda[tsda['date']<= end]
 
     def macd(self,data):
 
         closes = numpy.array(data['close'])
         diff, dea, macd= tl.MACD(closes,
                             fastperiod=12, slowperiod=26, signalperiod=9 )
-        
+
         data['MACD']= macd*2
         data['DEA'] = dea
         data['DIFF'] = diff
+        
         return data
-   
+
+    def kdj(self, data, fastk_period=9, slowk_period=3, slowd_period=3):
+        indicators={}
+        #计算kd指标
+        closes = numpy.array(data['close'])
+        highs = numpy.array(data['high'])
+        lows = numpy.array(data['low'])
+        k, d = tl.STOCH(highs, lows, closes, fastk_period=9, slowk_period=3, slowd_period=3)
+        data['k']= k
+        data['d'] = d
+        data['j'] = 3 * k - 2 * d
+        
+        return data
+
+    def real(self, data):
+        try:
+            macd_r = tl.LINEARREG_ANGLE(data['MACD'], timeperiod=3)
+            data['MACD_R']= macd_r
+
+            k_r = tl.LINEARREG_ANGLE(data['k'], timeperiod=3)
+            data['K_R']= k_r
+
+            ma5_r = tl.LINEARREG_ANGLE(data['ma5'], timeperiod=3)
+            data['MA5_R']= ma5_r
+
+            ma10_r = tl.LINEARREG_ANGLE(data['ma10'], timeperiod=3)
+            data['MA10_R']= ma10_r
+
+            ma20_r = tl.LINEARREG_ANGLE(data['ma20'], timeperiod=3)
+            data['MA20_R']= ma20_r
+
+        except Exception as e:
+            print('except:', e)
+        finally:
+            return data
+
+
 
     def save(self,data):
         data.to_csv('~/share/data/'+str(self.code)+'.csv')
+
+    def load(self):
+        sharefile = '~/share/data/'+str(self.code)+'.csv'
+        try:
+            temdata = pandas.read_csv(sharefile)
+            dates = numpy.array(temdata['date'])
+            enddate = dates[-1:][0]
+            if(dates[-1:])>=formattime:
+                return temdata
+        except Exception as e:
+            print('except:', e)
+            time.sleep(0.1)
+            return None
        
 
 ###
@@ -69,12 +134,10 @@ class shares:
             temshare = share(code=codes[i])
             temshare.save()
 
+        
 
 if __name__ == '__main__':
-    # center = shares()
-    # center.run()
-    # print(center.fitter("industry","纺织"))
-
-    temdata = share('002239','2018-01-02')
-    # print(temdata.cdata)
+    cshare = share('000100','2020-03-10')
+    print(cshare.cdata)
+    
  

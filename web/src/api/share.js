@@ -13,4 +13,29 @@ export function runexit(data) {
     }
     });
   }
+export function sharehistory(data) {
+
+  return axios({
+    method: 'get',
+    url: '/sharehistory',
+    params: data,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    });
+  }
+
+  export function fitterList(data) {
+
+    return axios({
+      method: 'get',
+      url: '/fitterList',
+      params: data,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+      });
+    }
+
+  
 

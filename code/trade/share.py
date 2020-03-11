@@ -8,6 +8,7 @@ import os,time
 import talib as tl
 
 formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
+# formattime = ('2020-03-10')
 ###
 ## 单个股票
 ###
@@ -20,14 +21,20 @@ class share:
         tsda = self.load()
         if tsda is None:
             tsda = ts.get_hist_data(code)
+            if(tsda is None):
+                return
+            tsda.sort_index(inplace=True)
+            tsda['date'] = tsda.index
+            tsda = self.macd(tsda)
+            tsda = self.kdj(tsda)
+            tsda = self.real(tsda)
+            self.save(tsda)
         if(tsda is None):
             return
-        tsda.sort_index(inplace=True)
-        tsda['date'] = tsda.index
-        tsda = self.macd(tsda)
-        tsda = self.kdj(tsda)
-        self.save(tsda)
-        self.cdata = tsda[tsda['date'] >= begin]
+
+        self.cdata = tsda
+        if begin is not None:
+            self.cdata = tsda[tsda['date'] >= begin]
         if end is not None:
             self.cdata = tsda[tsda['date']<= end]
 
@@ -36,10 +43,11 @@ class share:
         closes = numpy.array(data['close'])
         diff, dea, macd= tl.MACD(closes,
                             fastperiod=12, slowperiod=26, signalperiod=9 )
-        
+
         data['MACD']= macd*2
         data['DEA'] = dea
         data['DIFF'] = diff
+        
         return data
 
     def kdj(self, data, fastk_period=9, slowk_period=3, slowd_period=3):
@@ -52,20 +60,48 @@ class share:
         data['k']= k
         data['d'] = d
         data['j'] = 3 * k - 2 * d
+        
         return data
+
+    def real(self, data):
+        try:
+            macd_r = tl.LINEARREG_ANGLE(data['MACD'], timeperiod=3)
+            data['MACD_R']= macd_r
+
+            k_r = tl.LINEARREG_ANGLE(data['k'], timeperiod=3)
+            data['K_R']= k_r
+
+            ma5_r = tl.LINEARREG_ANGLE(data['ma5'], timeperiod=3)
+            data['MA5_R']= ma5_r
+
+            ma10_r = tl.LINEARREG_ANGLE(data['ma10'], timeperiod=3)
+            data['MA10_R']= ma10_r
+
+            ma20_r = tl.LINEARREG_ANGLE(data['ma20'], timeperiod=3)
+            data['MA20_R']= ma20_r
+
+        except Exception as e:
+            print('except:', e)
+        finally:
+            return data
+
+
 
     def save(self,data):
         data.to_csv('~/share/data/'+str(self.code)+'.csv')
 
     def load(self):
         sharefile = '~/share/data/'+str(self.code)+'.csv'
-        if os.path.exists(sharefile):
+        try:
             temdata = pandas.read_csv(sharefile)
             dates = numpy.array(temdata['date'])
+            enddate = dates[-1:][0]
             if(dates[-1:])>=formattime:
                 return temdata
-        time.sleep(1)
-        return None
+        except Exception as e:
+            print('except:', e)
+            time.sleep(0.1)
+            return None
        
 
 ###
@@ -98,28 +134,10 @@ class shares:
             temshare = share(code=codes[i])
             temshare.save()
 
-
-def run():
-    l_shares = shares()
-    fitters = l_shares.basics
-    codes = numpy.array(fitters.index)
-    sharlist = pandas.DataFrame()
-    sharecodes = []
-    for i in range(len(codes)):
-        temshare = share(codes[i],'2020-01-01', formattime)
-        if temshare.cdata is not None:
-            sharlist = sharlist.append(temshare.cdata[-1:])
-            sharecodes.append(codes[i])
-        sharlist["code"]= sharecodes 
-        print(codes[i],"[",i,"/",len(codes),"]")
-        sharlist.to_csv("~/share/tem/todyshare.csv")
-        
-    
-    print(sharlist)
         
 
 if __name__ == '__main__':
-    run()
-
+    cshare = share('000100','2020-03-10')
+    print(cshare.cdata)
     
  

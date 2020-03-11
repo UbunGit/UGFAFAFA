@@ -1,20 +1,14 @@
 <template>
   <div>
     <el-container>
-      <el-header>  
-      </el-header>
+      <el-header></el-header>
       <el-container>
-        <el-aside width="32%">
-                 <el-card>
-    <el-tabs  style="height: 200px;">
-    <el-tab-pane label="股价">股价</el-tab-pane>
-    <el-tab-pane label="MACD">MACD</el-tab-pane>
-    <el-tab-pane label="KDJ">KDJ</el-tab-pane>
-    <el-tab-pane label="其他">其他</el-tab-pane>
-  </el-tabs>
-    </el-card>
+        <el-aside :span="4">
+          <el-card>
+            <share-list @cell-click="handleCellClick"></share-list>
+          </el-card>
         </el-aside>
-        <el-main >
+        <el-main :span="12">
           <el-card>
             <el-form
               :model="formdata"
@@ -23,36 +17,36 @@
               class="demo-ruleForm"
               size="mini"
             >
-              <el-col :span="6">
+              <el-col :span="8">
                 <el-form-item label="股票代码">
-                  <el-input v-model="formdata.tcode"></el-input>
+                  <el-input v-model="formdata.code"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col :span="6">
-               
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="结束时间">
+
+              <el-col :span="16">
+                <el-form-item label="开始时间">
                   <el-date-picker
                     type="date"
                     format="yyyy-MM-dd"
                     value-format="yyyy-MM-dd HH:mm"
                     placeholder="选择日期"
-                    v-model="formdata.end"
+                    v-model="formdata.begin"
                     style="width: 100%;"
                   ></el-date-picker>
                 </el-form-item>
               </el-col>
-              <el-col :span="6">
-                <el-form-item label="初始金额">
-                  <el-input v-model="formdata.amount"></el-input>
-                </el-form-item>
-              </el-col>
             </el-form>
           </el-card>
-          <el-card>
+          <el-card style="wigth=100%">
+            <ve-candle :data="chartData" :settings="chartSettings" v-loading="loading"></ve-candle>
+            <ve-line
+              :data="amountdata"
+              :settings="amountSettings"
+              @ready-once="readyOnve"
+              height="160pt"
+            >></ve-line>
           </el-card>
-          <el-card>{{result}}</el-card>
+          <el-card>{{chartData.rows}}</el-card>
         </el-main>
       </el-container>
     </el-container>
@@ -62,51 +56,71 @@
       :visible.sync="drawer"
       :direction="direction"
       :before-close="handleClose"
-    >
-
-    </el-drawer>
+    ></el-drawer>
   </div>
 </template>
 <script>
-
-
-import { runexit } from "@/api/share";
+import { sharehistory, fitterList } from "@/api/share";
+import ShareList from "./components/ShareList";
 export default {
-  components: {  },
-  created() {},
+  components: { ShareList },
+  created() {
+    // this.getresult();
+  },
   data() {
     return {
       loading: false,
       formdata: {
-        code:
-          "import pandas \nhistory = pandas.read_csv('/Users/admin/Documents/github/UGFAFAFA/file/000652.csv', parse_dates=True, index_col=0) \nprint(history.to_json(orient='records'))",
-        star: null,
+        begin: "2019-03-01",
         end: null,
-        amount: 10000,
-        tcode: '000100',
+        code: "000100"
       },
       result: null,
+      shareList: [],
       drawer: false,
-      direction: 'ltr',
+      direction: "ltr",
+      chartSettings: {
+        showMA: true,
+        showVol: true,
+        downColor: "#00da3c",
+        upColor: "#ec0000"
+      },
+      chartData: {
+        columns: ["date", "open", "close", "low", "high", "volume"],
+        rows: []
+      },
+       amountdata: {
+          columns: ['date', 'MACD','DIFF','DEA'],
+          rows: [],
+          showDataZoom: true,
+          
+      },
+      amountSettings: {
+        showDataZoom: true,
+        scale:[true,true],
+        smooth: false,
+        labelMap: {
+            "MACD":"总资产",
+            "DIFF":"余额",
+            "DEA":"持股数"
+          },
+      
+      },
     };
   },
   methods: {
     onSubmit() {},
-    runexit() {
+    //获取股票交易数据
+    getresult() {
       this.loading = true;
-      this.formdata.code = this.$refs.codeView.code;
-      const params = new URLSearchParams();
-      params.append("code", this.formdata.code);
-      params.append("start", this.formdata.star);
-      params.append("end", this.formdata.end);
-      params.append("amount", this.formdata.amount);
-      params.append("tcode", this.formdata.tcode);
-      this.result = null;
-      runexit(params).then(response => {
+      sharehistory(this.formdata).then(response => {
         this.result = response.data.data;
+        this.chartData.rows = this.result;
+
         this.loading = false;
       });
     },
+
     handlePreview(file) {
       var reader = new FileReader();
       reader.onload = () => {
@@ -114,29 +128,28 @@ export default {
       };
       reader.readAsText(file.raw);
     },
-    handleClose(){
-
+    handleClose() {},
+    handleCellClick(code) {
+      this.formdata.code = code;
+      this.getresult();
     }
   }
 };
 </script>
 <style>
-.el-header{
+.el-header {
   background-color: #b3c0d1;
   padding: 10pt;
 }
 .el-footer {
-  background-color: #b3c0d1;
   color: #333;
 }
 
 .el-aside {
-  background-color: #d3dce6;
   color: #333;
 }
 
 .el-main {
-  background-color: #e9eef3;
   color: #333;
 }
 </style>

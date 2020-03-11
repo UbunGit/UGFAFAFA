@@ -10,7 +10,8 @@ from flask import Response
 import json
 import zxby
 from flask_sqlalchemy import SQLAlchemy
-
+from trade import share
+from fitter import macdfitter
 
 
 logging.basicConfig(format='%(asctime)s %(message)s ')
@@ -29,22 +30,54 @@ def Response_headers(content):
     resp.headers.add('Content-Type', 'text/plain')
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
- 
- 
-@app.route('/')
-def hello_world():
 
-    admin = Tactics(name='admin', categories='1', remark='admin@example.com')
-    db.session.add(admin)
-    db.session.commit()
-    Tactics.query.all()
-    data =  Tactics.query.filter_by(name='admin')
-    users_output = []
-    for user in data:
-        users_output.append(user.to_json())
-    print(users_output)
-    return  dict(data = str(users_output))
+def decode(s):
+    try:
+        return s.decode('utf-8')
+    except UnicodeDecodeError:
+        return s.decode('gbk')
  
+ # 根据时间获取股票交易历史数据
+@app.route('/sharehistory')
+def sharehistory():
+    if request.method == 'GET':
+        r = dict()
+        r["code"] = -1
+        try:
+            code = request.args.get("code")
+            begin = request.args.get("begin")
+            cshare = share(code,begin)
+            r["data"] =json.loads(cshare.cdata.to_json(orient='records')) 
+            r["code"] = 0
+            # r["data"] = str(request.args)
+
+        except Exception as e:
+            r["data"] = str(e)
+        finally:
+            print("======sharehistory======")
+            print(r)
+            print("============")
+            return json.dumps(r)
+
+ # 根据时间获取股票交易历史数据
+@app.route('/fitterList')
+def chooseList():
+    if request.method == 'GET':
+        r = dict()
+        r["code"] = -1
+        try:
+            date = request.args.get("date")
+            r["data"] =json.loads(macdfitter(date)) 
+            r["code"] = 0
+        except Exception as e:
+            r["data"] = str(e)
+        finally:
+            print("======fitterList======")
+            print(r)
+            print("============")
+            return json.dumps(r)
+ 
+
 @app.route('/run', methods=['POST'])
 def run():
     if request.method == 'POST' and request.form['code']:
