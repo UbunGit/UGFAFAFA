@@ -31,6 +31,7 @@
             <template slot-scope="scope">
               <span>{{scope.row.code}}</span>
               <span>{{scope.row.name}}</span>
+              <span>{{scope.row.close}}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -61,11 +62,13 @@ export default {
       fitterList(this.formdata).then(response => {
         this.shareList = response.data.data;
         this.size = this.shareList.length
+        var code = this.shareList[0].code
+        this.$emit("cell-click", code, this.formdata.date);
         this.loading = false;
       });
     },
     handleCellClick(row) {
-      this.$emit("cell-click", row.code);
+      this.$emit("cell-click", row.code,this.formdata.date);
     },
     handledatachange(){
         this.shareList = []

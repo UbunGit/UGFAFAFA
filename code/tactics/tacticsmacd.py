@@ -33,6 +33,20 @@ def fitter(data):
     deas = numpy.array(data['DEA'])
     closes = numpy.array(data['close'])
     times = numpy.array(data.index)
+    masdrs = numpy.array(data['MACD_R'])
+    ks = numpy.array(data['k'])
+    krs = numpy.array(data['K_R'])
+
+    # macddata = macddata[macddata.MACD>0]
+    # macddata = macddata[macddata.DEA>0]
+    # macddata = macddata[macddata.DIFF>0]
+    # macddata = macddata[macddata.DIFF>macddata.DEA]
+    # macddata = macddata[macddata.close>macddata.ma10]
+    # macddata = macddata[macddata.MACD_R>0]
+    # macddata = macddata[macddata.K_R>0]
+    # macddata = macddata[macddata.MA20_R>0]
+    # macddata = macddata[macddata.MA10_R>0]
+    # macddata = macddata[macddata.k<75]
 
     for i in range(len(df)):
         isscre = False
@@ -41,12 +55,12 @@ def fitter(data):
         macd = macds[i]
         diff = diffs[i]
         dea = deas[i]
-        if diff<dea or macd<0: 
+        if diff<dea or macd<0 or ks[i]>89: 
             btypes.append(-1)
             isscre, msg ,count= cent.sell(closes[i], times[i], cent.store)
             logging.debug("trade "+'sell '+str(times[i])+" " +str(closes[i])+" " +msg)
    
-        elif diff>0 and dea>0 and macd>0:
+        elif diff>0 and dea>0 and macd>0 and diff>dea and masdrs[i]>0 and krs[i]>0:
             btypes.append(1)
             isscre, msg, count = cent.buy(closes[i], times[i], count=cent.balance/closes[i])
             logging.debug("trade: "+' buy '+str(times[i]) +" "+str(closes[i])+" " +msg)
@@ -62,6 +76,8 @@ def fitter(data):
         sumAmounts.append(sumAmount)
         logging.debug(str(tcode)+"资产"+str(sumAmount)+"持仓"+str(cent.store))
     return btypes,scress,counts,amounts,stores,sumAmounts
+
+
 
 amount = 10000
 start = '2019-10-18'
