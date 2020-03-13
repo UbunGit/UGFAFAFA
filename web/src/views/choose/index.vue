@@ -19,8 +19,8 @@
             >
               <el-col :span="4">
                 <el-form-item label="股票代码">
-                  <span >{{formdata.code}}</span>
-                  <span >{{formdata.name}}</span>
+                  <span>{{formdata.code}}</span>
+                  <span>{{formdata.name}}</span>
                 </el-form-item>
               </el-col>
               <el-col :span="8">
@@ -52,17 +52,19 @@
               </el-col>
               <el-col :span="6">
                 <el-form-item label="股价">
-                  <span >{{lastData.close}}</span>
+                  <span>{{lastData.close}}</span>
                 </el-form-item>
               </el-col>
             </el-form>
           </el-card>
           <el-card style="wigth=100%">
-            <ve-candle :data="chartData" 
-            :settings="chartSettings" 
-            @ready-once="readyOnve"
-            height="180pt"
-            v-loading="loading"></ve-candle>
+            <ve-candle
+              :data="chartData"
+              :settings="chartSettings"
+              @ready-once="readyOnve"
+              height="180pt"
+              v-loading="loading"
+            ></ve-candle>
             <ve-histogram
               :data="amountdata"
               :settings="amountSettings"
@@ -86,7 +88,7 @@
 <script>
 import { sharehistory, fitterList } from "@/api/share";
 import ShareList from "./components/ShareList";
-import { str2Date ,addDate} from "@/utils/date";
+import { str2Date, addDate } from "@/utils/date";
 export default {
   components: { ShareList },
   created() {
@@ -101,7 +103,7 @@ export default {
         code: "000100"
       },
       lastData: {
-        close:0.00
+        close: 0.0
       },
       result: null,
       shareList: [],
@@ -110,24 +112,26 @@ export default {
       chartSettings: {
         showMA: true,
         showVol: true,
+        dimension:["date"],
         downColor: "#00da3c",
-        upColor: "#ec0000",
+        upColor: "#ec0000"
       },
       chartData: {
         columns: ["date", "open", "close", "low", "high", "volume"],
         rows: []
       },
       amountdata: {
-          columns: ['date', 'MACD','DIFF','DEA'],
-          rows: [],
-          
+        columns: ["date", "MACD", "DIFF", "DEA"],
+        rows: [],
+        
       },
       amountSettings: {
+        
         showDataZoom: true,
-        scale:[true,true],
+        scale: [true, true],
         smooth: false,
-        showLine: ['DIFF','DEA'],
-      },
+        showLine: ["DIFF", "DEA"],
+      }
     };
   },
   methods: {
@@ -139,7 +143,7 @@ export default {
         this.result = response.data.data;
         this.chartData.rows = this.result;
         this.amountdata.rows = this.result;
-        this.lastData = this.result[this.result.length-1]
+        this.lastData = this.result[this.result.length - 1];
         this.loading = false;
       });
     },
@@ -154,14 +158,14 @@ export default {
     handleClose() {},
     handleCellClick(code, date) {
       this.formdata.code = code;
-      this.formdata.begin = addDate(date,-15)
-      this.formdata.end = addDate(date,15)
+      this.formdata.begin = addDate(date, -65);
+      this.formdata.end = addDate(date, 5);
       this.getresult();
     },
-    handledatachange(){
-        this.getresult();
+    handledatachange() {
+      this.getresult();
     },
-    readyOnve(echart, options, echartsLib){
+    readyOnve(echart, options, echartsLib) {
       echart.group = "group1";
       echartsLib.connect("group1");
     }

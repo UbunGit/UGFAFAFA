@@ -15,7 +15,7 @@
         :settings="amountSettings"
         @ready-once="readyOnve"
         height="160pt"
-      >></ve-line>
+      ></ve-line>
     </div>
   </div>
 </template>
@@ -53,7 +53,7 @@ export default {
         selectedDepIndex: 1
       },
       amountdata: {
-        columns: ["date", "amounts", "store", "sumAmount"],
+        columns: ["date", "store", "sumAmount"],
         rows: [],
         showDataZoom: true
       },
@@ -62,11 +62,9 @@ export default {
         scale: [true, true],
         smooth: false,
         axisSite: { right: ["store"] },
-        yAxisType: ['KMB', 'KMB'],
-        yAxisName: ['数值', '股'],
+        yAxisName: ['总资产', '持股数'],
         labelMap: {
           sumAmount: "总资产",
-          amounts: "余额",
           store: "持股数"
         }
       },

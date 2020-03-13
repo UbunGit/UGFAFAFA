@@ -9,7 +9,7 @@ import os
 # diff>0 and dea>0 and macd>0买入
 # diff<dea or macd<0买出
 ##
-logpath = './tacticsm5.log'
+logpath = './log/tacticsm5.log'
 if os.path.isfile(logpath):
     os.remove(logpath)
 logging.basicConfig(format='%(asctime)s %(message)s ',filename= logpath )
@@ -33,6 +33,10 @@ def fitter(data):
     deas = numpy.array(data['DEA'])
     closes = numpy.array(data['close'])
     times = numpy.array(data.index)
+    masdrs = numpy.array(data['MACD_R'])
+    ks = numpy.array(data['k'])
+    krs = numpy.array(data['K_R'])
+    ma20rs = numpy.array(data['MA20_R'])
 
     for i in range(len(df)):
         isscre = False
@@ -41,12 +45,12 @@ def fitter(data):
         macd = macds[i]
         diff = diffs[i]
         dea = deas[i]
-        if diff<dea or macd<0: 
+        if diff<dea or macd<0 or ks[i]>92 or ma20rs[i]<0 or masdrs[i]<0: 
             btypes.append(-1)
             isscre, msg ,count= cent.sell(closes[i], times[i], cent.store)
             logging.debug("trade "+'sell '+str(times[i])+" " +str(closes[i])+" " +msg)
    
-        elif diff>0 and dea>0 and macd>0:
+        elif  diff>dea and masdrs[i]>0 and krs[i]>0 and ma20rs[i]>0 and masdrs[i]>0:
             btypes.append(1)
             isscre, msg, count = cent.buy(closes[i], times[i], count=cent.balance/closes[i])
             logging.debug("trade: "+' buy '+str(times[i]) +" "+str(closes[i])+" " +msg)
@@ -63,10 +67,12 @@ def fitter(data):
         logging.debug(str(tcode)+"资产"+str(sumAmount)+"持仓"+str(cent.store))
     return btypes,scress,counts,amounts,stores,sumAmounts
 
+
+
 amount = 10000
-start = '2019-10-18'
-end = '2020-10-18'
-tcode = '515050'
+start = '2019-10-01'
+end = '2020-12-01'
+tcode = '300022'
 
 if len(sys.argv)>1:
     tcode = sys.argv[1]
@@ -76,9 +82,9 @@ if len(sys.argv)>3:
     start = sys.argv[3]
 if len(sys.argv)>4:
     end = sys.argv[4]
-
+logging.debug("===================================")
+logging.debug(("时间：",start,"~",end))
 cent = trade(tcode, begin=start, end=end, balance=amount)
 df = cent.cdata
 df['buy'],df['scress'],df['counts'],df['amounts'], df['store'] ,df['sumAmount']= fitter(df)
-df['date'] = numpy.array(df.index)
-print(df.to_json(orient='records'))
+print(df)

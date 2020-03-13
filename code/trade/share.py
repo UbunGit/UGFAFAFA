@@ -4,11 +4,17 @@
 import tushare as ts
 import numpy
 import pandas
-import os,time
+import os,time,logging
 import talib as tl
 
 formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
-# formattime = ('2020-03-10')
+logpath = './log/share.log'
+if os.path.isfile(logpath):
+    os.remove(logpath)
+logging.basicConfig(format='%(message)s ',filename= logpath )
+logging.getLogger().setLevel(logging.DEBUG)
+
+logging.debug("sahre:%s",formattime)
 ###
 ## 单个股票
 ###
@@ -17,6 +23,7 @@ class share:
     code = None # 股票数据
     def __init__(self, code, begin= None, end= None):
         #根据股票编码初始化数据
+        logging.debug("根据股票编码初始化数据 code:%s 开始：%s 结束：%s",code,begin,end)
         self.code = code
         tsda = self.load()
         if tsda is None:
@@ -24,7 +31,7 @@ class share:
             if(tsda is None):
                 return
             tsda.sort_index(inplace=True)
-            tsda['date'] = tsda.index
+            
             tsda = self.macd(tsda)
             tsda = self.kdj(tsda)
             tsda = self.real(tsda)
@@ -34,9 +41,12 @@ class share:
 
         self.cdata = tsda
         if begin is not None:
-            self.cdata = tsda[tsda['date'] >= begin]
+            self.cdata = self.cdata[self.cdata['date'] >= begin]
         if end is not None:
-            self.cdata = tsda[tsda['date']<= end]
+            self.cdata = self.cdata[self.cdata['date']<= end]
+        logging.debug("cdata:%s",self.cdata)
+        # self.cdata['date'] = self.cdata.index
+
 
     def macd(self,data):
 
@@ -137,7 +147,8 @@ class shares:
         
 
 if __name__ == '__main__':
-    cshare = share('000100','2020-03-10')
+    cshare = share('300022','2019-10-01','2020-12-01')
     print(cshare.cdata)
+    # print(cshare.cdata.to_json(orient='records'))
     
  

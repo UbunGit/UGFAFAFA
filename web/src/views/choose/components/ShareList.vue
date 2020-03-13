@@ -26,6 +26,7 @@
         <span> {{size}}</span>  
         <el-table :data="shareList" 
         @cell-click="handleCellClick"
+        highlight-current-row 
         height="400px">
           <el-table-column width="180">
             <template slot-scope="scope">

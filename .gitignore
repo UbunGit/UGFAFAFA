@@ -7,3 +7,4 @@ Shares/default.realm.management/access_control.write.mx
 *.pyc
 *.egg
 *.log
+*.log
