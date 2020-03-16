@@ -18,10 +18,11 @@ def macdfitter(date):
     macddata = macddata[macddata.DIFF>0]
     macddata = macddata[macddata.DIFF>macddata.DEA]
     macddata = macddata[macddata.close>macddata.ma10]
-    macddata = macddata[macddata.MACD_R>0]
-    macddata = macddata[macddata.K_R>0]
-    macddata = macddata[macddata.MA20_R>0]
-    macddata = macddata[macddata.MA10_R>0]
+    macddata = macddata[macddata.MACD_R>1.5]
+    macddata = macddata[macddata.K_R>50]
+    macddata = macddata[macddata.MA20_R>1.5]
+    macddata = macddata[macddata.MA10_R>1.5]
+    macddata = macddata[macddata.MA5_R>3]
     macddata = macddata[macddata.k<75]
     macddata.to_csv('~/share/tem/macdChoose_'+str(date)+'.csv')
     return macddata.to_json(orient='records')

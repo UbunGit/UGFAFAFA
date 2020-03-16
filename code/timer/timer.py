@@ -14,15 +14,14 @@ def run():
     fitters = l_shares.basics
     
     codes = numpy.array(fitters.index)
-    print(codes)
     names = numpy.array(fitters.name)
     sharlist = pandas.DataFrame()
     sharecodes = []
     sharenames = []
     for i in range(len(codes)):
         temshare = share(codes[i],'2020-01-01', formattime)
-        print(codes[i],"[",i,"/",len(codes),"]")
-        if temshare.cdata is not None:
+        print(codes[i],names[i],"[",i,"/",len(codes),"]")
+        if temshare.cdata is not None and len(temshare.cdata)>1:
             try:
                 sharlist = sharlist.append(temshare.cdata[-1:])
                 sharecodes.append(codes[i])
@@ -31,8 +30,11 @@ def run():
                 sharlist["name"]= sharenames 
                 sharlist.to_csv("~/share/tem/shares_"+formattime+".csv")
             except Exception as e:
+                
                 print('except:', e)
-                print(sharecodes)
+                print("codes:%s",len(sharlist["code"]))
+                print("name:%s",len(sharlist["name"]))
+                print("sharenames.length%s",len(sharenames))
                 
     print(sharlist)
         

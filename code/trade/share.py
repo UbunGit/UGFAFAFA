@@ -72,6 +72,9 @@ class share:
             macd_r = tl.LINEARREG_ANGLE(data['MACD'], timeperiod=3)
             data['MACD_R']= macd_r
 
+            diff_r = tl.LINEARREG_ANGLE(data['DIFF'], timeperiod=3)
+            data['DIFF_R']= diff_r
+
             k_r = tl.LINEARREG_ANGLE(data['k'], timeperiod=3)
             data['K_R']= k_r
 
@@ -83,6 +86,8 @@ class share:
 
             ma20_r = tl.LINEARREG_ANGLE(data['ma20'], timeperiod=3)
             data['MA20_R']= ma20_r
+
+            
 
         except Exception as e:
             print('except:', e)

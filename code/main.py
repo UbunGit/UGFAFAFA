@@ -3,7 +3,7 @@
 
 import logging
 import time
-import sys
+import sys,os
 from flask import Flask
 from flask import request
 from flask import Response
@@ -13,15 +13,18 @@ from flask_sqlalchemy import SQLAlchemy
 from trade import share
 from fitter import macdfitter
 
-
-logging.basicConfig(format='%(asctime)s %(message)s ')
-logging.getLogger().setLevel(logging.WARN)
-logging.debug(sys.version)
+logpath = './log/main.log'
+if os.path.isfile(logpath):
+    os.remove(logpath)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./data/test.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 db = SQLAlchemy(app)
+
+logging.getLogger(__name__).setLevel(logging.DEBUG)
+logging.basicConfig(format='%(message)s ' )
+logging.debug(sys.version)
 
 def Response_headers(content):
     resp = Response(content)

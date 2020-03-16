@@ -12,13 +12,7 @@ import os
 # 买入：均线斜率大于0，close<30日均线
 ##
 
-logpath = './log/tacticsm5.log'
-if os.path.isfile(logpath):
-    os.remove(logpath)
-logging.basicConfig(format='%(asctime)s %(message)s ',filename= logpath )
-logging.getLogger().setLevel(logging.DEBUG)
 
-logging.debug("trade"+sys.version)
 
 ## 如果收盘价低于开盘价 买入
 def fitter(data):

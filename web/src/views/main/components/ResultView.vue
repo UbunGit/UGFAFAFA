@@ -58,8 +58,8 @@ export default {
         showDataZoom: true
       },
       amountSettings: {
-        showDataZoom: true,
-        scale: [true, true],
+    
+        // scale: [true, true],
         smooth: false,
         axisSite: { right: ["store"] },
         yAxisName: ['总资产', '持股数'],
