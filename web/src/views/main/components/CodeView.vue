@@ -1,10 +1,13 @@
 <template>
   <div>
-
     <el-card>
-      <textarea ref="mycode" class="codesql" v-model="code" style="height:500pt; width:100%;"></textarea>
-    </el-card>
-
+    <textarea 
+    ref="mycode" 
+    class="codesql" 
+    v-model="code" 
+    style="height:900px; width:100%;"
+  ></textarea>
+  </el-card>
   </div>
 </template>
 
@@ -77,4 +80,5 @@ export default {
   font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono,
     DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
 }
+
 </style>

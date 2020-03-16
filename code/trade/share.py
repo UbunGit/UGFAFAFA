@@ -8,13 +8,7 @@ import os,time,logging
 import talib as tl
 
 formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
-logpath = './log/share.log'
-if os.path.isfile(logpath):
-    os.remove(logpath)
-logging.basicConfig(format='%(message)s ',filename= logpath )
-logging.getLogger().setLevel(logging.DEBUG)
 
-logging.debug("sahre:%s",formattime)
 ###
 ## 单个股票
 ###
@@ -31,7 +25,7 @@ class share:
             if(tsda is None):
                 return
             tsda.sort_index(inplace=True)
-            
+            tsda["date"] = tsda.index
             tsda = self.macd(tsda)
             tsda = self.kdj(tsda)
             tsda = self.real(tsda)

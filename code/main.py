@@ -15,7 +15,7 @@ from fitter import macdfitter
 
 
 logging.basicConfig(format='%(asctime)s %(message)s ')
-logging.getLogger().setLevel(logging.DEBUG)
+logging.getLogger().setLevel(logging.WARN)
 logging.debug(sys.version)
 
 app = Flask(__name__)

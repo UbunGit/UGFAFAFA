@@ -75,7 +75,7 @@ def main(code,tcode = '000100',amount=10000,start = None,end = None):
         # 删除文件(其实不用删除临时文件会自动删除)
         try:
             os.remove(fpath)
-            logging.debug(fpath)
+            # logging.debug(fpath)
         except Exception as e:
             exit(1)
  

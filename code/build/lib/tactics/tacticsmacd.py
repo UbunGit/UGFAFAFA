@@ -9,13 +9,7 @@ import os
 # diff>0 and dea>0 and macd>0买入
 # diff<dea or macd<0买出
 ##
-logpath = './log/tacticsm5.log'
-if os.path.isfile(logpath):
-    os.remove(logpath)
-logging.basicConfig(format='%(asctime)s %(message)s ',filename= logpath )
-logging.getLogger().setLevel(logging.DEBUG)
 
-logging.debug("trade"+sys.version)
 
 ## 如果收盘价低于开盘价 买入
 def fitter(data):
@@ -32,7 +26,7 @@ def fitter(data):
     diffs = numpy.array(data['DIFF'])
     deas = numpy.array(data['DEA'])
     closes = numpy.array(data['close'])
-    times = numpy.array(data.index)
+    times = numpy.array(data.date)
     masdrs = numpy.array(data['MACD_R'])
     ks = numpy.array(data['k'])
     krs = numpy.array(data['K_R'])
@@ -45,18 +39,20 @@ def fitter(data):
         macd = macds[i]
         diff = diffs[i]
         dea = deas[i]
-        if diff<dea or macd<0 or ks[i]>92 or ma20rs[i]<0 or masdrs[i]<0: 
-            btypes.append(-1)
-            isscre, msg ,count= cent.sell(closes[i], times[i], cent.store)
-            logging.debug("trade "+'sell '+str(times[i])+" " +str(closes[i])+" " +msg)
-   
-        elif  diff>dea and masdrs[i]>0 and krs[i]>0 and ma20rs[i]>0 and masdrs[i]>0:
+        if diff>dea and krs[i]>0 and ma20rs[i]>-5 and masdrs[i]>0:
             btypes.append(1)
             isscre, msg, count = cent.buy(closes[i], times[i], count=cent.balance/closes[i])
-            logging.debug("trade: "+' buy '+str(times[i]) +" "+str(closes[i])+" " +msg)
+            # logging.debug("diff:%s dea:%s dea:%s ma20rs:%s masdrs:%s",diff,dea,krs[i],ma20rs[i],masdrs[i])
+            # logging.debug(str(times[i])+' 买入 ' +str(tcode)+" "+str(closes[i])+" " +msg)
+   
+        elif  diff<dea or macd<0 or ks[i]>90 or ma20rs[i]<0 or masdrs[i]<0: 
+            btypes.append(-1)
+            isscre, msg ,count= cent.sell(closes[i], times[i], cent.store)
+            # logging.debug("diff:%s dea:%s dea:%s ma20rs:%s masdrs:%s macd:%s ks:%s",diff,dea,krs[i],ma20rs[i],masdrs[i],macd,ks[i])
+            # logging.debug(str(times[i])+'卖出 '+str(tcode)+" " +str(closes[i])+" " +msg)
         
         else:
-            logging.debug("trade "+str(times[i]) +'无交易')
+            # logging.debug("trade "+str(times[i]) +'无交易')
             btypes.append(0)
         scress.append(isscre)
         counts.append(count)
@@ -64,7 +60,7 @@ def fitter(data):
         stores.append(cent.store)
         sumAmount = float(cent.balance) + float(cent.store)*float(closes[i])
         sumAmounts.append(sumAmount)
-        logging.debug(str(tcode)+"资产"+str(sumAmount)+"持仓"+str(cent.store))
+        # logging.debug("资产"+str(sumAmount)+"持仓"+str(cent.store))
     return btypes,scress,counts,amounts,stores,sumAmounts
 
 
@@ -82,9 +78,13 @@ if len(sys.argv)>3:
     start = sys.argv[3]
 if len(sys.argv)>4:
     end = sys.argv[4]
-logging.debug("===================================")
-logging.debug(("时间：",start,"~",end))
+
+
 cent = trade(tcode, begin=start, end=end, balance=amount)
 df = cent.cdata
+
 df['buy'],df['scress'],df['counts'],df['amounts'], df['store'] ,df['sumAmount']= fitter(df)
-print(df)
+# logging.debug("===================================")
+# logging.debug("tacticsm5 结果:%s",df)
+# logging.debug("===================================")
+print(df.to_json(orient='records'))

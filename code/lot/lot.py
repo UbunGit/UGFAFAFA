@@ -5,9 +5,6 @@ import logging
 import numpy
 logpath = '../data/tacticsm5.log'
 
-logging.basicConfig(format='%(asctime)s %(message)s ',filename= logpath )
-logging.getLogger().setLevel(logging.DEBUG)
-logging.debug("test")
 
 data = pandas.read_csv('../data/lot_zhcw_ssq.csv', header=None)
 data = data.sort_values(by=1)

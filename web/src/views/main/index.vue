@@ -70,8 +70,17 @@
           <el-card>
             <result-view v-model="result" v-loading="loading"></result-view>
           </el-card>
-          <el-card>{{result}}</el-card>
+          <el-footer >
+
+            <el-input
+            type="textarea"
+            placeholder="请输入内容"
+            v-model="JSON.stringify(result)"
+            style="height:100%;">
+          </el-input>
+          </el-footer>
         </el-main>
+         
       </el-container>
     </el-container>
 
@@ -132,6 +141,7 @@ export default {
       runexit(params).then(response => {
         this.result = response.data.data;
         this.loading = false;
+       
       });
     },
     handlePreview(file) {
@@ -160,6 +170,7 @@ export default {
 .el-aside {
   background-color: #d3dce6;
   color: #333;
+  height: 100%;
 }
 
 .el-main {

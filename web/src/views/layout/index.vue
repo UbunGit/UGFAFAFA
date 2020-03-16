@@ -7,7 +7,7 @@
       router>
         <el-menu-item index="/main">
           <i class="el-icon-menu"></i>
-          <span slot="title">测试</span>
+          <span slot="title">我的策略</span>
         </el-menu-item>
         <el-menu-item index="/choose">
           <i class="el-icon-setting"></i>

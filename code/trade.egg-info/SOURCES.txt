@@ -5,7 +5,6 @@ share/__init__.py
 share/top.py
 tactics/__init__.py
 tactics/tactics.py
-tactics/tacticsm5.py
 tactics/tacticsmacd.py
 timer/__init__.py
 timer/timer.py
