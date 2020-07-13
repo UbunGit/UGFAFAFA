@@ -12,6 +12,7 @@ class trade:
     lastTime = None #最后交易时间
 
     def __init__(self, code, begin = '', end= '', balance=10000.00):
+        logging.warn("初始化交易系统")
         self.balance = float(balance)
         
         if begin is None:
