@@ -6,6 +6,7 @@ import numpy
 import pandas
 import os,time,logging
 import talib as tl
+logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
 formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
 
@@ -17,7 +18,7 @@ class share:
     code = None # 股票数据
     def __init__(self, code, begin= None, end= None):
         #根据股票编码初始化数据
-        logging.debug("根据股票编码初始化数据 code:%s 开始：%s 结束：%s",code,begin,end)
+        logging.info("根据股票编码初始化数据 code:%s 开始：%s 结束：%s",code,begin,end)
         self.code = code
         tsda = self.load()
         if tsda is None:
@@ -31,6 +32,7 @@ class share:
             tsda = self.real(tsda)
             self.save(tsda)
         if(tsda is None):
+            logging.error("初始化失败，为获取到数据")
             return
 
         self.cdata = tsda
@@ -38,12 +40,12 @@ class share:
             self.cdata = self.cdata[self.cdata['date'] >= begin]
         if end is not None:
             self.cdata = self.cdata[self.cdata['date']<= end]
-        logging.debug("cdata:%s",self.cdata)
-        # self.cdata['date'] = self.cdata.index
+        logging.debug("初始化结束")
+
 
 
     def macd(self,data):
-
+        logging.info("MACD BEGIN")
         closes = numpy.array(data['close'])
         diff, dea, macd= tl.MACD(closes,
                             fastperiod=12, slowperiod=26, signalperiod=9 )
@@ -51,12 +53,15 @@ class share:
         data['MACD']= macd*2
         data['DEA'] = dea
         data['DIFF'] = diff
-        
+        logging.info("MACD END")
         return data
 
+   #计算kd指标
     def kdj(self, data, fastk_period=9, slowk_period=3, slowd_period=3):
+        logging.info("KDJ BEGIN")
         indicators={}
-        #计算kd指标
+     
+
         closes = numpy.array(data['close'])
         highs = numpy.array(data['high'])
         lows = numpy.array(data['low'])
@@ -64,10 +69,11 @@ class share:
         data['k']= k
         data['d'] = d
         data['j'] = 3 * k - 2 * d
-        
+        logging.info("KDJ END")
         return data
 
     def real(self, data):
+
         try:
             macd_r = tl.LINEARREG_ANGLE(data['MACD'], timeperiod=3)
             data['MACD_R']= macd_r
@@ -87,28 +93,32 @@ class share:
             ma20_r = tl.LINEARREG_ANGLE(data['ma20'], timeperiod=3)
             data['MA20_R']= ma20_r
 
-            
-
         except Exception as e:
-            print('except:', e)
+            logging.warning("real error%s",e)
         finally:
+            logging.warning("real end")
             return data
 
 
 
     def save(self,data):
-        data.to_csv('~/share/data/'+str(self.code)+'.csv')
+        path = '~/share/data/'+str(self.code)+'.csv'
+        logging.info("保存原始数据:"+path)
+        data.to_csv(path)
 
     def load(self):
-        sharefile = '~/share/data/'+str(self.code)+'.csv'
+        path = '~/share/data/'+str(self.code)+'.csv'
         try:
-            temdata = pandas.read_csv(sharefile)
+            logging.info("获取缓存数据:"+path)
+            temdata = pandas.read_csv(path)
             dates = numpy.array(temdata['date'])
             enddate = dates[-1:][0]
             if(dates[-1:])>=formattime:
                 return temdata
         except Exception as e:
-            print('except:', e)
+            logging.info("获取缓存数据失败：paht="+path)
+            logging.warning(e)
+      
             time.sleep(0.1)
             return None
        
@@ -147,7 +157,7 @@ class shares:
 
 if __name__ == '__main__':
     cshare = share('300022','2019-10-01','2020-12-01')
-    print(cshare.cdata)
+    logging.debug("result：\n%s",cshare.cdata)
     # print(cshare.cdata.to_json(orient='records'))
     
  

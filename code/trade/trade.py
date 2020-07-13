@@ -3,6 +3,7 @@ import logging
 import talib as tl
 import numpy
 from .share import share
+logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
 class trade:
     cshare = None # 股票数据
