@@ -18,7 +18,7 @@ class share:
     code = None # 股票数据
     def __init__(self, code, begin= None, end= None):
         #根据股票编码初始化数据
-        logging.info("根据股票编码初始化数据 code:%s 开始：%s 结束：%s",code,begin,end)
+        logging.info("share 根据股票编码初始化数据 code:%s 开始：%s 结束：%s",code,begin,end)
         self.code = code
         tsda = self.load()
         if tsda is None:
@@ -27,12 +27,9 @@ class share:
                 return
             tsda.sort_index(inplace=True)
             tsda["date"] = tsda.index
-            tsda = self.macd(tsda)
-            tsda = self.kdj(tsda)
-            tsda = self.real(tsda)
             self.save(tsda)
         if(tsda is None):
-            logging.error("初始化失败，为获取到数据")
+            logging.error("share 初始化失败，为获取到数据")
             return
 
         self.cdata = tsda
@@ -40,11 +37,11 @@ class share:
             self.cdata = self.cdata[self.cdata['date'] >= begin]
         if end is not None:
             self.cdata = self.cdata[self.cdata['date']<= end]
-        logging.debug("初始化结束")
+        logging.debug("share 初始化结束")
 
 
 
-    def macd(self,data):
+    def appendmacd(self,data):
         logging.info("MACD BEGIN")
         closes = numpy.array(data['close'])
         diff, dea, macd= tl.MACD(closes,
@@ -57,11 +54,10 @@ class share:
         return data
 
    #计算kd指标
-    def kdj(self, data, fastk_period=9, slowk_period=3, slowd_period=3):
+    def appendkdj(self, data, fastk_period=9, slowk_period=3, slowd_period=3):
         logging.info("KDJ BEGIN")
         indicators={}
-     
-
+    
         closes = numpy.array(data['close'])
         highs = numpy.array(data['high'])
         lows = numpy.array(data['low'])
@@ -72,7 +68,7 @@ class share:
         logging.info("KDJ END")
         return data
 
-    def real(self, data):
+    def appendreal(self, data):
 
         try:
             macd_r = tl.LINEARREG_ANGLE(data['MACD'], timeperiod=3)
@@ -114,6 +110,7 @@ class share:
             dates = numpy.array(temdata['date'])
             enddate = dates[-1:][0]
             if(dates[-1:])>=formattime:
+                logging.info("获取缓存数据,已是最新enddate:%s  formattime:%s",dates[-1:],formattime)
                 return temdata
         except Exception as e:
             logging.info("获取缓存数据失败：paht="+path)
@@ -158,6 +155,8 @@ class shares:
 if __name__ == '__main__':
     cshare = share('300022','2019-10-01','2020-12-01')
     logging.debug("result：\n%s",cshare.cdata)
+    result =cshare.appendmacd(cshare.cdata)
+    logging.debug("macd result：\n%s",result)
     # print(cshare.cdata.to_json(orient='records'))
     
  
