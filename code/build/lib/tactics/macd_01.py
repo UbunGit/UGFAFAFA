@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from trade import trade
+from trade import share
 import numpy
 import sys
 import logging
 import os
+import pandas as pd
+import numpy as np
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
 # 根据macd值买入优化v1.0.0 2020.7.14
@@ -20,9 +22,39 @@ logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 # 5. 卖出条件
 #   1 股价超过持仓最低档卖出价
 
+buylogs = []
+plandf = pd.DataFrame()
+
+def makeplan(price):
+    logging.info("创建购买计划:%s",price)
+    input = pd.Series(np.logspace(-5, 5, 15, base=1.05)*price)
+    tem =  (pd.Series(np.arange(5, 20, 1))*0.01)
+    out = (tem +1)*input
+    global plandf
+    plandf = pd.DataFrame({ "input": input, "out": out, "store":0, "tem":tem})
+    logging.info("购买计划创建完毕\n%s",plandf)
+
+def judgeBuy(data):
+    # 判断买入条件是否满足
+    logging.info("判断买入条件")
+    log = {}
+
+    try:
+        if data.MACD<0 or np.isnan(data.MACD):
+            raise Exception("MACD<0 macd:", data.MACD)
+    except Exception as e:
+        buylogs.append({"buymsg":str(e),"buy":False})
+    else:
+        if  plandf.empty:
+            logging.info(data)
+            makeplan(data.ma30)
+            
+        buylogs.append({"buy":True})
+
 
 
 if __name__ == '__main__':
+
     logging.info("根据macd值买入优化v1.0.0 2020.7.14")
     logging.info("args:%s",sys.argv)
     amount = '10000'
@@ -39,5 +71,16 @@ if __name__ == '__main__':
     if len(sys.argv)>4:
         end = sys.argv[4]
     logging.info("begin tcode:%s amount:%s start:%s end:%s",tcode,amount,start,end)
-    cent = trade(tcode, begin=start, end=end, balance=amount)
+
+    share = share(tcode)
+    data = share.appendmacd(share.cdata)
+    data = share.appendma(data,30)
+
+    for i in range(len(data[10:50])):
+        temdata = data.iloc[i]
+        judgeBuy(temdata)
+    logging.info(buylogs)
+ 
+
+
     

@@ -48,7 +48,7 @@ class trade:
     
 if __name__ == '__main__':
     trade = trade()
-    trade.buy(10,10000)
+    trade.buy(10,100)
     trade.sell(15,100)
 
    

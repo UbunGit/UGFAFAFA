@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from trade import share
 from trade import trade
 import numpy
 import sys
@@ -22,26 +23,43 @@ logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 # 5. 卖出条件
 #   1 股价超过持仓最低档卖出价
 
+buylogs = []
+plandf = pd.DataFrame()
+tradecenter = trade()
 
-
-def initializelevel(price):
-    s = pd.Series(np.random.randn(5), index=['a', 'b', 'c', 'd', 'e'])
-
-
-
+def makeplan(price):
+    logging.info("创建购买计划:%s",price)
+    input = pd.Series(np.logspace(-5, 5, 15, base=1.05)*price)
+    tem =  (pd.Series(np.arange(5, 20, 1))*0.01)
+    out = (tem +1)*input
+    global plandf
+    plandf = pd.DataFrame({ "input": input, "out": out, "store":0, "tem":tem})
+    logging.info("购买计划创建完毕\n%s",plandf)
 
 def judgeBuy(data):
     # 判断买入条件是否满足
-
-
     logging.info("判断买入条件")
+    log = {}
+
+    try:
+        if data.MACD<0 or np.isnan(data.MACD):
+            raise Exception("MACD<0 macd:", data.MACD)
+    except Exception as e:
+        buylogs.append({"buymsg":str(e),"buy":False,"date":data.date})
+    else:
+        if  plandf.empty:
+            logging.info(data)
+            makeplan(data.ma30)
+        tradecenter.buy(float(data.ma30), 100)
+        buylogs.append({"buy":True,"date":data.date})
+
 
 
 if __name__ == '__main__':
 
     logging.info("根据macd值买入优化v1.0.0 2020.7.14")
     logging.info("args:%s",sys.argv)
-    amount = '10000'
+    amount = '1000000000'
     start = '2019-10-01'
     end = '2020-12-01'
     tcode = '300022'
@@ -55,14 +73,21 @@ if __name__ == '__main__':
     if len(sys.argv)>4:
         end = sys.argv[4]
     logging.info("begin tcode:%s amount:%s start:%s end:%s",tcode,amount,start,end)
-    tradecenter = trade(tcode, begin=start, end=end, balance=amount)
-    share = tradecenter.cshare
+    tradecenter.balance = float(amount)
+    share = share(tcode)
     data = share.appendmacd(share.cdata)
-
-    for i in range(len(data[10:])):
+    data = share.appendma(data,30)
+    
+    for i in range(len(data)):
         temdata = data.iloc[i]
-        logging.info(temdata.MACD)
+        judgeBuy(temdata)
+    logspd = pd.DataFrame(buylogs)
+    logging.info("\n%s",data)
+    logging.info("\n%s",logspd)
+    frames = [data,logspd]
+    tem = pd.concat(frames ,axis=1) 
+    logging.info("\n%s",tem)
+ 
 
 
-    judgeBuy()
     
