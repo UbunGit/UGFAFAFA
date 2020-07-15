@@ -13,18 +13,12 @@ from flask_sqlalchemy import SQLAlchemy
 from trade import share
 from fitter import macdfitter
 
-logpath = './log/main.log'
-if os.path.isfile(logpath):
-    os.remove(logpath)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./data/test.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 db = SQLAlchemy(app)
 
-logging.getLogger(__name__).setLevel(logging.DEBUG)
-logging.basicConfig(format='%(message)s ' )
-logging.debug(sys.version)
 
 def Response_headers(content):
     resp = Response(content)
@@ -57,9 +51,7 @@ def sharehistory():
         except Exception as e:
             r["data"] = str(e)
         finally:
-            print("======sharehistory======")
-            print(r)
-            print("============")
+         
             return json.dumps(r)
 
  # 根据时间获取股票交易历史数据
@@ -75,9 +67,7 @@ def chooseList():
         except Exception as e:
             r["data"] = str(e)
         finally:
-            print("======fitterList======")
-            print(r)
-            print("============")
+          
             return json.dumps(r)
  
 

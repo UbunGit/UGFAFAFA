@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 import numpy
 import pandas
-
-
+import sys,logging
+logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 ##
 # 找出  
 # 条件1:macd>0 dea >0 diff>0 
@@ -33,12 +33,14 @@ def macdfitter(date):
 def loadData(date):
     todyfile = '~/share/tem/shares_'+str(date)+'.csv'
     try:
+        logging.info("读取"+todyfile)
         temdata = pandas.read_csv(todyfile,dtype={'code':object})
         print(temdata)
         return temdata
     except Exception as e:
-        print('except:', e)
-        return None
+        logging.info(e)
+        sys.exit(1)
+     
 
 if __name__ == '__main__':
     print(macdfitter('2020-03-11'))
