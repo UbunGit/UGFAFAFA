@@ -9,22 +9,19 @@ from flask import request
 from flask import Response
 import json
 import zxby
-from flask_sqlalchemy import SQLAlchemy
 from trade import share
 from fitter import macdfitter
-
+from flask_cors import CORS
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./data/test.db'
-app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
-db = SQLAlchemy(app)
+CORS(app, supports_credentials=True)
+
 
 
 def Response_headers(content):
     resp = Response(content)
     resp.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,session_id')
     resp.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEAD')
-    resp.headers.add('Content-Type', 'text/plain')
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
@@ -141,25 +138,6 @@ def page_not_found(error):
     return resp
 
 
-
-# 定义策略Tactics对象:
-class BaseModel(object):
-    def to_json(self):
-        fields = self.__dict__
-        if "_sa_instance_state" in fields:
-            del fields["_sa_instance_state"]
-        
-        return fields
-
-class Tactics(db.Model,BaseModel):
-    __tablename__ = 'tactics'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
-    categories = db.Column(db.Integer)
-    remark = db.Column(db.String(512))
-
-
- 
  
 if __name__ == '__main__':
     

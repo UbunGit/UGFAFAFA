@@ -53,19 +53,17 @@ export default {
         selectedDepIndex: 1
       },
       amountdata: {
-        columns: ["date", "store", "sumAmount"],
+        columns: ["date", "store", "all"],
         rows: [],
         showDataZoom: true
       },
       amountSettings: {
-    
-        // scale: [true, true],
         smooth: false,
         axisSite: { right: ["store"] },
         yAxisName: ['总资产', '持股数'],
         labelMap: {
-          sumAmount: "总资产",
-          store: "持股数"
+          all: "总资产",
+          store: "持股数",
         }
       },
       histogramdata: {

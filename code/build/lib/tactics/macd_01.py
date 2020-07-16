@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 
 from trade import share
+from trade import trade
 import numpy
 import sys
 import logging
 import os
 import pandas as pd
 import numpy as np
-logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
+
+logging.basicConfig(level=logging.error)  # 设置日志级别
 
 # 根据macd值买入优化v1.0.0 2020.7.14
 # 步骤：
@@ -23,33 +25,73 @@ logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 #   1 股价超过持仓最低档卖出价
 
 buylogs = []
+selllogs = []
 plandf = pd.DataFrame()
+tradecenter = trade()
 
 def makeplan(price):
+    # 创建购买计划
     logging.info("创建购买计划:%s",price)
-    input = pd.Series(np.logspace(-5, 5, 15, base=1.05)*price)
-    tem =  (pd.Series(np.arange(5, 20, 1))*0.01)
+    input = pd.Series(np.logspace(-10, 0, 10, base=1.05)*price)
+    tem =  (pd.Series(np.arange(5, 25, 2))*0.01)
     out = (tem +1)*input
     global plandf
     plandf = pd.DataFrame({ "input": input, "out": out, "store":0, "tem":tem})
     logging.info("购买计划创建完毕\n%s",plandf)
 
+def getbuyprice():
+    # 获取购买价格
+    return plandf[plandf.store == 0].input.max()
+
+def getsellprice():
+    # 获取卖出价格
+    return plandf[plandf.store > 0].out.min()
+
 def judgeBuy(data):
     # 判断买入条件是否满足
     logging.info("判断买入条件")
     log = {}
-
     try:
         if data.MACD<0 or np.isnan(data.MACD):
-            raise Exception("MACD<0 macd:", data.MACD)
+            raise Exception("MACD<0 macd:%s", data.MACD)
     except Exception as e:
-        buylogs.append({"buymsg":str(e),"buy":False})
+        buylogs.append({"buymsg":str(e),"buy":False,"date":data.name})
     else:
         if  plandf.empty:
             logging.info(data)
             makeplan(data.ma30)
-            
-        buylogs.append({"buy":True})
+        try:
+            buyprice = getbuyprice()
+            if data.high<buyprice:
+                raise Exception("data.high<buyprice buyprice:%s high:%s", buyprice,data.high)
+            if data.low>buyprice:
+                raise Exception("data.low>buyprice buyprice:%s low:%s",buyprice, data.low)
+            tradecenter.buy(float(buyprice), 100)
+            index= plandf[plandf.input == buyprice].index
+            plandf.loc[index,'store'] = 100
+
+        except Exception as e:
+            buylogs.append({"buymsg":str(e),"buy":False, "date":data.name})
+        else:
+            buylogs.append({"buymsg":str(data),"buy":buyprice,"date":data.name})
+def judgeSell(data):
+    # 判断买入条件是否满足
+    logging.info("判断买出条件")
+    log = {}
+ 
+    try:
+        sellprice = getsellprice()
+      
+        if data.low<sellprice:
+            raise Exception("data.low<sellprice sellprice:%s low:%s",sellprice, data.low)
+        tradecenter.sell(float(sellprice), 100)
+        index= plandf[plandf.out == sellprice].index
+        plandf.loc[index,'store'] = 0
+
+    except Exception as e:
+        selllogs.append({"sellmsg":str(e),"sell":False, "date":data.name})
+    else:
+        selllogs.append({"sellmsg":str(data),"sell":sellprice,"date":data.name})
 
 
 
@@ -71,15 +113,33 @@ if __name__ == '__main__':
     if len(sys.argv)>4:
         end = sys.argv[4]
     logging.info("begin tcode:%s amount:%s start:%s end:%s",tcode,amount,start,end)
-
+    tradecenter.balance = float(amount)
     share = share(tcode)
     data = share.appendmacd(share.cdata)
     data = share.appendma(data,30)
-
-    for i in range(len(data[10:50])):
+    
+    balance = []
+    for i in range(len(data)):
         temdata = data.iloc[i]
         judgeBuy(temdata)
-    logging.info(buylogs)
+        judgeSell(temdata)
+        balance.append({"balance":tradecenter.balance,"store":tradecenter.store, "all":tradecenter.balance+tradecenter.store*temdata.close,"date":temdata.name})
+
+    logspd = pd.DataFrame(buylogs)
+    logspd.set_index(["date"], inplace=True)
+
+    selllogspd = pd.DataFrame(selllogs)
+    selllogspd.set_index(["date"], inplace=True)
+
+    balancepd = pd.DataFrame(balance)
+    balancepd.set_index(["date"], inplace=True)
+ 
+    frames = [data,logspd,selllogspd,balancepd]
+    tem = pd.concat(frames ,axis=1) 
+    path = '~/share/tem/tem.csv'
+    tem.to_csv(path)
+    logging.info("tem：\n%s",tem)
+    print(tem.to_json(orient='records'))
  
 
 

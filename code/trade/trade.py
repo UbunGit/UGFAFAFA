@@ -3,7 +3,7 @@ import logging
 import talib as tl
 import numpy
 
-logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
+# logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
 class trade:
 
@@ -48,7 +48,7 @@ class trade:
     
 if __name__ == '__main__':
     trade = trade()
-    trade.buy(10,10000)
+    trade.buy(10,100)
     trade.sell(15,100)
 
    

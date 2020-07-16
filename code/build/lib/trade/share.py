@@ -6,7 +6,7 @@ import numpy
 import pandas
 import os,time,logging
 import talib as tl
-logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
+# logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
 formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
 
@@ -26,7 +26,7 @@ class share:
             if(tsda is None):
                 return
             tsda.sort_index(inplace=True)
-            tsda["date"] = tsda.index
+            
             self.save(tsda)
         if(tsda is None):
             logging.error("share 初始化失败，为获取到数据")
@@ -139,17 +139,17 @@ class shares:
     def __init__(self):
         temdata = None
         if os.path.exists(filepath):
-            print("股票列表--cvs")
+            logging.info("股票列表--cvs")
             temdata = pandas.read_csv(filepath)
         if temdata is None:
-            print("股票列表--tushare")
+            logging.info("股票列表--tushare")
             temdata = ts.get_stock_basics()
             temdata.to_csv(filepath)
         self.basics = temdata
 
     ## 根据条件获取对应的股票列表  
     def fitter(self,key,value):
-        print("根据条件获取对应的股票列表")
+        logging.info("根据条件获取对应的股票列表")
         return self.basics[self.basics[key]==value]
 
 
@@ -164,9 +164,9 @@ class shares:
 
 if __name__ == '__main__':
     cshare = share('300022')
-    logging.debug("result：\n%s",cshare.cdata)
+    logging.info("result：\n%s",cshare.cdata)
     result =cshare.appendma(cshare.cdata,30)
-    logging.debug("ma result：\n%s",result)
+    logging.info("ma result：\n%s",result)
     # print(cshare.cdata.to_json(orient='records'))
     
  

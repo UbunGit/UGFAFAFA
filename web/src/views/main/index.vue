@@ -142,7 +142,11 @@ export default {
         this.result = response.data.data;
         this.loading = false;
        
-      });
+      }).then(res => {
+        alert(JSON.stringify(res))
+        this.loading = false;
+       
+      })
     },
     handlePreview(file) {
       var reader = new FileReader();

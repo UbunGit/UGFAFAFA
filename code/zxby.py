@@ -55,18 +55,20 @@ def main(code,tcode = '000100',amount=10000,start = None,end = None):
 
     try:
        
-        outdata = decode(subprocess.check_output([EXEC, fpath, str(tcode), str(amount), str(start),str(end)], stderr=subprocess.STDOUT, timeout=15))
-    except subprocess.CalledProcessError as e:
+        outdata = decode(subprocess.check_output([EXEC, fpath, str(tcode), str(amount), str(start),str(end)], stderr=subprocess.STDOUT, timeout=55))
+        r['data'] = json.loads(outdata,strict=False)
+    except Exception as e:
         # e.output是错误信息标准输出
         # 错误返回的数据
         r["code"] = 'Error'
-        r["data"] = decode(e.output)
-        # r["output"] = json.loads(e.output)
+        r["msg"] = str(outdata)
+        r["data"] = str(e)
+        print("\n%s",r)
         return r
     else:
         # 成功返回的数据
         print(outdata)
-        r['data'] = json.loads(outdata)
+
         r["code"] = "Success"
         return r
     finally:
