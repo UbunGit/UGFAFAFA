@@ -3,9 +3,11 @@ import pandas as pd
 import sys
 import logging
 import os
+from trade import trade
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
 plandf = pd.DataFrame()
+tradecenter = trade()
 
 def makeplan(price):
 
@@ -23,8 +25,17 @@ def getsellprice():
 
 
 if __name__ == '__main__':
+
     makeplan(1)
-    price =  getsellprice()
+    plandf.loc[3,'store'] = 100
+    sellprice = getsellprice()
+    index= plandf[plandf.out == sellprice].index.values[0]
+    pd = plandf.loc[index]
+    
+    tradecenter.balance = 1000
+    logging.info(pd["out"].all())
+    tradecenter.sell(pd["out"], pd["store"])
+    logging.info("tradecenter:\n%s",tradecenter.balance)
     
 
 

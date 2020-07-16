@@ -45,9 +45,7 @@ def getbuyprice():
     # 获取购买价格
     return plandf[plandf.store == 0].input.max()
 
-def getsellprice():
-    # 获取卖出价格
-    return plandf[plandf.store > 0].out.min()
+
 
 def judgeBuy(data):
     # 判断买入条件是否满足
@@ -62,7 +60,8 @@ def judgeBuy(data):
         
         if  plandf.empty: 
             makeplan(data.ma30)
-        sellprice = getsellprice()    
+        #查询如果没有持有则重新设置买卖方案
+        sellprice = sellprice = plandf[plandf.store > 0].out.min()   
         if sellprice is np.nan:
             makeplan(data.ma30)
         try:
@@ -82,25 +81,24 @@ def judgeBuy(data):
 
 def judgeSell(data):
     # 判断买入条件是否满足
-    logging.info("判断买出条件")
+    logging.info("判断买出条件%s",data.high)
     log = {}
  
     try:
-        sellprice = getsellprice()
+        sellprice = plandf[plandf.store > 0].out.min()
         index= plandf[plandf.out == sellprice].index.values[0]
-        selldata = plandf.iloc[5]
-      
-        if data.high<sellprice:
-            raise Exception("data.low<sellprice sellprice:%s low:%s",sellprice, data.low)
-        tradecenter.sell(float(selldata.out), float(selldata.store))
-        plandf.loc[index,'store'] = 0
+        sellpd = plandf.loc[index]
+
+        if data.high<sellpd.out:
+            raise Exception("data.low<sellprice sellprice:{} low:{}",sellpd.out, data.high)
+        tradecenter.sell(sellpd.out, sellpd.store)
 
     except Exception as e:
         selllogs.append({"sellmsg":str(e),"sell":False, "date":data.name})
     else:
-        
-        msg = "以%s卖出成本：%s 获利%s",str(selldata.out), str(selldata.input),str((selldata.out-selldata.input)*selldata.store) 
-        selllogs.append({"sellmsg":str,"sell":sellprice,"date":data.name})
+        huli = (sellpd.out-sellpd.input)*sellpd.store
+        msg = "以{} 卖出成本：{} 获利{}".format(sellpd.out, sellpd.input ,huli)
+        selllogs.append({"sellmsg":msg,"sell":sellpd.out,"date":data.name})
 
 
 
