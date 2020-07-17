@@ -10,7 +10,8 @@ import os
 import pandas as pd
 import numpy as np
 
-logging.basicConfig(level=logging.error)  # 设置日志级别
+
+logging.basicConfig(level=logging.NOTSET)  # 设置日志级别  
 
 # 根据macd值买入优化v1.0.0 2020.7.14
 # 步骤：
@@ -33,19 +34,18 @@ def makeplan(price):
     # 创建购买计划
     logging.info("创建购买计划:%s",price)
     input = pd.Series(np.logspace(-10, 0, 10, base=1.05)*price)
-    tem =  (pd.Series(np.arange(5, 25, 2))*0.01)
+    tem =  (pd.Series(np.arange(24, 5, -2))*0.01)
     out = (tem +1)*input
     global plandf
     plandf = pd.DataFrame({ "input": input, "out": out, "store":0, "tem":tem})
     logging.info("购买计划创建完毕\n%s",plandf)
+    logging.info("===")
 
 def getbuyprice():
     # 获取购买价格
     return plandf[plandf.store == 0].input.max()
 
-def getsellprice():
-    # 获取卖出价格
-    return plandf[plandf.store > 0].out.min()
+
 
 def judgeBuy(data):
     # 判断买入条件是否满足
@@ -57,8 +57,12 @@ def judgeBuy(data):
     except Exception as e:
         buylogs.append({"buymsg":str(e),"buy":False,"date":data.name})
     else:
-        if  plandf.empty:
-            logging.info(data)
+        
+        if  plandf.empty: 
+            makeplan(data.ma30)
+        #查询如果没有持有则重新设置买卖方案
+        sellprice = sellprice = plandf[plandf.store > 0].out.min()   
+        if sellprice is np.nan:
             makeplan(data.ma30)
         try:
             buyprice = getbuyprice()
@@ -74,24 +78,27 @@ def judgeBuy(data):
             buylogs.append({"buymsg":str(e),"buy":False, "date":data.name})
         else:
             buylogs.append({"buymsg":str(data),"buy":buyprice,"date":data.name})
+
 def judgeSell(data):
     # 判断买入条件是否满足
-    logging.info("判断买出条件")
+    logging.info("判断买出条件%s",data.high)
     log = {}
  
     try:
-        sellprice = getsellprice()
-      
-        if data.low<sellprice:
-            raise Exception("data.low<sellprice sellprice:%s low:%s",sellprice, data.low)
-        tradecenter.sell(float(sellprice), 100)
-        index= plandf[plandf.out == sellprice].index
-        plandf.loc[index,'store'] = 0
+        sellprice = plandf[plandf.store > 0].out.min()
+        index= plandf[plandf.out == sellprice].index.values[0]
+        sellpd = plandf.loc[index]
+
+        if data.high<sellpd.out:
+            raise Exception("data.low<sellprice sellprice:{} low:{}",sellpd.out, data.high)
+        tradecenter.sell(sellpd.out, sellpd.store)
 
     except Exception as e:
         selllogs.append({"sellmsg":str(e),"sell":False, "date":data.name})
     else:
-        selllogs.append({"sellmsg":str(data),"sell":sellprice,"date":data.name})
+        huli = (sellpd.out-sellpd.input)*sellpd.store
+        msg = "以{} 卖出成本：{} 获利{}".format(sellpd.out, sellpd.input ,huli)
+        selllogs.append({"sellmsg":msg,"sell":sellpd.out,"date":data.name})
 
 
 
@@ -102,7 +109,7 @@ if __name__ == '__main__':
     amount = '10000'
     start = '2019-10-01'
     end = '2020-12-01'
-    tcode = '300022'
+    tcode = '000100'
 
     if len(sys.argv)>1:
         tcode = sys.argv[1]
@@ -117,10 +124,14 @@ if __name__ == '__main__':
     share = share(tcode)
     data = share.appendmacd(share.cdata)
     data = share.appendma(data,30)
-    
+
+
+    data_fecha = data.set_index('date')
+    selectData =  data_fecha.loc[start: end]
+
     balance = []
-    for i in range(len(data)):
-        temdata = data.iloc[i]
+    for i in range(len(selectData)):
+        temdata = selectData.iloc[i]
         judgeBuy(temdata)
         judgeSell(temdata)
         balance.append({"balance":tradecenter.balance,"store":tradecenter.store, "all":tradecenter.balance+tradecenter.store*temdata.close,"date":temdata.name})
@@ -134,8 +145,9 @@ if __name__ == '__main__':
     balancepd = pd.DataFrame(balance)
     balancepd.set_index(["date"], inplace=True)
  
-    frames = [data,logspd,selllogspd,balancepd]
+    frames = [selectData,logspd,selllogspd,balancepd]
     tem = pd.concat(frames ,axis=1) 
+    tem["date"] = tem.index
     path = '~/share/tem/tem.csv'
     tem.to_csv(path)
     logging.info("tem：\n%s",tem)

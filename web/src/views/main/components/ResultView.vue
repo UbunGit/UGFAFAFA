@@ -2,6 +2,8 @@
   <div>
     <div style="wigth=100%">
       <ve-candle :data="chartData" :settings="chartSettings" @ready-once="readyOnve"></ve-candle>
+    </div>
+    <div style="wigth=100%, height=160px">
       <ve-histogram
         :data="histogramdata"
         :settings="histogramSettings"
@@ -13,9 +15,28 @@
       <ve-line
         :data="amountdata"
         :settings="amountSettings"
+        :events="chartEvents"
         @ready-once="readyOnve"
         height="160pt"
       ></ve-line>
+    </div>
+    <!-- 买卖信息 -->
+    <div style="wigth=100%">
+      
+      <el-row>
+        <el-col :span="12">
+          <h1>买入信息</h1>
+           <div><span>价格：</span><span>{{selectDara.buy}}</span></div>
+           <div>{{selectDara.buymsg}}</div>
+        </el-col>
+        <el-col :span="12">
+          <h1>买出信息</h1>
+          <div><span>价格：</span><span>{{selectDara.sell}}</span></div>
+           <div>{{selectDara.sellmsg}}</div>
+        <span></span>
+        </el-col>
+      </el-row>
+      
     </div>
   </div>
 </template>
@@ -40,7 +61,16 @@ export default {
   },
 
   data() {
+    var self = this;
+    this.chartEvents = {
+      click: function(e) {
+        
+        self.selectDara = self.amountdata.rows[e.dataIndex]
+        console.log(self.selectDara)
+      }
+    };
     return {
+      selectDara: {},
       chartSettings: {
         showMA: true,
         showVol: true,
@@ -52,6 +82,7 @@ export default {
         rows: [],
         selectedDepIndex: 1
       },
+
       amountdata: {
         columns: ["date", "store", "all"],
         rows: [],
@@ -60,26 +91,27 @@ export default {
       amountSettings: {
         smooth: false,
         axisSite: { right: ["store"] },
-        yAxisName: ['总资产', '持股数'],
+        yAxisName: ["总资产", "持股数"],
         labelMap: {
           all: "总资产",
           store: "持股数",
+          sellmsg: "持股数"
         }
       },
+
       histogramdata: {
-          columns: ['date', 'MACD','DIFF','DEA','k','d','j'],
-          rows: [],
-          
+        columns: ["date", "MACD", "DIFF", "DEA", "k", "d", "j"],
+        rows: []
       },
       histogramSettings: {
         showDataZoom: true,
-        scale:[true,true],
+        scale: [true, true],
         smooth: false,
-        showLine: ['DIFF','DEA','k','d','j'],
-        axisSite: { right: ['k','d','j'] },
-        yAxisType: ['KMB', 'KMB'],
-        yAxisName: ['数值', '比率']
-      },
+        showLine: ["DIFF", "DEA", "k", "d", "j"],
+        axisSite: { right: ["k", "d", "j"] },
+        yAxisType: ["KMB", "KMB"],
+        yAxisName: ["数值", "比率"]
+      }
     };
   },
   methods: {

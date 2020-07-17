@@ -25,6 +25,8 @@ class share:
             tsda = ts.get_hist_data(code)
             if(tsda is None):
                 return
+            tsda["date"] = tsda.index
+            tsda.set_index('date')
             tsda.sort_index(inplace=True)
             
             self.save(tsda)
@@ -163,7 +165,7 @@ class shares:
         
 
 if __name__ == '__main__':
-    cshare = share('300022')
+    cshare = share('000100')
     logging.info("result：\n%s",cshare.cdata)
     result =cshare.appendma(cshare.cdata,30)
     logging.info("ma result：\n%s",result)
