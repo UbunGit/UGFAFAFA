@@ -1,17 +1,21 @@
   <template>
   <div>
-    <div style="wigth=100%">
-      <ve-candle :data="chartData" :settings="chartSettings" @ready-once="readyOnve"></ve-candle>
-    </div>
-    <div style="wigth=100%, height=160px">
+    <el-card style="wigth=100%">
+      <ve-candle 
+      :data="chartData" 
+      :events="chartEvents"
+      :settings="chartSettings" @ready-once="readyOnve"></ve-candle>
+    </el-card>
+    <el-card style="wigth=100%, height=140px">
       <ve-histogram
         :data="histogramdata"
+        :events="chartEvents"
         :settings="histogramSettings"
         @ready-once="readyOnve"
         height="160pt"
       ></ve-histogram>
-    </div>
-    <div style="wigth=100%, height=160px">
+    </el-card>
+    <el-card style="wigth=100%, height=120px">
       <ve-line
         :data="amountdata"
         :settings="amountSettings"
@@ -19,9 +23,9 @@
         @ready-once="readyOnve"
         height="160pt"
       ></ve-line>
-    </div>
+    </el-card>
     <!-- 买卖信息 -->
-    <div style="wigth=100%">
+    <el-card style="wigth=100%">
       
       <el-row>
         <el-col :span="12">
@@ -37,7 +41,7 @@
         </el-col>
       </el-row>
       
-    </div>
+    </el-card>
   </div>
 </template>
 

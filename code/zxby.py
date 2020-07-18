@@ -61,7 +61,6 @@ def main(code,tcode = '000100',amount=10000,start = None,end = None):
         # e.output是错误信息标准输出
         # 错误返回的数据
         r["code"] = 'Error'
-        r["msg"] = str(outdata)
         r["data"] = str(e)
         print("\n%s",r)
         return r

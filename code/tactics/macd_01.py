@@ -63,6 +63,8 @@ def judgeBuy(data):
             raise Exception("MACD<0 macd:%s", data.MACD)
         if data.MACD>0.2:
             raise Exception("MACD>0.2 macd:%s", data.MACD)
+        if data.DEA>0:
+            raise Exception("data.DEA dea:%s", data.DEA)
     except Exception as e:
         buylogs.append({"buymsg":str(e),"buy":False,"date":data.name})
     else:
@@ -136,6 +138,7 @@ if __name__ == '__main__':
     share = share(tcode)
     data = share.appendmacd(share.cdata)
     data = share.appendma(data,30)
+
 
 
     data_fecha = data.set_index('date')

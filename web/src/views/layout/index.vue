@@ -1,6 +1,7 @@
 <template>
   <el-container>
-    <el-aside width="200px">
+    <el-aside :width="asidewidth">
+       <el-button icon="el-icon-s-help" @click="reviewaside" ></el-button>
       <el-menu 
       :default-active="$router.path"
       class="el-menu-vertical-demo"
@@ -31,6 +32,23 @@
 
 <script>
 export default {
+  data() {
+    return {
+      ishidden: false,
+      asidewidth:"150px"
+    }
+  },
+   methods: {
+    reviewaside() {
+      this.ishidden = !this.ishidden;
+      if(this.ishidden){
+        this.asidewidth="50px"
+      }else{
+        this.asidewidth="150px"
+      }
+      
+    },
+   }
   
 };
 </script>
