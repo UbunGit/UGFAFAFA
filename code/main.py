@@ -2,20 +2,25 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import time
 import sys,os
+
 from flask import Flask
 from flask import request
 from flask import Response
+from flask import  abort
 import json
 import zxby
 from trade import share
 from fitter import macdfitter
 from flask_cors import CORS
+from flask_apscheduler import APScheduler
+
+logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
+
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True)
 
+CORS(app, supports_credentials=True)
 
 
 def Response_headers(content):
@@ -30,42 +35,46 @@ def decode(s):
         return s.decode('utf-8')
     except UnicodeDecodeError:
         return s.decode('gbk')
+
+
+
  
  # 根据时间获取股票交易历史数据
 @app.route('/sharehistory')
 def sharehistory():
     if request.method == 'GET':
-        r = dict()
-        r["code"] = -1
+
         try:
             code = request.args.get("code")
             begin = request.args.get("begin")
-            cshare = share(code,begin)
-            r["data"] =json.loads(cshare.cdata.to_json(orient='records')) 
-            r["code"] = 0
-            # r["data"] = str(request.args)
+            cshare = share(code)
+            data = cshare.cdata
+            data = cshare.appendmacd(data)
+            data = data[data.date>=begin]
+            
+            jsondata =json.loads(data.to_json(orient='records')) 
+            return json.dumps({"code": 200,"data":jsondata})
 
         except Exception as e:
-            r["data"] = str(e)
-        finally:
-         
-            return json.dumps(r)
+            logging.error("根据时间获取股票交易历史数据 Exception %s",e)
+            return json.dumps({"code": -1,"data":str(e)})
+ 
 
- # 根据时间获取股票交易历史数据
+
+ # 获取推荐股票
 @app.route('/fitterList')
 def chooseList():
     if request.method == 'GET':
-        r = dict()
-        r["code"] = -1
+        logging.info("获取推荐股票 begin")
         try:
             date = request.args.get("date")
-            r["data"] =json.loads(macdfitter(date)) 
-            r["code"] = 0
+            logging.info("获取推荐股票 date %s",date)
+            jsondata =json.loads(macdfitter(date)) 
+            return json.dumps({"code": 200,"data":jsondata})
         except Exception as e:
-            r["data"] = str(e)
-        finally:
-          
-            return json.dumps(r)
+            logging.error("获取推荐股票 Exception %s",e)
+            return json.dumps({"code": -1,"data":str(e)})
+       
  
 
 @app.route('/run', methods=['POST'])
@@ -84,12 +93,12 @@ def run():
             start = parms['start']
         if 'end' in parms:
             end = parms['end']
-        code = request.form['code']
-        jsondata = zxby.main(code= code,tcode = tcode,amount = amount,start = start,end = end)
-        print("======run======")
-        print(jsondata)
-        print("============")
-        return json.dumps(jsondata)
+        try:
+            code = request.form['code']
+            jsondata = zxby.main(code= code,tcode = tcode,amount = amount,start = start,end = end)
+            return json.dumps({"code": 200,"data":jsondata})
+        except Exception as e:
+            return json.dumps({"code": -1,"data":str(e)})
     return Response_headers(str("jsondata"))
  
 @app.route('/tactics')
@@ -98,48 +107,48 @@ def tactics():
  
 @app.errorhandler(403)
 def page_not_found(error):
-    content = json.dumps({"error_code": "403"})
+    content = json.dumps({"code": "403","message":"erroe"})
     resp = Response_headers(content)
     return resp
  
  
 @app.errorhandler(404)
 def page_not_found(error):
-    content = json.dumps({"error_code": "404"})
+    content = json.dumps({"code": 404})
     resp = Response_headers(content)
     return resp
  
  
 @app.errorhandler(400)
 def page_not_found(error):
-    content = json.dumps({"error_code": "400"})
+    content = json.dumps({"code": 400})
     resp = Response_headers(content)
     return resp
  
  
 @app.errorhandler(405)
 def page_not_found(error):
-    content = json.dumps({"error_code": "405"})
+    content = json.dumps({"code": 405})
     resp = Response_headers(content)
     return resp
  
  
 @app.errorhandler(410)
 def page_not_found(error):
-    content = json.dumps({"error_code": "410"})
+    content = json.dumps({"code": 410})
     resp = Response_headers(content)
     return resp
  
  
 @app.errorhandler(500)
 def page_not_found(error):
-    content = json.dumps({"error_code": "500"})
+    content = json.dumps({"code": 500})
     resp = Response_headers(content)
     return resp
 
 
  
 if __name__ == '__main__':
-    
+
     app.run(debug=True)
 

@@ -140,12 +140,16 @@ export default {
     getresult() {
       this.loading = true;
       sharehistory(this.formdata).then(response => {
-        this.result = response.data.data;
+      
+        this.result = response;
         this.chartData.rows = this.result;
         this.amountdata.rows = this.result;
         this.lastData = this.result[this.result.length - 1];
         this.loading = false;
-      });
+      }).catch(error => {
+          alert(error);
+          this.loading = false;
+        });
     },
 
     handlePreview(file) {

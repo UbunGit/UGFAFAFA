@@ -48,34 +48,12 @@ def decode(s):
  
 # 主执行函数
 def main(code,tcode = '000100',amount=10000,start = None,end = None):
-    r = dict()
-    r["version"] = get_version()
+
     pyname = get_pyname()
     fpath = write_file(pyname, code)
+    outdata = decode(subprocess.check_output([EXEC, fpath, str(tcode), str(amount), str(start),str(end)], stderr=subprocess.STDOUT, timeout=55))
+    return json.loads(outdata,strict=False)
 
-    try:
-       
-        outdata = decode(subprocess.check_output([EXEC, fpath, str(tcode), str(amount), str(start),str(end)], stderr=subprocess.STDOUT, timeout=55))
-        r['data'] = json.loads(outdata,strict=False)
-    except Exception as e:
-        # e.output是错误信息标准输出
-        # 错误返回的数据
-        r["code"] = 'Error'
-        r["data"] = str(e)
-        print("\n%s",r)
-        return r
-    else:
-        # 成功返回的数据
-        print(outdata)
-
-        r["code"] = "Success"
-        return r
-    finally:
-        # 删除文件(其实不用删除临时文件会自动删除)
-        try:
-            os.remove(fpath)
-        except Exception as e:
-            exit(1)
  
 if __name__ == '__main__':
     code = "print(11);print(22)"

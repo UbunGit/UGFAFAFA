@@ -4,24 +4,25 @@
       <ve-candle 
       :data="chartData" 
       :events="chartEvents"
+      height="140pt"
       :settings="chartSettings" @ready-once="readyOnve"></ve-candle>
     </el-card>
-    <el-card style="wigth=100%, height=140px">
+    <el-card style="wigth=100%">
       <ve-histogram
         :data="histogramdata"
         :events="chartEvents"
         :settings="histogramSettings"
         @ready-once="readyOnve"
-        height="160pt"
+        height="140pt"
       ></ve-histogram>
     </el-card>
-    <el-card style="wigth=100%, height=120px">
+    <el-card style="wigth=100%">
       <ve-line
         :data="amountdata"
         :settings="amountSettings"
         :events="chartEvents"
         @ready-once="readyOnve"
-        height="160pt"
+        height="140pt"
       ></ve-line>
     </el-card>
     <!-- 买卖信息 -->

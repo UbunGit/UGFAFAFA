@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       formdata: {
-        date: "2020-03-02"
+        date: new Date(),
       },
       shareList: [],
       size:0
@@ -61,12 +61,15 @@ export default {
     fitterList() {
       this.loading = true;
       fitterList(this.formdata).then(response => {
-        this.shareList = response.data.data;
+        this.shareList = response;
         this.size = this.shareList.length
         var code = this.shareList[0].code
         this.$emit("cell-click", code, this.formdata.date);
         this.loading = false;
-      });
+      }).catch(error => {
+          alert(error);
+          this.loading = false;
+        });
     },
     handleCellClick(row) {
       this.$emit("cell-click", row.code,this.formdata.date);

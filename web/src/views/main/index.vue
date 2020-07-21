@@ -116,8 +116,8 @@ export default {
           "import pandas, numpy \n\
 history = pandas.read_csv('/Users/mba/share/tem/tem.csv') \n\
 print(history.to_json(orient='records'))",
-        star: null,
-        end: null,
+        star: "2018-01-01",
+        end: new Date(),
         amount: 10000,
         tcode: "000100"
       },
@@ -140,7 +140,7 @@ print(history.to_json(orient='records'))",
       this.result = null;
       runexit(params)
         .then(response => {
-          this.result = response.data.data;
+          this.result = response;
           this.loading = false;
         })
         .catch(error => {
