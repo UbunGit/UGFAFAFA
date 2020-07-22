@@ -3,10 +3,11 @@
 
 import logging
 import sys,os
+import unit as unit
 
 from flask import Flask
 from flask import request
-from flask import Response
+
 from flask import  abort
 import json
 import zxby
@@ -14,6 +15,7 @@ from trade import share
 from fitter import macdfitter
 from flask_cors import CORS
 from flask_apscheduler import APScheduler
+
 
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
@@ -23,12 +25,7 @@ app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
 
-def Response_headers(content):
-    resp = Response(content)
-    resp.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,session_id')
-    resp.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEAD')
-    resp.headers['Access-Control-Allow-Origin'] = '*'
-    return resp
+
 
 def decode(s):
     try:
@@ -36,14 +33,37 @@ def decode(s):
     except UnicodeDecodeError:
         return s.decode('gbk')
 
-
-
- 
  # 根据时间获取股票交易历史数据
 @app.route('/sharehistory')
 def sharehistory():
-    if request.method == 'GET':
+    '''
+        获取股票历史数据
 
+    Parameters
+    --------
+        code:股票代码
+        begin:开始日期 2020-10-11
+    
+    Return
+    --------
+        DataFrame
+            date：日期
+            open：开盘价
+            high：最高价
+            close：收盘价
+            low：最低价
+            volume：成交量
+            price_change：价格变动
+            p_change：涨跌幅
+            ma5：5日均价
+            ma10：10日均价
+            ma20:20日均价
+            v_ma5:5日均量
+            v_ma10:10日均量
+            v_ma20:20日均量
+            turnover:换手率[注：指数无此项]
+    '''
+    if request.method == 'GET':
         try:
             code = request.args.get("code")
             begin = request.args.get("begin")
@@ -53,7 +73,8 @@ def sharehistory():
             data = data[data.date>=begin]
             
             jsondata =json.loads(data.to_json(orient='records')) 
-            return json.dumps({"code": 200,"data":jsondata})
+            
+            return unit.Response_headers(json.dumps({"code": 200,"data":jsondata}))
 
         except Exception as e:
             logging.error("根据时间获取股票交易历史数据 Exception %s",e)
@@ -62,6 +83,7 @@ def sharehistory():
 
 
  # 获取推荐股票
+
 @app.route('/fitterList')
 def chooseList():
     if request.method == 'GET':
@@ -101,51 +123,51 @@ def run():
             return json.dumps({"code": -1,"data":str(e)})
     return Response_headers(str("jsondata"))
  
-@app.route('/tactics')
-def tactics():
-    return json.dumps(jsondata)
+
  
 @app.errorhandler(403)
 def page_not_found(error):
     content = json.dumps({"code": "403","message":"erroe"})
-    resp = Response_headers(content)
+    resp = unit.Response_headers(content)
     return resp
  
  
 @app.errorhandler(404)
 def page_not_found(error):
     content = json.dumps({"code": 404})
-    resp = Response_headers(content)
+    resp = unit.Response_headers(content)
     return resp
  
  
 @app.errorhandler(400)
 def page_not_found(error):
     content = json.dumps({"code": 400})
-    resp = Response_headers(content)
+    resp = unit.Response_headers(content)
     return resp
  
  
 @app.errorhandler(405)
 def page_not_found(error):
     content = json.dumps({"code": 405})
-    resp = Response_headers(content)
+    resp = unit.Response_headers(content)
     return resp
  
  
 @app.errorhandler(410)
 def page_not_found(error):
     content = json.dumps({"code": 410})
-    resp = Response_headers(content)
+    resp = unit.Response_headers(content)
     return resp
  
  
 @app.errorhandler(500)
 def page_not_found(error):
     content = json.dumps({"code": 500})
-    resp = Response_headers(content)
+    resp = unit.Response_headers(content)
     return resp
 
+from api_share import share
+app.register_blueprint(share,url_prefix='/share')
 
  
 if __name__ == '__main__':

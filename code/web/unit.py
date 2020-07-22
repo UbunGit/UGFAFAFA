@@ -1,4 +1,6 @@
 
+from flask import Response
+
 def to_json(inst, cls):
     """
     Jsonify the sql alchemy query result.
@@ -19,3 +21,10 @@ def to_json(inst, cls):
         else:
             d[c.name] = v
     return json.dumps(d)
+
+def Response_headers(content):
+    resp = Response(content)
+    resp.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,session_id')
+    resp.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEAD')
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp

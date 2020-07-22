@@ -33,17 +33,24 @@ tradecenter = trade()
 def makeplan(price):
     # 创建购买计划
     logging.info("创建购买计划:%s",price)
-    input = pd.Series(np.logspace(-10, 0, 10, base=1.05)*price)
-    tem =  (pd.Series(np.arange(24, 5, -2))*0.01)
+    input = pd.Series(np.logspace(-9, 1, 10, base=1.05)*price)
+    tem =  (pd.Series(np.arange(24, 14, -1))*0.01)
     out = (tem +1)*input
     global plandf
     plandf = pd.DataFrame({ "input": input, "out": out, "store":0, "tem":tem})
     logging.info("购买计划创建完毕\n%s",plandf)
-    logging.info("===")
 
 def getbuyprice():
     # 获取购买价格
     return plandf[plandf.store == 0].input.max()
+
+def getcount(price,amount):
+    minc = int(amount/price)
+    maxc = minc+1
+    if abs(minc*price-amount)>abs(maxc*price-amount):
+        return maxc
+    return minc
+    
 
 
 
@@ -54,30 +61,35 @@ def judgeBuy(data):
     try:
         if data.MACD<0 or np.isnan(data.MACD):
             raise Exception("MACD<0 macd:%s", data.MACD)
+        if data.MACD>0.2:
+            raise Exception("MACD>0.2 macd:%s", data.MACD)
+        if data.DEA>0:
+            raise Exception("data.DEA dea:%s", data.DEA)
     except Exception as e:
         buylogs.append({"buymsg":str(e),"buy":False,"date":data.name})
     else:
         
         if  plandf.empty: 
             makeplan(data.ma30)
-        #查询如果没有持有则重新设置买卖方案
-        sellprice = sellprice = plandf[plandf.store > 0].out.min()   
-        if sellprice is np.nan:
+        #如果没有持有则重新设置买卖方案
+        if tradecenter.store <=0:
             makeplan(data.ma30)
         try:
             buyprice = getbuyprice()
             if data.high<buyprice:
-                raise Exception("data.high<buyprice buyprice:%s high:%s", buyprice,data.high)
+                raise Exception("data.high<buyprice buyprice:{:.2f} high:{:.2f}".format( buyprice,data.high))
             if data.low>buyprice:
-                raise Exception("data.low>buyprice buyprice:%s low:%s",buyprice, data.low)
-            tradecenter.buy(float(buyprice), 100)
+                raise Exception("data.low>buyprice buyprice:{:.2f} low:{:.2f}".format(buyprice, data.low))
+            buycount = getcount(buyprice,2000)
+            tradecenter.buy(float(buyprice), buycount)
             index= plandf[plandf.input == buyprice].index
-            plandf.loc[index,'store'] = 100
+            plandf.loc[index,'store'] = buycount
 
         except Exception as e:
             buylogs.append({"buymsg":str(e),"buy":False, "date":data.name})
         else:
-            buylogs.append({"buymsg":str(data),"buy":buyprice,"date":data.name})
+            msg = "以{:.2f} 卖入 {:.2f}".format(buyprice,buycount)
+            buylogs.append({"buymsg":msg,"buy":buyprice,"date":data.name})
 
 def judgeSell(data):
     # 判断买入条件是否满足
@@ -90,14 +102,16 @@ def judgeSell(data):
         sellpd = plandf.loc[index]
 
         if data.high<sellpd.out:
-            raise Exception("data.low<sellprice sellprice:{} low:{}",sellpd.out, data.high)
+            raise Exception("data.low<sellprice sellprice:{:.2f} low:{:.2f}".format(sellpd.out, data.high))
         tradecenter.sell(sellpd.out, sellpd.store)
 
     except Exception as e:
         selllogs.append({"sellmsg":str(e),"sell":False, "date":data.name})
     else:
+
+        plandf.loc[index,'store'] = 0
         huli = (sellpd.out-sellpd.input)*sellpd.store
-        msg = "以{} 卖出成本：{} 获利{}".format(sellpd.out, sellpd.input ,huli)
+        msg = "以{:.2f} 卖出成本：{:.2f} 个数：{:.2f} 获利{:.2f}".format(sellpd.out, sellpd.input ,sellpd.store,huli)
         selllogs.append({"sellmsg":msg,"sell":sellpd.out,"date":data.name})
 
 
@@ -107,9 +121,9 @@ if __name__ == '__main__':
     logging.info("根据macd值买入优化v1.0.0 2020.7.14")
     logging.info("args:%s",sys.argv)
     amount = '10000'
-    start = '2019-10-01'
-    end = '2020-12-01'
-    tcode = '000100'
+    start = '2019-01-01'
+    end = '2020-01-01'
+    tcode = '300022'
 
     if len(sys.argv)>1:
         tcode = sys.argv[1]
@@ -124,6 +138,7 @@ if __name__ == '__main__':
     share = share(tcode)
     data = share.appendmacd(share.cdata)
     data = share.appendma(data,30)
+
 
 
     data_fecha = data.set_index('date')

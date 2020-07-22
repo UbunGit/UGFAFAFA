@@ -1,4 +1,6 @@
 setup.py
+cheduler/__init__.py
+cheduler/baseData.py
 fitter/__init__.py
 fitter/macd.py
 share/__init__.py
@@ -8,8 +10,6 @@ tactics/macd_01.py
 tactics/tactics.py
 tactics/tactics_ma.py
 tactics/tacticsmacd.py
-timer/__init__.py
-timer/timer.py
 trade/__init__.py
 trade/share.py
 trade/trade.py

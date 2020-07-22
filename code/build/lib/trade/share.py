@@ -138,14 +138,14 @@ class share:
 filepath = '~/share/data/basics.csv'
 class shares:
     basics = None # 股票列表
-    def __init__(self):
+    def __init__(self,date=formattime):
         temdata = None
         if os.path.exists(filepath):
             logging.info("股票列表--cvs")
             temdata = pandas.read_csv(filepath)
         if temdata is None:
             logging.info("股票列表--tushare")
-            temdata = ts.get_stock_basics()
+            temdata = ts.get_zz500s()
             temdata.to_csv(filepath)
         self.basics = temdata
 
