@@ -177,10 +177,13 @@ def page_not_found(error):
     return resp
 
 from api_share import share
+from api_share_like import sharelike
 app.register_blueprint(share,url_prefix='/share')
+app.register_blueprint(sharelike,url_prefix='/sharelike')
+
 
  
 if __name__ == '__main__':
     init_db()
-    app.run(debug=True)
+    app.run(host="10.10.11.171", port='5000',debug=True)
 

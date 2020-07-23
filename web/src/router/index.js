@@ -7,24 +7,26 @@ Vue.use(Router)
 export const constantRouterMap = [
   {
     path: '/',
+    name: 'main',
     component: Layout,
-    redirect: '/main',
+    meta: {title: '自选股', icon: 'fire-o'},
     children: [{
-      path: '/main',
-      name: 'main',
+      path: 'main',
+      name: '我的策略',
       component:  () => import('@/views/main'),
+      meta: {title: '我的策略', icon: 'fire-o'}
     },
     {
-      path: '/choose',
-      component: Layout,
-      name: 'choose',
+      path: 'choose',
+      name: '今日推荐',
       component: () => import('@/views/choose'),
+      meta: {title: '今日推荐', icon: 'fire-o'}
     },
     {
-      path: '/test',
-      component: Layout,
+      path: 'test',
       name: 'test',
       component: () => import('@/views/test'),
+      meta: {title: '测试', icon: 'fire-o'}
     },
   ]
   },

@@ -1,55 +1,56 @@
 <template>
-  <el-container>
-    <el-aside :width="asidewidth">
-       <el-button icon="el-icon-s-help" @click="reviewaside" ></el-button>
-      <el-menu 
-      :default-active="$router.path"
-      class="el-menu-vertical-demo"
-      router>
-        <el-menu-item index="/main">
-          <i class="el-icon-menu"></i>
-          <span slot="title">我的策略</span>
-        </el-menu-item>
-        <el-menu-item index="/choose">
-          <i class="el-icon-setting"></i>
-          <span slot="title">选股</span>
-        </el-menu-item>
-        <el-menu-item index="/setting">
-          <i class="el-icon-setting"></i>
-          <span slot="title">设置</span>
-        </el-menu-item>
-             <el-menu-item index="/test">
-          <i class="el-icon-setting"></i>
-          <span slot="title">测试</span>
-        </el-menu-item>
-      </el-menu>
-    </el-aside>
-    <el-container>
-      <router-view />
-    </el-container>
-  </el-container>
+  <div>
+    <van-nav-bar title="标题">
+      <template #left>
+        <van-button icon="star-o" round @click="showPopup" />
+      </template>
+    </van-nav-bar>
+    <router-view />
+
+    <van-popup
+      v-model="show"
+      position="top"
+      closeable
+      close-icon-position="top-left"
+      :style="{ height: '90%' }"
+    >
+      <van-cell v-for="item in routes" :key="item.path">
+        <h2>{{item.meta.title}}</h2>
+        <van-grid>
+          <van-grid-item
+            :icon="citem.meta.icon"
+            :text="citem.meta.title"
+            @click="topath(citem.path)"
+            v-for="citem in item.children"
+            :key="citem.path"
+          ></van-grid-item>
+        </van-grid>
+      </van-cell>
+    </van-popup>
+  </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      ishidden: false,
-      asidewidth:"150px"
+  computed: {
+    routes() {
+      return this.$router.options.routes;
     }
   },
-   methods: {
-    reviewaside() {
-      this.ishidden = !this.ishidden;
-      if(this.ishidden){
-        this.asidewidth="50px"
-      }else{
-        this.asidewidth="150px"
-      }
-      
+  data() {
+    return {
+      show: false
+    };
+  },
+  methods: {
+    showPopup() {
+      this.show = true;
     },
-   }
-  
+    topath(path) {
+      this.show = false;
+      this.$router.push({ path: path });
+    }
+  }
 };
 </script>
 </script>

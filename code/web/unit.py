@@ -1,6 +1,8 @@
 
 from flask import Response
 
+import json
+
 def to_json(inst, cls):
     """
     Jsonify the sql alchemy query result.
@@ -28,3 +30,21 @@ def Response_headers(content):
     resp.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS,HEAD')
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
+
+def get_post_data(request):
+    """
+    从请求中获取参数
+    :return:
+    """
+    data = {}
+    if request.content_type.startswith('application/json'):
+        data = request.get_data()
+        data = json.loads(data)
+    else:
+        for key, value in request.form.items():
+            if key.endswith('[]'):
+                data[key[:-2]] = request.form.getlist(key)
+            else:
+                data[key] = value
+
+    return data
