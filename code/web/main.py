@@ -24,6 +24,7 @@ from database import init_db, db_session
 
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
+ 
 
 app = Flask(__name__)
 
@@ -185,5 +186,5 @@ app.register_blueprint(sharelike,url_prefix='/sharelike')
  
 if __name__ == '__main__':
     init_db()
-    app.run(host="10.10.11.171", port='5000',debug=True)
+    app.run( debug=True, host="0.0.0.0")
 

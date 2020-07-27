@@ -165,12 +165,12 @@ class shares:
         
 
 if __name__ == '__main__':
-    # cshare = share('000100')
-    # logging.info("result：\n%s",cshare.cdata)
+    cshare = share('000100')
+    logging.info("result：\n%s",cshare.cdata)
     # result =cshare.appendma(cshare.cdata,30)
     # logging.info("ma result：\n%s",result)
     # # print(cshare.cdata.to_json(orient='records'))
 
-    shares = shares()
+    # shares = shares()
     
  
