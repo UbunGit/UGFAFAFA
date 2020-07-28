@@ -1,5 +1,16 @@
 <template>
   <div>
+    <van-tabs v-model="active">
+      <van-tab title="源码">
+        <code-view ref="codeView" type="primary" v-model="formdata.code"></code-view>
+      </van-tab>
+      <van-tab title="文档">
+
+      </van-tab>
+      <van-tab title="结果">
+        <result-view v-model="result" v-loading="loading"></result-view>
+      </van-tab>
+    </van-tabs>
     <el-container>
       <el-header>
         <el-upload
@@ -19,9 +30,7 @@
         </el-button-group>
       </el-header>
       <el-container>
-        <el-aside width="32%">
-          <code-view ref="codeView" type="primary" v-model="formdata.code"></code-view>
-        </el-aside>
+
         <el-main>
           <el-card>
             <el-form
@@ -68,7 +77,7 @@
             </el-form>
           </el-card>
           <div>
-            <result-view v-model="result" v-loading="loading"></result-view>
+            
           </div>
           <el-footer>
             <el-input
@@ -110,6 +119,7 @@ export default {
   created() {},
   data() {
     return {
+      active: 0,
       loading: false,
       formdata: {
         code:
@@ -128,6 +138,7 @@ print(history.to_json(orient='records'))",
   },
   methods: {
     onSubmit() {},
+    
     runexit() {
       this.loading = true;
       this.formdata.code = this.$refs.codeView.code;
