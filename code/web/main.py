@@ -178,9 +178,13 @@ def page_not_found(error):
     return resp
 
 from api_share import share
-from api_share_like import sharelike
 app.register_blueprint(share,url_prefix='/share')
+
+from api_share_like import sharelike
 app.register_blueprint(sharelike,url_prefix='/sharelike')
+
+from api_tactics import tactics
+app.register_blueprint(tactics,url_prefix='/tactics')
 
 
  

@@ -9,30 +9,37 @@ export const constantRouterMap = [
     path: '/',
     name: 'main',
     component: Layout,
-    meta: {title: '自选股', icon: 'fire-o'},
-    children: [{
-      path: 'main',
-      name: '我的策略',
-      component:  () => import('@/views/main'),
-      meta: {title: '我的策略', icon: 'fire-o'}
-    },
-    {
-      path: 'choose',
-      name: '今日推荐',
-      component: () => import('@/views/choose'),
-      meta: {title: '今日推荐', icon: 'fire-o'}
-    },
-    {
-      path: 'test',
-      name: 'test',
-      component: () => import('@/views/test'),
-      meta: {title: '测试', icon: 'fire-o'}
-    },
-  ]
+    meta: { title: '自选股', icon: 'fire-o' },
+    children: [
+      {
+        path: 'tactics',
+        name: '策略',
+        component: () => import('@/views/tactics'),
+        meta: { title: '策略', icon: 'fire-o' }
+      },
+      {
+        path: 'main',
+        name: '我的策略',
+        component: () => import('@/views/main'),
+        meta: { title: '我的策略', icon: 'fire-o' }
+      },
+      {
+        path: 'choose',
+        name: '今日推荐',
+        component: () => import('@/views/choose'),
+        meta: { title: '今日推荐', icon: 'fire-o' }
+      },
+      {
+        path: 'test',
+        name: 'test',
+        component: () => import('@/views/test'),
+        meta: { title: '测试', icon: 'fire-o' }
+      },
+    ]
   },
 
 ]
 export default new Router({
   routes: constantRouterMap
-    
+
 })

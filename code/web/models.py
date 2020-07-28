@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-                                                              
+
+# sqlacodegen mysql+pymysql://root:root@127.0.0.1:3306/share > models.py
+#                                                            
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import create_engine
 from database import Base
@@ -24,11 +26,7 @@ class Tactics(Base):
     source = Column(String(256), unique=True)
     doc = Column(String(256), unique=True)
 
-    def __init__(self, owner, name,  source, doc):
-        self.owner = owner
-        self.name = name
-        self.source = source
-        self.doc = doc
+
 
 class TacticsInput(Base):
     __tablename__ = 'tactics_input'
@@ -38,15 +36,11 @@ class TacticsInput(Base):
     title = Column(String(50))
     defual = Column(String(50))
 
-    def __init__(self, tacticsId, name,  title, defual):
-        self.tacticsId = tacticsId
-        self.name = name
-        self.title = title
-        self.defual = defual
+
 
 
 if __name__ == '__main__':
-    engine = create_engine('sqlite:////Users/admin/share/sqllite/share.db', convert_unicode=True)
+    engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/share', convert_unicode=True)
     Base.metadata.create_all(bind=engine)
 
                                                               

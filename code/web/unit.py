@@ -22,7 +22,7 @@ def to_json(inst, cls):
             d[c.name] = str()
         else:
             d[c.name] = v
-    return json.dumps(d)
+    return d
 
 def Response_headers(content):
     resp = Response(content)

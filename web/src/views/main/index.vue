@@ -4,9 +4,7 @@
       <van-tab title="源码">
         <code-view ref="codeView" type="primary" v-model="formdata.code"></code-view>
       </van-tab>
-      <van-tab title="文档">
-
-      </van-tab>
+      <van-tab title="文档"></van-tab>
       <van-tab title="结果">
         <result-view v-model="result" v-loading="loading"></result-view>
       </van-tab>
@@ -30,7 +28,6 @@
         </el-button-group>
       </el-header>
       <el-container>
-
         <el-main>
           <el-card>
             <el-form
@@ -76,9 +73,7 @@
               </el-col>
             </el-form>
           </el-card>
-          <div>
-            
-          </div>
+          <div></div>
           <el-footer>
             <el-input
               type="textarea"
@@ -114,9 +109,16 @@ import ResultView from "./components/ResultView";
 import CodeView from "./components/CodeView";
 
 import { runexit } from "@/api/share";
+import { detailed as tacticsdetailed } from "@/api/tactucs";
+
 export default {
   components: { ResultView, CodeView },
-  created() {},
+  created() {
+  
+    tacticsdetailed(this.$route.query.id).then(response => {
+      this.formdata.code = response.code;
+    });
+  },
   data() {
     return {
       active: 0,
@@ -138,7 +140,7 @@ print(history.to_json(orient='records'))",
   },
   methods: {
     onSubmit() {},
-    
+
     runexit() {
       this.loading = true;
       this.formdata.code = this.$refs.codeView.code;
