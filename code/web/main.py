@@ -186,6 +186,8 @@ app.register_blueprint(sharelike,url_prefix='/sharelike')
 from api_tactics import tactics
 app.register_blueprint(tactics,url_prefix='/tactics')
 
+from api_tactics_input import tacticsInput
+app.register_blueprint(tacticsInput,url_prefix='/tacticsinput')
 
  
 if __name__ == '__main__':

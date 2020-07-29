@@ -5,6 +5,7 @@ fitter/__init__.py
 fitter/macd.py
 share/__init__.py
 share/top.py
+tactics/1.py
 tactics/__init__.py
 tactics/macd_01.py
 tactics/tactics.py

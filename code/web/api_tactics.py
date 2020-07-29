@@ -1,10 +1,11 @@
 from flask import Blueprint
 import unit
-import json,os
+import json,os,subprocess,sys
 from flask import request
 from models import Tactics
 from database import db_session as session
 
+EXEC = sys.executable
 tactics = Blueprint('tactics', __name__)
 
 @tactics.route('/list' , methods=["GET"])
@@ -36,8 +37,6 @@ def detailed():
             return unit.Response_headers(json.dumps({"code": 200, "data":dtactics}))
     except Exception as e:
         return json.dumps({"code": -1,"data":str(e)})
-
-
 
 
 @tactics.route('/add' , methods=["POST"])
@@ -79,10 +78,36 @@ def update():
                 tactics.source = postdata["source"]
             if "doc" in postdata:
                 tactics.doc = postdata["doc"]
+            if "code" in postdata:
+                path = '/code/tactics/'+postdata["id"]+'.py'
+                pwd = os.getcwd()+path
+                with open(pwd, 'w', encoding='utf-8') as f:
+                    f.write(postdata["code"])
+                    tactics.source = path
 
             session.add(tactics)
             session.commit()
             
             return unit.Response_headers(json.dumps({"code": 200, "data":"ok"}))
+    except Exception as e:
+        return json.dumps({"code": -1,"data":str(e)})
+
+@tactics.route('/exit' , methods=["GET"])
+def exit():
+    try:
+        if request.method == 'GET':
+            tacticid = request.args.get("id")
+            if None is tacticid:
+               raise Exception("策略id不能为空")
+            argv = request.args.get("argv")
+
+            if None is argv:
+               argv = ""
+            tactics = session.query(Tactics).filter_by(id=tacticid).first()
+            dtactics = unit.to_json(tactics,tactics.__class__)
+            pwd = os.getcwd()+dtactics["source"]
+            outdata = unit.decode(subprocess.check_output([EXEC, pwd, argv], stderr=subprocess.STDOUT, timeout=55))
+            result = json.loads(outdata,strict=False)
+            return json.dumps({"code": 200,"data":result})
     except Exception as e:
         return json.dumps({"code": -1,"data":str(e)})

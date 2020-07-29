@@ -1,13 +1,20 @@
   <template>
   <div>
-    <el-card style="wigth=100%">
-      <ve-candle 
-      :data="chartData" 
-      :events="chartEvents"
-      height="140pt"
-      :settings="chartSettings" @ready-once="readyOnve"></ve-candle>
-    </el-card>
-    <el-card style="wigth=100%">
+    <van-cell>
+      <div style="float:right">
+        <van-button icon="replay" text="刷新" size="mini" @click="onexit" />
+        <van-button icon="edit" text="参数" size="mini" />
+      </div>
+    </van-cell>
+    <van-cell>
+      <ve-candle
+        :data="chartData"
+        :events="chartEvents"
+        height="140pt"
+        :settings="chartSettings"
+        @ready-once="readyOnve"
+      ></ve-candle>
+
       <ve-histogram
         :data="histogramdata"
         :events="chartEvents"
@@ -15,8 +22,7 @@
         @ready-once="readyOnve"
         height="140pt"
       ></ve-histogram>
-    </el-card>
-    <el-card style="wigth=100%">
+
       <ve-line
         :data="amountdata"
         :settings="amountSettings"
@@ -24,57 +30,45 @@
         @ready-once="readyOnve"
         height="140pt"
       ></ve-line>
-    </el-card>
-    <!-- 买卖信息 -->
-    <el-card style="wigth=100%">
-      
+
       <el-row>
         <el-col :span="12">
           <h1>买入信息</h1>
-           <div><span>价格：</span><span>{{selectDara.buy}}</span></div>
-           <div>{{selectDara.buymsg}}</div>
+          <div>
+            <span>价格：</span>
+            <span>{{selectDara.buy}}</span>
+          </div>
+          <div>{{selectDara.buymsg}}</div>
         </el-col>
         <el-col :span="12">
           <h1>买出信息</h1>
-          <div><span>价格：</span><span>{{selectDara.sell}}</span></div>
-           <div>{{selectDara.sellmsg}}</div>
-        <span></span>
+          <div>
+            <span>价格：</span>
+            <span>{{selectDara.sell}}</span>
+          </div>
+          <div>{{selectDara.sellmsg}}</div>
+          <span></span>
         </el-col>
       </el-row>
-      
-    </el-card>
+    </van-cell>
   </div>
 </template>
 
-  <script>
+<script>
+import { exit as tactucexit } from "@/api/tactucs";
 export default {
   created: function() {},
-  props: {
-    value: Array
-  },
-  watch: {
-    value: {
-      handler(newValue, oldValue) {
-        if (newValue != null) {
-          this.chartData.rows = newValue;
-          this.amountdata.rows = newValue;
-          this.histogramdata.rows = newValue;
-        }
-      },
-      immediate: true
-    }
-  },
 
   data() {
     var self = this;
     this.chartEvents = {
       click: function(e) {
-        
-        self.selectDara = self.amountdata.rows[e.dataIndex]
-        console.log(self.selectDara)
+        self.selectDara = self.amountdata.rows[e.dataIndex];
+        console.log(self.selectDara);
       }
     };
     return {
+      param: {},
       selectDara: {},
       chartSettings: {
         showMA: true,
@@ -123,6 +117,15 @@ export default {
     readyOnve(echart, options, echartsLib) {
       echart.group = "group1";
       echartsLib.connect("group1");
+    },
+    onexit() {
+      tactucexit(this.$route.query.id).then(response => {
+        this.chartData.rows = response;
+        this.amountdata.rows = response;
+        this.histogramdata.rows = response;
+      }).catch(error=>{
+        alert(JSON.stringify(error))
+      })
     }
   }
 };

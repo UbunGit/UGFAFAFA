@@ -33,6 +33,7 @@ CREATE TABLE `tactics_input` (
   `tacticsId` bigint(20) NOT NULL COMMENT '策略id',
   `name` varchar(50) DEFAULT NULL COMMENT '入参名称',
   `title` varchar(50) DEFAULT NULL COMMENT '入参key',
+  `type` varchar(50) DEFAULT NULL COMMENT '入参类型',
   `defual` varchar(50) DEFAULT NULL COMMENT '入参默认值',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='策略入参表';

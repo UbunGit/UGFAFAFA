@@ -3,6 +3,13 @@ from flask import Response
 
 import json
 
+# 编码
+def decode(s):
+    try:
+        return s.decode('utf-8')
+    except UnicodeDecodeError:
+        return s.decode('gbk')
+        
 def to_json(inst, cls):
     """
     Jsonify the sql alchemy query result.

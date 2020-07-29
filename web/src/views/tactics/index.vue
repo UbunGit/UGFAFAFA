@@ -35,7 +35,6 @@ export default {
             this.list = response
             this.loading = false;
             this.finished = true;
-          
         });
   
     },

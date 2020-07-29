@@ -53,5 +53,5 @@ def updatebaseData(date):
         
 
 if __name__ == '__main__':
-    updatebaseData("2020-07-15")
+    updatebaseData(None)
     

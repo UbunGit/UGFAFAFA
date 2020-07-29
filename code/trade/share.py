@@ -119,11 +119,7 @@ class share:
         try:
             logging.info("获取缓存数据:"+path)
             temdata = pandas.read_csv(path)
-            dates = numpy.array(temdata['date'])
-            enddate = dates[-1:][0]
-            if(dates[-1:])>=formattime:
-                logging.info("获取缓存数据,已是最新enddate:%s  formattime:%s",dates[-1:],formattime)
-                return temdata
+            return temdata
         except Exception as e:
             logging.info("获取缓存数据失败：paht="+path)
             logging.warning(e)

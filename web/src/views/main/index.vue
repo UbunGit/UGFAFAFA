@@ -1,10 +1,13 @@
 <template>
   <div>
-    <van-tabs v-model="active">
+    <van-tabs v-model="active" scrollspy sticky>
+      <van-tab title="入参">
+        <tactics-inputView></tactics-inputView>
+      </van-tab>
       <van-tab title="源码">
         <code-view ref="codeView" type="primary" v-model="formdata.code"></code-view>
       </van-tab>
-      <van-tab title="文档"></van-tab>
+
       <van-tab title="结果">
         <result-view v-model="result" v-loading="loading"></result-view>
       </van-tab>
@@ -86,35 +89,21 @@
       </el-container>
     </el-container>
 
-    <el-drawer
-      title="选择策略"
-      :visible.sync="drawer"
-      :direction="direction"
-      :before-close="handleClose"
-    >
-      <el-card>
-        <el-tabs style="height: 200px;">
-          <el-tab-pane label="股价">股价</el-tab-pane>
-          <el-tab-pane label="MACD">MACD</el-tab-pane>
-          <el-tab-pane label="KDJ">KDJ</el-tab-pane>
-          <el-tab-pane label="其他">其他</el-tab-pane>
-        </el-tabs>
-      </el-card>
-    </el-drawer>
+
   </div>
 </template>
 <script>
 // import SettingForm from "./components/SettingForm";
 import ResultView from "./components/ResultView";
 import CodeView from "./components/CodeView";
+import TacticsInputView from "./components/TacticsInputView";
 
 import { runexit } from "@/api/share";
 import { detailed as tacticsdetailed } from "@/api/tactucs";
 
 export default {
-  components: { ResultView, CodeView },
+  components: { ResultView, CodeView, TacticsInputView },
   created() {
-  
     tacticsdetailed(this.$route.query.id).then(response => {
       this.formdata.code = response.code;
     });
@@ -175,23 +164,5 @@ print(history.to_json(orient='records'))",
 };
 </script>
 <style>
-.el-header {
-  background-color: #b3c0d1;
-  padding: 10pt;
-}
-.el-footer {
-  background-color: #b3c0d1;
-  color: #333;
-}
 
-.el-aside {
-  background-color: #d3dce6;
-  color: #333;
-  height: 100%;
-}
-
-.el-main {
-  background-color: #e9eef3;
-  color: #333;
-}
 </style>

@@ -24,6 +24,13 @@ export const constantRouterMap = [
         meta: { title: '我的策略', icon: 'fire-o' }
       },
       {
+        path: 'tacticsinput',
+        name: '策略入参数设置',
+        component: () => import('@/views/tactics/tacticsInput'),
+        meta: { title: '策略入参数设置', icon: 'fire-o' }
+      },
+      
+      {
         path: 'choose',
         name: '今日推荐',
         component: () => import('@/views/choose'),

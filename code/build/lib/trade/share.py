@@ -119,11 +119,7 @@ class share:
         try:
             logging.info("获取缓存数据:"+path)
             temdata = pandas.read_csv(path)
-            dates = numpy.array(temdata['date'])
-            enddate = dates[-1:][0]
-            if(dates[-1:])>=formattime:
-                logging.info("获取缓存数据,已是最新enddate:%s  formattime:%s",dates[-1:],formattime)
-                return temdata
+            return temdata
         except Exception as e:
             logging.info("获取缓存数据失败：paht="+path)
             logging.warning(e)
@@ -145,7 +141,7 @@ class shares:
             temdata = pandas.read_csv(filepath)
         if temdata is None:
             logging.info("股票列表--tushare")
-            temdata = ts.get_zz500s()
+            temdata = ts.top_list(date)
             temdata.to_csv(filepath)
         self.basics = temdata
 
@@ -167,8 +163,10 @@ class shares:
 if __name__ == '__main__':
     cshare = share('000100')
     logging.info("result：\n%s",cshare.cdata)
-    result =cshare.appendma(cshare.cdata,30)
-    logging.info("ma result：\n%s",result)
-    # print(cshare.cdata.to_json(orient='records'))
+    # result =cshare.appendma(cshare.cdata,30)
+    # logging.info("ma result：\n%s",result)
+    # # print(cshare.cdata.to_json(orient='records'))
+
+    # shares = shares()
     
  

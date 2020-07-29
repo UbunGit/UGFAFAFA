@@ -31,8 +31,9 @@ class Tactics(Base):
 class TacticsInput(Base):
     __tablename__ = 'tactics_input'
     id = Column(Integer, primary_key=True, autoincrement=True) 
-    tacticsId = Column(String(50),name="tactics_id")
+    tacticsId = Column(String(50))
     name = Column(String(50))
+    type = Column(String(50))
     title = Column(String(50))
     defual = Column(String(50))
 
