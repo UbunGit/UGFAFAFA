@@ -31,11 +31,11 @@ export function update(data) {
     }
     
 }
-export function exit(id) {
+export function exit(params) {
     return request({
         method: 'get',
         url: '/tactics/exit',
-        params: {"id":id},
+        params: params,
     });
 }
 

@@ -7,29 +7,46 @@
       </div>
     </van-cell>
     <van-cell>
-      <ve-candle
-        :data="chartData"
-        :events="chartEvents"
-        height="140pt"
-        :settings="chartSettings"
-        @ready-once="readyOnve"
-      ></ve-candle>
+      <van-collapse v-model="activeNames">
+        <van-collapse-item title="总览" name="1">
+          <ve-line
+            :data="resultdata"
+            :settings="resultSettings"
+            :events="chartEvents"
+            :tooltip="tooltip"
+            @ready-once="readyOnve"
+            height="300px"
+          ></ve-line>
+        </van-collapse-item>
+        <van-collapse-item title="日线图" name="2">
+          <ve-candle
+            :data="chartData"
+            :events="chartEvents"
+            height="300px"
+            :settings="chartSettings"
+            @ready-once="readyOnve"
+          ></ve-candle>
+        </van-collapse-item>
+        <van-collapse-item title="MACD" name="3">
+          <ve-histogram
+            :data="histogramdata"
+            :events="chartEvents"
+            :settings="histogramSettings"
+            @ready-once="readyOnve"
+            height="300px"
+          ></ve-histogram>
+        </van-collapse-item>
 
-      <ve-histogram
-        :data="histogramdata"
-        :events="chartEvents"
-        :settings="histogramSettings"
-        @ready-once="readyOnve"
-        height="140pt"
-      ></ve-histogram>
-
-      <ve-line
-        :data="amountdata"
-        :settings="amountSettings"
-        :events="chartEvents"
-        @ready-once="readyOnve"
-        height="140pt"
-      ></ve-line>
+        <van-collapse-item title="资产评估" name="4">
+          <ve-line
+            :data="amountdata"
+            :settings="amountSettings"
+            :events="chartEvents"
+            @ready-once="readyOnve"
+            height="300px"
+          ></ve-line>
+        </van-collapse-item>
+      </van-collapse>
 
       <el-row>
         <el-col :span="12">
@@ -58,7 +75,22 @@
 import { exit as tactucexit } from "@/api/tactucs";
 export default {
   created: function() {},
-
+  props: {
+    value: []
+  },
+  watch: {
+    value: {
+      handler(newValue, oldValue) {
+        if (newValue != null) {
+          this.chartData.rows = newValue;
+          this.amountdata.rows = newValue;
+          this.histogramdata.rows = newValue;
+          this.resultdata.rows = newValue;
+        }
+      },
+      immediate: true
+    }
+  },
   data() {
     var self = this;
     this.chartEvents = {
@@ -67,9 +99,18 @@ export default {
         console.log(self.selectDara);
       }
     };
+    this.tooltip = {
+      trigger: "axis",
+      position: function(point, params, dom, rect, size) {
+        self.selectDara = self.amountdata.rows[params[0].dataIndex];
+        return ;
+      }
+    };
+
     return {
       param: {},
       selectDara: {},
+      activeNames: ["1"],
       chartSettings: {
         showMA: true,
         showVol: true,
@@ -110,6 +151,17 @@ export default {
         axisSite: { right: ["k", "d", "j"] },
         yAxisType: ["KMB", "KMB"],
         yAxisName: ["数值", "比率"]
+      },
+      resultdata: {
+        columns: ["date", "rate", "vrate"],
+        rows: []
+      },
+      resultSettings: {
+        showDataZoom: true,
+        scale: [true, true],
+        smooth: false,
+        showLine: ["rate", "vrate"],
+        yAxisName: ["收益率", "对比"]
       }
     };
   },
@@ -119,13 +171,8 @@ export default {
       echartsLib.connect("group1");
     },
     onexit() {
-      tactucexit(this.$route.query.id).then(response => {
-        this.chartData.rows = response;
-        this.amountdata.rows = response;
-        this.histogramdata.rows = response;
-      }).catch(error=>{
-        alert(JSON.stringify(error))
-      })
+      alert("onexit");
+      this.$emit("runexit");
     }
   }
 };

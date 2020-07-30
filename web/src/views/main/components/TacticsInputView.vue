@@ -28,27 +28,30 @@
           clickable
           name="calendar"
           :value="item.value"
-          label="日历"
-          placeholder="点击选择日期"
+          :label="item.title"
+          :placeholder="item.defual"
           @click="handleDate(item)"
           v-if="item.type == 'date'"
         />
       </van-cell>
     </van-cell-group>
 
-    <van-calendar v-model="show" :min-date="minDate" :max-date="maxDate" @confirm="onchageData"/>
+    <van-calendar v-model="show" :min-date="minDate" :max-date="maxDate" @confirm="onchageData" />
   </div>
 </template>
 <script>
 import { inputlist, inputdelete } from "@/api/tactucs";
+import { formatDate } from "@/utils/date";
+
 export default {
   created() {
     this.getinputList();
   },
+
   data() {
     return {
       inputs: [],
-      selectItem:null,
+      selectItem: null,
       show: false,
       minDate: new Date(2000, 0, 1),
       maxDate: new Date()
@@ -56,7 +59,7 @@ export default {
   },
   methods: {
     onchageData(date) {
-      this.selectItem.value = date;
+      this.selectItem.value = formatDate(date, "yyyy-MM-dd");
       this.show = false;
     },
     getinputList() {
@@ -75,9 +78,9 @@ export default {
         });
       }
     },
-    handleDate(item){
-        this.show = true;
-        this.selectItem = item;
+    handleDate(item) {
+      this.show = true;
+      this.selectItem = item;
     },
     close(item) {
       this.$dialog

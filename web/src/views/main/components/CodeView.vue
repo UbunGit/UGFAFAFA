@@ -6,7 +6,7 @@
       </div>
     </van-cell>
     <van-cell>
-      <textarea ref="mycode" class="codesql" v-model="code" style="height:900px; width:100%;"></textarea>
+      <textarea ref="mycode" class="codesql" v-model="code" style="height:300px; width:100%;"></textarea>
     </van-cell>
   </div>
 </template>

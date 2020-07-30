@@ -2,7 +2,7 @@
   <div>
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <van-cell v-for="item in list" :key="item" :title="item.name" @click="onpush(item.id)" />
+        <van-cell v-for="item in list" :key="item.id" :title="item.name" @click="onpush(item.id)" />
       </van-list>
     </van-pull-refresh>
     <footer class="footer">
