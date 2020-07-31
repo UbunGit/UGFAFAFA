@@ -18,7 +18,7 @@
             <el-input
               type="textarea"
               placeholder="请输入内容"
-              v-model="result"
+              v-model="JSON.stringify(result)"
               style="height:100%;"
             ></el-input>
           </el-footer>

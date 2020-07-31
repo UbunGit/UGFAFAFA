@@ -40,7 +40,8 @@ class Test(unittest.TestCase):
         logging.info(response.url)
         logging.info(response.content)
         logging.info("----------------end-------------")
-
+        
+    @unittest.skip("跳过该测试项") 
     def test_detailed(self):
   
         url = BaseUrl+'/tactics/detailed'
@@ -51,6 +52,15 @@ class Test(unittest.TestCase):
         logging.info(response.content)
         logging.info("----------------end-------------")
 
+    def test_detailed(self):
+  
+        url = BaseUrl+'/tactics/exit'
+        response = requests.get(url=url,params={"id":1})
+        logging.info("-------------begin--------------")
+        logging.info(response.status_code)
+        logging.info(response.url)
+        logging.info(response.content)
+        logging.info("----------------end-------------")
 
     
 

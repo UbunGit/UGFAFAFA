@@ -4,11 +4,13 @@
 import tushare as ts
 import numpy
 import pandas
-import os,time,logging
+import os,time,logging,json,datetime
 import talib as tl
-# logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
-
+logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
+ts.set_token("8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195")
 formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
+
+dpath = '/Users/admin/share/data/'
 
 ###
 ## 单个股票
@@ -21,26 +23,16 @@ class share:
         logging.info("share 根据股票编码初始化数据 code:%s 开始：%s 结束：%s",code,begin,end)
         self.code = code
         tsda = self.load()
-        if tsda is None:
-            tsda = ts.get_hist_data(code)
-            if(tsda is None):
-                return
-            tsda["date"] = tsda.index
-            tsda.set_index('date')
-            tsda.sort_index(inplace=True)
-            
-            self.save(tsda)
         if(tsda is None):
             logging.error("share 初始化失败，为获取到数据")
             return
-
+        tsda = tsda.sort_values(by='date')
         self.cdata = tsda
         if begin is not None:
             self.cdata = self.cdata[self.cdata['date'] >= begin]
         if end is not None:
             self.cdata = self.cdata[self.cdata['date']<= end]
         logging.debug("share 初始化结束")
-
 
 
     def appendmacd(self,data):
@@ -115,23 +107,44 @@ class share:
         data.to_csv(path)
 
     def load(self):
-        path = '~/share/data/'+str(self.code)+'.csv'
         try:
-            logging.info("获取缓存数据:"+path)
-            temdata = pandas.read_csv(path)
-            return temdata
+            path = dpath+str(self.code)+'.csv'
+            endtime = ""
+            if os.path.exists(path):
+                etimme = time.localtime(os.path.getmtime(path))
+                endtime = time.strftime('%Y-%m-%d',etimme)
+            dtimme = time.localtime(time.time())
+            todytime = (time.strftime('%Y-%m-%d',dtimme))
+            if dtimme.tm_hour<16:
+                temtime = datetime.datetime.now()+datetime.timedelta(days=-1)
+                todytime = temtime.strftime('%Y-%m-%d')
+
+            if endtime == todytime :
+                logging.info("获取缓存数据:"+path)
+                temdata = pandas.read_csv(path ,index_col=0)
+                return temdata
+            else:
+                return self.download()
         except Exception as e:
-            logging.info("获取缓存数据失败：paht="+path)
+            logging.info("获取数据失败：paht=")
             logging.warning(e)
-      
             time.sleep(0.1)
             return None
+    def download(self):
+
+        tsda = ts.pro_bar(ts_code=self.code, adj='qfq')
+        if(tsda is None):
+            raise Exception("TUshare获取数据失败") 
+        tsda = tsda.rename(columns={'trade_date':'date'})
+        tsda.sort_index(inplace=True)
+        self.save(tsda)
+        return tsda
        
 
 ###
 ## 股票列表
 ###
-filepath = '~/share/data/basics.csv'
+filepath = dpath+'basics.csv'
 class shares:
     basics = None # 股票列表
     def __init__(self,date=formattime):
@@ -161,7 +174,8 @@ class shares:
         
 
 if __name__ == '__main__':
-    cshare = share('000100')
+    # SH沪股通SZ
+    cshare = share('300022.SZ')
     logging.info("result：\n%s",cshare.cdata)
     # result =cshare.appendma(cshare.cdata,30)
     # logging.info("ma result：\n%s",result)

@@ -12,8 +12,8 @@ tradecenter = trade()
 def makeplan(price):
 
     logging.info("创建购买计划:%s",price)
-    input = pd.Series(np.logspace(-5, 5, 10, base=1.05)*price)
-    tem =  (pd.Series(np.arange(24, 14, -1))*0.05)
+    input = pd.Series(np.logspace(-9, 1, 10, base=1.05)*price)
+    tem =  (pd.Series(np.arange(34, 14, -2))*0.01)
     out = (tem +1)*input
     global plandf
     plandf = pd.DataFrame({ "input": input, "out": out, "store":0, "tem":tem})
@@ -39,7 +39,7 @@ def getcount(price,amount):
 
 if __name__ == '__main__':
 
-    makeplan(1)
+    makeplan(4.50)
     logging.info("购买价格：%s",getbuyprice(1.05))
     
 

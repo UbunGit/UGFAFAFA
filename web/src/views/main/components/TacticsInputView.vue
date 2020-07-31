@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     onchageData(date) {
-      this.selectItem.value = formatDate(date, "yyyy-MM-dd");
+      this.selectItem.value = formatDate(date, "yyyyMMdd");
       this.show = false;
     },
     getinputList() {

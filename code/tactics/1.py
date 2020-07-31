@@ -10,7 +10,7 @@ import os, json
 import pandas as pd
 import numpy as np
  
-# logging.basicConfig(level=logging.NOTSET)  # 设置日志级别  
+logging.basicConfig(level=logging.NOTSET)  # 设置日志级别  
 
 # 根据macd值买入优化v1.0.0 2020.7.14
 # 步骤：
@@ -33,7 +33,7 @@ def makeplan(price):
     # 创建购买计划
     logging.info("创建购买计划:%s",price)
     input = pd.Series(np.logspace(-7, 3, 10, base=1.05)*price)
-    tem =  (pd.Series(np.arange(24, 14, -1))*0.01)
+    tem =  (pd.Series(np.arange(30, 10, -2))*0.01)
     out = (tem +1)*input
     global plandf
     plandf = pd.DataFrame({ "input": input, "out": out, "store":0, "tem":tem})
@@ -50,8 +50,6 @@ def getcount(price,amount):
     if abs(minc*price-amount)>abs(maxc*price-amount):
         return maxc
     return minc
-    
-
 
 
 def judgeBuy(data):
@@ -129,15 +127,15 @@ if __name__ == '__main__':
     logging.info("根据macd值买入优化v1.0.0 2020.7.14")
     logging.info("args:%s",sys.argv)
     amount = '10000'
-    start = '2019-01-01'
-    end = '2019-05-10'
-    tcode = '300022'
+    start = 20200301
+    end = 20200510
+    tcode = '300022.SZ'
     if len(sys.argv)>1 and len(sys.argv[1])>0:
         indata = json.loads(sys.argv[1])
         if "start" in indata:
-            start=indata["start"]
+            start=int(indata["start"])
         if "end" in indata:
-            end=indata["end"]
+            end=int(indata["end"])
         if "amount" in indata:
             amount=indata["amount"]
         if "tcode" in indata:
@@ -151,8 +149,9 @@ if __name__ == '__main__':
 
 
 
-    data_fecha = data.set_index('date')
-    selectData =  data_fecha.loc[start: end]
+    data_fecha = data[data.date>=start]
+    selectData =  data_fecha[data_fecha.date<=end]
+    logging.info("selectData:\n%s",selectData)
 
     balance = []
     firstData = selectData.iloc[0]
@@ -165,13 +164,12 @@ if __name__ == '__main__':
         balance.append({
             "balance":tradecenter.balance,
             "store":tradecenter.store,
-            "rate":rate,
-            "vrate":vrate,
-            "all":tradecenter.balance+tradecenter.store*temdata.close,
+            "rate":rate*1.0,
+            "vrate":vrate*1.0,
+            "all":(tradecenter.balance+tradecenter.store*temdata.close)*1.0,
             "date":temdata.name})
-
+    logging.info("selectData:\n%s",selectData)
     logspd = pd.DataFrame(buylogs)
-    logging.info(logspd)
     logspd.set_index(["date"], inplace=True)
 
     selllogspd = pd.DataFrame(selllogs)
@@ -182,11 +180,10 @@ if __name__ == '__main__':
  
     frames = [selectData,logspd,selllogspd,balancepd]
     tem = pd.concat(frames ,axis=1) 
-    tem["date"] = tem.index
+    
+    logging.info("tem:\n%s",tem)
     path = '~/share/tem/tem.csv'
     tem.to_csv(path)
-    logging.info("tem：\n%s",tem)
-    print(tem.to_json(orient='records'))
  
 
 

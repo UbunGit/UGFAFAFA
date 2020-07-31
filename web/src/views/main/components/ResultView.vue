@@ -74,9 +74,9 @@
 <script>
 import { exit as tactucexit } from "@/api/tactucs";
 export default {
-  created: function() {},
+  created: function () {},
   props: {
-    value: []
+    value: [],
   },
   watch: {
     value: {
@@ -88,23 +88,23 @@ export default {
           this.resultdata.rows = newValue;
         }
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   data() {
     var self = this;
     this.chartEvents = {
-      click: function(e) {
+      click: function (e) {
         self.selectDara = self.amountdata.rows[e.dataIndex];
         console.log(self.selectDara);
-      }
+      },
     };
     this.tooltip = {
       trigger: "axis",
-      position: function(point, params, dom, rect, size) {
+      position: function (point, params, dom, rect, size) {
         self.selectDara = self.amountdata.rows[params[0].dataIndex];
-        return ;
-      }
+        return;
+      },
     };
 
     return {
@@ -115,18 +115,18 @@ export default {
         showMA: true,
         showVol: true,
         downColor: "#00da3c",
-        upColor: "#ec0000"
+        upColor: "#ec0000",
       },
       chartData: {
         columns: ["date", "open", "close", "low", "high", "volume"],
         rows: [],
-        selectedDepIndex: 1
+        selectedDepIndex: 1,
       },
 
       amountdata: {
         columns: ["date", "store", "all"],
         rows: [],
-        showDataZoom: true
+        showDataZoom: true,
       },
       amountSettings: {
         smooth: false,
@@ -135,34 +135,37 @@ export default {
         labelMap: {
           all: "总资产",
           store: "持股数",
-          sellmsg: "持股数"
-        }
+          sellmsg: "持股数",
+        },
       },
 
       histogramdata: {
-        columns: ["date", "MACD", "DIFF", "DEA", "k", "d", "j"],
-        rows: []
+        columns: ["date", "MACD", "DIFF", "DEA"],
+        rows: [],
       },
       histogramSettings: {
         showDataZoom: true,
         scale: [true, true],
         smooth: false,
-        showLine: ["DIFF", "DEA", "k", "d", "j"],
-        axisSite: { right: ["k", "d", "j"] },
+        showLine: ["DIFF", "DEA"],
         yAxisType: ["KMB", "KMB"],
-        yAxisName: ["数值", "比率"]
+        yAxisName: ["数值", "比率"],
       },
+
       resultdata: {
         columns: ["date", "rate", "vrate"],
-        rows: []
+        rows: [{'ts_code': '300022.SZ', 'date': '20200508', 'rate': '0.0', 'vrate': '0.2539267016', 'all': 10000.0},
+                {'ts_code': '300022.SZ', 'date': '20200509', 'rate': '0.0', 'vrate': '0.2539267016', 'all': 10000.0},
+              ],
       },
       resultSettings: {
         showDataZoom: true,
         scale: [true, true],
         smooth: false,
         showLine: ["rate", "vrate"],
-        yAxisName: ["收益率", "对比"]
-      }
+        yAxisType: ["KMB", "KMB"],
+        yAxisName: ["收益率", "对比"],
+      },
     };
   },
   methods: {
@@ -173,8 +176,8 @@ export default {
     onexit() {
       alert("onexit");
       this.$emit("runexit");
-    }
-  }
+    },
+  },
 };
 </script>
 <style>

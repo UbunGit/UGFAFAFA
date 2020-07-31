@@ -2,6 +2,7 @@ from flask import Blueprint
 import unit
 import json,os,subprocess,sys
 from flask import request
+import pandas as pd
 from models import Tactics
 from database import db_session as session
 
@@ -106,8 +107,13 @@ def exit():
             tactics = session.query(Tactics).filter_by(id=tacticid).first()
             dtactics = unit.to_json(tactics,tactics.__class__)
             pwd = os.getcwd()+dtactics["source"]
-            outdata = unit.decode(subprocess.check_output([EXEC, pwd, argv], stderr=subprocess.STDOUT, timeout=55))
+            info = unit.decode(subprocess.check_output([EXEC, pwd, argv], stderr=subprocess.STDOUT, timeout=55))
+            print(info)
+            path = '~/share/tem/tem.csv'
+            tem = pd.read_csv(path,dtype={"date":"string"}, index_col=0)
+            outdata = tem.to_json(orient='records')
             result = json.loads(outdata,strict=False)
+            print(result)
             return json.dumps({"code": 200,"data":result})
     except Exception as e:
         return json.dumps({"code": -1,"data":str(e)})
