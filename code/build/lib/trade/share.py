@@ -121,7 +121,7 @@ class share:
 
             if endtime == todytime :
                 logging.info("获取缓存数据:"+path)
-                temdata = pandas.read_csv(path ,index_col=0)
+                temdata = pandas.read_csv(path ,dtype={"date":"string"}, index_col=0,)
                 return temdata
             else:
                 return self.download()

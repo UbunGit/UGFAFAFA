@@ -39,8 +39,8 @@ def getcount(price,amount):
 
 if __name__ == '__main__':
 
-    makeplan(4.50)
-    logging.info("购买价格：%s",getbuyprice(1.05))
+    makeplan(9.36)
+    logging.info("购买价格：%s",getbuyprice(9.36))
     
 
     

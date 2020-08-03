@@ -65,7 +65,12 @@ print(history.to_json(orient='records'))",
       var temdata = {};
       for (const i in chil.inputs) {
         let item = chil.inputs[i];
-        temdata[item.name] = item.value;
+        if(item.value){
+            temdata[item.name] = item.value;
+        }else{
+            temdata[item.name] = item.defual;
+        }
+        
       }
 
       this.loading = true;

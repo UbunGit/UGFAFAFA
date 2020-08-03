@@ -12,9 +12,11 @@
           <ve-line
             :data="resultdata"
             :settings="resultSettings"
+            :data-zoom="dataZoom"
             :events="chartEvents"
             :tooltip="tooltip"
             @ready-once="readyOnve"
+            :colors=resultSettings.colors
             height="300px"
           ></ve-line>
         </van-collapse-item>
@@ -25,6 +27,7 @@
             height="300px"
             :settings="chartSettings"
             @ready-once="readyOnve"
+            :data-zoom="dataZoom"
           ></ve-candle>
         </van-collapse-item>
         <van-collapse-item title="MACD" name="3">
@@ -32,6 +35,7 @@
             :data="histogramdata"
             :events="chartEvents"
             :settings="histogramSettings"
+            :data-zoom="dataZoom"
             @ready-once="readyOnve"
             height="300px"
           ></ve-histogram>
@@ -41,6 +45,7 @@
           <ve-line
             :data="amountdata"
             :settings="amountSettings"
+            :data-zoom="dataZoom"
             :events="chartEvents"
             @ready-once="readyOnve"
             height="300px"
@@ -67,6 +72,25 @@
           <span></span>
         </el-col>
       </el-row>
+      <el-row>
+        <h1>买卖计划{{selectDara.date}}</h1>
+         <van-cell 
+        v-for="item in this.plant" :key="item.input" 
+        :title="item.input" 
+        :value="item.store"
+       >
+        <template #title>
+            <span>买入：{{item.input}}</span>
+        </template>
+        <template #label>
+            <span>欲卖：{{item.out}}</span>
+            <span>收益：{{item.tem}}</span>
+        </template>
+        <template #default>
+            <span>持仓：{{item.store}}</span>
+        </template>
+         </van-cell>
+      </el-row>
     </van-cell>
   </div>
 </template>
@@ -91,6 +115,16 @@ export default {
       immediate: true,
     },
   },
+  computed:{
+    plant:function(){
+      if(this.selectDara.plandf == undefined){
+        return []
+      }
+      let tplant = JSON.parse(this.selectDara.plandf)
+ 
+      return tplant
+    }
+  },
   data() {
     var self = this;
     this.chartEvents = {
@@ -111,9 +145,17 @@ export default {
       param: {},
       selectDara: {},
       activeNames: ["1"],
+      dataZoom: [
+        {
+          type: "slider",
+          start: 0,
+          end: 100,
+        },
+      ],
       chartSettings: {
         showMA: true,
         showVol: true,
+        showDataZoom: true,
         downColor: "#00da3c",
         upColor: "#ec0000",
       },
@@ -154,17 +196,30 @@ export default {
 
       resultdata: {
         columns: ["date", "rate", "vrate"],
-        rows: [{'ts_code': '300022.SZ', 'date': '20200508', 'rate': '0.0', 'vrate': '0.2539267016', 'all': 10000.0},
-                {'ts_code': '300022.SZ', 'date': '20200509', 'rate': '0.0', 'vrate': '0.2539267016', 'all': 10000.0},
-              ],
+        rows: [
+          {
+            ts_code: "300022.SZ",
+            date: "20200508",
+            rate: "0.0",
+            vrate: "0.2539267016",
+            all: 10000.0,
+          },
+          {
+            ts_code: "300022.SZ",
+            date: "20200509",
+            rate: "0.0",
+            vrate: "0.2539267016",
+            all: 10000.0,
+          },
+        ],
       },
       resultSettings: {
-        showDataZoom: true,
-        scale: [true, true],
+        colors:['#c23531','#2f4554'],
         smooth: false,
-        showLine: ["rate", "vrate"],
-        yAxisType: ["KMB", "KMB"],
-        yAxisName: ["收益率", "对比"],
+        labelMap: {
+          'rate': '预测收益',
+          'vrate': '股票收益'
+        },
       },
     };
   },
@@ -174,7 +229,7 @@ export default {
       echartsLib.connect("group1");
     },
     onexit() {
-      alert("onexit");
+
       this.$emit("runexit");
     },
   },

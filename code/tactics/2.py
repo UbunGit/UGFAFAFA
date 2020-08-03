@@ -12,7 +12,7 @@ import numpy as np
  
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别  
 
-# 根据macd值买入优化v1.0.0 2020.7.14
+# 根据KDJ值买入优化v1.0.0 2020.7.14
 # 步骤：
 # 1.获取 MACD DEA，DIFF
 # 2.如果 MACD>0 --其实也就是20日均线开始向上掉头，判断是否可以买入
@@ -57,12 +57,12 @@ def judgeBuy(data):
     logging.info("判断买入条件")
     log = {}
     try:
-        if data.MACD<0 or np.isnan(data.MACD):
-            raise Exception("MACD<0 macd:{:.2f}".format(data.MACD))
-        if data.MACD>0.2:
-            raise Exception("MACD>0.2 macd:{:.2f}".format( data.MACD))
-        if data.DEA>0:
-            raise Exception("data.DEA dea:{:.2f}".format( data.DEA))
+        if data.j<data.k or np.isnan(data.MACD):
+            raise Exception("j<k J:{:.2f} K:{:.2f}".format(data.j,data.k))
+        # if data.MACD>0.2:
+        #     raise Exception("MACD>0.2 macd:{:.2f}".format( data.MACD))
+        # if data.DEA>0:
+        #     raise Exception("data.DEA dea:{:.2f}".format( data.DEA))
     except Exception as e:
         buylogs.append({"buymsg":str(e),"buy":False,"date":data.name})
     else:
@@ -107,8 +107,8 @@ def judgeSell(data):
 
         if data.high<sellpd.out:
             raise Exception("data.low<sellprice sellprice:{:.2f} low:{:.2f}".format(sellpd.out, data.high))
-        if data.MACD>1 or np.isnan(data.MACD):
-            raise Exception("MACD>1 macd:{:.2f}".format(data.MACD))
+        # if data.MACD>0.0 or np.isnan(data.MACD):
+        #     raise Exception("MACD>0 macd:{:.2f}".format(data.MACD))
         tradecenter.sell(sellpd.out, sellpd.store)
 
     except Exception as e:
@@ -127,15 +127,15 @@ if __name__ == '__main__':
     logging.info("根据macd值买入优化v1.0.0 2020.7.14")
     logging.info("args:%s",sys.argv)
     amount = '10000'
-    start = 20200301
-    end = 20200510
+    start = '20200301'
+    end = '20200510'
     tcode = '300022.SZ'
     if len(sys.argv)>1 and len(sys.argv[1])>0:
         indata = json.loads(sys.argv[1])
         if "start" in indata:
-            start=int(indata["start"])
+            start=indata["start"]
         if "end" in indata:
-            end=int(indata["end"])
+            end=indata["end"]
         if "amount" in indata:
             amount=indata["amount"]
         if "tcode" in indata:
@@ -146,6 +146,7 @@ if __name__ == '__main__':
     share = share(tcode)
     data = share.appendmacd(share.cdata)
     data = share.appendma(data,30)
+    data = share.appendkdj(data)
 
 
 
@@ -154,6 +155,7 @@ if __name__ == '__main__':
     logging.info("selectData:\n%s",selectData)
 
     balance = []
+    plands = []
     firstData = selectData.iloc[0]
     for i in range(len(selectData)):
         temdata = selectData.iloc[i]
@@ -168,6 +170,8 @@ if __name__ == '__main__':
             "vrate":vrate*1.0,
             "all":(tradecenter.balance+tradecenter.store*temdata.close)*1.0,
             "date":temdata.name})
+        plands.append({"plandf":plandf.to_json(orient='records'),"date":temdata.name})
+
     logging.info("selectData:\n%s",selectData)
     logspd = pd.DataFrame(buylogs)
     logspd.set_index(["date"], inplace=True)
@@ -177,8 +181,11 @@ if __name__ == '__main__':
 
     balancepd = pd.DataFrame(balance)
     balancepd.set_index(["date"], inplace=True)
+
+    plandspd = pd.DataFrame(plands)
+    plandspd.set_index(["date"], inplace=True)
  
-    frames = [selectData,logspd,selllogspd,balancepd]
+    frames = [selectData,logspd,selllogspd,balancepd,plandspd]
     tem = pd.concat(frames ,axis=1) 
     
     logging.info("tem:\n%s",tem)
