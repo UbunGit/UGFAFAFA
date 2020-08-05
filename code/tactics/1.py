@@ -32,7 +32,7 @@ tradecenter = trade()
 def makeplan(price):
     # 创建购买计划
     logging.info("创建购买计划:%s",price)
-    input = pd.Series(np.logspace(-7, 3, 10, base=1.05)*price)
+    input = pd.Series(np.logspace(-9, 1, 10, base=1.05)*price)
     tem =  (pd.Series(np.arange(30, 10, -2))*0.01)
     out = (tem +1)*input
     global plandf

@@ -57,7 +57,7 @@ def judgeBuy(data):
     logging.info("判断买入条件")
     log = {}
     try:
-        if data.j<data.k or np.isnan(data.MACD):
+        if data.ma5<data.ma20 or np.isnan(data.ma20):
             raise Exception("j<k J:{:.2f} K:{:.2f}".format(data.j,data.k))
         # if data.MACD>0.2:
         #     raise Exception("MACD>0.2 macd:{:.2f}".format( data.MACD))
@@ -68,10 +68,10 @@ def judgeBuy(data):
     else:
         
         if  plandf.empty: 
-            makeplan(data.ma30)
+            makeplan(data.ma5)
         #如果没有持有则重新设置买卖方案
         if tradecenter.store <=0:
-            makeplan(data.ma30)
+            makeplan(data.ma5)
         try:
             buyprice = getbuyprice(data.low)
             
@@ -146,6 +146,8 @@ if __name__ == '__main__':
     share = share(tcode)
     data = share.appendmacd(share.cdata)
     data = share.appendma(data,30)
+    data = share.appendma(data,5)
+    data = share.appendma(data,20)
     data = share.appendkdj(data)
 
 
