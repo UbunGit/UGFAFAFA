@@ -1,5 +1,5 @@
 from flask import Blueprint
-import unit
+from .unit import *
 import json
 share = Blueprint('share', __name__)
 

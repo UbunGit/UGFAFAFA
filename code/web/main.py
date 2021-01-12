@@ -4,22 +4,27 @@
 import logging
 import sys,os
 import json
-import zxby
 
 
-import unit as unit
 
 from flask import Flask
 from flask import request
-
 from flask import  abort
+
+from .zxby import *
+from .unit import *
+
+
 
 from trade import share
 from fitter import macdfitter
 from flask_cors import CORS
 from flask_apscheduler import APScheduler
 
-from database import init_db, db_session
+
+
+
+# from database import init_db, db_session
 
 
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
@@ -177,16 +182,16 @@ def page_not_found(error):
     resp = unit.Response_headers(content)
     return resp
 
-from api_share import share
+from .api_share import share
 app.register_blueprint(share,url_prefix='/share')
 
-from api_share_like import sharelike
+from .api_share_like import sharelike
 app.register_blueprint(sharelike,url_prefix='/sharelike')
 
-from api_tactics import tactics
+from .api_tactics import tactics
 app.register_blueprint(tactics,url_prefix='/tactics')
 
-from api_tactics_input import tacticsInput
+from .api_tactics_input import tacticsInput
 app.register_blueprint(tacticsInput,url_prefix='/tacticsinput')
 
  

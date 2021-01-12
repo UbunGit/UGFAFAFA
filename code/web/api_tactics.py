@@ -1,10 +1,10 @@
 from flask import Blueprint
-import unit
+from .unit import *
 import json,os,subprocess,sys
 from flask import request
 import pandas as pd
-from models import Tactics
-from database import db_session as session
+from .models import Tactics
+from .database import db_session as session
 
 EXEC = sys.executable
 tactics = Blueprint('tactics', __name__)

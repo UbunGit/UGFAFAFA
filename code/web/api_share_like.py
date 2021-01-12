@@ -2,10 +2,10 @@ from flask import Blueprint
 from flask import request
 from flask import jsonify
 
-from database import db_session as session
-import unit
+from .database import db_session as session
+from .unit import *
 import json
-from models import ShareLikeCategory
+from .models import ShareLikeCategory
 sharelike = Blueprint('sharelike', __name__)
 
 @sharelike.route('/addcategory' , methods=["POST"])

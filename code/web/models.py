@@ -4,7 +4,7 @@
 #                                                            
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import create_engine
-from database import Base
+from .database import Base
                                                               
 class ShareLike(Base):
     __tablename__ = 'share_like'                                                      
