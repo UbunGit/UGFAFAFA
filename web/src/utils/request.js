@@ -11,12 +11,14 @@ const service = axios.create({
 // respone拦截器
 service.interceptors.response.use(
     response => {
-        
+        console.log(response)
         const res = response.data
-        if (res.code !== 200) {
-            return Promise.reject(res.message)
+        if (res.code != 200) {
+            console.log("error"+JSON.stringify(res))
+            return Promise.reject(res.data)
         } else {
-            return res.data
+            console.log("scress"+res)
+            return res
         }
     },
     error => {

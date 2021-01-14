@@ -24,7 +24,7 @@ from flask_apscheduler import APScheduler
 
 
 
-# from database import init_db, db_session
+from .database import init_db, db_session
 
 
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
