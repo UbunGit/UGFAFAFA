@@ -1,6 +1,6 @@
 import sys
 from flask import Blueprint
-from .unit import *
+
 import json,os,subprocess,sys
 from flask import request
 import pandas as pd
@@ -8,6 +8,8 @@ import pandas as pd
 sys.path.append("..") 
 from models import Tactics
 from database import session
+# from .unit import *
+from .unit import get_post_data
 
 EXEC = sys.executable
 tactics = Blueprint('tactics', __name__)
@@ -67,7 +69,7 @@ def add():
 def update():
     try:
         if request.method == 'POST':
-            postdata = unit.get_post_data(request)
+            postdata = get_post_data(request)
             if None is postdata["id"]:
                 raise Exception("策略id不能为空") 
             tactics = session.query(Tactics).filter_by(id=postdata["id"]).first()

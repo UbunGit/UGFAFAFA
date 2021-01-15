@@ -50,6 +50,12 @@ export default {
     },
     onSave(){
         tactucsupdate({"id":this.$route.query.id,"code":this.code})
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          this.$message.error(JSON.stringify(error));
+        });
     }
   }  
 };
