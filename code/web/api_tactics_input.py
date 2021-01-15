@@ -1,9 +1,12 @@
+import sys
+sys.path.append("..") 
+
 from flask import Blueprint
 from .unit import *
 import json,os
 from flask import request
-from .models import TacticsInput
-from .database import db_session as session
+from models import TacticsInput
+from database import session
 
 tacticsInput = Blueprint('tacticsInput', __name__)
 

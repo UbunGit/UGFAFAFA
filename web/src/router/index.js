@@ -44,6 +44,34 @@ export const constantRouterMap = [
       },
     ]
   },
+  {
+    path: '/a',
+    name: 'main',
+    component: Layout,
+    meta: { title: '交易策略', icon: 'fire-o' },
+    children: [
+      {
+        path: 'tactics',
+        name: '交易策略',
+        component: () => import('@/views/tactics'),
+        meta: { title: '策略', icon: 'fire-o' }
+      },
+    ]
+  },
+  {
+    path: '/test',
+    name: 'main',
+    component: Layout,
+    meta: { title: '测试', icon: 'fire-o' },
+    children: [
+      {
+        path: 'test',
+        name: 'test',
+        component: () => import('@/views/test'),
+        meta: { title: '测试', icon: 'fire-o' }
+      },
+    ]
+  },
 
 ]
 export default new Router({

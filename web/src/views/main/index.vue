@@ -1,6 +1,7 @@
 <template>
   <div>
     <van-tabs v-model="active" scrollspy sticky>
+      
       <van-tab title="源码">
         <code-view ref="codeView" type="primary" v-model="formdata.code"></code-view>
       </van-tab>

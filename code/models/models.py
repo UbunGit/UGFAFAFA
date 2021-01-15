@@ -4,7 +4,7 @@
 #                                                            
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import create_engine
-from .database import Base
+from database import Base
                                                               
 class ShareLike(Base):
     __tablename__ = 'share_like'                                                      
@@ -38,11 +38,6 @@ class TacticsInput(Base):
     defual = Column(String(50))
 
 
-
-
-if __name__ == '__main__':
-    engine = create_engine('mysql+pymysql://root:root@127.0.0.1:3306/share', convert_unicode=True)
-    Base.metadata.create_all(bind=engine)
 
                                                               
     

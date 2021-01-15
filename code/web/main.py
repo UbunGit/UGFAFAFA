@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+
+
 import logging
 import sys,os
 import json
 
-
+sys.path.append("..") 
 
 from flask import Flask
 from flask import request
@@ -14,30 +16,18 @@ from flask import  abort
 from .zxby import *
 from .unit import *
 
-
-
 from trade import share
 from fitter import macdfitter
 from flask_cors import CORS
 from flask_apscheduler import APScheduler
 
-
-
-
-from .database import init_db, db_session
-
+from database import session
 
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
- 
-
 app = Flask(__name__)
 
-
 CORS(app, supports_credentials=True)
-
-
-
 
 def decode(s):
     try:
@@ -47,7 +37,7 @@ def decode(s):
 
 @app.teardown_request
 def shutdown_session(exception=None):
-    db_session.remove()
+    session.remove()
 
  # 根据时间获取股票交易历史数据
 @app.route('/sharehistory')
