@@ -1,35 +1,11 @@
 <template>
   <div>
-    <van-nav-bar title="标题">
-      <template #left>
-        <van-button icon="star-o" round @click="showPopup" />
-      </template>
-    </van-nav-bar>
-
-    <van-popup
-      v-model="show"
-      position="top"
-      closeable
-      close-icon-position="top-left"
-      :style="{ height: '90%' }"
-    >
-      <van-cell v-for="item in routes" :key="item.path">
-        <h2>{{ item.meta.title }}</h2>
-        <van-grid>
-          <van-grid-item
-            :icon="citem.meta.icon"
-            :text="citem.meta.title"
-            @click="topath(citem.path)"
-            v-for="citem in item.children"
-            :key="citem.path"
-          ></van-grid-item>
-        </van-grid>
-      </van-cell>
-    </van-popup>
-
     <sidebar class="sidebar-container" />
+
     <div class="main-container">
-      <router-view />
+      <el-card class="box-card">
+        <router-view />
+      </el-card>
     </div>
   </div>
 </template>
@@ -52,7 +28,6 @@ export default {
     };
   },
   methods: {
-    
     showPopup() {
       this.show = true;
     },
@@ -83,5 +58,8 @@ export default {
   transition: margin-left 0.28s;
   margin-left: 220px;
   position: relative;
+}
+.box-card{
+  margin: 8px;
 }
 </style>

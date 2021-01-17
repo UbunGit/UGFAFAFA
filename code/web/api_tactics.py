@@ -1,4 +1,4 @@
-import sys
+import sys, logging
 from flask import Blueprint
 
 import json,os,subprocess,sys
@@ -8,8 +8,7 @@ import pandas as pd
 sys.path.append("..") 
 from models import Tactics
 from database import session
-# from .unit import *
-from .unit import get_post_data
+from .unit import get_post_data,Response_headers,to_json
 
 EXEC = sys.executable
 tactics = Blueprint('tactics', __name__)
@@ -19,12 +18,13 @@ def list():
     try:
         if request.method == 'GET':
  
-            tactics =  Tactics.query.all()
+            tactics = Tactics.query.all()
             list = []
             for data in tactics:
-                list.append(unit.to_json(data,data.__class__)) 
-            return unit.Response_headers(json.dumps({"code": 200, "data":list}))
+                list.append(to_json(data,data.__class__)) 
+            return Response_headers(json.dumps({"code": 200, "data":list}))
     except Exception as e:
+        logging.error(str(e))
         return json.dumps({"code": -1,"data":str(e)})
 
 @tactics.route('/detailed' , methods=["GET"])
@@ -35,12 +35,12 @@ def detailed():
             if None is tacticid:
                raise Exception("策略id不能为空")
             tactics = session.query(Tactics).filter_by(id=tacticid).first()
-            dtactics = unit.to_json(tactics,tactics.__class__)
+            dtactics = to_json(tactics,tactics.__class__)
             pwd = os.getcwd()+dtactics["source"]
             f = open(pwd,'rb')
             dtactics["code"] = f.read().decode(encoding='UTF-8',errors='strict')
             f.close()
-            return unit.Response_headers(json.dumps({"code": 200, "data":dtactics}))
+            return Response_headers(json.dumps({"code": 200, "data":dtactics}))
     except Exception as e:
         return json.dumps({"code": -1,"data":str(e)})
 
@@ -49,20 +49,23 @@ def detailed():
 def add():
     try:
         if request.method == 'POST':
-            postdata = unit.get_post_data(request)
+            postdata = get_post_data(request)
             tactics = Tactics()
-            tactics.owner = postdata["owner"]
+        
             tactics.name = postdata["name"]
             if "source" in postdata:
                 tactics.source = postdata["source"]
             if "doc" in postdata:
                 tactics.doc = postdata["doc"]
+            if "owner" in postdata:
+                tactics.owner = postdata["owner"]
      
             session.add(tactics)
             session.commit()
             
-            return unit.Response_headers(json.dumps({"code": 200, "data":"ok"}))
+            return Response_headers(json.dumps({"code": 200, "data":"ok"}))
     except Exception as e:
+        logging.error(str(e))
         return json.dumps({"code": -1,"data":str(e)})
 
 @tactics.route('/update' , methods=["POST"])
@@ -96,6 +99,7 @@ def update():
             
             return unit.Response_headers(json.dumps({"code": 200, "data":"ok"}))
     except Exception as e:
+        logging.error(str(e))
         return json.dumps({"code": -1,"data":str(e)})
 
 @tactics.route('/exit' , methods=["GET"])

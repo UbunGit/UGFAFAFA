@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
 # sqlacodegen mysql+pymysql://root:root@127.0.0.1:3306/share > models.py
-#                                                            
+#  
+
+# from flask import Flask
+# from flask_sqlalchemy import SQLAlchemy    
+
 from sqlalchemy import Column, Integer, String
 from sqlalchemy import create_engine
 from database import Base

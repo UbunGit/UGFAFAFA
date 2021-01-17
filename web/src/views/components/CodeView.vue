@@ -5,9 +5,7 @@
         <van-button icon="envelop-o" text="保存" size="mini"  @click="onSave"/>
       </div>
     </van-cell>
-    <van-cell>
-      <textarea ref="mycode" class="codesql" v-model="code" style="height:300px; width:100%;"></textarea>
-    </van-cell>
+     <el-input  type="textarea" class="code-view" v-model="code"></el-input>
   </div>
 </template>
 
@@ -62,9 +60,5 @@ export default {
 </script>
 
 <style>
-.codesql {
-  font-size: 11pt;
-  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono,
-    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-}
+
 </style>
