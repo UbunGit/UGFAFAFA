@@ -123,7 +123,7 @@ def exit():
                argv = ""
             tactics = session.query(Tactics).filter_by(id=tacticid).first()
             dtactics = to_json(tactics,tactics.__class__)
-            pwd = os.getcwd()+dtactics["source"]
+            pwd = dtactics["source"]
             info = decode(subprocess.check_output([EXEC, pwd, argv], stderr=subprocess.STDOUT, timeout=55))
             print(info)
             path = '~/share/tem/tem.csv'

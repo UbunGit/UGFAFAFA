@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from trade import share
-from trade import trade
+
 import numpy
-import sys
+
 import logging
 import os, json
 import pandas as pd
 import numpy as np
+import sys
+sys.path.append("..") 
+
+from trade import share
+from trade import trade
  
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别  
 

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-from trade import trade
 import numpy
 import sys
+
+sys.path.append("..") 
+from trade import trade
+
 
 ##
 # 交易策略

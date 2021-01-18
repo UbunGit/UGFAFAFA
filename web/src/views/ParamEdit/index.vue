@@ -88,14 +88,13 @@ export default {
         this.$message("请选择策略");
         return;
       }
-      alert(JSON.stringify(this.data))
       this.data.id = this.paramId
       this.data.tacticsId = this.tacticsId
       
       inputupdate(this.data)
         .then((response) => {
           this.$message("成功");
-          alert(response);
+          this.$emit('saveSuccess',this.titleRight);
         })
         .catch((error) => {
           this.$message(JSON.stringify(error));

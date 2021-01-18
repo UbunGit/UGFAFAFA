@@ -58,7 +58,11 @@
     </el-card>
 
     <el-dialog :visible.sync="dialogVisible">
-      <param-edit :paramId="paramId" :tacticsId="tactic.id"></param-edit>
+      <param-edit
+        :paramId="paramId"
+        :tacticsId="tactic.id"
+        @saveSuccess="loadData"
+      ></param-edit>
     </el-dialog>
   </div>
 </template>
@@ -70,9 +74,7 @@ import ParamEdit from "@/views/ParamEdit";
 export default {
   components: { ParamEdit },
   created() {
-    tactic(this.$route.query.id).then((response) => {
-      this.tactic = response.data;
-    });
+    this.loadData();
   },
   data() {
     return {
@@ -88,22 +90,30 @@ export default {
     };
   },
   methods: {
+    loadData() {
+       this.dialogVisible = false
+      tactic(this.$route.query.id)
+        .then((response) => {
+          this.tactic = response.data;
+        })
+        .catch(() => {});
+    },
     onSubmit() {
       update(this.tactic)
         .then((response) => {
-          this.tactic = response.data;
+            this.$message("保存成功");
         })
         .catch((error) => {
           this.$message(JSON.stringify(error));
         });
     },
+ 
     handleCreateParam(row) {
       if (row != null) {
         this.paramId = this.tactic.params[row].id;
       } else {
         this.paramId = 0;
       }
-       alert(JSON.stringify("handleCreateParam"+this.paramId));
       this.dialogVisible = true;
     },
   },

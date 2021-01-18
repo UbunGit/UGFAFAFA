@@ -22,8 +22,9 @@
         </template>
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-            >编辑</el-button
-          >
+            >编辑</el-button>
+            <el-button size="mini" @click="handleExit(scope.$index, scope.row)"
+            >回测</el-button>
           <el-button
             size="mini"
             type="danger"
@@ -96,6 +97,10 @@ export default {
             message: '已取消删除'
           });          
         });
+    },
+    handleExit(row){
+         var trace = this.list[row]
+      this.$router.push({ path: "/tactic/exit?id=" + trace.id });
     }
   },
 };

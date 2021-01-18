@@ -57,6 +57,12 @@ export const constantRouterMap = [
         component: () => import('@/views/tactics/components/setting'),
         meta: { title: '交易策略设置', icon: 'el-icon-grape' }
       },
+      {
+        path: 'exit',
+        name: '策略回测',
+        component: () => import('@/views/tactics/exit'),
+        meta: { title: '交易策略设置', icon: 'el-icon-grape' }
+      },
     ]
   },
   {
