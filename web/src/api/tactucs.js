@@ -66,15 +66,14 @@ export function inputdelete(id) {
 }
 
 export function inputupdate(data) {
-    if(data.id){
-      
+    if(data.id != 0){
         return request({
             method: 'post',
             url: '/tacticsinput/update',
             data: data,
         });
     }else{
-     
+
         return request({
             method: 'post',
             url: '/tacticsinput/add',

@@ -6,12 +6,14 @@ from flask import request
 import pandas as pd
 
 sys.path.append("..") 
-from models import Tactics
+from models import Tactics,TacticsInput
 from database import session
-from .unit import get_post_data,Response_headers,to_json
+from .unit import get_post_data,Response_headers,to_json,decode
 
 EXEC = sys.executable
 tactics = Blueprint('tactics', __name__)
+
+spath = os.path.join(os.getcwd(),"code", "tactics")
 
 @tactics.route('/list' , methods=["GET"])
 def list():
@@ -36,12 +38,19 @@ def detailed():
                raise Exception("策略id不能为空")
             tactics = session.query(Tactics).filter_by(id=tacticid).first()
             dtactics = to_json(tactics,tactics.__class__)
-            pwd = os.getcwd()+dtactics["source"]
-            f = open(pwd,'rb')
-            dtactics["code"] = f.read().decode(encoding='UTF-8',errors='strict')
-            f.close()
+            pwd = dtactics["source"]
+            if os.path.exists(pwd):
+                f = open(pwd,'rb')
+                dtactics["code"] = f.read().decode(encoding='UTF-8',errors='strict')
+                f.close()
+            params = []
+            tacticsInputs = session.query(TacticsInput).filter_by(tacticsId=tacticid)
+            for data in tacticsInputs:
+                params.append(to_json(data,data.__class__)) 
+            dtactics["params"] = params
             return Response_headers(json.dumps({"code": 200, "data":dtactics}))
     except Exception as e:
+        logging.error(str(e))
         return json.dumps({"code": -1,"data":str(e)})
 
 
@@ -88,16 +97,15 @@ def update():
             if "doc" in postdata:
                 tactics.doc = postdata["doc"]
             if "code" in postdata:
-                path = '/code/tactics/'+postdata["id"]+'.py'
-                pwd = os.getcwd()+path
-                with open(pwd, 'w', encoding='utf-8') as f:
+                path = os.path.join(spath,'{0}.py'.format(postdata["id"])) 
+                with open(path, 'w', encoding='utf-8') as f:
                     f.write(postdata["code"])
                     tactics.source = path
 
             session.add(tactics)
             session.commit()
             
-            return unit.Response_headers(json.dumps({"code": 200, "data":"ok"}))
+            return Response_headers(json.dumps({"code": 200, "data":"ok"}))
     except Exception as e:
         logging.error(str(e))
         return json.dumps({"code": -1,"data":str(e)})
@@ -114,9 +122,9 @@ def exit():
             if None is argv:
                argv = ""
             tactics = session.query(Tactics).filter_by(id=tacticid).first()
-            dtactics = unit.to_json(tactics,tactics.__class__)
+            dtactics = to_json(tactics,tactics.__class__)
             pwd = os.getcwd()+dtactics["source"]
-            info = unit.decode(subprocess.check_output([EXEC, pwd, argv], stderr=subprocess.STDOUT, timeout=55))
+            info = decode(subprocess.check_output([EXEC, pwd, argv], stderr=subprocess.STDOUT, timeout=55))
             print(info)
             path = '~/share/tem/tem.csv'
             tem = pd.read_csv(path,dtype={"date":"string"}, index_col=0)

@@ -2,7 +2,7 @@ import sys
 sys.path.append("..") 
 
 from flask import Blueprint
-from .unit import *
+from .unit import get_post_data,Response_headers,to_json,decode
 import json,os
 from flask import request
 from models import TacticsInput
@@ -31,8 +31,8 @@ def detailed():
             if None is inputid:
                raise Exception("策略id不能为空")
             input = session.query(TacticsInput).filter_by(id=inputid).first()
-            inputs = unit.to_json(input,input.__class__)
-            return unit.Response_headers(json.dumps({"code": 200, "data":inputs}))
+            inputs = to_json(input,input.__class__)
+            return Response_headers(json.dumps({"code": 200, "data":inputs}))
     except Exception as e:
         return json.dumps({"code": -1,"data":str(e)})
 
@@ -57,7 +57,7 @@ def delete():
 def add():
     try:
         if request.method == 'POST':
-            postdata = unit.get_post_data(request)
+            postdata = get_post_data(request)
             input = TacticsInput()
             input.title = postdata["title"]
             input.name = postdata["name"]
@@ -66,7 +66,7 @@ def add():
             input.tacticsId = postdata["tacticsId"]
             session.add(input)
             session.commit()
-            return unit.Response_headers(json.dumps({"code": 200, "data":"ok"}))
+            return Response_headers(json.dumps({"code": 200, "data":"ok"}))
     except Exception as e:
         return json.dumps({"code": -1,"data":str(e)})
 
@@ -74,7 +74,7 @@ def add():
 def update():
     try:
         if request.method == 'POST':
-            postdata = unit.get_post_data(request)
+            postdata = get_post_data(request)
             if None is postdata["id"]:
                 raise Exception("策略入参id不能为空") 
             input = session.query(TacticsInput).filter_by(id=postdata["id"]).first()
@@ -93,6 +93,6 @@ def update():
             session.add(input)
             session.commit()
             
-            return unit.Response_headers(json.dumps({"code": 200, "data":"ok"}))
+            return Response_headers(json.dumps({"code": 200, "data":"ok"}))
     except Exception as e:
         return json.dumps({"code": -1,"data":str(e)})

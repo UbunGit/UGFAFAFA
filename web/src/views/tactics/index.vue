@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div slot="header" class="clearfix">
+    <span>交易策略</span>
+    <el-button style="float: right; padding: 3px 0" type="text">新增</el-button>
+  </div>
     <el-table
       :data="
         list.filter(
@@ -9,29 +13,28 @@
       "
       stripe
       style="width: 100%"
-      @row-click="onpush()"
     >
       <el-table-column prop="name" label="名称" width="180"> </el-table-column>
       <el-table-column prop="doc" label="描述"> </el-table-column>
       <el-table-column align="right">
-        <template slot="header" slot-scope="scope">
+        <template slot="header" slot-scope="scope" >
           <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
         </template>
         <template slot-scope="scope">
           <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
-            >Edit</el-button
+            >编辑</el-button
           >
           <el-button
             size="mini"
             type="danger"
             @click="handleDelete(scope.$index, scope.row)"
-            >Delete</el-button
+            >删除</el-button
           >
         </template>
       </el-table-column>
     </el-table>
     <div class="footer">
-      <el-pagination layout="prev, pager, next" :total="50"> </el-pagination>
+        <el-pagination layout="prev, pager, next" :total="list.length" > </el-pagination>
     </div>
   </div>
 </template>
@@ -70,23 +73,39 @@ export default {
         });
     },
     onRefresh() {
-      // 清空列表数据
-      // this.finished = false;
-      // // 重新加载数据
-      // // 将 loading 设置为 true，表示处于加载状态
-      // this.loading = true;
-      // this.onLoad();
+
     },
-    onpush(id) {
-      this.$router.push({ path: "/main?id=" + id });
+    handleEdit(row) {
+
+      var trace = this.list[row]
+      this.$router.push({ path: "/tactic/setting?id=" + trace.id });
     },
+    handleDelete(row){
+      this.$confirm('此操作将永久删除策略, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
+    }
   },
 };
 </script>
 
 <style scoped>
+
 .footer {
   margin: 10px;
 }
+
 </style>
 
