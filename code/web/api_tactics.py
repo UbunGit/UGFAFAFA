@@ -125,12 +125,12 @@ def exit():
             dtactics = to_json(tactics,tactics.__class__)
             pwd = dtactics["source"]
             info = decode(subprocess.check_output([EXEC, pwd, argv], stderr=subprocess.STDOUT, timeout=55))
-            print(info)
+   
             path = '~/share/tem/tem.csv'
             tem = pd.read_csv(path,dtype={"date":"string"}, index_col=0)
             outdata = tem.to_json(orient='records')
             result = json.loads(outdata,strict=False)
-            print(result)
+        
             return json.dumps({"code": 200,"data":result})
     except Exception as e:
         return json.dumps({"code": -1,"data":str(e)})

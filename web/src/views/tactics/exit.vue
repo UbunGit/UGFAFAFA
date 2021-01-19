@@ -13,6 +13,8 @@
         <el-button type="primary" @click="onSubmit">执行</el-button>
       </el-form-item>
     </el-form>
+
+    <div>{{JSON.stringify(result)}}</div>
   </div>
 </template>
 
@@ -27,7 +29,8 @@ export default {
       return{
           data:{
 
-          }
+          },
+          result:{}
       }
   },
   methods: {
@@ -40,9 +43,10 @@ export default {
         .catch(() => {});
     },
     onSubmit(){
+      this.result = "加载中..."
        exit(this.data)
         .then((response) => {
-          this.data = response.data;
+          this.result = response.data;
         })
         .catch((error) => {
           this.$message.error(JSON.stringify(error))

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-
 import numpy
 
 import logging
@@ -9,12 +8,16 @@ import os, json
 import pandas as pd
 import numpy as np
 import sys
-sys.path.append("..") 
+
+sys.path.append("./code") 
+
+# for item in sys.path:
+#     print(os.path.abspath(item))
 
 from trade import share
 from trade import trade
  
-logging.basicConfig(level=logging.NOTSET)  # 设置日志级别  
+# logging.basicConfig(level=logging.NOTSET)  # 设置日志级别  
 
 # 根据macd值买入优化v1.0.0 2020.7.14
 # 步骤：
