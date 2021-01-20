@@ -16,8 +16,10 @@ dpath = '/Users/admin/share/data/'
 ## 单个股票
 ###
 class share:
+
     cdata = None # 股票数据
-    code = None # 股票数据
+    code = None # 股票代码
+
     def __init__(self, code, begin= None, end= None):
         #根据股票编码初始化数据
         logging.info("share 根据股票编码初始化数据 code:%s 开始：%s 结束：%s",code,begin,end)
@@ -133,6 +135,7 @@ class share:
     def download(self):
 
         tsda = ts.pro_bar(ts_code=self.code, adj='qfq')
+        print(tsda.head())
         if(tsda is None):
             raise Exception("TUshare获取数据失败") 
         tsda = tsda.rename(columns={'trade_date':'date'})

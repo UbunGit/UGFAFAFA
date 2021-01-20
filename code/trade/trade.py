@@ -3,7 +3,6 @@ import logging
 import talib as tl
 import numpy
 
-# logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
 class trade:
 
@@ -28,6 +27,8 @@ class trade:
         self.balance -= t_money
         self.store += count
         logging.info("end buy 余额：%s 持仓%s",self.balance,self.store)
+
+        
   
     
     def sell(self, price, count=None):
