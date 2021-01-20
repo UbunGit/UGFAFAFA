@@ -22,8 +22,8 @@ if __name__ == '__main__':
     logging.info("根据macd值买入优化v1.0.0 2020.7.14")
     logging.info("args:%s",sys.argv)
     amount = '10000'
-    start = '20200907'
-    end = '20211207'
+    start = '20200707'
+    end = '20200907'
     tcode = '300022.SZ'
     if len(sys.argv)>1 and len(sys.argv[1])>0:
         indata = json.loads(sys.argv[1])
@@ -40,9 +40,7 @@ if __name__ == '__main__':
  
     share = share(tcode)
     data = share.appendmacd(share.cdata)
-    data = share.appendma(data,30)
-
-
+    data = share.appendma(data,5)
 
     data_fecha = data[data.date>=start]
     selectData =  data_fecha[data_fecha.date<=end]
@@ -58,8 +56,15 @@ if __name__ == '__main__':
         share = ShareData()
         share.__dict__.update(temdata.to_dict())
         inScale = 0.95-len(stores.online)*0.05
+        # if(share.ma5>share.open):
         stores.buy(share,inScale= inScale)
+        # else:
+        #     logging.debug("share.ma30>share.open")
+        # if(share.ma5<share.open):
         stores.seller(share)
+        # else:
+        #     logging.debug("share.ma30<share.open")
+       
     
 
     res = pd.DataFrame(map(lambda x:x.__dict__,stores.line), columns=('num', 'bdate', 'sdate', 'bprice', 'sprice', 'isSeller', 'inday', 'fee'), index=map(lambda x:x.id,stores.line))
