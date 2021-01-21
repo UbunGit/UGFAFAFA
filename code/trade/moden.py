@@ -29,3 +29,5 @@ class ShareData:
     DEA=None
     DIFF=None
     ma30=None
+    B=None
+    S=None

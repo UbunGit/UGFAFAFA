@@ -13,14 +13,19 @@
         <el-button type="primary" @click="onSubmit">执行</el-button>
       </el-form-item>
     </el-form>
-
-    <div>{{JSON.stringify(result)}}</div>
+    <div>
+      <div>bsecharts</div>
+      <BS-echarts v-model="result"></BS-echarts>
+    </div>
+    <!-- <div>{{JSON.stringify(result)}}</div> -->
   </div>
 </template>
 
 <script>
 import { detailed as tactic ,exit} from "@/api/tactucs";
+import  BSEcharts from "./components/BSEcharts";
 export default {
+  components: { BSEcharts },
   created() {
     this.loadData(this.$route.query.id)
     
@@ -30,7 +35,7 @@ export default {
           data:{
 
           },
-          result:{}
+          result:[]
       }
   },
   methods: {
@@ -43,7 +48,7 @@ export default {
         .catch(() => {});
     },
     onSubmit(){
-      this.result = "加载中..."
+ 
        exit(this.data)
         .then((response) => {
           this.result = response.data;
