@@ -12,9 +12,18 @@ import router from './router'
 import Vant from 'vant';
 import 'vant/lib/index.css';
 
+import VueSocketIO from 'vue-socket.io'
+
 Vue.use(Vant);
 Vue.use(VCharts)
 Vue.use(ElementUI);
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: 'http://127.0.0.1:8081/test',  //
+  options:{
+    path:"/test"
+  }
+}))
 
 Vue.config.productionTip = false
 

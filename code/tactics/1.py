@@ -16,8 +16,10 @@ from trade import trade
 from trade import Stores
 from trade import ShareData,StoreData
 
+def test():
+    print("test is run")
 
-def buy(share, stores,inScale=0.95):
+def buy(share, stores, inScale=0.95):
     price = share.close    
     if len(stores.online)>0:
         price = minPrice(stores)*inScale
@@ -28,7 +30,10 @@ def buy(share, stores,inScale=0.95):
     if price<share.close:
         logging.debug('''时间{} 买入失败 买入价{:.3f} 最低价{} 比例{} online{}'''.format(share.date,price,share.low,inScale,len(stores.online)))
         return
-
+    
+    if price<share.ma30:
+        logging.debug('''时间{} 买入失败 买入价{:.3f} MA30{} 比例{} online{}'''.format(share.date,price,share.ma30,inScale,len(stores.online)))
+        return
     if stores.balance > totalPrice:
         store = StoreData()
         store.id = len(stores.line)
@@ -73,7 +78,7 @@ if __name__ == '__main__':
     logging.info("args:%s",sys.argv)
     amount = '10000'
     start = '20200507'
-    end = '20210907'
+    end = '20200907'
     tcode = '300022.SZ'
     if len(sys.argv)>1 and len(sys.argv[1])>0:
         indata = json.loads(sys.argv[1])
@@ -107,6 +112,7 @@ if __name__ == '__main__':
         share = ShareData()
         share.__dict__.update(temdata.to_dict())
         inScale = 0.95-len(stores.online)*0.05
+
         buy(share,stores,inScale=inScale)
         seller(share,stores)
         shares.append(share)
