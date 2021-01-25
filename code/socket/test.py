@@ -22,10 +22,6 @@ class Trade:
             print(data)
 
 
-
-       
-
-
 if __name__ == '__main__':
      Trade().trade(
             "test", param={
