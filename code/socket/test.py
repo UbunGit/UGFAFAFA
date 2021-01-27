@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import sys
+import os,sys
 import logging
 import importlib
-
-sys.path.append("./code")
-
-
+from flask_socketio import SocketIO,send,emit 
+sys.path.append("..")
+print(sys.path)
 class Trade:
     shares = []
 

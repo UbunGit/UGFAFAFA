@@ -3,6 +3,8 @@
     <h1>websocket连接</h1>
      <el-button size="mini" @click="clickButton"
             >编辑</el-button>
+            <h1>消息列表</h1>
+      <div v-for="item in log_list" :key="item.date">  {{item}}  </div> 
   </div>
 </template>
 <script>
@@ -10,28 +12,29 @@ export default {
   data() {
     return {
       id: "",
+      msg: "",  
+      log_list:[] 
     };
   },
   sockets: {
     connect: function () {
       console.log("socket connected");
     },
-    customEmit: function (data) {
-      console.log(
-        'this method was fired by the socket server. eg: io.emit("customEmit", data)'
-      );
-    },
+     message: function(val){ 
+
+      console.log(new Date()+'返回:'+val);  
+      this.log_list.push(val);  
+    } 
   },
   methods: {
     clickButton: function () {
-      console.log("clickButton")
-      this.$socket.emit("connect", "eeee");
-      this.$socket.emit("message", "3333");
+      console.log("message")
+      this.log_list = []
+      this.$socket.emit("message", "test");
     },
   },
   mounted() {
-    // this.$socket.emit("connect", "1234567890");
-    this.$socket.emit('message',"eeee"); //在这里触发connect事件
+ 
   },
 };
 </script>

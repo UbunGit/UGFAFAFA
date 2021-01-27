@@ -20,7 +20,8 @@ class Stores:
         self.count = count 
 
     def buy(self, store):
-
+        store["id"] = self.next()
+        
         self.balance = self.balance - store.get('num')*store.get("bprice")
         self.online.append(store)
         self.assets = self.assets+store.get('num')

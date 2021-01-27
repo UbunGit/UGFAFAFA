@@ -19,7 +19,7 @@ Vue.use(VCharts)
 Vue.use(ElementUI);
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://10.10.10.136:5000',
+  connection: 'http://127.0.0.1:8081',
   // options: { path: "/" }
 }))
 

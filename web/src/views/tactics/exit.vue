@@ -17,12 +17,10 @@
         <el-button type="primary" @click="onSubmit">执行</el-button>
       </el-form-item>
     </el-form>
-    <div v-loading="loading">
-      <div>bsecharts</div>
-      <BS-echarts v-model="result" ></BS-echarts>
-    </div>
-    <!-- <div>{{JSON.stringify(result)}}</div> -->
-  </div>
+
+     <BS-echarts v-model="result" :points="points"></BS-echarts>
+
+ </div>
 </template>
 
 <script>
@@ -38,7 +36,19 @@ export default {
       loading: false,
       data: {},
       result: [],
+      points:[]
     };
+  },
+  sockets: {
+    connect: function () {
+      console.log("socket connected");
+    },
+    message: function (val) {
+    
+      this.result.push(val);
+      this.getbsPoint(val)
+      
+    },
   },
   methods: {
     loadData(tacticId) {
@@ -49,17 +59,41 @@ export default {
         .catch(() => {});
     },
     onSubmit() {
-      this.loading = true
-      exit(this.data)
-        .then((response) => {
-          this.result = response.data;
-          this.loading = false
-        })
-        .catch((error) => {
-          this.loading = false
-          this.$message.error(JSON.stringify(error));
-        });
+      this.result = [];
+      this.$socket.emit("message", "test");
     },
+
+    getbsPoint(val) {
+
+        var share = val;
+
+        if (share.B.isBuy == true) {
+          this.points.push({
+            name: "B",
+            coord: [share.date, share.B.data.bprice],
+            value: "B",
+            itemStyle: {
+              color: "rgb(255,150,200)",
+              fontSize: "4",
+            },
+          });
+        }
+
+        if (share.S.isSeller == true) {
+     
+          this.points.push({
+            name: "S",
+            coord: [share.date, share.high],
+            value: "S",
+            itemStyle: {
+              color: "rgb(50,205,200)",
+              fontSize: "4px",
+            },
+          });
+        }
+     
+    },
+    
   },
 };
 </script>
