@@ -94,14 +94,13 @@ export default {
       inputupdate(this.data)
         .then((response) => {
           this.$message("成功");
-          this.$emit('saveSuccess',this.titleRight);
         })
         .catch((error) => {
           this.$message(JSON.stringify(error));
         });
     },
     onselect(value) {
-      this.inputdata.type = value;
+      this.data.type = value;
       this.showPicker = false;
     },
   },

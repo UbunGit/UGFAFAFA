@@ -19,13 +19,18 @@ class TError(BaseException):
         self.msg = arg
 
 
-# stores = None
-inScale = 0.90
-outScale = 1.20
-money = 10000
+stores = None
+inScale = 0.95
+outScale = 1.10
+money = 20000
 
-def setup(param):
-
+def setup(param={
+            'code': "300022.SZ",
+            'begin': '20200107',
+            'end': '20210607',
+            'money': 20000
+            }):
+    print(param)
     global code
     global begin 
     global end
@@ -34,39 +39,46 @@ def setup(param):
     global inScale
     global outScale
     global stores
-    stores = Stores()
-    stores.online = []
-
+    
+    money = 20000
     code = param.get('code')
     begin = param.get('begin')
     end = param.get('end')
 
     if param.__contains__("money"):
-        money = param.get('money')
+        money = float(param.get('money'))
     if param.__contains__("inScale"):
         inScale = param.get('inScale')
     if param.__contains__("outScale"):
         outScale = param.get('outScale')
 
+    stores = Stores(balance = money)
     spd = share(code)
+    if spd.cdata is None:
+        return []
     list = spd.appendma(data=spd.cdata,ma=5)
+    list = spd.appendma(data=list,ma=10)
+    list = spd.appendma(data=list,ma=20)
+    
     if begin != None:
         list = list[list.date>=begin]
     if end != None:
         list = list[list.date<=end]
-    stores.balance = money
+    
     shares = json.loads(list.to_json(orient='records'))
 
     logging.info(
         '''
+        setup
         余额：{}
         持仓：{}
         持仓记录：{}
-        初始化完成
+        代码：{}
         ''' .format(
             stores.balance,
             stores.assets,
-            stores.online
+            stores.online,
+            code
         )
     )
     return shares
@@ -80,8 +92,8 @@ def buy(share):
         if price<share.get('close'):
             raise TError('''买入价{:.3f}小于收盘价{:.3f}'''.format(price,share.get('close')))
 
-        if price<share.get('ma5'):
-            raise TError('''买入价{:.3f}小于ma5 {:.3f}'''.format(price,share.get('ma5')))
+        if share.get('ma10')>share.get('ma5'):
+            raise TError('''ma10{:.3f}大于ma5 {:.3f}'''.format(share.get('ma10'),share.get('ma5')))
 
         bcount = buyCount(price, 2000)
         totalPrice =  price*bcount
@@ -101,8 +113,7 @@ def buy(share):
             "msg":err.msg
         }
     else:
-        # share["blance"]= stores.balance
-        # share["assets"] = stores.assets
+
         share["B"]={
             "isBuy":True,
             "data":store
@@ -116,6 +127,8 @@ def seller(share):
     try:
         if len(stores.online) == 0:
             raise TError('''持仓为空''')
+        if share.get('ma10')<=share.get('ma5'):
+            raise TError('''ma10 {:.3f}小于ma5 {:.3f}'''.format(share.get('ma10'),share.get('ma5')))
         sellers = []
 
         for item in stores.online:
@@ -124,14 +137,13 @@ def seller(share):
       
             if sellerPrice < share.get('high'):
                 item["sdate"] = share.get("date")
-                item["sprice"] = sellerPrice
+                item["sprice"] = max([sellerPrice,share.get('close')])
                 item["isSeller"] = True
                 item["fee"] = 10.00
                 stores.seller(item)
                 sellers.append(item)
         if len(sellers)==0:
             raise TError('''没有符合条件的卖出单''')
-     
 
     except TError as err:
         share["S"]={
@@ -157,22 +169,16 @@ def summary(share):
     return share
 
 if __name__ == '__main__':
-    param={
-            'code': "300022.SZ",
-            'begin': '20200107',
-            'end': '20210607',
-            'money': 20000
-            }
-    shares = setup(param)
+    
+    shares = setup({'code': '601138.sh', 'begin': '20200107', 'end': '20210607', 'money': '20000'})
     for item in shares:
- 
-        
+
         data = seller(item)
         data = buy(data)
         data = summary(data)
-        # print(data)
         print('----------------') 
-
+    # res = pd.DataFrame(map(lambda x:x.__dict__,stores.line), columns=('num', 'bdate', 'sdate', 'bprice', 'sprice', 'isSeller', 'inday', 'fee'), index=map(lambda x:x.id,stores.line))
+    print(stores.line)
 
 
 

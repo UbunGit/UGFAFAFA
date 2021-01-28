@@ -25,7 +25,7 @@ class share:
         logging.info("share 根据股票编码初始化数据 code:%s 开始：%s 结束：%s",code,begin,end)
         self.code = code
         tsda = self.load()
-        if(tsda is None):
+        if(tsda is None ):
             logging.error("share 初始化失败，为获取到数据")
             return
         tsda = tsda.sort_values(by='date')
@@ -39,6 +39,8 @@ class share:
 
     def appendmacd(self,data):
         logging.info("MACD BEGIN")
+        if(data == None):
+            return data
         closes = numpy.array(data['close'])
         diff, dea, macd= tl.MACD(closes,
                             fastperiod=12, slowperiod=26, signalperiod=9 )
@@ -50,7 +52,7 @@ class share:
         return data
 
     def appendma(self,data, ma):
-
+    
         logging.info("ma %s BEGIN",ma)
         closes = numpy.array(data['close'])
         madata = tl.MA(closes,timeperiod=ma)
@@ -62,6 +64,7 @@ class share:
    #计算kd指标
     def appendkdj(self, data, fastk_period=9, slowk_period=3, slowd_period=3):
         logging.info("KDJ BEGIN")
+    
         indicators={}
     
         closes = numpy.array(data['close'])
@@ -75,7 +78,7 @@ class share:
         return data
 
     def appendreal(self, data):
-
+   
         try:
             macd_r = tl.LINEARREG_ANGLE(data['MACD'], timeperiod=3)
             data['MACD_R']= macd_r
@@ -135,9 +138,10 @@ class share:
     def download(self):
 
         tsda = ts.pro_bar(ts_code=self.code, adj='qfq')
-        print(tsda.head())
+        
         if(tsda is None):
-            raise Exception("TUshare获取数据失败") 
+            return None
+        print(tsda.head())
         tsda = tsda.rename(columns={'trade_date':'date'})
         tsda.sort_index(inplace=True)
         self.save(tsda)

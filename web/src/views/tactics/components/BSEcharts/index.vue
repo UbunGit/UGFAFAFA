@@ -11,6 +11,14 @@
           :not-set-unchange="['dataZoom']"
         >
         </ve-candle>
+
+        <ve-line
+          :data="amountData"
+          :settings="amountSettings"
+          :data-zoom="dataZoom"
+          :events="chartEvents"
+          height="300px"
+        ></ve-line>
       </el-col>
       <el-col :span="8">
         <div v-if="selectDara">
@@ -35,21 +43,41 @@
             </span>
             <span class="span-data" v-if="selectDara.S.isSeller == true">
               <i class="el-icon-success">卖 出</i>
-              <p v-for="item in selectDara.S.data" :key="item.id">
-                {{ item }}
-              </p>
+              <el-table :data="selectDara.S.data" size="mini">
+                <el-table-column
+                  prop="id"
+                  label="id"
+                  width="50"
+                ></el-table-column>
+                <el-table-column
+                  prop="num"
+                  label="数量"
+                  width="50"
+                ></el-table-column>
+                <el-table-column prop="sprice" label="卖出价格" width="80">
+                </el-table-column>
+              </el-table>
             </span>
           </div>
 
-          <el-table :data="selectDara.online"  size="mini">
+          <i>剩余持仓</i>
+          <el-table :data="selectDara.online" size="mini">
             <el-table-column prop="id" label="id" width="50"></el-table-column>
-            <el-table-column prop="num" label="数量" width="50"></el-table-column>
-            <el-table-column prop="bdate" label="购买日期" width="80"> </el-table-column>
-            <el-table-column prop="bprice" label="购买价格" width="60"> </el-table-column>
-            <el-table-column prop="inday" label="持仓天数" width="60"> </el-table-column>
+            <el-table-column
+              prop="num"
+              label="数量"
+              width="50"
+            ></el-table-column>
+            <el-table-column prop="bdate" label="购买日期" width="80">
+            </el-table-column>
+            <el-table-column prop="bprice" label="购买价格" width="60">
+            </el-table-column>
+            <el-table-column prop="inday" label="持仓天数" width="60">
+            </el-table-column>
           </el-table>
 
           <div>
+            <i>结余</i>
             <p v-if="selectDara.blance != undefined">
               余额：{{ selectDara.blance.toFixed(2) }}
             </p>
@@ -68,12 +96,18 @@
 export default {
   props: {
     value: null,
-    points:null
+    points: null,
   },
   computed: {
     chartData: function () {
       return {
         columns: ["date", "open", "close", "low", "high", "vol"],
+        rows: this.value,
+      };
+    },
+    amountData: function () {
+      return {
+        columns: ["date", "blance", "summary"],
         rows: this.value,
       };
     },
@@ -93,8 +127,7 @@ export default {
             return param.name + "<br>" + (param.data.coord || "");
           },
         },
-        data:this.points
-
+        data: this.points,
       };
     },
   },
@@ -106,6 +139,9 @@ export default {
         self.selectDara = self.chartData.rows[e.dataIndex];
         console.log(self.selectDara);
       },
+      mouseup: function (e) {
+       
+      }
     };
     this.tooltip = {
       trigger: "axis",
@@ -124,6 +160,14 @@ export default {
         downColor: "#00da3c",
         upColor: "#ec0000",
       },
+      amountSettings: {
+        axisSite: { right: ["summary"] },
+        yAxisName: ["总资产", "持股数"],
+        labelMap: {
+          summary: "总资产",
+          blance: "余额",
+        },
+      },
       dataZoom: [
         {
           type: "slider",
@@ -135,9 +179,7 @@ export default {
       ],
     };
   },
-  methods: {
-  
-  },
+  methods: {},
 };
 </script>
 

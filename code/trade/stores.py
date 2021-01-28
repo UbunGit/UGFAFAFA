@@ -4,28 +4,34 @@
 import sys
 import logging
 
-
-
 class Stores:
-    # 持仓
-    balance = 0.00  # 余额
-    assets = 0   #持股数量
-    online = []
-    nextId = 0
 
-    def __init__(self, money=2000, buyType=0, count=1):
-     
-        self.buyType = buyType 
-        self.money = money
-        self.count = count 
+    def __init__(self, balance=2000):
+
+        self.balance = balance
+        self.assets = 0   #持股数量
+        self.nextId = 0
+        self.online = []
+        self.line = []
+        logging.info(
+            '''
+            初始化Stores
+            余额balance：{}
+            持股assets：{}
+            持仓online：{}
+            记录line：{}
+            '''
+            .format(self.balance,self.assets,self.online,self.line)
+        )
+        
 
     def buy(self, store):
         store["id"] = self.next()
         
         self.balance = self.balance - store.get('num')*store.get("bprice")
         self.online.append(store)
+        self.line.append(store)
         self.assets = self.assets+store.get('num')
-
 
     def seller(self,store):
 

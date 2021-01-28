@@ -20,24 +20,21 @@ socketio = SocketIO(app,cors_allowed_origins='*')
 
 @socketio.on('message')  
 def handle_message(message):
-    print('message0') 
-    message = urllib.parse.unquote(message)
-    mod = importlib.import_module("tactics.{}".format(message))
-    param={
-            'code': "300022.SZ",
-            'begin': '20200107',
-            'end': '20210607',
-            'money': 20000
-            }
-    shares = mod.setup(param)
+    print(message) 
+    mod = importlib.import_module("tactics.{}".format(message.get("id")))
+    shares = mod.setup(param = message.get("param"))
+    if shares == []:
+        emit('error', "获取数据失败")
+        print("error 获取数据失败")
+        return
     for item in shares:
-     
         data = mod.seller(item)
         data = mod.buy(data)
         data = mod.summary(data)
         emit('message', data)
         print(data) 
         socketio.sleep(0.1)
+    emit('finesh', "完成")
         
     
     
