@@ -27,17 +27,18 @@ def handle_message(message):
         emit('error', "获取数据失败")
         print("error 获取数据失败")
         return
+    last = None
     for item in shares:
         data = mod.seller(item)
         data = mod.buy(data)
         data = mod.summary(data)
+        last = data
         emit('message', data)
-        print(data) 
         socketio.sleep(0.1)
-    emit('finesh', "完成")
         
-    
-    
+    finesh = mod.finesh()
+    emit('finesh',finesh)
+    logging.debug('finesh {}'.format(finesh))
 
 @socketio.on('connect', namespace=None)  
 def test_connect():  

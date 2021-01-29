@@ -11,12 +11,7 @@ export const constantRouterMap = [
     component: Layout,
     meta: { title: '自选股', icon: 'el-icon-grape' },
     children: [
-      {
-        path: 'tactics',
-        name: '策略',
-        component: () => import('@/views/tactics'),
-        meta: { title: '策略', icon: 'el-icon-grape' }
-      },
+
       {
         path: 'main',
         name: '我的策略',
@@ -31,17 +26,12 @@ export const constantRouterMap = [
         component: () => import('@/views/choose'),
         meta: { title: '今日推荐', icon: 'el-icon-grape' }
       },
-      {
-        path: 'test',
-        name: 'test',
-        component: () => import('@/views/test'),
-        meta: { title: '测试', icon: 'el-icon-grape' }
-      },
+  
     ]
   },
   {
     path: '/tactic',
-    name: 'main',
+    name: 'tactic',
     component: Layout,
     meta: { title: '交易策略', icon: 'el-icon-grape' },
     children: [
@@ -55,25 +45,27 @@ export const constantRouterMap = [
         path: 'setting',
         name: '修改/新增交易策略',
         component: () => import('@/views/tactics/components/setting'),
-        meta: { title: '交易策略设置', icon: 'el-icon-grape' }
+        meta: { title: '修改/新增交易策略', icon: 'el-icon-grape' }
       },
       {
         path: 'exit',
         name: '策略回测',
         component: () => import('@/views/tactics/exit'),
-        meta: { title: '交易策略设置', icon: 'el-icon-grape' }
+        meta: { title: '策略回测', icon: 'el-icon-grape' },
+        hidden:true
+
       },
     ]
   },
   {
     path: '/test',
-    name: 'main',
+    name: 'test',
     component: Layout,
     meta: { title: '测试', icon: 'el-icon-grape' },
     children: [
       {
-        path: 'test',
-        name: 'test',
+        path: '/test',
+        name: 'test1',
         component: () => import('@/views/test'),
         meta: { title: '测试', icon: 'el-icon-grape' }
       },

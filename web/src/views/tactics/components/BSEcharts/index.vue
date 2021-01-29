@@ -9,6 +9,7 @@
           :mark-point="markPoint"
           :data-zoom="dataZoom"
           :not-set-unchange="['dataZoom']"
+          :tooltip="tooltip"
         >
         </ve-candle>
 
@@ -17,9 +18,11 @@
           :settings="amountSettings"
           :data-zoom="dataZoom"
           :events="chartEvents"
+          :tooltip="tooltip"
           height="300px"
         ></ve-line>
       </el-col>
+      
       <el-col :span="8">
         <div v-if="selectDara">
           <p>{{ selectDara.date }}</p>
@@ -107,6 +110,7 @@ export default {
     },
     amountData: function () {
       return {
+        scale:[true, false],
         columns: ["date", "blance", "summary"],
         rows: this.value,
       };
@@ -136,7 +140,8 @@ export default {
     var self = this;
     this.chartEvents = {
       click: function (e) {
-        self.selectDara = self.chartData.rows[e.dataIndex];
+        var selectdata = self.chartData.rows[e.dataIndex]
+        self.selectDara = selectdata;
         console.log(self.selectDara);
       },
       mouseup: function (e) {
@@ -146,7 +151,9 @@ export default {
     this.tooltip = {
       trigger: "axis",
       position: function (point, params, dom, rect, size) {
-        self.selectDara = self.chartData.rows[params[0].dataIndex];
+        var selectdata = self.chartData.rows[params[0].dataIndex]
+        self.selectDara = selectdata;
+        self.emit_do(selectdata)
         return;
       },
     };
@@ -161,8 +168,6 @@ export default {
         upColor: "#ec0000",
       },
       amountSettings: {
-        axisSite: { right: ["summary"] },
-        yAxisName: ["总资产", "持股数"],
         labelMap: {
           summary: "总资产",
           blance: "余额",
@@ -179,7 +184,11 @@ export default {
       ],
     };
   },
-  methods: {},
+  methods: {
+    emit_do(val){
+      this.$emit("select", val);
+    }
+  },
 };
 </script>
 

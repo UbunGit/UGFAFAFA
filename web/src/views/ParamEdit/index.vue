@@ -94,6 +94,7 @@ export default {
       inputupdate(this.data)
         .then((response) => {
           this.$message("成功");
+          this.$emit("saveSuccess")
         })
         .catch((error) => {
           this.$message(JSON.stringify(error));

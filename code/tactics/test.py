@@ -48,9 +48,9 @@ def setup(param={
     if param.__contains__("money"):
         money = float(param.get('money'))
     if param.__contains__("inScale"):
-        inScale = param.get('inScale')
+        inScale = float(param.get('inScale'))
     if param.__contains__("outScale"):
-        outScale = param.get('outScale')
+        outScale = float(param.get('outScale'))
 
     stores = Stores(balance = money)
     spd = share(code)
@@ -112,15 +112,19 @@ def buy(share):
             "isBuy":False,
             "msg":err.msg
         }
+    except:
+        share["B"]={
+            "isBuy":False,
+            "msg":sys.exc_info()[0]
+        }
     else:
-
         share["B"]={
             "isBuy":True,
             "data":store
         }
-        print("+++++++++{}".format(store["id"]) )
-        
+
     finally:
+        print("buy--:{}".format(share))
         return share
 
 def seller(share):
@@ -159,6 +163,7 @@ def seller(share):
         }
         
     finally:
+        print("seller--:{}".format(share))
         return share
 
 def summary(share):
@@ -170,13 +175,13 @@ def summary(share):
 
 if __name__ == '__main__':
     
-    shares = setup({'code': '601138.sh', 'begin': '20200107', 'end': '20210607', 'money': '20000'})
+    shares = setup({'code': '300022.sz', 'begin': '20210101', 'end': '20210607', 'money': '20000', 'inScale': '0.98', 'outScale': '1.10'})
     for item in shares:
 
         data = seller(item)
         data = buy(data)
         data = summary(data)
-        print('----------------') 
+        print(data) 
     # res = pd.DataFrame(map(lambda x:x.__dict__,stores.line), columns=('num', 'bdate', 'sdate', 'bprice', 'sprice', 'isSeller', 'inday', 'fee'), index=map(lambda x:x.id,stores.line))
     print(stores.line)
 

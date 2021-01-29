@@ -102,6 +102,8 @@ export default {
       update(this.tactic)
         .then((response) => {
             this.$message("保存成功");
+            this.dialogVisible = true;
+            this.loadData()
         })
         .catch((error) => {
           this.$message(JSON.stringify(error));
@@ -116,6 +118,9 @@ export default {
       }
       this.dialogVisible = true;
     },
+    handleDelete(row){
+
+    }
   },
 };
 </script>

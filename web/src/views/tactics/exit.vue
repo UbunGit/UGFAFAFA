@@ -4,14 +4,13 @@
       <span>回测分析</span>
     </div>
 
-    <el-form :model="data" label-width="80px" class="form-param" >
+    <el-form :model="data" label-width="80px" class="form-param" size="mini">
 
       <el-row :gutter="20">
-        <el-col :span="6" >
+        <el-col :span="10" v-for="item in data.params"
+            :key="item.id">
           <el-form-item
             :label="item.name"
-            v-for="item in data.params"
-            :key="item.id"
           >
             <el-date-picker
               v-if="item.type == 'date'"
@@ -33,15 +32,53 @@
         </el-col>
       </el-row>
 
-  
-</el-row>
-
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">执行</el-button>
+        <el-button type="primary" @click="onSubmit" :loading="loading">执行</el-button>
       </el-form-item>
     </el-form>
+  <div>
 
-    <BS-echarts v-model="result" :points="points"></BS-echarts>
+    <!-- BS K线图 -->
+    <BS-echarts v-model="result" :points="points" @select="emit_dayinfo"></BS-echarts>
+   
+    <el-tabs tab-position="top">
+    <el-tab-pane label="每日详情">
+      {{dayinfo}}
+    </el-tab-pane>
+
+    <el-tab-pane label="BS 记录">
+      <el-table :data="outcome.line" size="mini">
+            <el-table-column prop="id" label="id" width="50"></el-table-column>
+            <el-table-column
+              prop="num"
+              label="数量"
+              width="50"
+            ></el-table-column>
+            <el-table-column prop="bdate" label="购买日期" >
+            </el-table-column>
+            <el-table-column prop="bprice" label="购买价格" >
+            </el-table-column>
+            <el-table-column prop="inday" label="持仓天数" >
+            </el-table-column>
+            <el-table-column prop="sprice" label="卖出价格" >
+            </el-table-column>
+            <el-table-column prop="sdate" label="卖出时间">
+            </el-table-column>
+            <el-table-column prop="fee" label="手续费">
+            </el-table-column>
+          </el-table>
+      
+    </el-tab-pane>
+
+    <el-tab-pane label="BS K线图">
+      {{outcome}}
+    </el-tab-pane>
+
+  </el-tabs>
+  </div>
+
+ 
+    
   </div>
 </template>
 
@@ -59,6 +96,12 @@ export default {
       data: {},
       result: [],
       points: [],
+      dayinfo:{},
+      outcome:{
+        last:{},
+        line:[]
+      }, //最终结果
+
     };
   },
   sockets: {
@@ -66,15 +109,19 @@ export default {
       console.log("socket connected");
     },
     message: function (val) {
+      this.outcome.last=val
       this.result.push(val);
       this.getbsPoint(val);
     },
     error: function (val) {
-      this.$message.error(val)
+      this.$message.error(val);
+      this.loading = false
     },
     finesh: function (val) {
-      this.$message.error(val)
-    }
+      this.$message.info("结束");
+      this.outcome.line=val["line"]
+      this.loading = false
+    },
   },
   methods: {
     loadData(tacticId) {
@@ -85,20 +132,23 @@ export default {
         .catch(() => {});
     },
     onSubmit() {
+      this.loading = true
       this.result = [];
       this.points = [];
-      var data = {}
+      var data = {};
       var param = {};
       for (var index in this.data.params) {
         var item = this.data.params[index];
         param[item.title] = item.defual;
       }
-      data["id"]="test"
-      data["param"]=param
-      alert(JSON.stringify(data))
+      data["id"] = this.data.id;
+      data["param"] = param;
       this.$socket.emit("message", data);
     },
+    emit_dayinfo(val){
 
+      this.dayinfo= val
+    },
     getbsPoint(val) {
       var share = val;
 
@@ -131,13 +181,10 @@ export default {
 };
 </script>
 <style>
-
-
-  .form-param {
-    border-radius: 4px;
-    padding: 10px 0;
-    margin-bottom: 8px;
-    background: #f6f7f8;
-  }
- 
+.form-param {
+  border-radius: 4px;
+  padding: 10px 0;
+  margin-bottom: 8px;
+  background: #f6f7f8;
+}
 </style>

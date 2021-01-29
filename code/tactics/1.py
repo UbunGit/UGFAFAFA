@@ -1,137 +1,188 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-import numpy
-
-import logging
-import os, json
-import pandas as pd
-import numpy as np
 import sys
-
+import os, json, logging
 sys.path.append("./code") 
 
+import pandas as pd
+import numpy as np
+
 from trade import share
-from trade import trade
 from trade import Stores
 from trade import ShareData,StoreData
 
-def test():
-    print("test is run")
-
-def buy(share, stores, inScale=0.95):
-    price = share.close    
-    if len(stores.online)>0:
-        price = minPrice(stores)*inScale
-        price = min([share.close,price])
-    bcount = buyCount(price, stores.money)
-    totalPrice =  price*bcount
-
-    if price<share.close:
-        logging.debug('''时间{} 买入失败 买入价{:.3f} 最低价{} 比例{} online{}'''.format(share.date,price,share.low,inScale,len(stores.online)))
-        return
-    
-    if price<share.ma30:
-        logging.debug('''时间{} 买入失败 买入价{:.3f} MA30{} 比例{} online{}'''.format(share.date,price,share.ma30,inScale,len(stores.online)))
-        return
-    if stores.balance > totalPrice:
-        store = StoreData()
-        store.id = len(stores.line)
-        store.num = bcount
-        store.bdate = share.date
-        store.bprice = price
-        store.inday = 0
-        stores.buy(store)
-        share.B = store.bprice
-        
-    else:
-        logging.debug("余额不足:{}".format(stores.balance))
-
-def seller(share,stores,fee=10.00,outScale=1.10):
-    for item in stores.online:
-        item.inday = item.inday+1
-        sellerPrice = item.bprice * outScale
-        if sellerPrice < share.high:
-            item.sdate = share.date
-            item.sprice = sellerPrice
-            item.isSeller = True
-            item.fee = fee
-            stores.seller(item)
-            share.S = item.sprice
-            logging.debug("卖出 id{} 价格：{}".format(item.id,item.sprice))
-            
-        else:
-            logging.debug("卖出失败 id{}".format(item.id))
-
 def buyCount(price, money):
-        return int(money/(price*100))*100
+    return int(money/(price*100))*100
 
-def minPrice(stores):
-        list = []
+class TError(BaseException):
+    def __init__(self, arg):
+        self.msg = arg
+
+
+stores = None
+inScale = 0.95
+outScale = 1.10
+money = 20000
+
+def setup(param={
+            'code': "300022.SZ",
+            'begin': '20200107',
+            'end': '20210607',
+            'money': 20000
+            }):
+    print(param)
+    global code
+    global begin 
+    global end
+    global money
+    global inScale
+    global inScale
+    global outScale
+    global stores
+    
+    money = 20000
+    code = param.get('code')
+    begin = param.get('begin')
+    end = param.get('end')
+
+    if param.__contains__("money"):
+        money = float(param.get('money'))
+    if param.__contains__("inScale"):
+        inScale = float(param.get('inScale'))
+    if param.__contains__("outScale"):
+        outScale = float(param.get('outScale'))
+
+    stores = Stores(balance = money)
+    spd = share(code)
+    if spd.cdata is None:
+        return []
+    list = spd.appendma(data=spd.cdata,ma=5)
+    list = spd.appendma(data=list,ma=10)
+    list = spd.appendma(data=list,ma=20)
+    
+    if begin != None:
+        list = list[list.date>=begin]
+    if end != None:
+        list = list[list.date<=end]
+    
+    shares = json.loads(list.to_json(orient='records'))
+
+    logging.info(
+        '''
+        setup
+        余额：{}
+        持仓：{}
+        持仓记录：{}
+        代码：{}
+        ''' .format(
+            stores.balance,
+            stores.assets,
+            stores.online,
+            code
+        )
+    )
+    return shares
+
+def buy(share):
+    try:
+        price = share.get('close')
+        if len(stores.online)>0:
+            scalePrice = stores.minPrice()*inScale
+            price = min([scalePrice,price])
+        if price<share.get('close'):
+            raise TError('''买入价{:.3f}小于收盘价{:.3f}'''.format(price,share.get('close')))
+
+        if share.get('ma10')>share.get('ma5'):
+            raise TError('''ma10{:.3f}大于ma5 {:.3f}'''.format(share.get('ma10'),share.get('ma5')))
+
+        bcount = buyCount(price, 2000)
+        totalPrice =  price*bcount
+        if stores.balance < totalPrice:
+            raise TError('''余额不足''')
+        store = {
+            "num":bcount,
+            "bdate":share.get("date"),
+            "bprice":price,
+            "inday":0
+        }
+        stores.buy(store)
+
+    except TError as err:
+        share["B"]={
+            "isBuy":False,
+            "msg":err.msg
+        }
+    else:
+
+        share["B"]={
+            "isBuy":True,
+            "data":store
+        }
+        print("+++++++++{}".format(store["id"]) )
+        
+    finally:
+        return share
+
+def seller(share):
+    try:
+        if len(stores.online) == 0:
+            raise TError('''持仓为空''')
+        if share.get('ma10')<=share.get('ma5'):
+            raise TError('''ma10 {:.3f}小于ma5 {:.3f}'''.format(share.get('ma10'),share.get('ma5')))
+        sellers = []
+
         for item in stores.online:
-            list.append(item.bprice)
-        return min(list)
+            item["inday"]= item.get("inday") +1
+            sellerPrice = item.get("bprice") * outScale
+      
+            if sellerPrice < share.get('high'):
+                item["sdate"] = share.get("date")
+                item["sprice"] = max([sellerPrice,share.get('close')])
+                item["isSeller"] = True
+                item["fee"] = 10.00
+                stores.seller(item)
+                sellers.append(item)
+        if len(sellers)==0:
+            raise TError('''没有符合条件的卖出单''')
+
+    except TError as err:
+        share["S"]={
+            "isSeller":False,
+            "msg":err.msg
+        }
+  
+    else:
+        
+        share["S"]={
+            "isSeller":True,
+            "data":sellers
+        }
+        
+    finally:
+        return share
+
+def summary(share):
+    share["blance"]= stores.balance
+    share["assets"] = stores.assets
+    share["summary"] = (stores.assets*share.get("close")) + stores.balance
+    share["online"]= stores.online
+    return share
+
+def finesh():
+    return {
+       "line":stores.line 
+    }
 
 if __name__ == '__main__':
-
-    logging.info("根据macd值买入优化v1.0.0 2020.7.14")
-    logging.info("args:%s",sys.argv)
-    amount = '10000'
-    start = '20200507'
-    end = '20200907'
-    tcode = '300022.SZ'
-    if len(sys.argv)>1 and len(sys.argv[1])>0:
-        indata = json.loads(sys.argv[1])
-        if "start" in indata:
-            start=indata["start"]
-        if "end" in indata:
-            end=indata["end"]
-        if "amount" in indata:
-            amount=indata["amount"]
-        if "tcode" in indata:
-            tcode=indata["tcode"]
-        
-    logging.info("begin tcode:%s amount:%s start:%s end:%s",tcode,amount,start,end)
- 
-    share = share(tcode)
-    data = share.appendmacd(share.cdata)
-    data = share.appendma(data,30)
-
-    data_fecha = data[data.date>=start]
-    selectData =  data_fecha[data_fecha.date<=end]
-    logging.info("selectData:\n%s",selectData)
-
-    firstData = selectData.iloc[0]
-    stores = Stores()
-    stores.balance = 10000
-    lastData = None
-    shares = []
-    for i in range(len(selectData)):
-        temdata = selectData.iloc[i]
-        lastData = temdata
-        share = ShareData()
-        share.__dict__.update(temdata.to_dict())
-        inScale = 0.95-len(stores.online)*0.05
-
-        buy(share,stores,inScale=inScale)
-        seller(share,stores)
-        shares.append(share)
-  
-    res = pd.DataFrame(map(lambda x:x.__dict__,stores.line), columns=('num', 'bdate', 'sdate', 'bprice', 'sprice', 'isSeller', 'inday', 'fee'), index=map(lambda x:x.id,stores.line))
-    print(res)
-    logging.debug("余额：{}".format(stores.balance))
-    logging.debug("持股：{}".format(stores.assets))
-    logging.debug("交易次数：{}".format(len(stores.line)))
-    logging.debug("未卖出笔数：{}".format(len(stores.online))) 
-    logging.debug("结余：{}".format(stores.assets*lastData.close +stores.balance))
-
-    spd = pd.DataFrame(map(lambda x:x.__dict__,shares), columns=('date','open', 'high', 'low', 'close', 'vol', 'B', 'S'))
-    print(spd)
-    path = '~/share/tem/tem.csv'
-    spd.to_csv(path)
-        
-
- 
-
-
     
+    shares = setup({'code': '300022.sz', 'begin': '20210101', 'end': '20210607', 'money': '20000', 'inScale': '0.98', 'outScale': '1.10'})
+    for item in shares:
+
+        data = seller(item)
+        data = buy(data)
+        data = summary(data)
+        print('----------------') 
+    print(stores.line)
+
+
+
