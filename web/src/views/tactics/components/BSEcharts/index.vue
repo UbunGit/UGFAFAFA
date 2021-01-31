@@ -1,7 +1,6 @@
 <template>
   <div>
-    <el-row :gutter="24">
-      <el-col :span="16">
+
         <ve-candle
           :data="chartData"
           :events="chartEvents"
@@ -21,78 +20,7 @@
           :tooltip="tooltip"
           height="300px"
         ></ve-line>
-      </el-col>
-      
-      <el-col :span="8">
-        <div v-if="selectDara">
-          <p>{{ selectDara.date }}</p>
 
-          <div v-if="selectDara.B">
-            <span class="span-msg" v-if="selectDara.B.isBuy == false">
-              <i class="el-icon-error">买入失败</i>
-              {{ selectDara.B.msg }}
-            </span>
-            <span class="span-data" v-if="selectDara.B.isBuy == true">
-              <i class="el-icon-success">买入</i>
-              <p>买入数量：{{ selectDara.B.data.num }}</p>
-              <p>买入价格：{{ selectDara.B.data.bprice }}</p>
-            </span>
-          </div>
-
-          <div v-if="selectDara.S">
-            <span class="span-msg" v-if="selectDara.S.isSeller == false">
-              <i class="el-icon-error">卖出失败</i>
-              {{ selectDara.S.msg }}
-            </span>
-            <span class="span-data" v-if="selectDara.S.isSeller == true">
-              <i class="el-icon-success">卖 出</i>
-              <el-table :data="selectDara.S.data" size="mini">
-                <el-table-column
-                  prop="id"
-                  label="id"
-                  width="50"
-                ></el-table-column>
-                <el-table-column
-                  prop="num"
-                  label="数量"
-                  width="50"
-                ></el-table-column>
-                <el-table-column prop="sprice" label="卖出价格" width="80">
-                </el-table-column>
-              </el-table>
-            </span>
-          </div>
-
-          <i>剩余持仓</i>
-          <el-table :data="selectDara.online" size="mini">
-            <el-table-column prop="id" label="id" width="50"></el-table-column>
-            <el-table-column
-              prop="num"
-              label="数量"
-              width="50"
-            ></el-table-column>
-            <el-table-column prop="bdate" label="购买日期" width="80">
-            </el-table-column>
-            <el-table-column prop="bprice" label="购买价格" width="60">
-            </el-table-column>
-            <el-table-column prop="inday" label="持仓天数" width="60">
-            </el-table-column>
-          </el-table>
-
-          <div>
-            <i>结余</i>
-            <p v-if="selectDara.blance != undefined">
-              余额：{{ selectDara.blance.toFixed(2) }}
-            </p>
-            <p>持股：{{ selectDara.assets }}</p>
-            <p v-if="selectDara.summary != undefined">
-              结余：{{ selectDara.summary.toFixed(2) }}
-            </p>
-          </div>
-        </div>
-        <div>{{}}</div>
-      </el-col>
-    </el-row>
   </div>
 </template>
 <script>

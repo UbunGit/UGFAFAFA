@@ -4,19 +4,14 @@ import sys
 import os, json, logging
 sys.path.append("..") 
 
+from flask_socketio import SocketIO,send,emit  
 import pandas as pd
 import numpy as np
 
 from trade import share
 from trade import Stores
 from trade import ShareData,StoreData
-
-def buyCount(price, money):
-    return int(money/(price*100))*100
-
-class TError(BaseException):
-    def __init__(self, arg):
-        self.msg = arg
+from unit import buyCount,TError
 
 
 stores = None
@@ -39,14 +34,19 @@ def setup(param={
     global inScale
     global outScale
     global stores
+    global acount
     
     money = 20000
+    acount = 2000
     code = param.get('code')
     begin = param.get('begin')
     end = param.get('end')
 
     if param.__contains__("money"):
         money = float(param.get('money'))
+    if param.__contains__("acount"):
+        acount = float(param.get('acount'))
+    
     if param.__contains__("inScale"):
         inScale = float(param.get('inScale'))
     if param.__contains__("outScale"):
@@ -95,7 +95,7 @@ def buy(share):
         if share.get('ma10')>share.get('ma5'):
             raise TError('''ma10{:.3f}大于ma5 {:.3f}'''.format(share.get('ma10'),share.get('ma5')))
 
-        bcount = buyCount(price, 2000)
+        bcount = buyCount(price, acount)
         totalPrice =  price*bcount
         if stores.balance < totalPrice:
             raise TError('''余额不足''')
@@ -166,6 +166,7 @@ def summary(share):
     share["assets"] = stores.assets
     share["summary"] = (stores.assets*share.get("close")) + stores.balance
     share["online"]= stores.online
+    share["money"]= money
     return share
 
 def finesh():
