@@ -11,7 +11,10 @@ from flask_cors import CORS
 from flask_socketio import SocketIO,send,emit  
 import urllib.parse  
 
-sys.path.append("..")
+codepath = os.path.join(os.getcwd(),"code")
+# os.path.join()
+
+sys.path.append(codepath)
 
 app = Flask(__name__)  
 
@@ -20,25 +23,31 @@ socketio = SocketIO(app,cors_allowed_origins='*')
 
 @socketio.on('message')  
 def handle_message(message):
-    print(message) 
-    mod = importlib.import_module("tactics.{}".format(message.get("id")))
-    shares = mod.setup(param = message.get("param"))
-    if shares == []:
-        emit('error', "获取数据失败")
-        print("error 获取数据失败")
-        return
-    last = None
-    for item in shares:
-        data = mod.seller(item)
-        data = mod.buy(data)
-        data = mod.summary(data)
-        last = data
-        emit('message', data)
-        socketio.sleep(0.1)
-        
-    finesh = mod.finesh()
-    emit('finesh',finesh)
-    logging.debug('finesh {}'.format(finesh))
+    try:
+        print(message) 
+        modulestr = "tactics.{}".format(message.get("id"))
+        mod = importlib.import_module(modulestr)
+        shares = mod.setup(param = message.get("param"))
+        if shares == []:
+            emit('error', "获取数据失败")
+            print("error 获取数据失败")
+            return
+        last = None
+        for item in shares:
+            data = mod.seller(item)
+            data = mod.buy(data)
+            data = mod.summary(data)
+            last = data
+            emit('message', data)
+            socketio.sleep(0.1)
+            
+        finesh = mod.finesh()
+        emit('finesh',finesh)
+        logging.debug('finesh {}'.format(finesh))
+    except Exception as e:
+            logging.warning("real error%s",e)
+            emit('error', "exceptin:{}".format(e))
+    
 
 @socketio.on('connect', namespace=None)  
 def test_connect():  

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import sys
 import os, json, logging
-sys.path.append("./code") 
+sys.path.append("..") 
 
 import pandas as pd
 import numpy as np

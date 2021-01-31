@@ -10,7 +10,9 @@ logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 ts.set_token("8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195")
 formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
 
-dpath = '/Users/admin/share/data/'
+
+
+dpath = os.path.join(os.getcwd(),"data","cvs")
 
 ###
 ## 单个股票
@@ -107,13 +109,14 @@ class share:
 
 
     def save(self,data):
-        path = '~/share/data/'+str(self.code)+'.csv'
+        path = os.path.join(dpath,str(self.code)+'.csv')
+     
         logging.info("保存原始数据:"+path)
         data.to_csv(path)
 
     def load(self):
         try:
-            path = dpath+str(self.code)+'.csv'
+            path = os.path.join(dpath,str(self.code)+'.csv')
             endtime = ""
             if os.path.exists(path):
                 etimme = time.localtime(os.path.getmtime(path))
