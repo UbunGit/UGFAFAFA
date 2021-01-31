@@ -88,6 +88,7 @@
                 </span>
                 <span class="span-data" v-if="dayinfo.S.isSeller == true">
                   <i class="el-icon-success">卖 出</i>
+            
                   <el-table :data="dayinfo.S.data" size="mini">
                     <el-table-column
                       prop="id"
@@ -100,7 +101,12 @@
                       width="50"
                     ></el-table-column>
                     <el-table-column prop="sprice" label="卖出价格" width="80">
+                      
                     </el-table-column>
+                    <el-table-column prop="income" label="收益" width="80">
+                      
+                    </el-table-column>
+                    
                   </el-table>
                 </span>
               </div>

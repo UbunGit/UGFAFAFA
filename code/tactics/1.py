@@ -2,17 +2,13 @@
 # -*- coding: utf-8 -*-
 import sys
 import os, json, logging
-sys.path.append("..") 
-
-from flask_socketio import SocketIO,send,emit  
-import pandas as pd
-import numpy as np
+codepath = os.path.join(os.getcwd(),"code")
+sys.path.append(codepath)
+# sys.path.append("./code") 
 
 from trade import share
 from trade import Stores
-from trade import ShareData,StoreData
 from unit import buyCount,TError
-
 
 stores = None
 inScale = 0.95

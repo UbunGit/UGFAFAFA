@@ -1,197 +1,201 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import sys
+import os, json, logging
+codepath = os.path.join(os.getcwd(),"code")
+sys.path.append(codepath)
 
 from trade import share
-from trade import trade
-import numpy
-import sys
-import logging
-import os, json
-import pandas as pd
-import numpy as np
- 
-logging.basicConfig(level=logging.NOTSET)  # 设置日志级别  
+from trade import Stores
+from .unit import buyCount,TError
 
-# 根据KDJ值买入优化v1.0.0 2020.7.14
-# 步骤：
-# 1.获取 MACD DEA，DIFF
-# 2.如果 MACD>0 --其实也就是20日均线开始向上掉头，判断是否可以买入
-# 3.以第一次买入价制定买卖价格11个档位 -- 30日均线 向上5个，向下五个 各以5%为阶梯
-# 4.循环判断买入条件
-#   1 MACD>0
-#   2 b 股价在30日均线1%以内 
-#   3 股价在当前档位没有持仓
-# 5. 卖出条件
-#   1 股价超过持仓最低档卖出价
+stores = None
+inScale = 0.95
+outScale = 1.10
+money = 20000
 
-buylogs = []
-selllogs = []
-plandf = pd.DataFrame()
-tradecenter = trade()
-
-def makeplan(price):
-    # 创建购买计划
-    logging.info("创建购买计划:%s",price)
-    input = pd.Series(np.logspace(-9, 1, 10, base=1.05)*price)
-    tem =  (pd.Series(np.arange(30, 10, -2))*0.01)
-    out = (tem +1)*input
-    global plandf
-    plandf = pd.DataFrame({ "input": input, "out": out, "store":0, "tem":tem})
-    logging.info("购买计划创建完毕\n%s",plandf)
-
-def getbuyprice(price):
-    tempd = plandf[plandf.store == 0]
-    tempd = tempd[tempd.input >= price]
-    return tempd.input.min()
-
-def getcount(price,amount):
-    minc = int(amount/price)
-    maxc = minc+1
-    if abs(minc*price-amount)>abs(maxc*price-amount):
-        return maxc
-    return minc
-
-
-def judgeBuy(data):
-    # 判断买入条件是否满足
-    logging.info("判断买入条件")
-    log = {}
+def setup(param={
+            'code': "300022.SZ",
+            'begin': '20200107',
+            'end': '20210607',
+            'money': 20000
+            }):
     try:
-        if data.j<data.k or np.isnan(data.MACD):
-            raise Exception("j<k J:{:.2f} K:{:.2f}".format(data.j,data.k))
-        # if data.MACD>0.2:
-        #     raise Exception("MACD>0.2 macd:{:.2f}".format( data.MACD))
-        # if data.DEA>0:
-        #     raise Exception("data.DEA dea:{:.2f}".format( data.DEA))
+        print(param)
+        global code
+        global begin 
+        global end
+        global money
+        global inScale
+        global inScale
+        global outScale
+        global stores
+        global acount
+        
+        money = 20000
+        acount = 2000
+        code = param.get('code')
+        begin = param.get('begin')
+        end = param.get('end')
+
+        if param.__contains__("money"):
+            money = float(param.get('money'))
+        if param.__contains__("acount"):
+            acount = float(param.get('acount'))
+        
+        if param.__contains__("inScale"):
+            inScale = float(param.get('inScale'))
+        if param.__contains__("outScale"):
+            outScale = float(param.get('outScale'))
+
+        stores = Stores(balance = money)
+        spd = share(code)
+        if spd.cdata is None:
+            return []
+        data = spd.cdata
+        data = spd.appendma(data=data,ma=5)
+        data = spd.appendma(data=data,ma=10)
+        data = spd.appendma(data=data,ma=20)
+        data = spd.appendma(data=data,ma=30)
+        data['yclose']= data["close"].shift(1)
+        data['yopen']= data["open"].shift(1)
+        data['yma30']= data["ma30"].shift(1)
+        print(data)
+        if begin != None:
+            data = data[data.date>=begin]
+        if end != None:
+            data = data[data.date<=end]
+
+        shares = json.loads(data.to_json(orient='records'))
+
+        logging.info(
+            '''
+            02 -setup
+            余额：{}
+            持仓：{}
+            持仓记录：{}
+            代码：{}
+            ''' .format(
+                stores.balance,
+                stores.assets,
+                stores.online,
+                code
+            )
+        )
+        return shares
     except Exception as e:
-        buylogs.append({"buymsg":str(e),"buy":False,"date":data.name})
+            logging.warning("real error%s",e)
+
+def buy(share):
+    try:
+        if share.get('yma30')>share.get('ma30'):
+            raise TError('''ma10{:.3f}大于ma5 {:.3f}'''.format(share.get('ma10'),share.get('ma5')))
+        ymin = min(share.get("yclose"),share.get("yopen"))
+        ymax = max(share.get("yclose"),share.get("yopen"))
+        price = share.get("close")
+        if len(stores.online)>0:
+           raise TError('''已有持仓''')
+        if price<ymax:
+            raise TError('''购买价小于前一日最大值''')
+
+        bcount = buyCount(price, acount)
+        totalPrice =  price*bcount
+        if stores.balance < totalPrice:
+            raise TError('''余额不足''')
+        store = {
+            "num":bcount,
+            "bdate":share.get("date"),
+            "bprice":price,
+            "inday":0
+        }
+        stores.buy(store)
+
+    except TError as err:
+        share["B"]={
+            "isBuy":False,
+            "msg":err.msg
+        }
+
+    except Exception as e:
+        share["B"]={
+            "isBuy":False,
+            "msg":"Exception"
+        }   
+    else:
+
+        share["B"]={
+            "isBuy":True,
+            "data":store
+        }
+       
+        
+    finally:
+        logging.info("{}/n\n".format(share["B"]))
+        return share
+
+def seller(share):
+    try:
+        ymin = min(share.get("yclose"),share.get("yopen"))
+        ymax = max(share.get("yclose"),share.get("yopen"))
+        price = share.get("close")
+        if len(stores.online)==0:
+           raise TError('''无持仓''')
+        sellers = []
+        for item in stores.online:
+            item["inday"]= item.get("inday") +1
+            if price <= ymin:
+                item["sdate"] = share.get("date")
+                item["sprice"] = price
+                item["isSeller"] = True
+                item["fee"] = 10.00
+                item["income"] = ((item["sprice"]-item["bprice"])*item["num"])-item["fee"]
+                stores.seller(item)
+                sellers.append(item)
+        if len(sellers)==0:
+            raise TError('''没有符合条件的卖出单''')
+
+    except TError as err:
+        share["S"]={
+            "isSeller":False,
+            "msg":err.msg
+        }
+    except Exception as e:
+        share["S"]={
+            "isSeller":False,
+            "msg":"Exception"
+        }
+  
     else:
         
-        if  plandf.empty: 
-            makeplan(data.ma30)
-        #如果没有持有则重新设置买卖方案
-        if tradecenter.store <=0:
-            makeplan(data.ma30)
-        try:
-            buyprice = getbuyprice(data.low)
-            
-            if data.high<buyprice:
-                raise Exception("data.high<buyprice buyprice:{:.2f} high:{:.2f}".format( buyprice,data.high))
-            if data.low>buyprice:
-                raise Exception("data.low>buyprice buyprice:{:.2f} low:{:.2f}".format(buyprice, data.low))
-            buycount = getcount(buyprice,2000)
-            tradecenter.buy(float(buyprice), buycount)
-            index= plandf[plandf.input == buyprice].index
-            plandf.loc[index,'store'] = buycount
-
-        except Exception as e:
-            buylogs.append({"buymsg":str(e),"buy":False, "date":data.name})
-        else:
-            index= plandf[plandf.input == buyprice].index.values[0]
-            tempd = plandf.loc[index]
-            msg = "以{:.2f} 卖入 {:.2f} 期望价 {:.2f}".format(buyprice,buycount, tempd.out)
-            buylogs.append({"buymsg":msg,"buy":buyprice,"date":data.name})
-
-def judgeSell(data):
-    # 判断买出条件是否满足
-    logging.info("判断买出条件%s",data.high)
-    log = {}
- 
-    try:
-        if tradecenter.store<=0:
-            raise Exception("store is zero")
+        share["S"]={
+            "isSeller":True,
+            "data":sellers
+        }
         
-        sellprice = plandf[plandf.store > 0].out.min()
-        index= plandf[plandf.out == sellprice].index.values[0]
-        sellpd = plandf.loc[index]
+    finally:
+        logging.info("{}/n\n/n\n".format(share["S"]))
+        return share
 
-        if data.high<sellpd.out:
-            raise Exception("data.low<sellprice sellprice:{:.2f} low:{:.2f}".format(sellpd.out, data.high))
-        # if data.MACD>0.0 or np.isnan(data.MACD):
-        #     raise Exception("MACD>0 macd:{:.2f}".format(data.MACD))
-        tradecenter.sell(sellpd.out, sellpd.store)
+def summary(share):
+    share["blance"]= stores.balance
+    share["assets"] = stores.assets
+    share["summary"] = (stores.assets*share.get("close")) + stores.balance
+    share["online"]= stores.online
+    share["money"]= money
+    return share
 
-    except Exception as e:
-        selllogs.append({"sellmsg":str(e),"sell":False, "date":data.name})
-    else:
-
-        plandf.loc[index,'store'] = 0
-        huli = (sellpd.out-sellpd.input)*sellpd.store
-        msg = "以{:.2f} 卖出成本：{:.2f} 个数：{:.2f} 获利{:.2f}".format(sellpd.out, sellpd.input ,sellpd.store,huli)
-        selllogs.append({"sellmsg":msg,"sell":sellpd.out,"date":data.name})
-
-
+def finesh():
+    return {
+       "line":stores.line 
+    }
 
 if __name__ == '__main__':
-
-    logging.info("根据macd值买入优化v1.0.0 2020.7.14")
-    logging.info("args:%s",sys.argv)
-    amount = '10000'
-    start = '20200301'
-    end = '20200510'
-    tcode = '300022.SZ'
-    if len(sys.argv)>1 and len(sys.argv[1])>0:
-        indata = json.loads(sys.argv[1])
-        if "start" in indata:
-            start=indata["start"]
-        if "end" in indata:
-            end=indata["end"]
-        if "amount" in indata:
-            amount=indata["amount"]
-        if "tcode" in indata:
-            tcode=indata["tcode"]
-        
-    logging.info("begin tcode:%s amount:%s start:%s end:%s",tcode,amount,start,end)
-    tradecenter.balance = float(amount)
-    share = share(tcode)
-    data = share.appendmacd(share.cdata)
-    data = share.appendma(data,30)
-    data = share.appendkdj(data)
-
-
-
-    data_fecha = data[data.date>=start]
-    selectData =  data_fecha[data_fecha.date<=end]
-    logging.info("selectData:\n%s",selectData)
-
-    balance = []
-    plands = []
-    firstData = selectData.iloc[0]
-    for i in range(len(selectData)):
-        temdata = selectData.iloc[i]
-        judgeBuy(temdata)
-        judgeSell(temdata)
-        rate = ((tradecenter.balance+(tradecenter.store*temdata.close))/float(amount))-1
-        vrate = (temdata.close/firstData.close)-1
-        balance.append({
-            "balance":tradecenter.balance,
-            "store":tradecenter.store,
-            "rate":rate*1.0,
-            "vrate":vrate*1.0,
-            "all":(tradecenter.balance+tradecenter.store*temdata.close)*1.0,
-            "date":temdata.name})
-        plands.append({"plandf":plandf.to_json(orient='records'),"date":temdata.name})
-
-    logging.info("selectData:\n%s",selectData)
-    logspd = pd.DataFrame(buylogs)
-    logspd.set_index(["date"], inplace=True)
-
-    selllogspd = pd.DataFrame(selllogs)
-    selllogspd.set_index(["date"], inplace=True)
-
-    balancepd = pd.DataFrame(balance)
-    balancepd.set_index(["date"], inplace=True)
-
-    plandspd = pd.DataFrame(plands)
-    plandspd.set_index(["date"], inplace=True)
- 
-    frames = [selectData,logspd,selllogspd,balancepd,plandspd]
-    tem = pd.concat(frames ,axis=1) 
     
-    logging.info("tem:\n%s",tem)
-    path = '~/share/tem/tem.csv'
-    tem.to_csv(path)
- 
+    shares = setup({'code': '300022.sz', 'begin': '20210107', 'end': '20210607', 'money': '20000', 'inScale': '0.95', 'outScale': '1.10', 'acount': '2000'})
+    for item in shares:
+        data = seller(item)
+        data = buy(data)
+        data = summary(data)
 
+    print(stores.line)
 
-    
