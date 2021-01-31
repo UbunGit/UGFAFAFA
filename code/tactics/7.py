@@ -56,14 +56,9 @@ def setup(param={
         data = spd.appendma(data=data,ma=5)
         data = spd.appendma(data=data,ma=10)
         data = spd.appendma(data=data,ma=20)
-        data = spd.appendma(data=data,ma=25)
         data = spd.appendma(data=data,ma=30)
         data['yclose']= data["close"].shift(1)
         data['yopen']= data["open"].shift(1)
-        data['yma5']= data["ma5"].shift(1)
-        data['yma20']= data["ma20"].shift(1)
-        data['yma10']= data["ma10"].shift(1)
-        data['yma25']= data["ma25"].shift(1)
         data['yma30']= data["ma30"].shift(1)
         print(data)
         if begin != None:
@@ -93,14 +88,15 @@ def setup(param={
 
 def buy(share):
     try:
-        if share.get('yma10')>share.get('ma10'):
-            raise TError('30均线向下')
-        if share.get('ma5')<share.get('ma10') or share.get('ma10')<share.get('ma20') or share.get('ma20')<share.get('ma30'):
-            raise TError('ma5小于ma20')
-
+        if share.get('yma30')>share.get('ma30'):
+            raise TError('''ma10{:.3f}大于ma5 {:.3f}'''.format(share.get('ma10'),share.get('ma5')))
+        ymin = min(share.get("yclose"),share.get("yopen"))
+        ymax = max(share.get("yclose"),share.get("yopen"))
         price = share.get("close")
         if len(stores.online)>0:
            raise TError('''已有持仓''')
+        if price<ymax:
+            raise TError('''购买价小于前一日最大值''')
 
         bcount = buyCount(price, acount)
         totalPrice =  price*bcount
@@ -147,7 +143,7 @@ def seller(share):
         sellers = []
         for item in stores.online:
             item["inday"]= item.get("inday") +1
-            if share.get('ma5')<=share.get('ma10') or share.get('ma10')<share.get('ma20'):
+            if price <= ymin:
                 item["sdate"] = share.get("date")
                 item["sprice"] = price
                 item["isSeller"] = True
