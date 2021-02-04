@@ -80,7 +80,7 @@ def sharehistory():
             
             jsondata =json.loads(data.to_json(orient='records')) 
             
-            return unit.Response_headers(json.dumps({"code": 200,"data":jsondata}))
+            return Response_headers(json.dumps({"code": 200,"data":jsondata}))
 
         except Exception as e:
             logging.error("根据时间获取股票交易历史数据 Exception %s",e)
@@ -134,42 +134,42 @@ def run():
 @app.errorhandler(403)
 def page_not_found(error):
     content = json.dumps({"code": "403","message":"erroe"})
-    resp = unit.Response_headers(content)
+    resp = Response_headers(content)
     return resp
  
  
 @app.errorhandler(404)
 def page_not_found(error):
     content = json.dumps({"code": 404})
-    resp = unit.Response_headers(content)
+    resp = Response_headers(content)
     return resp
  
  
 @app.errorhandler(400)
 def page_not_found(error):
     content = json.dumps({"code": 400})
-    resp = unit.Response_headers(content)
+    resp = Response_headers(content)
     return resp
  
  
 @app.errorhandler(405)
 def page_not_found(error):
     content = json.dumps({"code": 405})
-    resp = unit.Response_headers(content)
+    resp = Response_headers(content)
     return resp
  
  
 @app.errorhandler(410)
 def page_not_found(error):
     content = json.dumps({"code": 410})
-    resp = unit.Response_headers(content)
+    resp = Response_headers(content)
     return resp
  
  
 @app.errorhandler(500)
 def page_not_found(error):
     content = json.dumps({"code": 500})
-    resp = unit.Response_headers(content)
+    resp = Response_headers(content)
     return resp
 
 from .api_share import share

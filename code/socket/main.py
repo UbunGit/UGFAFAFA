@@ -10,6 +10,7 @@ from flask import request,jsonify
 from flask_cors import CORS  
 from flask_socketio import SocketIO,send,emit  
 import urllib.parse  
+from imp import reload
 
 codepath = os.path.join(os.getcwd(),"code")
 # os.path.join()
@@ -26,7 +27,7 @@ def handle_message(message):
     try:
         print(message) 
         modulestr = "tactics.{}".format(message.get("id"))
-        mod = importlib.import_module(modulestr)
+        mod =reload(importlib.import_module(modulestr)) 
         shares = mod.setup(param = message.get("param"))
         if shares == []:
             emit('error', "获取数据失败")
@@ -48,7 +49,6 @@ def handle_message(message):
             logging.warning("real error%s",e)
             emit('error', "exceptin:{}".format(e))
     
-
 @socketio.on('connect', namespace=None)  
 def test_connect():  
     emit('my response', {'data': 'Connected'})  
@@ -56,8 +56,6 @@ def test_connect():
 @socketio.on('disconnect', namespace=None)  
 def test_disconnect():  
     print('Client disconnected')  
-
-
 
 if __name__ == '__main__':  
     socketio.run(app,debug=True,host="0.0.0.0",port=8081)

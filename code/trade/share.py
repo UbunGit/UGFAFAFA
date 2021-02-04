@@ -127,7 +127,7 @@ class share:
                 temtime = datetime.datetime.now()+datetime.timedelta(days=-1)
                 todytime = temtime.strftime('%Y-%m-%d')
 
-            if endtime == todytime :
+            if endtime >= todytime :
                 logging.info("获取缓存数据:"+path)
                 temdata = pandas.read_csv(path ,dtype={"date":"string"}, index_col=0,)
                 return temdata

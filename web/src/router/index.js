@@ -9,14 +9,14 @@ export const constantRouterMap = [
     path: '/',
     name: 'main',
     component: Layout,
-    meta: { title: '自选股', icon: 'el-icon-grape' },
+    meta: { title: '模拟', icon: 'el-icon-grape' },
     children: [
 
       {
-        path: 'main',
-        name: '我的策略',
-        component: () => import('@/views/main'),
-        meta: { title: '我的策略', icon: 'el-icon-grape' }
+        path: '',
+        name: 'K线模拟',
+        component: () => import('@/views/simulation'),
+        meta: { title: 'K线模拟', icon: 'el-icon-grape' }
       },
  
       
@@ -36,7 +36,7 @@ export const constantRouterMap = [
     meta: { title: '交易策略', icon: 'el-icon-grape' },
     children: [
       {
-        path: 'list',
+        path: '',
         name: '交易策略',
         component: () => import('@/views/tactics'),
         meta: { title: '策略', icon: 'el-icon-grape' }
@@ -45,7 +45,8 @@ export const constantRouterMap = [
         path: 'setting',
         name: '修改/新增交易策略',
         component: () => import('@/views/tactics/components/setting'),
-        meta: { title: '修改/新增交易策略', icon: 'el-icon-grape' }
+        meta: { title: '修改/新增交易策略', icon: 'el-icon-grape' },
+        hidden:true
       },
       {
         path: 'exit',
@@ -53,7 +54,6 @@ export const constantRouterMap = [
         component: () => import('@/views/tactics/exit'),
         meta: { title: '策略回测', icon: 'el-icon-grape' },
         hidden:true
-
       },
     ]
   },

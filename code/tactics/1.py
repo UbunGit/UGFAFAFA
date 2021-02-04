@@ -8,7 +8,7 @@ sys.path.append(codepath)
 
 from trade import share
 from trade import Stores
-from unit import buyCount,TError
+from .unit import buyCount,TError
 
 stores = None
 inScale = 0.95

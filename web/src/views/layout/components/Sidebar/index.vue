@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-// import variables from '@/styles/variables.scss'
+
 import SidebarItem from './SidebarItem'
 
 

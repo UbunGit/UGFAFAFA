@@ -11,7 +11,7 @@ from .unit import buyCount,TError
 
 stores = None
 inScale = 0.95
-outScale = 1.10
+outScale = 1.20
 money = 20000
 
 def setup(param={
@@ -91,16 +91,26 @@ def setup(param={
     except Exception as e:
             logging.warning("real error%s",e)
 
+
 def buy(share):
     try:
-        if share.get('yma10')>share.get('ma10'):
-            raise TError('30均线向下')
-        if share.get('ma5')<share.get('ma10') or share.get('ma10')<share.get('ma20') or share.get('ma20')<share.get('ma30'):
-            raise TError('ma5小于ma20')
+     
+        if share.get('yma20') > share.get('yma30') or share.get('ma20') < share.get('ma30'):
+            raise TError('''均线没有相交yma20:{} ma30:{} ma20:{} yma30:{}'''.format(
+        share.get('yma20'),
+        share.get('ma30'),
+        share.get('ma20'),
+        share.get('yma30'),
+        ))
 
         price = share.get("close")
+
         if len(stores.online)>0:
-           raise TError('''已有持仓''')
+            scalePrice = stores.minPrice()*inScale
+            price = min([scalePrice,price])
+        if price<share.get('close'):
+            raise TError('''买入价{:.3f}小于收盘价{:.3f}'''.format(price,share.get('close')))
+
 
         bcount = buyCount(price, acount)
         totalPrice =  price*bcount
@@ -139,34 +149,30 @@ def buy(share):
 
 def seller(share):
     try:
-        ymin = min(share.get("yclose"),share.get("yopen"))
-        ymax = max(share.get("yclose"),share.get("yopen"))
-        price = share.get("close")
-        if len(stores.online)==0:
-           raise TError('''无持仓!!!''')
+        if len(stores.online) == 0:
+            raise TError('''持仓为空''')
+        # if share.get('ma5')>share.get('ma10'):
+        #     raise TError('''ma10 {:.3f}小于ma5 {:.3f}'''.format(share.get('ma10'),share.get('ma5')))
         sellers = []
+
         for item in stores.online:
             item["inday"]= item.get("inday") +1
-            if share.get('ma5')<=share.get('ma10') or share.get('ma10')<share.get('ma20'):
+            sellerPrice = item.get("bprice") * outScale
+      
+            if sellerPrice < share.get('high'):
                 item["sdate"] = share.get("date")
-                item["sprice"] = price
+                item["sprice"] = max([sellerPrice,share.get('close')])
                 item["isSeller"] = True
                 item["fee"] = 10.00
-                item["income"] = ((item["sprice"]-item["bprice"])*item["num"])-item["fee"]
                 stores.seller(item)
                 sellers.append(item)
         if len(sellers)==0:
-            raise TError('''没有符合条件的卖出单！！！''')
+            raise TError('''没有符合条件的卖出单''')
 
     except TError as err:
         share["S"]={
             "isSeller":False,
             "msg":err.msg
-        }
-    except Exception as e:
-        share["S"]={
-            "isSeller":False,
-            "msg":"Exception"
         }
   
     else:
@@ -177,7 +183,6 @@ def seller(share):
         }
         
     finally:
-        logging.info("{}/n\n/n\n".format(share["S"]))
         return share
 
 def summary(share):
@@ -195,11 +200,11 @@ def finesh():
 
 if __name__ == '__main__':
     
-    shares = setup({'code': '300022.sz', 'begin': '20210107', 'end': '20210607', 'money': '20000', 'inScale': '0.95', 'outScale': '1.10', 'acount': '2000'})
+    shares = setup({'code': '300022.sz', 'begin': '20200107', 'end': '20210101', 'money': '20000', 'inScale': '0.95', 'outScale': '1.10', 'acount': '2000'})
     for item in shares:
         data = seller(item)
         data = buy(data)
         data = summary(data)
+        print(data)
 
     print(stores.line)
-
