@@ -18,15 +18,15 @@ export const constantRouterMap = [
         component: () => import('@/views/simulation'),
         meta: { title: 'K线模拟', icon: 'el-icon-grape' }
       },
- 
-      
+
+
       {
         path: 'choose',
         name: '今日推荐',
         component: () => import('@/views/choose'),
         meta: { title: '今日推荐', icon: 'el-icon-grape' }
       },
-  
+
     ]
   },
   {
@@ -46,14 +46,14 @@ export const constantRouterMap = [
         name: '修改/新增交易策略',
         component: () => import('@/views/tactics/components/setting'),
         meta: { title: '修改/新增交易策略', icon: 'el-icon-grape' },
-        hidden:true
+        hidden: true
       },
       {
         path: 'exit',
         name: '策略回测',
         component: () => import('@/views/tactics/exit'),
         meta: { title: '策略回测', icon: 'el-icon-grape' },
-        hidden:true
+        hidden: true
       },
     ]
   },
@@ -69,9 +69,18 @@ export const constantRouterMap = [
         component: () => import('@/views/test'),
         meta: { title: '测试', icon: 'el-icon-grape' }
       },
-     
+      {
+        path: '/tabbarMenu',
+        name: 'tabbarMenu',
+        component: () => import('@/views/layout/components/tabbar/TabbarMenu'),
+        meta: { title: '菜单', icon: 'el-icon-grape' },
+        hidden: true
+      },
     ]
   },
+
+ 
+
 
 ]
 export default new Router({

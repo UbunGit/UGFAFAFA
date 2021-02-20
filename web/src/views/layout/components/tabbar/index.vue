@@ -1,20 +1,17 @@
 <template>
   <div>
     <van-tabbar v-model="active" @change="onChange">
-      <van-tabbar-item  v-for="route in routes" :key="route.path"
-      :to="route.path"
-      :icon="route.meta.icon"
-        >{{route.meta.title}}</van-tabbar-item
-      >
+     <TabbarItem v-for="route in routes" :key="route.path" :item="route"></TabbarItem>
     </van-tabbar>
-    <!-- <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" /> -->
+   
   </div>
 </template>
 
 <script>
-// import { Notify } from "vant";
+import TabbarItem from './TabbarItem'
 
 export default {
+  components: { TabbarItem },
   computed: {
     routes() {
       return this.$router.options.routes;
@@ -32,6 +29,11 @@ export default {
       return false;
       // return !this.sidebar.opened
     },
+  },
+  data() {
+    return {
+      active: 'home',
+    };
   },
   methods: {
     onChange(index) {

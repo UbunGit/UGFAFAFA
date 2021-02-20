@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+
+'''
+均线交易策略
+均线多头排列买入
+'''
 import sys
 import os, json, logging
 codepath = os.path.join(os.getcwd(),"code")

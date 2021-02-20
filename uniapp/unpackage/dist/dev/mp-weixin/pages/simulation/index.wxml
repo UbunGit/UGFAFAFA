@@ -1,0 +1,1 @@
+<view class="footer _div"><view class="result _div"><label>收益：10000.00</label><view class="_br"></view><label>收益率：0.00%</label></view><view class="active _div"><button class="settle" round="{{true}}" type="info">结算</button><button class="buy" round="{{true}}" type="info">买入</button><button class="seller" round="{{true}}" type="info">卖出</button></view></view>

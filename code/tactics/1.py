@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+'''
+表格交易策略
+'''
+
 import sys
 import os, json, logging
 codepath = os.path.join(os.getcwd(),"code")
@@ -81,18 +86,24 @@ def setup(param={
 
 def buy(share):
     try:
+        # 预算买入价 
+        # 如果没有持仓，买入价为当天收盘价
+        # 如果有持仓，买入价为持仓最低价*买入系数
+        
         price = share.get('close')
         if len(stores.online)>0:
             scalePrice = stores.minPrice()*inScale
             price = min([scalePrice,price])
         if price<share.get('close'):
             raise TError('''买入价{:.3f}小于收盘价{:.3f}'''.format(price,share.get('close')))
-
+        # 如果10日均线大于5日均线 不买入
         if share.get('ma10')>share.get('ma5'):
             raise TError('''ma10{:.3f}大于ma5 {:.3f}'''.format(share.get('ma10'),share.get('ma5')))
-
+        # 计算买入数量    
         bcount = buyCount(price, acount)
+        # 计算买入花费  
         totalPrice =  price*bcount
+
         if stores.balance < totalPrice:
             raise TError('''余额不足''')
         store = {
@@ -114,8 +125,7 @@ def buy(share):
             "isBuy":True,
             "data":store
         }
-        print("+++++++++{}".format(store["id"]) )
-        
+ 
     finally:
         return share
 

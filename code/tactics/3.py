@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+'''
+均线相交买卖策略
+'''
 import sys
 import os, json, logging
 codepath = os.path.join(os.getcwd(),"code")

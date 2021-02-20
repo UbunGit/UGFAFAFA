@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "首页",
+  "usingComponents": {
+    "uni-link": "/components/uni-link/uni-link"
+  }
+}

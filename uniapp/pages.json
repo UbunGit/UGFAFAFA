@@ -1,0 +1,47 @@
+{
+	"pages": [
+		{
+			"path": "pages/simulation/index",
+			"style": {
+				"navigationBarTitleText": "训练"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
+			}
+		}
+	
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	},
+	"tabBar": {
+	    "color": "#7A7E83",
+	    "selectedColor": "#3cc51f",
+	    "borderStyle": "black",
+	    "backgroundColor": "#ffffff",
+	    "list": [
+			{
+			    "pagePath": "pages/simulation/index",
+			    // "iconPath": "static/image/icon_API.png",
+			    // "selectedIconPath": "static/image/icon_API_HL.png",
+			    "text": "K线训练"
+			},
+			{
+	        "pagePath": "pages/index/index",
+	        // "iconPath": "static/image/icon_component.png",
+	        // "selectedIconPath": "static/image/icon_component_HL.png",
+	        "text": "首页"
+			}
+	
+		]
+	}
+}
