@@ -1,0 +1,13 @@
+{
+    "id": "u-charts",
+    "name": "uCharts高性能跨全端图表",
+    "version": "1.9.6.20210214",
+    "description": "支持H5、PC、APP、小程序（微信/支付宝/百度/头条/QQ/360）Vue、Taro",
+    "keywords": [
+        "echarts",
+        "canvas2d",
+        "F2",
+        "图表",
+        "跨全端"
+    ]
+}

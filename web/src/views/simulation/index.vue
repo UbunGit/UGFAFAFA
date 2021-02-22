@@ -365,7 +365,6 @@ export default {
 
 .active {
 
-  /* right: 10px; */
   display: inline-block;
 }
 .result {

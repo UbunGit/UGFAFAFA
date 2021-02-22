@@ -1,55 +1,83 @@
 
-.footer {
-  position: fixed;
-  bottom: 0px;
-  background-color: #EEEEEE;
-  width: 100%;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
-  height: 80px;
+page{background:#F2F2F2;width: 750rpx;overflow-x: hidden;}
+.qiun-padding{padding:2%; width:96%;}
+.qiun-wrap{display:-webkit-box;display:-webkit-flex;display:flex; -webkit-flex-wrap:wrap; flex-wrap:wrap;}
+.qiun-rows{display:-webkit-box;display:-webkit-flex;display:flex; -webkit-box-orient:horizontal !important; -webkit-box-direction:normal !important; -webkit-flex-direction:row !important; flex-direction:row !important;}
+.qiun-columns{display:-webkit-box;display:-webkit-flex;display:flex; -webkit-box-orient:vertical !important; -webkit-box-direction:normal !important; -webkit-flex-direction:column !important; flex-direction:column !important;}
+.qiun-common-mt{margin-top:10rpx;}
+.qiun-bg-white{background:#FFFFFF;}
+.qiun-title-bar{width:96%; padding:10rpx 2%; -webkit-flex-wrap:nowrap; flex-wrap:nowrap;}
+.qiun-title-dot-light{border-left: 10rpx solid #0ea391; padding-left: 10rpx; font-size: 32rpx;color: #000000}
+/* 通用样式 */
+.qiun-charts{width: 750rpx; height:500rpx;background-color: #FFFFFF;}
+.charts{
+	left: 25rpx;
+	width: 700rpx;
+	height:500rpx;
+	background-color: #FFFFFF;
 }
-.footer button {
-	position: absolute;
-		  display: inline-block;
-  font-size: 10px;
-  
-  width: 60px;
-  height: 30px;
-  bottom: 4px;
-  color: #FFFFFF;
+.header {
+	display:-webkit-box;
+	display:-webkit-flex;
+	display:flex;
+	-webkit-flex-wrap:wrap;
+	        flex-wrap:wrap;
 }
-.settle {
-  border: 1px solid crimson;
-  background-color: crimson;
-
-  
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-}
-.buy {
-
-  border: 1px solid crimson;
-  background-color: crimson;
-  left: 15px;
-}
-.seller {
-
-  border: 1px solid rgb(101, 59, 201);
-  background-color: rgb(101, 59, 201);
-  right: 15px;
-}
-.active {
-}
-.result {
-	position: absolute;
+.header label{
+	display:-webkit-box;
+	display:-webkit-flex;
+	display:flex;
+	-webkit-flex-wrap:wrap;
+	        flex-wrap:wrap;
 	left: 12px;
 	font-size: 12px;
 	color: #333333;
+	margin: 15rpx;
 }
+.footer {
+	position: fixed;
+	bottom: 0px;
+	background-color: #EEEEEE;
+	width: 100%;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: row;
+	        flex-direction: row;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	        justify-content: space-between;
+	height: 80px;
+}
+.footer button {
+	position: absolute;
+	display: inline-block;
+	font-size: 10px;
+
+	width: 60px;
+	height: 30px;
+	bottom: 4px;
+	color: #FFFFFF;
+}
+.settle {
+	border: 1px solid crimson;
+	background-color: crimson;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	        transform: translateX(-50%);
+}
+.buy {
+
+	border: 1px solid crimson;
+	background-color: crimson;
+	left: 15px;
+}
+.seller {
+
+	border: 1px solid rgb(101, 59, 201);
+	background-color: rgb(101, 59, 201);
+	right: 15px;
+}
+.active {}
+
+
 
