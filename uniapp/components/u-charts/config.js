@@ -73,13 +73,9 @@ module.exports = {
 		padding:[15,15,0,15],
 		legend:{
 			show:true,
-			position:'left',
-			float:'center',
-			itemGap:10,
 			padding:5,
-			lineHeight:26,
-			margin:5,
-			borderWidth :1
+			lineHeight:11,
+			margin:0,
 		},
 		dataLabel: true,
 		extra: {
@@ -164,10 +160,11 @@ module.exports = {
 			lineHeight:11,
 			margin:0,
 		},
-		dataLabel: true,
+		dataLabel: false,
 		dataPointShape:true,
 		xAxis: {
 			disableGrid: true,
+			labelCount: 4
 		},
 		yAxis: {
 			gridType: 'dash',
@@ -175,7 +172,7 @@ module.exports = {
 			dashLength: 8,
 			splitNumber: 4,
 			format: val => {
-				return val.toFixed(0);
+				return val.toFixed(1);
 			}
 		},
 		extra: {
@@ -186,7 +183,7 @@ module.exports = {
 	},
 	"column":{
 		type: 'column',
-		padding:[15,5,0,15],
+		padding:[35,5,0,15],
 		legend:{
 			show:true,
 			padding:5,
@@ -197,31 +194,41 @@ module.exports = {
 		dataLabel: true,
 		xAxis: {
 			disableGrid:true,
+			labelCount: 4
 		},
 		yAxis: {
 		  data:[{
 		    position:'right',
 				axisLine:false,
-		    format:(val)=>{return val.toFixed(0)},
+		    format:(val)=>{return val.toFixed(1)},
 		  }]
 		},
 		extra: {
 			column: {
 				type:'group',
-				width:30
+				width:20
 			}
 		}
 	},
 	"area":{
 		type: 'area',
-		padding:[15,15,0,15],
+		padding:[0,15,10,15],
 		legend:{
 			show:true,
+			position:'top',
+			float:'center',
+			itemGap:30,
+			padding:5,
+			lineHeight:18,
+			margin:0,
 		},
-		dataLabel:true,
+		dataLabel:false,
 		dataPointShape:true,
 		xAxis: {
-			disableGrid:true,
+			type:'grid',
+			gridColor:'#CCCCCC',
+			gridType:'dash',
+			dashLength:8,
 		},
 		yAxis: {
 			gridType:'dash',
@@ -231,7 +238,7 @@ module.exports = {
 		},
 		extra: {
 			area:{
-				type: 'straight',
+				type: 'curve',
 				opacity:0.2,
 				addLine:true,
 				width:2,
@@ -369,7 +376,7 @@ module.exports = {
 	},
 	"mix":{
 		type: 'mix',
-		padding:[15,15,0,15],
+		padding:[5,5,0,5],
 		legend:{
 			show:true,
 		  position:'bottom',
@@ -378,10 +385,16 @@ module.exports = {
 			lineHeight:11,
 			margin:6,
 		},
+		enableScroll: true,
 		dataLabel: true,
 		dataPointShape: true,
 		xAxis: {
-			disableGrid:true,
+			disableGrid:false,
+			type:'grid',
+			gridType:'dash',
+			itemCount:4,
+			scrollShow:true,
+			scrollAlign:'left',
 		},
 		yAxis: {
 		  data:[{
@@ -414,7 +427,23 @@ module.exports = {
 		extra: {
 		  column:{
 		    width:20
-		  }
+		  },
+			tooltip:{
+				showBox:false,
+				bgColor:'#000000',
+				bgOpacity:0.7,
+				gridType:'dash',
+				dashLength:8,
+				gridColor:'#1890ff',
+				fontColor:'#FFFFFF',
+				horizentalLine:true,
+				xAxisLabel:true,
+				yAxisLabel:true,
+				labelBgColor:'#DFE8FF',
+				labelBgOpacity:0.95,
+				labelAlign:'left',
+				labelFontColor:'#666666'
+			}
 		}
 	},
 	"point":{

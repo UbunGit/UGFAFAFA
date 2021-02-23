@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import qiunCharts from '../../js_sdk/u-charts/u-charts.js';
-import config from '../../js_sdk/u-charts/config.js';
+import qiunCharts from '.u-charts.js';
+import config from '..config.js';
 var canvases = {};
 var options = {};
 var chartdom = null;
