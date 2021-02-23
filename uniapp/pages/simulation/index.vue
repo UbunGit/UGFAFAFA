@@ -1,14 +1,13 @@
 <template>
 	<div>
-		<div class="header">
+		<view class="header">
 			<label>收益：10000.00</label></br>
 			<label>收益率：0.00%</label>
 			<label>收益：10000.00</label></br>
 			<label>收益率：0.00%</label>
 			<label>收益：10000.00</label></br>
 			<label>收益率：0.00%</label>
-		</div>
-
+		</view>
 
 
 			<view class="qiun-charts">
@@ -22,8 +21,6 @@
 				 @touchmove="moveCandle" @touchend="touchEndCandle"></canvas>
 				<!--#endif-->
 			</view>
-
-
 
 
 		<view class="footer">
@@ -81,28 +78,14 @@
 					success: function(res) {
 
 						_self.result = JSON.parse(res.data.data)
-
+						let data = _self.updateCanvaCandle()
 						let Candle = {
-							categories: [],
-							series: []
+							categories: data.categories,
+							series: data.series,
 						};
-						var series = []
-						var categories = []
-						for (var i = 0; i < Math.min(_self.itemCount, _self.result.length); i++) {
-							let data = _self.result[i]
-
-							categories.push(data.date)
-							series.push([data.open, data.close, data.low, data.high])
-
-						}
-						Candle.series = [{
-							"name": "测试",
-							"data": series
-						}]
-						Candle.categories = categories
-						console.log(Candle)
 						_self.showCandle("canvasCandle", Candle);
-						// _self.updateCanvaCandle()
+					
+						
 					},
 					fail: () => {
 						_self.tips = "网络错误，小程序端请检查合法域名";
@@ -113,7 +96,7 @@
 				canvaCandle = new uCharts({
 					$this: _self,
 					canvasId: canvasId,
-					type: 'candlestick',
+					type: 'candle',
 					fontSize: 11,
 					padding: [15, 15, 0, 15],
 					legend: {
@@ -132,21 +115,21 @@
 					enableScroll: true, //开启图表拖拽功能
 					xAxis: {
 						disableGrid: true, //不绘制X轴网格线
-						labelCount: 5, //X轴文案数量
-						type: 'grid',
-						gridType: 'dash',
-						itemCount: Math.min((_self.itemCount + 1), 30), //可不填写，配合enableScroll图表拖拽功能使用，x轴单屏显示数据的数量，默认为5个
+						labelCount: 4, //X轴文案数量
+						//type:'grid',
+						//gridType:'dash',
+						itemCount: _self.itemCount, //可不填写，配合enableScroll图表拖拽功能使用，x轴单屏显示数据的数量，默认为5个
 						scrollShow: true, //新增是否显示滚动条，默认false
 						scrollAlign: 'right',
-						scrollBackgroundColor: '#F7F7FF', //可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条背景颜色,默认为 #EFEBEF
-						scrollColor: '#A6A6A6', //可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条颜色,默认为 #A6A6A6
+						//scrollBackgroundColor:'#F7F7FF',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条背景颜色,默认为 #EFEBEF
+						//scrollColor:'#DEE7F7',//可不填写，配合enableScroll图表拖拽功能使用，X轴滚动条颜色,默认为 #A6A6A6
 					},
 					yAxis: {
-						disabled: true,
+						disabled:true,
 						gridType: 'dash',
 						splitNumber: 5,
 						format: (val) => {
-							return val
+							return val.toFixed(0)
 						}
 					},
 					width: _self.cWidth * _self.pixelRatio,
@@ -198,6 +181,7 @@
 						}
 					}
 				});
+			
 			},
 			touchCandle(e) {
 				canvaCandle.scrollStart(e);
@@ -236,30 +220,39 @@
 			},
 			handerBuy() {
 				_self.itemCount = _self.itemCount + 1
-				_self.updateCanvaCandle()
+				let data = _self.updateCanvaCandle()
+				canvaCandle.updateData({
+					series: data.series,
+					categories: data.categories,
+					xAxis: {
+						itemCount: _self.itemCount,
+					}, //可不填写，配合enableScroll图表拖拽功能使用，x轴单屏显示数据的数量，默认为5个
+					scrollPosition: "right",
+				
+				});
 
 			},
 			updateCanvaCandle() {
 				var series = []
 				var categories = []
+				var ma = []
 				for (var i = 0; i < Math.min(_self.itemCount, _self.result.length); i++) {
 					let data = _self.result[i]
 					console.log(data)
 					categories.push(data.date)
 					series.push([data.open, data.close, data.low, data.high])
+					ma.push(data.ma30)
 
 				}
-				canvaCandle.updateData({
+				return {
 					series: [{
 						"name": "测试",
 						"data": series
 					}],
 					categories: categories,
-					xAxis: {
-						itemCount: _self.itemCount,
-					}, //可不填写，配合enableScroll图表拖拽功能使用，x轴单屏显示数据的数量，默认为5个
-					scrollPosition: "right"
-				});
+				
+				}
+				
 
 			}
 		}
