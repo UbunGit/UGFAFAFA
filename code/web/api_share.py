@@ -21,6 +21,7 @@ def simulation():
             if not os.path.exists(path):
                 raise Exception("数据不存在")
             temdata = pandas.read_csv(path ,dtype={"date":"string"}, index_col=0,)
+            temdata = temdata.sort_values(by='date')
             result = temdata.to_json(orient='records')
             return Response_headers(json.dumps({"code": 200,"data":result}))
         else:
