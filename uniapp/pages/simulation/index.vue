@@ -4,18 +4,20 @@
 			<label>初始：{{handle.defual.toFixed(3)}}</label></br>
 			<label>持股：{{handle.have}}</label></br>
 			<label>余额：{{handle.blance.toFixed(3)}}</label></br>
-			<label>收益率：{{((handle.assets/(handle.defual*1.00)-1)*100).toFixed(3)}}%</label></br>
-			<label >交易次数：{{handle.list.length}}</label></br>
+
+			<label>交易次数：{{handle.list.length}}</label></br>
 			<label>资产：{{handle.assets.toFixed(3)}}</label></br>
-			
+			<label>股票收益：{{getStoreIncome().toFixed(2)}}%</label></br>
+			<label>收益率：{{getHandleIncome().toFixed(3)}}%</label></br>
+		
 		</view>
 
-		<uni-ec-canvas class="uni-ec-canvas" id="candle1" canvas-id="multi-charts-pie" :ec="ec3"></uni-ec-canvas>
+		<uni-ec-canvas class="uni-ec-canvas" id="candle1" canvas-id="multi-charts-pie" :ec="chartdata"></uni-ec-canvas>
 
 		<view class="footer">
 
 			<div class="active">
-				<button round type="info" class="settle" @click="handleEnd">结算</button>
+				<button round type="info" class="settle" @click="handleEnd">结算{{offset}}</button>
 				<button round type="info" class="buy" @click="handerBuy">{{handle.have>0?"持有":"买入"}}</button>
 				<button round type="info" class="seller" @click="handerSeller">{{handle.have>0?"卖出":"观望"}}</button>
 			</div>
@@ -32,22 +34,9 @@
 	var _self;
 	var canvaCandle = null;
 	export default {
-
-		data() {
-			return {
-				cWidth: '',
-				cHeight: '',
-				pixelRatio: 1,
-				itemCount: 30, //x轴单屏数据密度
-				result: '',
-				handle:{
-					defual:10000, // 初始金额
-					list:[], // 买卖记录
-					blance:10000, // 余额
-					have:0,// 持仓
-					assets:10000, // 资产
-				},
-				ec3: {
+		computed: {
+			chartdata() {
+				return {
 					option: {
 						animation: false,
 						legend: {
@@ -99,18 +88,19 @@
 						grid: [{
 								left: '10%',
 								right: '8%',
-								height: '40%'
+								top:"20upx",
+								height: '160upx'
 							},
 							{
 								left: '10%',
 								right: '8%',
-								top: '63%',
+								top: '200upx',
 								height: '16%'
 							}
 						],
 						xAxis: [{
 								type: 'category',
-								data: data.categoryData,
+								data: this.sresult.categoryData,
 								scale: true,
 								boundaryGap: false,
 								axisLine: {
@@ -129,7 +119,7 @@
 							{
 								type: 'category',
 								gridIndex: 1,
-								data: data.categoryData,
+								data: this.sresult.categoryData,
 								scale: true,
 								boundaryGap: false,
 								axisLine: {
@@ -177,13 +167,15 @@
 								type: 'inside',
 								xAxisIndex: [0, 1],
 								start: 0,
-								end: 100
+								end: 100,
+								height:"15upx",
 							},
 							{
 								show: true,
 								xAxisIndex: [0, 1],
 								type: 'slider',
 								top: '0',
+								height:"15upx",
 								start: 0,
 								end: 100
 							}
@@ -191,7 +183,7 @@
 						series: [{
 								name: '日K',
 								type: 'candlestick',
-								data: [],
+								data: this.sresult.values,
 								itemStyle: {
 									color: upColor,
 									color0: downColor,
@@ -222,24 +214,7 @@
 											return param.name + '<br>' + (param.data.coord || '');
 										}
 									},
-									data: [
-
-										{
-											name: 'highest value',
-											type: 'max',
-											valueDim: 'highest'
-										},
-										{
-											name: 'lowest value',
-											type: 'min',
-											valueDim: 'lowest'
-										},
-										{
-											name: 'average value on close',
-											type: 'average',
-											valueDim: 'close'
-										}
-									],
+									data: this.pointData,
 
 								},
 								markLine: {
@@ -247,14 +222,14 @@
 									data: [
 
 										{
-											name: 'min line on close',
+											name: 'min line on lowest',
 											type: 'min',
-											valueDim: 'close'
+											valueDim: 'lowest'
 										},
 										{
-											name: 'max line on close',
+											name: 'max line on highest',
 											type: 'max',
-											valueDim: 'close'
+											valueDim: 'highest'
 										}
 									]
 								}
@@ -262,8 +237,8 @@
 							{
 								name: 'MA5',
 								type: 'line',
-								data: calculateMA(5, data.values),
-								smooth: true,
+								data: this.calculateMA(5, this.sresult),
+								symbol: 'none',
 								lineStyle: {
 									opacity: 0.5
 								}
@@ -271,8 +246,8 @@
 							{
 								name: 'MA10',
 								type: 'line',
-								data: calculateMA(10, data.values),
-								smooth: true,
+								data: this.calculateMA(10, this.sresult),
+								symbol: 'none',
 								lineStyle: {
 									opacity: 0.5
 								}
@@ -280,8 +255,8 @@
 							{
 								name: 'MA20',
 								type: 'line',
-								data: calculateMA(20, data.values),
-								smooth: true,
+								data: this.calculateMA(20, this.sresult),
+								symbol: 'none',
 								lineStyle: {
 									opacity: 0.5
 								}
@@ -289,8 +264,8 @@
 							{
 								name: 'MA30',
 								type: 'line',
-								data: calculateMA(30, data.values),
-								smooth: true,
+								data: this.calculateMA(30, this.sresult),
+								symbol: 'none',
 								lineStyle: {
 									opacity: 0.5
 								}
@@ -301,26 +276,62 @@
 								type: 'bar',
 								xAxisIndex: 1,
 								yAxisIndex: 1,
-								data: data.volumes
+								data: this.sresult.volumes
 							},
 
 						]
 					}
 
+				}
+			}
+		},
+
+		data() {
+			return {
+				cWidth: '',
+				cHeight: '',
+				pixelRatio: 1,
+				itemCount: 30, //x轴单屏数据密度
+				offset: 0,
+				result: [],
+				sresult: {
+					categoryData: [],
+					values: [],
+					volumes: [],
+				},
+				pointData: [
+				
+					{
+						name: 'highest value',
+						type: 'max',
+						valueDim: 'highest'
+					},
+					{
+						name: 'lowest value',
+						type: 'min',
+						valueDim: 'lowest'
+					},
+					{
+						name: 'average value on close',
+						type: 'average',
+						valueDim: 'close'
+					}
+				],
+				handle: {
+					defual: 10000, // 初始金额
+					list: [], // 买卖记录
+					blance: 10000, // 余额
+					have: 0, // 持仓
+					assets: 10000, // 资产
 				},
 			};
 		},
 		onReady() {
-			setTimeout(() => {
-				// this.ec3.option.series[0].data = data.values
-				console.log("折线图数据改变啦");
-			}, 1000);
 
 		},
 		components: {
 			uniEcCanvas
 		},
-
 
 		onLoad() {
 			_self = this;
@@ -341,7 +352,7 @@
 		},
 		methods: {
 			getServerData() {
-
+				_self.reload()
 				uni.request({
 					url: this.baseUrl + '/share/simulation',
 					data: {
@@ -350,6 +361,25 @@
 					success: function(res) {
 						console.log(res.data.data)
 						_self.result = JSON.parse(res.data.data)
+						if (_self.result.length < 60) {
+							uni.showModal({
+								title: '错误',
+								content: '数据量太少',
+								success: function(res) {
+									if (res.confirm) {
+
+										_self.getServerData()
+									} else if (res.cancel) {
+										_self.getServerData()
+									}
+								}
+							});
+							return;
+						}
+						var max = _self.result.length - 30
+						var min = 30
+						_self.itemCount = Math.round(Math.random() * (max - min)) + min
+						console.log(_self.itemCount)
 						let tdata = _self.updateCanvaCandle()
 					},
 					fail: () => {
@@ -357,46 +387,39 @@
 					},
 				});
 			},
-			touchCandle(e) {
-				canvaCandle.scrollStart(e);
-			},
-			moveCandle(e) {
-				canvaCandle.scroll(e);
-			},
-			touchEndCandle(e) {
-				canvaCandle.scrollEnd(e);
-				//下面是toolTip事件，如果滚动后不需要显示，可不填写
-				canvaCandle.showToolTip(e, {
-					format: function(item, category) {
-						return category + ' ' + item.name + ':' + item.data
-					}
-				});
-				//这里演示了获取点击序列的方法，如需要将数据显示到canvas外面，可用此方法。
-				var xx = canvaCandle.getCurrentDataIndex(e);
-				//console.log(canvaCandle.opts.series[0].data[xx]);
-				//下面是计算好的MA均线集合，想要点击序列中的当前数据，需要自己遍历seriesMA
-				//console.log(canvaCandle.opts.seriesMA);
-			},
-			tapButton(type) {
+
+			reload() {
+				_self.offset = 0
+				_self.handle = {
+					defual: 10000, // 初始金额
+					list: [], // 买卖记录
+					blance: 10000, // 余额
+					have: 0, // 持仓
+					assets: 10000, // 资产
+				}
+				_self.pointData = [{
+						name: 'highest value',
+						type: 'max',
+						valueDim: 'highest'
+					},
+					{
+						name: 'lowest value',
+						type: 'min',
+						valueDim: 'lowest'
+					},
+					{
+						name: 'average value on close',
+						type: 'average',
+						valueDim: 'close'
+					}]
+				
 
 			},
-			sliderMove(e) {
-				_self.itemCount = e.detail.value;
-				_self.zoomCandle(e.detail.value);
-			},
-			zoomCandle(val) {
-				canvaCandle.zoom({
-					itemCount: val
-				});
-			},
-			changeData() {
 
-			},
 			handerBuy() {
-				if(_self.handle.have==0){
-					let data = _self.result[_self.itemCount]
-					
-					_self.ec3.option.series[0].markPoint.data.push({
+				if (_self.handle.have == 0) {
+					let data = _self.result[_self.itemCount + _self.offset-1]
+					_self.pointData.push({
 						name: 'XX标点',
 						coord: [data.date, data.open],
 						value: "B",
@@ -405,29 +428,30 @@
 							fontSize: "4px",
 						}
 					})
-					_self.handle.list.push(
-					{"type":"B",
-					"date":data.date
+					_self.handle.list.push({
+						"type": "B",
+						"date": data.date
 					})
-					let count = Math.floor(_self.handle.blance/(data.close*100))*100
-					_self.handle.blance = _self.handle.blance-(count*data.close)
+					let count = Math.floor(_self.handle.blance / (data.close * 100)) * 100
+					_self.handle.blance = _self.handle.blance - (count * data.close)
 					_self.handle.have = count
+					console.log("B"+data.date +" "+ data.close+" "+count)
+					
 				}
-				if(_self.itemCount<60){
-					_self.itemCount = _self.itemCount + 1
+				if (_self.offset < 30) {
+					_self.offset = _self.offset + 1
 					_self.updateCanvaCandle()
 				}
-				let data = _self.result[_self.itemCount]
-				_self.handle.assets = _self.handle.blance+_self.handle.have*data.close
-				
-				
+				let data = _self.result[_self.itemCount + _self.offset-1]
+				console.log("new"+data.date +" "+ data.close)
 
 			},
-			handerSeller(){
-				if(_self.handle.have>0){
-					let data = _self.result[_self.itemCount]
-					
-					_self.ec3.option.series[0].markPoint.data.push({
+
+			handerSeller() {
+				if (_self.handle.have > 0) {
+					let data = _self.result[_self.itemCount + _self.offset-1]
+
+					_self.pointData.push({
 						name: 'XX标点',
 						coord: [data.date, data.open],
 						value: "S",
@@ -436,51 +460,80 @@
 							fontSize: "red",
 						}
 					})
-					
+
 					let count = _self.handle.have
-					_self.handle.blance = _self.handle.blance+(count*data.close)
+					_self.handle.blance = _self.handle.blance + (count * data.close)
 					_self.handle.have = 0
 				}
-				
-				if(_self.itemCount<60){
-					_self.itemCount = _self.itemCount + 1
+
+				if (_self.offset < 30) {
+					_self.offset = _self.offset + 1
 					_self.updateCanvaCandle()
 				}
-				let data = _self.result[_self.itemCount]
-				_self.handle.assets = _self.handle.blance+_self.handle.have*data.close
+				let data = _self.result[_self.itemCount + _self.offset-1]
+				_self.handle.assets = _self.handle.blance + _self.handle.have * data.close
 			},
-			handleEnd(){
+
+			handleEnd() {
 				uni.showModal({
-				    title: '提示',
-				    content: '这是一个模态弹窗',
-				    success: function (res) {
-				        if (res.confirm) {
-				            console.log('用户点击确定');
-				        } else if (res.cancel) {
-				            console.log('用户点击取消');
-				        }
-				    }
+					title: '提示',
+					content: '这是一个模态弹窗',
+					success: function(res) {
+						if (res.confirm) {
+							console.log('用户点击确定');
+							_self.getServerData()
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
 				});
 			},
+
 			updateCanvaCandle() {
+
 				var series = []
-				for (var i = 0; i < Math.min(_self.itemCount, _self.result.length); i++) {
+				var begin = _self.itemCount - 30
+				var end = _self.itemCount + _self.offset
+				for (var i = begin; i < Math.min(end, _self.result.length); i++) {
 					let data = _self.result[i]
 					// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
 					series.push([data.date, data.open, data.close, data.low, data.high, data.high])
 
 				}
-				data = splitData(series)
+				
+				_self.sresult = splitData(series)
+			},
+			// 获取股票阶段收益
+			getStoreIncome() {
+				var begindata = _self.result[_self.itemCount]
+				var enddata = _self.result[_self.itemCount + _self.offset-1]
+				return ((enddata.close / begindata.close) - 1) * 100
+			
+			},
+			getHandleIncome() {
+				var end = (_self.handle.assets / (_self.handle.defual) - 1) * 100
+				return end
+			},
+			calculateMA(dayCount, data) {
+				var result = [];
+				
+				for (var i = 0, len = data.values.length; i < len; i++) {
+					var resindex = _self.itemCount+i-30
+					if (resindex < dayCount) {
+						result.push('-');
+						continue;
+					}
+					var sum = 0;
+					for (var j = 0; j < dayCount; j++) {
+						sum += _self.result[resindex - j].close;
+					}
+					result.push(+(sum / dayCount).toFixed(3));
+				}
+			
+				return result;
 
-				_self.ec3.option.series[0].data = data.values
-				_self.ec3.option.series[1].data = calculateMA(30, data)
-				_self.ec3.option.series[2].data = calculateMA(5, data)
-				_self.ec3.option.series[3].data = calculateMA(10, data)
-				_self.ec3.option.series[4].data = calculateMA(20, data)
-				_self.ec3.option.series[5].data = data.volumes
-				_self.ec3.option.xAxis[0].data = data.categoryData
-				_self.ec3.option.xAxis[1].data = data.categoryData
 			}
+
 		},
 	};
 
@@ -489,9 +542,7 @@
 	var downColor = '#00da3c';
 	var downBorderColor = '#008F28';
 
-	var data = splitData([
-
-	]);
+	// var data = splitData([]);
 
 	function splitData(rawData) {
 		var categoryData = [];
@@ -502,7 +553,6 @@
 			values.push(rawData[i]);
 			volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1]);
 		}
-
 		return {
 			categoryData: categoryData,
 			values: values,
@@ -510,21 +560,7 @@
 		};
 	}
 
-	function calculateMA(dayCount, data) {
-		var result = [];
-		for (var i = 0, len = data.values.length; i < len; i++) {
-			if (i < dayCount) {
-				result.push('-');
-				continue;
-			}
-			var sum = 0;
-			for (var j = 0; j < dayCount; j++) {
-				sum += data.values[i - j][1];
-			}
-			result.push(+(sum / dayCount).toFixed(3));
-		}
-		return result;
-	}
+	
 </script>
 
 <style>

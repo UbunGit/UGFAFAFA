@@ -9,9 +9,6 @@ import talib as tl
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 ts.set_token("8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195")
 formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
-
-
-
 dpath = os.path.join(os.getcwd(),"data","cvs")
 
 ###
