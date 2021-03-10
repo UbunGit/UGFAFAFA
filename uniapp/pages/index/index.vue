@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<view class="header">
-			<label>初始}</label></br>
+
 
 		</view>
 
@@ -43,7 +43,7 @@
 								var obj = {
 									top: 110
 								};
-							
+
 								obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
 								console.log(obj)
 								return obj;
@@ -74,7 +74,7 @@
 						grid: [{
 								left: '10%',
 								right: '8%',
-								top:"20upx",
+								top: "20upx",
 								height: '160upx'
 							},
 							{
@@ -154,14 +154,14 @@
 								xAxisIndex: [0, 1],
 								start: 0,
 								end: 100,
-								height:"15upx",
+								height: "15upx",
 							},
 							{
 								show: true,
 								xAxisIndex: [0, 1],
 								type: 'slider',
 								top: '0',
-								height:"15upx",
+								height: "15upx",
 								start: 0,
 								end: 100
 							}
@@ -279,14 +279,14 @@
 				pixelRatio: 1,
 				itemCount: 30, //x轴单屏数据密度
 				offset: 0,
-				result: '',
+				result: [],
 				sresult: {
 					categoryData: [],
 					values: [],
 					volumes: [],
 				},
 				pointData: [
-				
+
 					{
 						name: 'highest value',
 						type: 'max',
@@ -338,34 +338,37 @@
 		},
 		methods: {
 			getServerData() {
+				return
 				_self.reload()
 				uni.request({
-					url: this.baseUrl + '/share/simulation',
+					url: 'http://api.tushare.pro',
+					method: "POST",
 					data: {
-						"code": "300022.sz"
+						"api_name":"daily",
+						"token":"8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195",
+						"params":{"ts_code":"300022.SZ"},
+						"fields":""
 					},
 					success: function(res) {
-						console.log(res.data.data)
-						_self.result = JSON.parse(res.data.data)
-						if (_self.result.length < 60) {
-							uni.showModal({
-								title: '错误',
-								content: '数据量太少',
-								success: function(res) {
-									if (res.confirm) {
 
-										_self.getServerData()
-									} else if (res.cancel) {
-										_self.getServerData()
-									}
-								}
-							});
-							return;
+						let result = res.data.data
+						let datas = result.items.reverse()
+			
+						var dataArr = []
+						for (var i = 0; i < datas.length; i++) {
+							let values = datas[i]
+							let keys =  result.fields
+							var data = {}
+							for (var j = 0; j < keys.length; j++) {
+								let key = keys[j]
+								data[key]= values[j]
+							}
+							dataArr.push(data)
 						}
-						var max = _self.result.length - 30
-						var min = 30
-						_self.itemCount = Math.round(Math.random() * (max - min)) + min
-						let tdata = _self.updateCanvaCandle()
+						_self.result = dataArr
+						console.log(_self.result)
+						// _self.result = JSON.parse(res.data.data)
+						
 					},
 					fail: () => {
 						_self.tips = "网络错误，小程序端请检查合法域名";
@@ -383,7 +386,7 @@
 					have: 0, // 持仓
 					assets: 10000, // 资产
 				}
-				
+
 
 			},
 
@@ -392,7 +395,7 @@
 					let data = _self.result[_self.itemCount + _self.offset]
 					_self.pointData.push({
 						name: 'XX标点',
-						coord: [data.date, data.open],
+						coord: [data.trade_date, data.open],
 						value: "B",
 						itemStyle: {
 							color: "rgb(50,205,200)",
@@ -401,7 +404,7 @@
 					})
 					_self.handle.list.push({
 						"type": "B",
-						"date": data.date
+						"date": data.trade_date
 					})
 					let count = Math.floor(_self.handle.blance / (data.close * 100)) * 100
 					_self.handle.blance = _self.handle.blance - (count * data.close)
@@ -424,7 +427,7 @@
 
 					_self.pointData.push({
 						name: 'XX标点',
-						coord: [data.date, data.open],
+						coord: [data.trade_date, data.open],
 						value: "S",
 						itemStyle: {
 							color: "red",
@@ -468,10 +471,12 @@
 				for (var i = begin; i < Math.min(end, _self.result.length); i++) {
 					let data = _self.result[i]
 					// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
-					series.push([data.date, data.open, data.close, data.low, data.high, data.high])
+					series.push([data.trade_date, data.open, data.close, data.low, data.high, data.high])
 
 				}
+			
 				_self.sresult = splitData(series)
+				
 
 			},
 			// 获取股票阶段收益
@@ -479,7 +484,7 @@
 				var begindata = _self.result[_self.itemCount]
 				var enddata = _self.result[_self.itemCount + _self.offset]
 				return ((enddata.close / begindata.close) - 1) * 100
-			
+
 			},
 			getHandleIncome() {
 				var end = (_self.handle.assets / (_self.handle.defual) - 1) * 100
@@ -487,9 +492,9 @@
 			},
 			calculateMA(dayCount, data) {
 				var result = [];
-				
+
 				for (var i = 0, len = data.values.length; i < len; i++) {
-					var resindex = _self.itemCount+i-30
+					var resindex = _self.itemCount + i - 30
 					if (resindex < dayCount) {
 						result.push('-');
 						continue;
@@ -500,7 +505,7 @@
 					}
 					result.push(+(sum / dayCount).toFixed(3));
 				}
-			
+
 				return result;
 
 			}
@@ -530,8 +535,6 @@
 			volumes: volumes
 		};
 	}
-
-	
 </script>
 
 <style>

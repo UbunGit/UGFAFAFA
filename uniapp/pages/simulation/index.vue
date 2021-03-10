@@ -40,7 +40,7 @@
 					option: {
 						animation: false,
 						legend: {
-							bottom: 10,
+							top: 200,
 							left: 'center',
 							data: ['Dow-Jones index', 'MA5', 'MA10', 'MA20', 'MA30']
 						},
@@ -86,16 +86,16 @@
 							}]
 						},
 						grid: [{
-								left: '10%',
+								left: '8%',
 								right: '8%',
-								top:"20upx",
-								height: '160upx'
+								top:"20",
+								height: '160'
 							},
 							{
-								left: '10%',
+								left: '8%',
 								right: '8%',
-								top: '200upx',
-								height: '16%'
+								top: '200',
+								height: '60'
 							}
 						],
 						xAxis: [{
@@ -243,33 +243,33 @@
 									opacity: 0.5
 								}
 							},
-							{
-								name: 'MA10',
-								type: 'line',
-								data: this.calculateMA(10, this.sresult),
-								symbol: 'none',
-								lineStyle: {
-									opacity: 0.5
-								}
-							},
-							{
-								name: 'MA20',
-								type: 'line',
-								data: this.calculateMA(20, this.sresult),
-								symbol: 'none',
-								lineStyle: {
-									opacity: 0.5
-								}
-							},
-							{
-								name: 'MA30',
-								type: 'line',
-								data: this.calculateMA(30, this.sresult),
-								symbol: 'none',
-								lineStyle: {
-									opacity: 0.5
-								}
-							},
+							// {
+							// 	name: 'MA10',
+							// 	type: 'line',
+							// 	data: this.calculateMA(10, this.sresult),
+							// 	symbol: 'none',
+							// 	lineStyle: {
+							// 		opacity: 0.5
+							// 	}
+							// },
+							// {
+							// 	name: 'MA20',
+							// 	type: 'line',
+							// 	data: this.calculateMA(20, this.sresult),
+							// 	symbol: 'none',
+							// 	lineStyle: {
+							// 		opacity: 0.5
+							// 	}
+							// },
+							// {
+							// 	name: 'MA30',
+							// 	type: 'line',
+							// 	data: this.calculateMA(30, this.sresult),
+							// 	symbol: 'none',
+							// 	lineStyle: {
+							// 		opacity: 0.5
+							// 	}
+							// },
 
 							{
 								name: 'Volume',
@@ -354,13 +354,34 @@
 			getServerData() {
 				_self.reload()
 				uni.request({
-					url: this.baseUrl + '/share/simulation',
+					url: 'https://api.tushare.pro',
+					method: "POST",
 					data: {
-						"code": "300022.sz"
+						"api_name":"daily",
+						"token":"8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195",
+						"params":{"ts_code":"300022.SZ"},
+						"fields":""
 					},
 					success: function(res) {
-						console.log(res.data.data)
-						_self.result = JSON.parse(res.data.data)
+				
+						let result = res.data.data
+						let datas = result.items.reverse()
+						console.log(datas)
+						var dataArr = []
+						for (var i = 0; i < datas.length; i++) {
+							let values = datas[i]
+							let keys =  result.fields
+							var data = {}
+							for (var j = 0; j < keys.length; j++) {
+								let key = keys[j]
+								data[key]= values[j]
+							}
+							dataArr.push(data)
+						}
+				
+						_self.result = dataArr
+				
+						console.log(_self.result)
 						if (_self.result.length < 60) {
 							uni.showModal({
 								title: '错误',
@@ -381,13 +402,20 @@
 						_self.itemCount = Math.round(Math.random() * (max - min)) + min
 						console.log(_self.itemCount)
 						let tdata = _self.updateCanvaCandle()
+						uni.showToast({
+						    title: '数据获取成功',
+						    duration: 2000
+						});
 					},
-					fail: () => {
-						_self.tips = "网络错误，小程序端请检查合法域名";
+					fail: (error) => {
+						uni.showToast({
+						    title: JSON.stringify(error),
+						    duration: 2000
+						});
 					},
 				});
 			},
-
+			
 			reload() {
 				_self.offset = 0
 				_self.handle = {
@@ -421,7 +449,7 @@
 					let data = _self.result[_self.itemCount + _self.offset-1]
 					_self.pointData.push({
 						name: 'XX标点',
-						coord: [data.date, data.open],
+						coord: [data.trade_date, data.open],
 						value: "B",
 						itemStyle: {
 							color: "rgb(50,205,200)",
@@ -430,12 +458,12 @@
 					})
 					_self.handle.list.push({
 						"type": "B",
-						"date": data.date
+						"date": data.trade_date
 					})
 					let count = Math.floor(_self.handle.blance / (data.close * 100)) * 100
 					_self.handle.blance = _self.handle.blance - (count * data.close)
 					_self.handle.have = count
-					console.log("B"+data.date +" "+ data.close+" "+count)
+					console.log("B"+data.trade_date +" "+ data.close+" "+count)
 					
 				}
 				if (_self.offset < 30) {
@@ -443,7 +471,7 @@
 					_self.updateCanvaCandle()
 				}
 				let data = _self.result[_self.itemCount + _self.offset-1]
-				console.log("new"+data.date +" "+ data.close)
+				console.log("new"+data.trade_date +" "+ data.close)
 
 			},
 
@@ -453,7 +481,7 @@
 
 					_self.pointData.push({
 						name: 'XX标点',
-						coord: [data.date, data.open],
+						coord: [data.trade_date, data.open],
 						value: "S",
 						itemStyle: {
 							color: "red",
@@ -497,17 +525,36 @@
 				for (var i = begin; i < Math.min(end, _self.result.length); i++) {
 					let data = _self.result[i]
 					// 数据意义：开盘(open)，收盘(close)，最低(lowest)，最高(highest)
-					series.push([data.date, data.open, data.close, data.low, data.high, data.high])
-
+					series.push([data.trade_date, data.open, data.close, data.low, data.high, data.high])
 				}
 				
-				_self.sresult = splitData(series)
+				_self.sresult = _self.splitData(series)
+			},
+			splitData(rawData) {
+				var categoryData = [];
+				var values = [];
+				var volumes = [];
+				for (var i = 0; i < rawData.length; i++) {
+					categoryData.push(rawData[i].splice(0, 1)[0]);
+					values.push(rawData[i]);
+					volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1]);
+				}
+				return {
+					categoryData: categoryData,
+					values: values,
+					volumes: volumes
+				};
 			},
 			// 获取股票阶段收益
 			getStoreIncome() {
-				var begindata = _self.result[_self.itemCount]
-				var enddata = _self.result[_self.itemCount + _self.offset-1]
-				return ((enddata.close / begindata.close) - 1) * 100
+				if(_self.result != undefined){
+					var begindata = _self.result[_self.itemCount]
+					var enddata = _self.result[_self.itemCount + _self.offset-1]
+					return ((enddata.close / begindata.close) - 1) * 100
+				}else{
+					return 0
+				}
+				
 			
 			},
 			getHandleIncome() {
@@ -515,9 +562,13 @@
 				return end
 			},
 			calculateMA(dayCount, data) {
+				console.log("1111")
 				var result = [];
 				
 				for (var i = 0, len = data.values.length; i < len; i++) {
+					let item = data[i]
+					let key = "ma"+dayCount.toString()
+					
 					var resindex = _self.itemCount+i-30
 					if (resindex < dayCount) {
 						result.push('-');
@@ -542,31 +593,12 @@
 	var downColor = '#00da3c';
 	var downBorderColor = '#008F28';
 
-	// var data = splitData([]);
-
-	function splitData(rawData) {
-		var categoryData = [];
-		var values = [];
-		var volumes = [];
-		for (var i = 0; i < rawData.length; i++) {
-			categoryData.push(rawData[i].splice(0, 1)[0]);
-			values.push(rawData[i]);
-			volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1]);
-		}
-		return {
-			categoryData: categoryData,
-			values: values,
-			volumes: volumes
-		};
-	}
-
-	
 </script>
 
 <style>
 	.uni-ec-canvas {
 		width: 750upx;
-		height: 750upx;
+		height: 700upx;
 		display: block;
 	}
 

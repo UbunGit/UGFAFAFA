@@ -17,6 +17,9 @@ spath = os.path.join(os.getcwd(),"code", "tactics")
 
 @tactics.route('/list' , methods=["GET"])
 def list():
+    '''
+    获取回测策略列表
+    '''
     try:
         if request.method == 'GET':
  
@@ -31,6 +34,9 @@ def list():
 
 @tactics.route('/detailed' , methods=["GET"])
 def detailed():
+    '''
+    获取策略详情
+    '''
     try:
         if request.method == 'GET':
             tacticid = request.args.get("id")
@@ -56,6 +62,9 @@ def detailed():
 
 @tactics.route('/add' , methods=["POST"])
 def add():
+    '''
+    添加策略
+    '''
     try:
         if request.method == 'POST':
             postdata = get_post_data(request)
@@ -79,6 +88,9 @@ def add():
 
 @tactics.route('/update' , methods=["POST"])
 def update():
+    '''
+    修改策略
+    '''
     try:
         if request.method == 'POST':
             postdata = get_post_data(request)
@@ -97,7 +109,10 @@ def update():
             if "doc" in postdata:
                 tactics.doc = postdata["doc"]
             if "code" in postdata:
-                path = os.path.join(spath,'{0}.py'.format(postdata["id"])) 
+                if os.path.exists(tactics.source):
+                    path = tactics.source
+                else:
+                    path = os.path.join(spath,'{0}.py'.format(postdata["id"])) 
                 with open(path, 'w', encoding='utf-8') as f:
                     f.write(postdata["code"])
                     tactics.source = path
@@ -112,6 +127,9 @@ def update():
 
 @tactics.route('/exit' , methods=["GET"])
 def exit():
+    '''
+    执行策略
+    '''
     try:
         if request.method == 'GET':
             tacticid = request.args.get("id")
@@ -130,7 +148,6 @@ def exit():
             tem = pd.read_csv(path,dtype={"date":"string"}, index_col=0)
             outdata = tem.to_json(orient='records')
             result = json.loads(outdata,strict=False)
-        
             return json.dumps({"code": 200,"data":result})
     except Exception as e:
         return json.dumps({"code": -1,"data":str(e)})
