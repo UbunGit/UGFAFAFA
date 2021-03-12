@@ -57,16 +57,23 @@ def setup(param={
     spd = share(code)
     if spd.cdata is None:
         return []
+    logging.info(spd.cdata)
     list = spd.appendma(data=spd.cdata,ma=5)
+
     list = spd.appendma(data=list,ma=10)
+
     list = spd.appendma(data=list,ma=20)
+    
     
     if begin != None:
         list = list[list.date>=begin]
+        logging.info(list)
     if end != None:
         list = list[list.date<=end]
-    
+        logging.info(list)
+    logging.info(list)
     shares = json.loads(list.to_json(orient='records'))
+    logging.info(shares)
 
     logging.info(
         '''
@@ -182,7 +189,7 @@ def finesh():
 
 if __name__ == '__main__':
     
-    shares = setup({'code': '300022.sz', 'begin': '20210101', 'end': '20210607', 'money': '20000', 'inScale': '0.98', 'outScale': '1.10'})
+    shares = setup({'code': '600111.sh', 'begin': '20210101', 'end': '20210607', 'money': '20000', 'inScale': '0.98', 'outScale': '1.10'})
     for item in shares:
 
         data = seller(item)

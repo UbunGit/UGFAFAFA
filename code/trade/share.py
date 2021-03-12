@@ -182,7 +182,7 @@ class shares:
 
 if __name__ == '__main__':
     # SH沪股通SZ
-    cshare = share('300022.SZ')
+    cshare = share('600111.SH')
     logging.info("result：\n%s",cshare.cdata)
     # result =cshare.appendma(cshare.cdata,30)
     # logging.info("ma result：\n%s",result)
