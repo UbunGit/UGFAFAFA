@@ -11,6 +11,7 @@
 		84807DBB25FB7A8900C8CB18 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84807DBA25FB7A8900C8CB18 /* Tests_macOS.swift */; };
 		84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84807D9125FB7A8500C8CB18 /* apple.xcdatamodeld */; };
 		84807DBE25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84807D9125FB7A8500C8CB18 /* apple.xcdatamodeld */; };
+		84807DBF25FB7A8900C8CB18 /* appleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84807D9325FB7A8500C8CB18 /* appleApp.swift */; };
 		84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84807D9325FB7A8500C8CB18 /* appleApp.swift */; };
 		84807DC125FB7A8900C8CB18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84807D9425FB7A8500C8CB18 /* ContentView.swift */; };
 		84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84807D9425FB7A8500C8CB18 /* ContentView.swift */; };
