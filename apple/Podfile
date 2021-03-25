@@ -1,0 +1,26 @@
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+
+use_frameworks!
+
+def commonPods
+
+end
+
+def debugPods
+    
+end
+target 'apple (iOS)' do
+    
+   pod 'CocoaAsyncSocket'
+    
+end
+
+
+target 'apple (macOS)' do
+    
+   pod 'CocoaAsyncSocket'
+   
+    
+end
+
+

@@ -8,6 +8,7 @@
 import SwiftUI
 import CoreData
 
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -16,6 +17,8 @@ struct ContentView: View {
         animation: .default)
     private var items: FetchedResults<Item>
 
+    var socketServer = TcpSocketServer()
+
     var body: some View {
         List {
             ForEach(items) { item in
@@ -23,19 +26,34 @@ struct ContentView: View {
             }
             .onDelete(perform: deleteItems)
         }
+        .background(Color.red)
         .toolbar {
-            #if os(iOS)
-            EditButton()
-            #endif
-
-            Button(action: addItem) {
-                Label("Add Item", systemImage: "plus")
+            if(socketServer.state == false){
+                Button(action: addItem) {
+                    Label("star", systemImage: "play")
+                }
+            }else{
+                Button(action: addItem) {
+                    Label("stop", systemImage: "stop")
+                }
             }
+           
         }
+       
     }
 
     private func addItem() {
+        if (socketServer.state==true) {
+            socketServer.stop()
+        }else{
+            socketServer.start()
+        }
+        
+        return
         withAnimation {
+            //启动服务器
+          
+            
             let newItem = Item(context: viewContext)
             newItem.timestamp = Date()
 
