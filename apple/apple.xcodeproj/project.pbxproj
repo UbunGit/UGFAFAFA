@@ -16,10 +16,14 @@
 		84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84807D9425FB7A8500C8CB18 /* ContentView.swift */; };
 		84807DC325FB7A8900C8CB18 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84807D9525FB7A8500C8CB18 /* Persistence.swift */; };
 		84807DC425FB7A8900C8CB18 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84807D9525FB7A8500C8CB18 /* Persistence.swift */; };
-		84807DC525FB7A8900C8CB18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84807D9625FB7A8900C8CB18 /* Assets.xcassets */; };
-		84807DC625FB7A8900C8CB18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84807D9625FB7A8900C8CB18 /* Assets.xcassets */; };
 		8489294E260C5C8500006D88 /* Pods_apple__macOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25FE6ADDE50ED540B221C130 /* Pods_apple__macOS_.framework */; };
 		8489294F260C5C8500006D88 /* Pods_apple__macOS_.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 25FE6ADDE50ED540B221C130 /* Pods_apple__macOS_.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		84E11EDB260D924D0012D151 /* HomeModen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EDA260D924D0012D151 /* HomeModen.swift */; };
+		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
+		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
+		84E11F15260DBF9A0012D151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E11F14260DBF9A0012D151 /* Assets.xcassets */; };
+		84E11F19260DBF9F0012D151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E11F14260DBF9A0012D151 /* Assets.xcassets */; };
+		84E11F2E260DCEEF0012D151 /* SQLiteManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */; };
 		84FA4DE425FB9C8D00F93203 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84FA4DE325FB9C8D00F93203 /* PythonKit */; };
 		84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */; };
 		84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DF725FBA4EF00F93203 /* ContentView.swift */; };
@@ -67,7 +71,6 @@
 		84807D9325FB7A8500C8CB18 /* appleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appleApp.swift; sourceTree = "<group>"; };
 		84807D9425FB7A8500C8CB18 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		84807D9525FB7A8500C8CB18 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		84807D9625FB7A8900C8CB18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84807D9B25FB7A8900C8CB18 /* apple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = apple.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84807D9E25FB7A8900C8CB18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84807DA325FB7A8900C8CB18 /* apple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = apple.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +82,11 @@
 		84807DB625FB7A8900C8CB18 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		84807DBA25FB7A8900C8CB18 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		84807DBC25FB7A8900C8CB18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84E11EDA260D924D0012D151 /* HomeModen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeModen.swift; sourceTree = "<group>"; };
+		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
+		84E11F14260DBF9A0012D151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
 		84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonCenter.swift; sourceTree = "<group>"; };
 		84FA4DF725FBA4EF00F93203 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		84FA4E3425FBAA2B00F93203 /* SockerServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SockerServer.swift; sourceTree = "<group>"; };
@@ -160,9 +168,10 @@
 		84807D9025FB7A8500C8CB18 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				84E11F14260DBF9A0012D151 /* Assets.xcassets */,
+				84E11EF5260DBC860012D151 /* TextField */,
 				84807D9325FB7A8500C8CB18 /* appleApp.swift */,
 				84807D9525FB7A8500C8CB18 /* Persistence.swift */,
-				84807D9625FB7A8900C8CB18 /* Assets.xcassets */,
 				84807D9125FB7A8500C8CB18 /* apple.xcdatamodeld */,
 			);
 			path = Shared;
@@ -193,8 +202,9 @@
 		84807DA425FB7A8900C8CB18 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				84E11ED6260D91E80012D151 /* Home */,
+				84E11EB3260D8CF50012D151 /* DataBase */,
 				84FA4E3325FBA9E600F93203 /* SocketServer */,
-				84807D9425FB7A8500C8CB18 /* ContentView.swift */,
 				84807DA525FB7A8900C8CB18 /* Info.plist */,
 				84807DA625FB7A8900C8CB18 /* macOS.entitlements */,
 				84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */,
@@ -218,6 +228,56 @@
 				84807DBC25FB7A8900C8CB18 /* Info.plist */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		84E11EB3260D8CF50012D151 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		84E11ED6260D91E80012D151 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				84E11ED9260D92250012D151 /* Page */,
+				84E11ED8260D92190012D151 /* Moden */,
+				84E11ED7260D92100012D151 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		84E11ED7260D92100012D151 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		84E11ED8260D92190012D151 /* Moden */ = {
+			isa = PBXGroup;
+			children = (
+				84E11EDA260D924D0012D151 /* HomeModen.swift */,
+			);
+			path = Moden;
+			sourceTree = "<group>";
+		};
+		84E11ED9260D92250012D151 /* Page */ = {
+			isa = PBXGroup;
+			children = (
+				84807D9425FB7A8500C8CB18 /* ContentView.swift */,
+				84E11EF0260DB3460012D151 /* Sidebar.swift */,
+				84E11EEB260DB2DB0012D151 /* SettingView.swift */,
+			);
+			path = Page;
+			sourceTree = "<group>";
+		};
+		84E11EF5260DBC860012D151 /* TextField */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TextField;
 			sourceTree = "<group>";
 		};
 		84FA4E3325FBA9E600F93203 /* SocketServer */ = {
@@ -378,7 +438,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84807DC525FB7A8900C8CB18 /* Assets.xcassets in Resources */,
+				84E11F19260DBF9F0012D151 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +446,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84807DC625FB7A8900C8CB18 /* Assets.xcassets in Resources */,
+				84E11F15260DBF9A0012D151 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +552,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84E11F2E260DCEEF0012D151 /* SQLiteManage.swift in Sources */,
 				84807DBF25FB7A8900C8CB18 /* appleApp.swift in Sources */,
 				84807DC325FB7A8900C8CB18 /* Persistence.swift in Sources */,
 				84FA4E4A25FBB8B900F93203 /* Socket.swift in Sources */,
@@ -509,6 +570,9 @@
 				84807DC425FB7A8900C8CB18 /* Persistence.swift in Sources */,
 				84807DBE25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */,
+				84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */,
+				84E11EDB260D924D0012D151 /* HomeModen.swift in Sources */,
+				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

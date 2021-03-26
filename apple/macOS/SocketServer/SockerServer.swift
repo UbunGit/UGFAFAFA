@@ -19,48 +19,57 @@ class TcpSocketServer: NSObject,GCDAsyncSocketDelegate {
     var serverSocket: GCDAsyncSocket?
     var clientSockets = NSMutableArray()
     
+    override init() {
+        super.init()
+    }
 
-    
-    
-    
-    func start()  {
-        let queue = DispatchQueue.global(qos: .default)
+    func start(port:String)  {
+        print("start")
+        let p = UInt16(port) ?? 8888
+        let queue = DispatchQueue.main
         serverSocket = GCDAsyncSocket(delegate: self, delegateQueue: queue)
-       
         do {
-            try serverSocket?.accept( onPort: UInt16(8888))
+            try serverSocket?.accept( onPort: p)
             state = true
-            print("监听成功")
+            print("监听\(p)成功")
         }catch _ {
             state = false
             print("监听失败")
         }
     }
     func stop()  {
-        serverSocket?.disconnect()
-        state = false
+//        serverSocket?.disconnect()
+//        serverSocket?.delegate = nil
+//        serverSocket = nil
+//        state = false
+//        print("stop")
     }
     
-    func socket(_ sock: GCDAsyncSocket, didConnectTo url: URL) {
-        print("连接主机对应端口\(sock)")
-        serverSocket?.readData(withTimeout: -1, tag: 0)
+    func sendmsg(client:GCDAsyncSocket, msg:Dictionary<String, Any>)  {
+        guard let data:Data = try? Data(JSONSerialization.data(withJSONObject: msg,
+                                                               options: JSONSerialization.WritingOptions(rawValue: 1))) else { return }
+        print("发送消息\(msg)")
+        client.write(data, withTimeout: -1, tag: 0)
+        client.readData(withTimeout: -1, tag: 0)
+        
+    }
+    
+  
+    func socket(_ sock: GCDAsyncSocket, didAcceptNewSocket newSocket: GCDAsyncSocket) {
+       
+        if (clientSockets.contains(newSocket)) {
+            print("client 已经存在！")
+            return
+        }
+        clientSockets.add(newSocket)
+        let beat = ["a":"0"]
+        sendmsg(client: newSocket, msg: beat)
     }
     
     func socket(_ sock: GCDAsyncSocket, didRead data: Data, withTag tag: Int) {
-        let str = String(data: data, encoding: .utf8)
-        print(str ?? "000")
-        serverSocket?.readData(withTimeout: -1, tag: 0)
+        let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String:AnyObject]
+        print(json ?? "Empty Data")
+        sock.readData(withTimeout: -1, tag: 0)
     }
-    
-    func socketDidDisconnect(_ sock: GCDAsyncSocket, withError err: Error?) {
-        print("断开连接")
-        serverSocket?.delegate = nil
-    }
-    
-
-    
-    
-    
-    
 }
 

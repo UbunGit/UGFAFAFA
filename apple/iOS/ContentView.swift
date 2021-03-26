@@ -37,7 +37,7 @@ struct ContentView: View {
         }
         .background(Color.red)
         .onAppear(){
-            client.connect()
+            client.sendmsg(msg: "onAppear")
         }
         
     }

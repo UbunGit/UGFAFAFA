@@ -1,4 +1,4 @@
-source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+#source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 use_frameworks!
 
@@ -12,6 +12,7 @@ end
 target 'apple (iOS)' do
     
    pod 'CocoaAsyncSocket'
+   pod 'SQLite.swift'
     
 end
 
@@ -19,6 +20,7 @@ end
 target 'apple (macOS)' do
     
    pod 'CocoaAsyncSocket'
+   pod 'SQLite.swift'
    
     
 end
