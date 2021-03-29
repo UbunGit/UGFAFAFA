@@ -9,15 +9,14 @@ DEPENDENCIES:
   - SQLite.swift
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - CocoaAsyncSocket
-  trunk:
     - SQLite.swift
 
 SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
 
-PODFILE CHECKSUM: 863ca5b95f2ac4f402e986cf606a0d0b26310382
+PODFILE CHECKSUM: f322577fa6deb5124c1f3391570ae5292635241e
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0

@@ -13,13 +13,15 @@ struct SettingView: View {
     @State var port = "8888"
     @State var dbfile = UserDefaults.standard.string(forKey: "dbfile")
     
-    var socketServer = TcpSocketServer()
+    @ObservedObject var socketServer = TcpSocketServer()
     
     var body: some View {
         VStack(alignment: .leading){
             socketSetting
             
             dbSetting
+            
+            test
             
         }
         .padding(.all)
@@ -35,46 +37,47 @@ struct SettingView: View {
                 .fontWeight(.medium)
                 .opacity(0.4)
             VStack(alignment: .trailing){
-      
-            
-           
-            VStack {
-                HStack(){
-                    Text("ip地址")
-                    TextField("请输入ip地址", text: $host)
-                        .font(.title3)
-                        .padding(8)
-                        .background(Color("Background 1"))
-                        .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                        .padding(.vertical, 8)
-                    
+                
+                
+                
+                VStack {
+                    HStack(){
+                        Text("ip地址")
+                        TextField("请输入ip地址", text: $host)
+                            .font(.title3)
+                            .padding(8)
+                            .background(Color("Background 1"))
+                            .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                            .padding(.vertical, 8)
+                        
+                    }
+                    HStack{
+                        Text("端口号")
+                        TextField("请输入端口号", text: $port)
+                            .font(.title3)
+                            .padding(8)
+                            .background(Color("Background 1"))
+                            .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                            .padding(.vertical, 8)
+                    }
                 }
-                HStack{
-                    Text("端口号")
-                    TextField("请输入端口号", text: $port)
-                        .font(.title3)
-                        .padding(8)
-                        .background(Color("Background 1"))
-                        .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
-                        .padding(.vertical, 8)
-                }
-            }
-            
-       
+                
+                
                 if(socketServer.state == false){
                     Button(action: start) {
-                        Label("start", systemImage: "play")
+                        Text("start")
                     }
                     .frame(alignment: .bottomTrailing)
+
                 }else{
                     Button(action: stop) {
-                        Label("stop", systemImage: "stop")
+                        Text("starting")
                     }
+                    .frame(alignment: .bottomTrailing)
+                    
                 }
-            
+                
             }
-         
-            
             
         }
         .padding(.trailing)
@@ -93,11 +96,28 @@ struct SettingView: View {
                     .background(Color("Background 1"))
                     .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
                     .padding(.vertical, 8)
-             
+                
                 Button(action: findFile) {
                     Text("选择文件")
                 }
-               
+                
+            }
+        }
+    }
+    
+    var test:some View{
+        Group{
+            Text("测试按钮")
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .opacity(0.4)
+            
+            HStack{
+                
+                Button(action: dotest) {
+                    Text("测试按钮")
+                }
+                
             }
         }
     }
@@ -118,7 +138,7 @@ struct SettingView: View {
     
     private func findFile(){
         let openPanel = NSOpenPanel()
-
+        
         openPanel.allowsMultipleSelection = false
         openPanel.canChooseDirectories = false
         openPanel.canCreateDirectories = false
@@ -129,14 +149,19 @@ struct SettingView: View {
                 let defaults = UserDefaults.standard
                 defaults.set(openPanel.url?.absoluteString, forKey: "dbfile")
                 dbfile = openPanel.url?.absoluteString
+                SQLiteManage.updatefile()
                 
-              
+                Tactic.tactics()
+                
                 print(defaults.string(forKey: "dbfile")!)
             }
         }
     }
     
-    
+    private func dotest(){
+        confitpython()
+//        pythonManageTest1()
+    }
 }
 
 struct SettingView_Previews: PreviewProvider {

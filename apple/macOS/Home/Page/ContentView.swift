@@ -16,11 +16,7 @@ struct ContentView: View {
     var body: some View {
         
         Sidebar()
-            
-            .frame(minWidth: 1000, maxWidth: .infinity, minHeight: 600, maxHeight: .infinity)
-        
-            
-        
+
     }
     
   

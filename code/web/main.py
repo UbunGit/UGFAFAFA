@@ -102,7 +102,7 @@ def chooseList():
         except Exception as e:
             logging.error("获取推荐股票 Exception %s",e)
             return json.dumps({"code": -1,"data":str(e)})
-       
+      
  
 
 @app.route('/run', methods=['POST'])
@@ -129,7 +129,6 @@ def run():
             return json.dumps({"code": -1,"data":str(e)})
     return Response_headers(str("jsondata"))
  
-
  
 @app.errorhandler(403)
 def page_not_found(error):
@@ -184,8 +183,10 @@ app.register_blueprint(tactics,url_prefix='/tactics')
 from .api_tactics_input import tacticsInput
 app.register_blueprint(tacticsInput,url_prefix='/tacticsinput')
 
- 
-if __name__ == '__main__':
+def start():
     init_db()
     app.run( debug=True, host="0.0.0.0")
 
+if __name__ == '__main__':
+    
+    start()

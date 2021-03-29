@@ -7,14 +7,14 @@
 
 import Foundation
 import CocoaAsyncSocket
-
+import SwiftUI
 class ClientSocket: GCDAsyncSocket {
     
  
 }
-class TcpSocketServer: NSObject,GCDAsyncSocketDelegate {
+class TcpSocketServer: NSObject,GCDAsyncSocketDelegate,ObservableObject {
     
-    var state:Bool=false
+    @Published  var state:Bool=false
     //服务端和客户端的socket引用
     var serverSocket: GCDAsyncSocket?
     var clientSockets = NSMutableArray()
@@ -30,7 +30,7 @@ class TcpSocketServer: NSObject,GCDAsyncSocketDelegate {
         serverSocket = GCDAsyncSocket(delegate: self, delegateQueue: queue)
         do {
             try serverSocket?.accept( onPort: p)
-            state = true
+            self.state = true
             print("监听\(p)成功")
         }catch _ {
             state = false
@@ -38,6 +38,7 @@ class TcpSocketServer: NSObject,GCDAsyncSocketDelegate {
         }
     }
     func stop()  {
+        state = false
 //        serverSocket?.disconnect()
 //        serverSocket?.delegate = nil
 //        serverSocket = nil
