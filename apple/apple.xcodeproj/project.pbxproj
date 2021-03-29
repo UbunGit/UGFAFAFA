@@ -26,6 +26,7 @@
 		84E11F15260DBF9A0012D151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E11F14260DBF9A0012D151 /* Assets.xcassets */; };
 		84E11F19260DBF9F0012D151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E11F14260DBF9A0012D151 /* Assets.xcassets */; };
 		84E11F2E260DCEEF0012D151 /* SQLiteManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */; };
+		84E127CA2611D3CA0012D151 /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 84E127C92611D3CA0012D151 /* PerfectSQLite */; };
 		84F291F32611C13500593144 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		84F291FC2611C48A00593144 /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 84F291FB2611C48A00593144 /* PerfectSQLite */; };
 		84FA4DE425FB9C8D00F93203 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84FA4DE325FB9C8D00F93203 /* PythonKit */; };
@@ -118,6 +119,7 @@
 			files = (
 				84FA4DE425FB9C8D00F93203 /* PythonKit in Frameworks */,
 				8489294E260C5C8500006D88 /* Pods_apple__macOS_.framework in Frameworks */,
+				84E127CA2611D3CA0012D151 /* PerfectSQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +373,7 @@
 			name = "apple (macOS)";
 			packageProductDependencies = (
 				84FA4DE325FB9C8D00F93203 /* PythonKit */,
+				84E127C92611D3CA0012D151 /* PerfectSQLite */,
 			);
 			productName = "apple (macOS)";
 			productReference = 84807DA325FB7A8900C8CB18 /* apple.app */;
@@ -1010,6 +1013,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		84E127C92611D3CA0012D151 /* PerfectSQLite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84F291FA2611C48A00593144 /* XCRemoteSwiftPackageReference "Perfect-SQLite" */;
+			productName = PerfectSQLite;
+		};
 		84F291FB2611C48A00593144 /* PerfectSQLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 84F291FA2611C48A00593144 /* XCRemoteSwiftPackageReference "Perfect-SQLite" */;
