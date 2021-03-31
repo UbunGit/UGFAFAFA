@@ -11,16 +11,18 @@ struct SettingView: View {
     
     @State var host = "127.0.0.1"
     @State var port = "8888"
+    
+    @State var httpPort = "8181"
     @State var dbfile = UserDefaults.standard.string(forKey: "dbfile")
     
     @ObservedObject var socketServer = TcpSocketServer()
-    
+    @ObservedObject var httpServer = HttpServer()
     var body: some View {
         VStack(alignment: .leading){
+            
             socketSetting
-            
+            httpSetting
             dbSetting
-            
             test
             
         }
@@ -82,6 +84,49 @@ struct SettingView: View {
         }
         .padding(.trailing)
     }
+    
+    var httpSetting:some View{
+        Group (){
+            Text("http设置")
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .opacity(0.4)
+            VStack(alignment: .trailing){
+                
+                VStack {
+                   
+                    HStack{
+                        Text("端口号")
+                        TextField("请输入端口号", text: $httpPort)
+                            .font(.title3)
+                            .padding(8)
+                            .background(Color("Background 1"))
+                            .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
+                            .padding(.vertical, 8)
+                    }
+                }
+                
+                
+                if(httpServer.state == false){
+                    Button(action: httpStart) {
+                        Text("start")
+                    }
+                    .frame(alignment: .bottomTrailing)
+
+                }else{
+                    Button(action: stop) {
+                        Text("starting")
+                    }
+                    .frame(alignment: .bottomTrailing)
+                    
+                }
+                
+            }
+            
+        }
+        .padding(.trailing)
+    }
+    
     var dbSetting:some View{
         Group{
             Text("db设置")
@@ -122,28 +167,30 @@ struct SettingView: View {
         }
     }
     
-    private func start() {
+    func start() {
         if (socketServer.state==false) {
             socketServer.start(port: port)
         }
     }
     
-    private func stop() {
+    func stop() {
         if (socketServer.state==true) {
             socketServer.stop()
             
         }
-        
+    }
+    func httpStart(){
+        httpServer.start(port:httpPort)
     }
     
     private func findFile(){
         let openPanel = NSOpenPanel()
         
         openPanel.allowsMultipleSelection = false
-        openPanel.canChooseDirectories = false
+        openPanel.canChooseDirectories = true
         openPanel.canCreateDirectories = false
-        openPanel.canChooseFiles = true
-        openPanel.allowedFileTypes = ["db"]
+        openPanel.canChooseFiles = false
+//        openPanel.allowedFileTypes = ["db"]
         openPanel.begin { (result) -> Void in
             if result.rawValue == NSApplication.ModalResponse.OK.rawValue {
                 let defaults = UserDefaults.standard

@@ -23,7 +23,7 @@ class TcpSocketServer: NSObject,GCDAsyncSocketDelegate,ObservableObject {
         super.init()
     }
 
-    func start(port:String)  {
+    func start(port:String="8888")  {
         print("start")
         let p = UInt16(port) ?? 8888
         let queue = DispatchQueue.main
@@ -73,4 +73,6 @@ class TcpSocketServer: NSObject,GCDAsyncSocketDelegate,ObservableObject {
         sock.readData(withTimeout: -1, tag: 0)
     }
 }
+
+
 

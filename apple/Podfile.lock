@@ -1,22 +1,26 @@
 PODS:
+  - Alamofire (5.4.1)
   - CocoaAsyncSocket (7.6.5)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
 
 DEPENDENCIES:
+  - Alamofire
   - CocoaAsyncSocket
   - SQLite.swift
 
 SPEC REPOS:
   https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
+    - Alamofire
     - CocoaAsyncSocket
     - SQLite.swift
 
 SPEC CHECKSUMS:
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
 
-PODFILE CHECKSUM: f322577fa6deb5124c1f3391570ae5292635241e
+PODFILE CHECKSUM: 364ccbc061112bb332e15bd93c274b3ca26139f4
 
 COCOAPODS: 1.10.0

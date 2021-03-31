@@ -7,6 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8472688726120CB500F92E66 /* Tractic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472688626120CB500F92E66 /* Tractic.swift */; };
+		8472689C261307F300F92E66 /* ArchiveShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ArchiveShareCell.swift */; };
+		8472689E261307F300F92E66 /* ArchiveSharesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* ArchiveSharesPage.swift */; };
+		847268A0261307F300F92E66 /* ArchiveSharesPageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* ArchiveSharesPageStore.swift */; };
+		847268AB2613088700F92E66 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268A92613088700F92E66 /* Share.swift */; };
+		847268AD2613088700F92E66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268AA2613088700F92E66 /* Store.swift */; };
+		847268BE26130CAE00F92E66 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268BD26130CAE00F92E66 /* Date.swift */; };
+		847268BF26130CAE00F92E66 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268BD26130CAE00F92E66 /* Date.swift */; };
+		847268DF26130EC700F92E66 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268A92613088700F92E66 /* Share.swift */; };
+		847268EF26130F6100F92E66 /* C_Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268D626130EB600F92E66 /* C_Share.swift */; };
+		847268F626130F7600F92E66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268AA2613088700F92E66 /* Store.swift */; };
+		847268FB26130F8600F92E66 /* C_Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268FA26130F8600F92E66 /* C_Store.swift */; };
+		84726906261313B100F92E66 /* S_Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726904261313B100F92E66 /* S_Share.swift */; };
+		847269122613299C00F92E66 /* testShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847269112613299C00F92E66 /* testShare.swift */; };
+		8472691926132D2C00F92E66 /* S_Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726904261313B100F92E66 /* S_Share.swift */; };
+		8472691D26132D3E00F92E66 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268A92613088700F92E66 /* Share.swift */; };
+		8472692C26132E8600F92E66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268AA2613088700F92E66 /* Store.swift */; };
+		8472693026132E8900F92E66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268AA2613088700F92E66 /* Store.swift */; };
+		8472693426132E9D00F92E66 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268BD26130CAE00F92E66 /* Date.swift */; };
+		8472693826132E9E00F92E66 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268BD26130CAE00F92E66 /* Date.swift */; };
+		8472693C26132EBF00F92E66 /* SQLiteManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */; };
+		847269412613353700F92E66 /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 847269402613353700F92E66 /* PerfectSQLite */; };
+		8472695426133DE700F92E66 /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8472695326133DE700F92E66 /* PerfectSQLite */; };
 		84807DB025FB7A8900C8CB18 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84807DAF25FB7A8900C8CB18 /* Tests_iOS.swift */; };
 		84807DBB25FB7A8900C8CB18 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84807DBA25FB7A8900C8CB18 /* Tests_macOS.swift */; };
 		84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84807D9125FB7A8500C8CB18 /* apple.xcdatamodeld */; };
@@ -26,15 +49,15 @@
 		84E11F15260DBF9A0012D151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E11F14260DBF9A0012D151 /* Assets.xcassets */; };
 		84E11F19260DBF9F0012D151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E11F14260DBF9A0012D151 /* Assets.xcassets */; };
 		84E11F2E260DCEEF0012D151 /* SQLiteManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */; };
-		84E127CA2611D3CA0012D151 /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 84E127C92611D3CA0012D151 /* PerfectSQLite */; };
-		84F291F32611C13500593144 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
-		84F291FC2611C48A00593144 /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 84F291FB2611C48A00593144 /* PerfectSQLite */; };
+		84F292122611D63F00593144 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
+		84F2921E2611FF2E00593144 /* PerfectHTTPServer in Frameworks */ = {isa = PBXBuildFile; productRef = 84F2921D2611FF2E00593144 /* PerfectHTTPServer */; };
 		84FA4DE425FB9C8D00F93203 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84FA4DE325FB9C8D00F93203 /* PythonKit */; };
 		84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */; };
 		84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DF725FBA4EF00F93203 /* ContentView.swift */; };
 		84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4E3425FBAA2B00F93203 /* SockerServer.swift */; };
 		84FA4E4A25FBB8B900F93203 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4E4925FBB8B900F93203 /* Socket.swift */; };
 		ABE41E7854F9611A49B02DB1 /* Pods_apple__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B692F0E0810CA47CAE67000D /* Pods_apple__iOS_.framework */; };
+		CE54A7A2AAB5AC45E15FD96E /* Pods_Tests_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9648D6D19086E26C3CA8E6C3 /* Pods_Tests_macOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +95,17 @@
 		0B37FEE809CC79B313ED64C5 /* Pods-apple (iOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apple (iOS).release.xcconfig"; path = "Target Support Files/Pods-apple (iOS)/Pods-apple (iOS).release.xcconfig"; sourceTree = "<group>"; };
 		25FE6ADDE50ED540B221C130 /* Pods_apple__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_apple__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BD726DDCB5A4F80F32A27C1 /* Pods-apple (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apple (iOS).debug.xcconfig"; path = "Target Support Files/Pods-apple (iOS)/Pods-apple (iOS).debug.xcconfig"; sourceTree = "<group>"; };
+		8472688626120CB500F92E66 /* Tractic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tractic.swift; sourceTree = "<group>"; };
+		84726897261307F300F92E66 /* ArchiveShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveShareCell.swift; sourceTree = "<group>"; };
+		84726899261307F300F92E66 /* ArchiveSharesPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveSharesPage.swift; sourceTree = "<group>"; };
+		8472689B261307F300F92E66 /* ArchiveSharesPageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveSharesPageStore.swift; sourceTree = "<group>"; };
+		847268A92613088700F92E66 /* Share.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
+		847268AA2613088700F92E66 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		847268BD26130CAE00F92E66 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		847268D626130EB600F92E66 /* C_Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C_Share.swift; sourceTree = "<group>"; };
+		847268FA26130F8600F92E66 /* C_Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C_Store.swift; sourceTree = "<group>"; };
+		84726904261313B100F92E66 /* S_Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S_Share.swift; sourceTree = "<group>"; };
+		847269112613299C00F92E66 /* testShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testShare.swift; sourceTree = "<group>"; };
 		84807D9225FB7A8500C8CB18 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		84807D9325FB7A8500C8CB18 /* appleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appleApp.swift; sourceTree = "<group>"; };
 		84807D9425FB7A8500C8CB18 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,8 +132,11 @@
 		84FA4DF725FBA4EF00F93203 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		84FA4E3425FBAA2B00F93203 /* SockerServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SockerServer.swift; sourceTree = "<group>"; };
 		84FA4E4925FBB8B900F93203 /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		9648D6D19086E26C3CA8E6C3 /* Pods_Tests_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B40092AE8C3F1CC640D053B /* Pods-Tests macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests macOS.debug.xcconfig"; path = "Target Support Files/Pods-Tests macOS/Pods-Tests macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B692F0E0810CA47CAE67000D /* Pods_apple__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_apple__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD77BCFB0CBCD7FBD0F9E98F /* Pods-apple (macOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apple (macOS).debug.xcconfig"; path = "Target Support Files/Pods-apple (macOS)/Pods-apple (macOS).debug.xcconfig"; sourceTree = "<group>"; };
+		C786A93CE50B5F0A66C5EA46 /* Pods-Tests macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests macOS.release.xcconfig"; path = "Target Support Files/Pods-Tests macOS/Pods-Tests macOS.release.xcconfig"; sourceTree = "<group>"; };
 		FA8833153DF3E4D2F21EEA36 /* Pods-apple (macOS).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apple (macOS).release.xcconfig"; path = "Target Support Files/Pods-apple (macOS)/Pods-apple (macOS).release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +145,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84F291FC2611C48A00593144 /* PerfectSQLite in Frameworks */,
 				ABE41E7854F9611A49B02DB1 /* Pods_apple__iOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,9 +153,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8472695426133DE700F92E66 /* PerfectSQLite in Frameworks */,
 				84FA4DE425FB9C8D00F93203 /* PythonKit in Frameworks */,
+				84F2921E2611FF2E00593144 /* PerfectHTTPServer in Frameworks */,
 				8489294E260C5C8500006D88 /* Pods_apple__macOS_.framework in Frameworks */,
-				84E127CA2611D3CA0012D151 /* PerfectSQLite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +171,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847269412613353700F92E66 /* PerfectSQLite in Frameworks */,
+				CE54A7A2AAB5AC45E15FD96E /* Pods_Tests_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +186,8 @@
 				0B37FEE809CC79B313ED64C5 /* Pods-apple (iOS).release.xcconfig */,
 				BD77BCFB0CBCD7FBD0F9E98F /* Pods-apple (macOS).debug.xcconfig */,
 				FA8833153DF3E4D2F21EEA36 /* Pods-apple (macOS).release.xcconfig */,
+				9B40092AE8C3F1CC640D053B /* Pods-Tests macOS.debug.xcconfig */,
+				C786A93CE50B5F0A66C5EA46 /* Pods-Tests macOS.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -156,8 +197,85 @@
 			children = (
 				B692F0E0810CA47CAE67000D /* Pods_apple__iOS_.framework */,
 				25FE6ADDE50ED540B221C130 /* Pods_apple__macOS_.framework */,
+				9648D6D19086E26C3CA8E6C3 /* Pods_Tests_macOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		84726895261307F300F92E66 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				84726896261307F300F92E66 /* View */,
+				84726898261307F300F92E66 /* Pages */,
+				8472689A261307F300F92E66 /* Store */,
+			);
+			path = Archive;
+			sourceTree = "<group>";
+		};
+		84726896261307F300F92E66 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				84726897261307F300F92E66 /* ArchiveShareCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		84726898261307F300F92E66 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				84726899261307F300F92E66 /* ArchiveSharesPage.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		8472689A261307F300F92E66 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				8472689B261307F300F92E66 /* ArchiveSharesPageStore.swift */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
+		847268A82613088700F92E66 /* Moden */ = {
+			isa = PBXGroup;
+			children = (
+				847268A92613088700F92E66 /* Share.swift */,
+				847268AA2613088700F92E66 /* Store.swift */,
+			);
+			path = Moden;
+			sourceTree = "<group>";
+		};
+		847268BC26130C9300F92E66 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				847268BD26130CAE00F92E66 /* Date.swift */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
+		847268D526130E8600F92E66 /* Moden */ = {
+			isa = PBXGroup;
+			children = (
+				847268D626130EB600F92E66 /* C_Share.swift */,
+				847268FA26130F8600F92E66 /* C_Store.swift */,
+			);
+			path = Moden;
+			sourceTree = "<group>";
+		};
+		847269032613138300F92E66 /* Moden */ = {
+			isa = PBXGroup;
+			children = (
+				84726904261313B100F92E66 /* S_Share.swift */,
+			);
+			path = Moden;
+			sourceTree = "<group>";
+		};
+		847269102613295800F92E66 /* ApiTest */ = {
+			isa = PBXGroup;
+			children = (
+				847269112613299C00F92E66 /* testShare.swift */,
+			);
+			path = ApiTest;
 			sourceTree = "<group>";
 		};
 		84807D8B25FB7A8500C8CB18 = {
@@ -177,6 +295,9 @@
 		84807D9025FB7A8500C8CB18 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				847268BC26130C9300F92E66 /* extension */,
+				847268A82613088700F92E66 /* Moden */,
+				84726895261307F300F92E66 /* Archive */,
 				84E11F14260DBF9A0012D151 /* Assets.xcassets */,
 				84E11EF5260DBC860012D151 /* TextField */,
 				84807D9325FB7A8500C8CB18 /* appleApp.swift */,
@@ -200,6 +321,7 @@
 		84807D9D25FB7A8900C8CB18 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				847268D526130E8600F92E66 /* Moden */,
 				84FA4E4825FBB87400F93203 /* Database */,
 				84FA4E4725FBB85B00F93203 /* Socket */,
 				84FA4DF725FBA4EF00F93203 /* ContentView.swift */,
@@ -211,6 +333,7 @@
 		84807DA425FB7A8900C8CB18 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				847269032613138300F92E66 /* Moden */,
 				84F291F12611C10D00593144 /* HttpServer */,
 				848929C5261186A100006D88 /* PythonManage */,
 				84E11ED6260D91E80012D151 /* Home */,
@@ -235,6 +358,7 @@
 		84807DB925FB7A8900C8CB18 /* Tests macOS */ = {
 			isa = PBXGroup;
 			children = (
+				847269102613295800F92E66 /* ApiTest */,
 				84807DBA25FB7A8900C8CB18 /* Tests_macOS.swift */,
 				84807DBC25FB7A8900C8CB18 /* Info.plist */,
 			);
@@ -303,6 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				84F291F22611C13500593144 /* HttpServer.swift */,
+				8472688626120CB500F92E66 /* Tractic.swift */,
 			);
 			path = HttpServer;
 			sourceTree = "<group>";
@@ -348,9 +473,6 @@
 			dependencies = (
 			);
 			name = "apple (iOS)";
-			packageProductDependencies = (
-				84F291FB2611C48A00593144 /* PerfectSQLite */,
-			);
 			productName = "apple (iOS)";
 			productReference = 84807D9B25FB7A8900C8CB18 /* apple.app */;
 			productType = "com.apple.product-type.application";
@@ -373,7 +495,8 @@
 			name = "apple (macOS)";
 			packageProductDependencies = (
 				84FA4DE325FB9C8D00F93203 /* PythonKit */,
-				84E127C92611D3CA0012D151 /* PerfectSQLite */,
+				84F2921D2611FF2E00593144 /* PerfectHTTPServer */,
+				8472695326133DE700F92E66 /* PerfectSQLite */,
 			);
 			productName = "apple (macOS)";
 			productReference = 84807DA325FB7A8900C8CB18 /* apple.app */;
@@ -401,9 +524,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84807DD225FB7A8900C8CB18 /* Build configuration list for PBXNativeTarget "Tests macOS" */;
 			buildPhases = (
+				5B501972C14A3CE6D8DC1380 /* [CP] Check Pods Manifest.lock */,
 				84807DB225FB7A8900C8CB18 /* Sources */,
 				84807DB325FB7A8900C8CB18 /* Frameworks */,
 				84807DB425FB7A8900C8CB18 /* Resources */,
+				4A0AD906F5CA7FE298C186A3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -411,6 +536,9 @@
 				84807DB825FB7A8900C8CB18 /* PBXTargetDependency */,
 			);
 			name = "Tests macOS";
+			packageProductDependencies = (
+				847269402613353700F92E66 /* PerfectSQLite */,
+			);
 			productName = "Tests macOS";
 			productReference = 84807DB625FB7A8900C8CB18 /* Tests macOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -422,7 +550,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					84807D9A25FB7A8900C8CB18 = {
 						CreatedOnToolsVersion = 12.4;
@@ -452,6 +580,7 @@
 			packageReferences = (
 				84FA4DE225FB9C8D00F93203 /* XCRemoteSwiftPackageReference "PythonKit" */,
 				84F291FA2611C48A00593144 /* XCRemoteSwiftPackageReference "Perfect-SQLite" */,
+				84F2921C2611FF2E00593144 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */,
 			);
 			productRefGroup = 84807D9C25FB7A8900C8CB18 /* Products */;
 			projectDirPath = "";
@@ -538,6 +667,45 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-apple (iOS)/Pods-apple (iOS)-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		4A0AD906F5CA7FE298C186A3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tests macOS/Pods-Tests macOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tests macOS/Pods-Tests macOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tests macOS/Pods-Tests macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B501972C14A3CE6D8DC1380 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tests macOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		C7E20D5F11BE5E33D31E8AA2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -586,11 +754,18 @@
 			files = (
 				84E11F2E260DCEEF0012D151 /* SQLiteManage.swift in Sources */,
 				84807DBF25FB7A8900C8CB18 /* appleApp.swift in Sources */,
+				847268EF26130F6100F92E66 /* C_Share.swift in Sources */,
 				84807DC325FB7A8900C8CB18 /* Persistence.swift in Sources */,
-				84F291F32611C13500593144 /* HttpServer.swift in Sources */,
 				84FA4E4A25FBB8B900F93203 /* Socket.swift in Sources */,
 				84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */,
+				847268AB2613088700F92E66 /* Share.swift in Sources */,
+				847268FB26130F8600F92E66 /* C_Store.swift in Sources */,
+				847268AD2613088700F92E66 /* Store.swift in Sources */,
+				847268BE26130CAE00F92E66 /* Date.swift in Sources */,
+				8472689C261307F300F92E66 /* ArchiveShareCell.swift in Sources */,
 				84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
+				8472689E261307F300F92E66 /* ArchiveSharesPage.swift in Sources */,
+				847268A0261307F300F92E66 /* ArchiveSharesPageStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,16 +773,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84726906261313B100F92E66 /* S_Share.swift in Sources */,
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
+				8472688726120CB500F92E66 /* Tractic.swift in Sources */,
 				84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */,
+				847268F626130F7600F92E66 /* Store.swift in Sources */,
+				84F292122611D63F00593144 /* HttpServer.swift in Sources */,
 				84807DC425FB7A8900C8CB18 /* Persistence.swift in Sources */,
 				84807DBE25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */,
 				84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */,
 				84E11EDB260D924D0012D151 /* HomeModen.swift in Sources */,
+				847268DF26130EC700F92E66 /* Share.swift in Sources */,
 				848929CE26118E5900006D88 /* PythonManage.swift in Sources */,
 				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,
+				847268BF26130CAE00F92E66 /* Date.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -617,6 +798,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				84807DB025FB7A8900C8CB18 /* Tests_iOS.swift in Sources */,
+				8472693426132E9D00F92E66 /* Date.swift in Sources */,
+				8472693026132E8900F92E66 /* Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,7 +807,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8472692C26132E8600F92E66 /* Store.swift in Sources */,
+				8472693826132E9E00F92E66 /* Date.swift in Sources */,
+				8472693C26132EBF00F92E66 /* SQLiteManage.swift in Sources */,
+				8472691926132D2C00F92E66 /* S_Share.swift in Sources */,
+				8472691D26132D3E00F92E66 /* Share.swift in Sources */,
 				84807DBB25FB7A8900C8CB18 /* Tests_macOS.swift in Sources */,
+				847269122613299C00F92E66 /* testShare.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,11 +1002,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = macOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -837,11 +1027,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = macOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -860,7 +1051,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -882,7 +1073,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -901,18 +1092,19 @@
 		};
 		84807DD325FB7A8900C8CB18 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B40092AE8C3F1CC640D053B /* Pods-Tests macOS.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Tests macOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "UG.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -923,18 +1115,19 @@
 		};
 		84807DD425FB7A8900C8CB18 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C786A93CE50B5F0A66C5EA46 /* Pods-Tests macOS.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Tests macOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "UG.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1002,6 +1195,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		84F2921C2611FF2E00593144 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PerfectlySoft/Perfect-HTTPServer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.23;
+			};
+		};
 		84FA4DE225FB9C8D00F93203 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pvieito/PythonKit.git";
@@ -1013,15 +1214,20 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		84E127C92611D3CA0012D151 /* PerfectSQLite */ = {
+		847269402613353700F92E66 /* PerfectSQLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 84F291FA2611C48A00593144 /* XCRemoteSwiftPackageReference "Perfect-SQLite" */;
 			productName = PerfectSQLite;
 		};
-		84F291FB2611C48A00593144 /* PerfectSQLite */ = {
+		8472695326133DE700F92E66 /* PerfectSQLite */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 84F291FA2611C48A00593144 /* XCRemoteSwiftPackageReference "Perfect-SQLite" */;
 			productName = PerfectSQLite;
+		};
+		84F2921D2611FF2E00593144 /* PerfectHTTPServer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84F2921C2611FF2E00593144 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */;
+			productName = PerfectHTTPServer;
 		};
 		84FA4DE325FB9C8D00F93203 /* PythonKit */ = {
 			isa = XCSwiftPackageProductDependency;

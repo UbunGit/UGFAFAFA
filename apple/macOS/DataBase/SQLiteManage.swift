@@ -12,9 +12,9 @@ var dbfile = UserDefaults.standard.string(forKey: "dbfile")
 var db = try? Connection(dbfile!)
 
 class SQLiteManage: NSObject {
-   static func updatefile()  {
+    static func updatefile()  {
         dbfile = UserDefaults.standard.string(forKey: "dbfile")
-    db = try? Connection(dbfile!)
+        db = try? Connection(dbfile!)
     }
 }
 extension Connection {
@@ -23,8 +23,4 @@ extension Connection {
         get { return Int32(try! scalar("PRAGMA user_version") as! Int64)}
         set { try! run("PRAGMA user_version = \(newValue)") }
     }
-    
-
-    
-  
 }

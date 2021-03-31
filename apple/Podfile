@@ -2,7 +2,9 @@ source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 use_frameworks!
 
-def commonPods
+def macOS
+  pod 'CocoaAsyncSocket'
+  pod 'SQLite.swift'
 
 end
 
@@ -13,16 +15,18 @@ target 'apple (iOS)' do
     
    pod 'CocoaAsyncSocket'
    pod 'SQLite.swift'
+   pod 'Alamofire'
     
 end
 
 
 target 'apple (macOS)' do
     
-   pod 'CocoaAsyncSocket'
-   pod 'SQLite.swift'
-   
-    
+    macOS
 end
 
+target 'Tests macOS' do
+  
+  macOS
 
+end
