@@ -13,8 +13,9 @@ import Alamofire
  */
 extension Store{
     
-    static func api_stores(finesh:@escaping  (NSError?, [Store]?) ->  ()){
-        let url = "\(baseurl)/stores"
+    static func api_stores_list(finesh:@escaping  (NSError?, [Store]?) ->  ()){
+        
+        let url = "\(baseurl)/api/shares/list"
         let parameters = ["_start":0,"_limit":10]
         AF.request(url, method: .get, parameters: parameters){ urlRequest in
             urlRequest.timeoutInterval = 5

@@ -33,8 +33,10 @@ class HttpServer: NSObject,ObservableObject {
         do{
             var routes = Routes()
             routes.add(method: .get, uri: "/", handler: handler)
-            routes.add(method: .get, uri: "/api/tactics", handler: tactics)
-            routes.add(method: .get, uri: "/api/shares", handler: share_list)
+            
+            routes.add(method: .get, uri: "/api/shares/list", handler: share_list)
+            routes.add(method: .get, uri: "/api/shares/detail", handler: share_detail)
+            
             routes.add(method: .get, uri: "/**",
                        handler: StaticFileHandler(documentRoot: "./webroot", allowResponseFilters: true).handleRequest)
             

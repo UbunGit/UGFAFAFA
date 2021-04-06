@@ -197,8 +197,7 @@ struct SettingView: View {
                 defaults.set(openPanel.url?.absoluteString, forKey: "dbfile")
                 dbfile = openPanel.url?.absoluteString
                 SQLiteManage.updatefile()
-                
-                Tactic.tactics()
+         
                 
                 print(defaults.string(forKey: "dbfile")!)
             }

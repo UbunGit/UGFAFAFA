@@ -15,15 +15,17 @@ import Combine
 
 struct  Share: Codable , Identifiable {
     
-    var id = 0
+    var id:Int
     var name:String=""
     var code:String=""
-    var price:String?
-    var yestodayprice:String?
+    var price:Float?
+    var yestodayprice:Float?
     var ratioIn:String="0.95"
     var ratioOut:String="1.00"
+    
     var stores: [Store]?
-    var outstores: [Store]?
+    var storeCount:Int?
+  
 }
 
 
@@ -138,19 +140,20 @@ extension Share{
      获取收益
      */
     func getIncome() -> Float {
-        guard let stores = self.outstores else {
-            return 0
-        }
-        var income:Float = 0
-        for store in stores {
-            if store.state == 1 {
-                let outprice:Float = store.outprice ?? 0.00
-                let price:Float = store.price
-                let fee:Float = store.fee ?? 0.00
-                income = income + ((outprice - price) * Float(store.num))-fee
-            }
-        }
-        return income
+        return 0
+//        guard let stores = self.outstores else {
+//            return 0
+//        }
+//        var income:Float = 0
+//        for store in stores {
+//            if store.state == 1 {
+//                let outprice:Float = store.outprice ?? 0.00
+//                let price:Float = store.price
+//                let fee:Float = store.fee ?? 0.00
+//                income = income + ((outprice - price) * Float(store.num))-fee
+//            }
+//        }
+//        return income
     }
     
     
@@ -160,136 +163,136 @@ extension Share{
 // MARK: DB
 extension Share{
     
-    static func row_to(row:SQLite.Row)->Share{
-        var share = Share()
-        share.id = Int(row[Expression<Int64>("id")])
-        share.name = "\(row[Expression<String?>("name")] ?? "")"
-        share.code = "\(row[Expression<String?>("code")] ?? "")"
-        share.price = "\(row[Expression<String?>("price")] ?? "")"
-        share.yestodayprice = "\(row[Expression<String?>("yestodayprice")] ?? "")"
-        share.ratioIn = "\(row[Expression<String?>("ratioIn")] ?? "")"
-        share.ratioOut = "\(row[Expression<String?>("ratioOut")] ?? "")"
-        share.stores = Store.db_stores(shareid: Int64(share.id)).filter({ (store) -> Bool in
-            Int(store.state ?? 0) == 0
-        })
-        share.outstores = Store.db_stores(shareid: Int64(share.id)).filter({ (store) -> Bool in
-            store.state == 1
-        })
-        return share
-    }
+//    static func row_to(row:SQLite.Row)->Share{
+//        var share = Share()
+//        share.id = UUID(number: Int((row[Expression<Int64>("id")])))
+//        share.name = "\(row[Expression<String?>("name")] ?? "")"
+//        share.code = "\(row[Expression<String?>("code")] ?? "")"
+//        share.price = "\(row[Expression<String?>("price")] ?? "")"
+//        share.yestodayprice = "\(row[Expression<String?>("yestodayprice")] ?? "")"
+//        share.ratioIn = "\(row[Expression<String?>("ratioIn")] ?? "")"
+//        share.ratioOut = "\(row[Expression<String?>("ratioOut")] ?? "")"
+//        share.stores = Store.db_stores(shareid: Int64(share.id)).filter({ (store) -> Bool in
+//            Int(store.state ?? 0) == 0
+//        })
+//        share.outstores = Store.db_stores(shareid: Int64(share.id)).filter({ (store) -> Bool in
+//            store.state == 1
+//        })
+//        return share
+//    }
     
     static func db_shares(finesh:@escaping  (NSError?, [Share]?) ->  ()) {
         
-        let share = Table("Share")
-        do {
-            let query = try db?.prepare(share)
-            let list:[Share] =  query?.map({ row -> Share in
-                return Share.row_to(row: row)
-            }) ?? [Share]()
-            finesh(nil,list)
-        } catch {
-            debugPrint("\(self) \(#function) error db_shares: \(error)")
-            finesh(error as NSError,nil)
-        }
+//        let share = Table("Share")
+//        do {
+//            let query = try db?.prepare(share)
+//            let list:[Share] =  query?.map({ row -> Share in
+//                return Share.row_to(row: row)
+//            }) ?? [Share]()
+//            finesh(nil,list)
+//        } catch {
+//            debugPrint("\(self) \(#function) error db_shares: \(error)")
+//            finesh(error as NSError,nil)
+//        }
     }
     
     static func db_share(id:Int, finesh:@escaping  (NSError?, Share?) ->  ()) {
         
-        let share = Table("Share")
-        do {
-            let query = try db?.prepare(share.filter(Expression<Int64>("id") == Int64(id)))
-            let list:[Share] =  query?.map({ row -> Share in
-                return Share.row_to(row: row)
-            }) ?? [Share]()
-            if list.count>0 {
-                finesh(nil,list[0])
-            }else{
-                finesh(NSError.init(domain: "share not found" , code: -1, userInfo: nil),nil)
-            }
-            
-        } catch {
-            debugPrint("\(self) \(#function) error db_shares_id: \(error)")
-            finesh(error as NSError,nil)
-        }
+//        let share = Table("Share")
+//        do {
+//            let query = try db?.prepare(share.filter(Expression<Int64>("id") == Int64(id)))
+//            let list:[Share] =  query?.map({ row -> Share in
+//                return Share.row_to(row: row)
+//            }) ?? [Share]()
+//            if list.count>0 {
+//                finesh(nil,list[0])
+//            }else{
+//                finesh(NSError.init(domain: "share not found" , code: -1, userInfo: nil),nil)
+//            }
+//
+//        } catch {
+//            debugPrint("\(self) \(#function) error db_shares_id: \(error)")
+//            finesh(error as NSError,nil)
+//        }
     }
     
     func db_share(id:Int?,finesh:@escaping  (Error?, Share?) ->  ()) {
-        let share = Table("Share")
-        do {
-            if nil != id {
-                let alice = share.filter(Expression<Int64>("id") == Int64(id!))
-                var setters = [SQLite.Setter]()
-                if name.count>0 {
-                    setters.append(Expression<String?>("name") <- name)
-                }
-                if code.count>0 {
-                    setters.append(Expression<String?>("code") <- code)
-                }
-                if price?.count ?? 0>0 {
-                    setters.append(Expression<String?>("price") <- price)
-                }
-                if yestodayprice?.count ?? 0>0 {
-                    setters.append(Expression<String?>("yestodayprice") <- yestodayprice)
-                }
-                if ratioIn.count>0 {
-                    setters.append(Expression<String?>("ratioIn") <- ratioIn)
-                }
-                
-                if ratioOut.count>0 {
-                    setters.append(Expression<String?>("ratioOut") <- ratioOut)
-                }
-                
-                let rowid =  try db?.run(alice.update(setters))
-                if rowid ?? 0>0{
-                    finesh(nil,self)
-                }else{
-                    finesh(NSError.init(domain: "share not found" , code: -1, userInfo: nil),nil)
-                }
-                
-            }else{
-                let rowid = try db?.run(share.insert(
-                    Expression<String?>("name") <- name,
-                    Expression<String?>("code") <- code,
-                    Expression<String?>("price") <- price,
-                    Expression<String?>("yestodayprice") <- yestodayprice,
-                    Expression<String?>("ratioIn") <- ratioIn,
-                    Expression<String?>("ratioOut") <- ratioOut
-                ))
-                if rowid ?? 0>0{
-                    var temshare = self
-                    temshare.id = Int(rowid!)
-                    finesh(nil,temshare)
-                }else{
-                    finesh(NSError.init(domain: "share not found" , code: -1, userInfo: nil),nil)
-                }
-                
-            }
-        } catch {
-            debugPrint("\(self) \(#function) error: \(error)")
-            finesh(error as NSError,nil)
-        }
+//        let share = Table("Share")
+//        do {
+//            if nil != id {
+//                let alice = share.filter(Expression<Int64>("id") == Int64(id!))
+//                var setters = [SQLite.Setter]()
+//                if name.count>0 {
+//                    setters.append(Expression<String?>("name") <- name)
+//                }
+//                if code.count>0 {
+//                    setters.append(Expression<String?>("code") <- code)
+//                }
+//                if price?.count ?? 0>0 {
+//                    setters.append(Expression<String?>("price") <- price)
+//                }
+//                if yestodayprice?.count ?? 0>0 {
+//                    setters.append(Expression<String?>("yestodayprice") <- yestodayprice)
+//                }
+//                if ratioIn.count>0 {
+//                    setters.append(Expression<String?>("ratioIn") <- ratioIn)
+//                }
+//
+//                if ratioOut.count>0 {
+//                    setters.append(Expression<String?>("ratioOut") <- ratioOut)
+//                }
+//
+//                let rowid =  try db?.run(alice.update(setters))
+//                if rowid ?? 0>0{
+//                    finesh(nil,self)
+//                }else{
+//                    finesh(NSError.init(domain: "share not found" , code: -1, userInfo: nil),nil)
+//                }
+//
+//            }else{
+//                let rowid = try db?.run(share.insert(
+//                    Expression<String?>("name") <- name,
+//                    Expression<String?>("code") <- code,
+//                    Expression<String?>("price") <- price,
+//                    Expression<String?>("yestodayprice") <- yestodayprice,
+//                    Expression<String?>("ratioIn") <- ratioIn,
+//                    Expression<String?>("ratioOut") <- ratioOut
+//                ))
+//                if rowid ?? 0>0{
+//                    var temshare = self
+//                    temshare.id = Int(rowid!)
+//                    finesh(nil,temshare)
+//                }else{
+//                    finesh(NSError.init(domain: "share not found" , code: -1, userInfo: nil),nil)
+//                }
+//
+//            }
+//        } catch {
+//            debugPrint("\(self) \(#function) error: \(error)")
+//            finesh(error as NSError,nil)
+//        }
         
     }
     
  
     
     func db_delete(finesh:@escaping  (NSError?) ->  ())  {
-        let share = Table("Share")
-        do {
-            let alice = share.filter(Expression<Int64>("id") == Int64(id))
-            let rowid = try db?.run(alice.delete())
-            if rowid ?? 0>0{
-                var temshare = self
-                temshare.id = Int(rowid!)
-                finesh(nil)
-            }else{
-                finesh(NSError.init(domain: "share not found" , code: -1, userInfo: nil))
-            }
-            
-        } catch {
-            debugPrint("\(self) \(#function) error: \(error)")
-            finesh(error as NSError)
-        }
+//        let share = Table("Share")
+//        do {
+//            let alice = share.filter(Expression<Int64>("id") == Int64(id))
+//            let rowid = try db?.run(alice.delete())
+//            if rowid ?? 0>0{
+//                var temshare = self
+//                temshare.id = Int(rowid!)
+//                finesh(nil)
+//            }else{
+//                finesh(NSError.init(domain: "share not found" , code: -1, userInfo: nil))
+//            }
+//            
+//        } catch {
+//            debugPrint("\(self) \(#function) error: \(error)")
+//            finesh(error as NSError)
+//        }
     }
     
     
@@ -300,8 +303,8 @@ extension Share{
 extension Share{
     
     static let _shares:[Share] = [
-        Share.init(id:0, name: "积分科技", code: "300022",price: "12.00", stores:Store._stores),
-        Share.init(id:1, name: "科技ETF", code: "300022",price: "12.00", stores:Store._stores)
+        Share.init(id:0, name: "积分科技", code: "300022",price: 12.00, stores:Store._stores),
+        Share.init(id:1, name: "科技ETF", code: "300022",price: 12.00, stores:Store._stores)
     ]
 }
 

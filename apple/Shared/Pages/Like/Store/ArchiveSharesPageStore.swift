@@ -11,7 +11,15 @@ import SwiftUI
 
 class ArchiveSharesPageStore: ObservableObject {
     
-    @Published var shares:[Share] = []
+    @Published var shares:[Share] = [Share].init()
+    @Published var searchText:String=""
+        {
+            didSet {
+                if searchText.count > 2 && oldValue.count <= 2 {
+                    searchText = oldValue
+                }
+            }
+        }
     @Published var loading = false
     
     /**
@@ -19,10 +27,9 @@ class ArchiveSharesPageStore: ObservableObject {
      */
    func update() {
 
-    let issql = UserDefaults.standard.bool(forKey: "isSql")
-    if issql {
-        Share.db_shares { (error, results) in
-            
+
+        Share.api_shares_list{ (error, results) in
+
             self.loading = false
             if((error) != nil){
                 print(error?.description as Any)
@@ -30,17 +37,7 @@ class ArchiveSharesPageStore: ObservableObject {
                 self.shares = results ?? [Share]()
             }
         }
-    }else{
-        Share.api_shares  { (error, results) in
-            
-            self.loading = false
-            if((error) != nil){
-                print(error?.description as Any)
-            }else{
-                self.shares = results ?? [Share]()
-            }
-        }
-    }
+
    }
 
 

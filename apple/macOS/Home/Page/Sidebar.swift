@@ -48,6 +48,11 @@ struct Sidebar: View {
             }
             .tag(NavigationItem.courses)
             
+            NavigationLink(destination: ArchiveSharesPage()) {
+                Label("收藏", systemImage: "heart")
+            }
+            .tag(NavigationItem.courses)
+            
            
         }
         .listStyle(SidebarListStyle())

@@ -11,27 +11,29 @@ import SwiftUI
 struct ArchiveShareCell: View {
     var share:Share
     var body: some View {
-        HStack(){
+        HStack(alignment: .center){
             VStack(alignment: .leading){
                 Text("\(share.name)")
-                    .font(.system(size: 14))
-                    .foregroundColor(Color("background 4"))
+                    .font(.subheadline)
+                    .bold()
+                    .foregroundColor(Color.primary)
                 
                 Text("\(share.code)")
-                    .font(.system(size: 12))
-                .foregroundColor(Color("background 4"))
+                    .font(.footnote)
+                    .foregroundColor(.secondary)
+                    .padding(.bottom, 2)
+           
             }
-            
-            
-            Spacer()
+            Spacer(minLength: 0)
             VStack(alignment: .leading){
                 Text("持仓:\(share.getAllNum())")
                 Text(String(format: "收益:%0.2f", arguments: [share.getIncome()]))
             }
-            .foregroundColor(Color("background 4"))
-            .font(.system(size: 14))
+            .font(.caption)
+            .foregroundColor(.secondary)
+            .padding(.bottom, 2)
         }
-        .padding(.horizontal)
+      
         
         
     }
@@ -40,5 +42,7 @@ struct ArchiveShareCell: View {
 struct ArchiveShareCell_Previews: PreviewProvider {
     static var previews: some View {
         ArchiveShareCell(share: Share._shares[1])
+            .background(Color("Background 1"))
     }
+    
 }

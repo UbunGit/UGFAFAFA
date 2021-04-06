@@ -5,6 +5,7 @@ use_frameworks!
 def macOS
   pod 'CocoaAsyncSocket'
   pod 'SQLite.swift'
+  pod 'Alamofire'
 
 end
 

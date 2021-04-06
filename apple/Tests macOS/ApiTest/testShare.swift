@@ -8,6 +8,9 @@
 import XCTest
 
 class testShare: XCTestCase {
+    override class func setUp() {
+        UserDefaults.standard.setValue("/Users/admin/Documents/github/UGFAFAFA/data/", forKey: "dbfile")
+    }
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -29,6 +32,18 @@ class testShare: XCTestCase {
             }
         }
         
+    }
+    
+    func testdetail()  {
+        Share.detail(id: 8) { (result) in
+            switch result {
+            case .success(let value):
+                XCTAssert(value != nil)
+            case .failure(let error):
+                XCTAssert(false, error.localizedDescription)
+                
+            }
+        }
     }
 
     func testPerformanceExample() throws {
