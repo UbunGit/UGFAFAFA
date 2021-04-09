@@ -34,7 +34,11 @@ class ArchiveSharesPageStore: ObservableObject {
             if((error) != nil){
                 print(error?.description as Any)
             }else{
-                self.shares = results ?? [Share]()
+                let page = results
+                guard let t_shares = page?.datas else {
+                    return
+                }
+                self.shares = t_shares ?? [Share].init()
             }
         }
 

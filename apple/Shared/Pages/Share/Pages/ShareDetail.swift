@@ -115,36 +115,42 @@ struct ShareDetail: View {
         
         //                    NavigationLink(destination: ShareEdit(shareStore: shareStore) ){
         HStack(alignment: .bottom){
-            VStack(alignment: .leading) {
-                
-                VStack(alignment: .leading){
-                    
-                    Text("持有：\(shareStore.share.getAllNum())")
-                    Text("成本：¥\(shareStore.share.getAllPrice(), specifier: "%0.3f")")
-                    Text(String(format:"市值：¥%0.3f", arguments: [shareStore.shizhi]))
-                }
-                Button(action: {updatePrice()}, label: {
-                    HStack {
-                        Text("现价：¥\(shareStore.price, specifier: "%0.3f")")
-                        
-                        Image(systemName: "goforward")
-                            .font(.system(size: 12))
-                            .frame(width: 16, height: 16, alignment: .center)
-                    }
-                    .foregroundColor(Color("Secondary"))
-                })
+            
+            VStack(alignment: .leading){
+       
+                Text("累计收益：¥\((shareStore.profited), specifier: "%0.2f")")
             }
-            .font(.system(size: 12))
+
             
             Spacer()
             VStack{
                 Progress(percent:shareStore.percent, colors: [Color("Secondary"),Color("Primary")])
-                    .frame(width: 80, height: 80)
+                    .frame(width: 60, height: 60)
                 
-                Text("持仓收益：¥\((shareStore.shizhi-shareStore.share.getAllPrice()), specifier: "%0.2f")")
-                    .font(.system(size: 12))
-                    .padding(.vertical)
-                    .frame( height: 12)
+             
+                VStack(alignment: .leading) {
+             
+                    
+                    VStack(alignment: .leading){
+                   
+                        
+                        Text("持仓数量：\(shareStore.share.getAllNum(state: 0))")
+                        Text("持仓成本：¥\(shareStore.share.getAllPrice(state: 0), specifier: "%0.3f")")
+                        Text("持仓市值：¥\(shareStore.shizhi, specifier: "%0.3f")")
+                        Text("持仓收益：¥\((shareStore.profit), specifier: "%0.2f")")
+                    }
+                    Button(action: {updatePrice()}, label: {
+                        HStack {
+                            Text("现价：¥\(shareStore.price, specifier: "%0.3f")")
+                            
+                            Image(systemName: "goforward")
+                                .font(.system(size: 12))
+                                .frame(width: 16, height: 16, alignment: .center)
+                        }
+                        .foregroundColor(Color("Secondary"))
+                    })
+                }
+                .font(.system(size: 12))
             }
         }
         .foregroundColor(Color("Background 4"))

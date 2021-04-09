@@ -25,7 +25,7 @@ class testShare: XCTestCase {
             
             switch result {
             case .success(let value):
-                XCTAssert(value.count>0)
+                XCTAssert(true)
             case .failure(let error):
                 XCTAssert(false, error.localizedDescription)
                 

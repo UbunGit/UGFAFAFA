@@ -16,10 +16,16 @@
 		840E2B922615CC25003A84C6 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
 		840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
-		840E2B9D2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
-		840E2B9E2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
-		8472689C261307F300F92E66 /* ArchiveShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ArchiveShareCell.swift */; };
-		8472689E261307F300F92E66 /* ArchiveSharesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* ArchiveSharesPage.swift */; };
+		841F2ED6262017D90099B8CB /* PythonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F2ED5262017D90099B8CB /* PythonTest.swift */; };
+		84565A69261C5F15009F9F7D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565A68261C5F15009F9F7D /* Page.swift */; };
+		84565A6D261C6000009F9F7D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565A68261C5F15009F9F7D /* Page.swift */; };
+		84565A71261C6001009F9F7D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565A68261C5F15009F9F7D /* Page.swift */; };
+		84565A75261C6001009F9F7D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565A68261C5F15009F9F7D /* Page.swift */; };
+		84565AB6261C76CB009F9F7D /* ShareEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditPage.swift */; };
+		84565ABA261C76D7009F9F7D /* ShareEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditPage.swift */; };
+		84565ABB261C76D7009F9F7D /* ShareEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditPage.swift */; };
+		8472689C261307F300F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
+		8472689E261307F300F92E66 /* SharesListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListPage.swift */; };
 		847268A0261307F300F92E66 /* ArchiveSharesPageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* ArchiveSharesPageStore.swift */; };
 		847268AB2613088700F92E66 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268A92613088700F92E66 /* Share.swift */; };
 		847268AD2613088700F92E66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268AA2613088700F92E66 /* Store.swift */; };
@@ -40,8 +46,8 @@
 		8472693C26132EBF00F92E66 /* SQLiteManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */; };
 		847269412613353700F92E66 /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 847269402613353700F92E66 /* PerfectSQLite */; };
 		8472695426133DE700F92E66 /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8472695326133DE700F92E66 /* PerfectSQLite */; };
-		8472697026146A2100F92E66 /* ArchiveShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ArchiveShareCell.swift */; };
-		8472697426146A2400F92E66 /* ArchiveSharesPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* ArchiveSharesPage.swift */; };
+		8472697026146A2100F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
+		8472697426146A2400F92E66 /* SharesListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListPage.swift */; };
 		8472697826146A2800F92E66 /* ArchiveSharesPageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* ArchiveSharesPageStore.swift */; };
 		84726983261479CC00F92E66 /* ShareDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726982261479CC00F92E66 /* ShareDetail.swift */; };
 		84726984261479CC00F92E66 /* ShareDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726982261479CC00F92E66 /* ShareDetail.swift */; };
@@ -132,8 +138,11 @@
 		3BD726DDCB5A4F80F32A27C1 /* Pods-apple (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apple (iOS).debug.xcconfig"; path = "Target Support Files/Pods-apple (iOS)/Pods-apple (iOS).debug.xcconfig"; sourceTree = "<group>"; };
 		840E2B832615C3B0003A84C6 /* UDID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDID.swift; sourceTree = "<group>"; };
 		840E2B9A2615DECC003A84C6 /* SroreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SroreCell.swift; sourceTree = "<group>"; };
-		84726897261307F300F92E66 /* ArchiveShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveShareCell.swift; sourceTree = "<group>"; };
-		84726899261307F300F92E66 /* ArchiveSharesPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveSharesPage.swift; sourceTree = "<group>"; };
+		841F2ED5262017D90099B8CB /* PythonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonTest.swift; sourceTree = "<group>"; };
+		84565A68261C5F15009F9F7D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		84565AB5261C76CB009F9F7D /* ShareEditPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEditPage.swift; sourceTree = "<group>"; };
+		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
+		84726899261307F300F92E66 /* SharesListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesListPage.swift; sourceTree = "<group>"; };
 		8472689B261307F300F92E66 /* ArchiveSharesPageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveSharesPageStore.swift; sourceTree = "<group>"; };
 		847268A92613088700F92E66 /* Share.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Share.swift; sourceTree = "<group>"; };
 		847268AA2613088700F92E66 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -248,21 +257,21 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		84726895261307F300F92E66 /* Like */ = {
+		84726895261307F300F92E66 /* SharesList */ = {
 			isa = PBXGroup;
 			children = (
 				84726896261307F300F92E66 /* View */,
 				84726898261307F300F92E66 /* Pages */,
 				8472689A261307F300F92E66 /* Store */,
 			);
-			path = Like;
+			path = SharesList;
 			sourceTree = "<group>";
 		};
 		84726896261307F300F92E66 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				840E2B9A2615DECC003A84C6 /* SroreCell.swift */,
-				84726897261307F300F92E66 /* ArchiveShareCell.swift */,
+				84726897261307F300F92E66 /* ShareCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -270,7 +279,8 @@
 		84726898261307F300F92E66 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				84726899261307F300F92E66 /* ArchiveSharesPage.swift */,
+				84726899261307F300F92E66 /* SharesListPage.swift */,
+				84565AB5261C76CB009F9F7D /* ShareEditPage.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -288,6 +298,7 @@
 			children = (
 				847268A92613088700F92E66 /* Share.swift */,
 				847268AA2613088700F92E66 /* Store.swift */,
+				84565A68261C5F15009F9F7D /* Page.swift */,
 			);
 			path = Moden;
 			sourceTree = "<group>";
@@ -321,7 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				847269802614798000F92E66 /* Share */,
-				84726895261307F300F92E66 /* Like */,
+				84726895261307F300F92E66 /* SharesList */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -489,6 +500,7 @@
 			children = (
 				847269102613295800F92E66 /* ApiTest */,
 				84807DBA25FB7A8900C8CB18 /* Tests_macOS.swift */,
+				841F2ED5262017D90099B8CB /* PythonTest.swift */,
 				84807DBC25FB7A8900C8CB18 /* Info.plist */,
 			);
 			path = "Tests macOS";
@@ -900,18 +912,20 @@
 				84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */,
 				847268AB2613088700F92E66 /* Share.swift in Sources */,
 				8472699E26147C4E00F92E66 /* TostError.swift in Sources */,
+				84565AB6261C76CB009F9F7D /* ShareEditPage.swift in Sources */,
 				847269B32615AEE900F92E66 /* SegmentedView.swift in Sources */,
 				847269BF2615B15F00F92E66 /* base.swift in Sources */,
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
+				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				848BB2BD26183E1000D639DE /* SearchView.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				847268BE26130CAE00F92E66 /* Date.swift in Sources */,
-				8472689C261307F300F92E66 /* ArchiveShareCell.swift in Sources */,
+				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
 				84726983261479CC00F92E66 /* ShareDetail.swift in Sources */,
 				84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				840E2B842615C3B0003A84C6 /* UDID.swift in Sources */,
 				8472699626147ABA00F92E66 /* Progress .swift in Sources */,
-				8472689E261307F300F92E66 /* ArchiveSharesPage.swift in Sources */,
+				8472689E261307F300F92E66 /* SharesListPage.swift in Sources */,
 				847268A0261307F300F92E66 /* ArchiveSharesPageStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -922,13 +936,14 @@
 			files = (
 				840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */,
 				847269B42615AEE900F92E66 /* SegmentedView.swift in Sources */,
+				84565A6D261C6000009F9F7D /* Page.swift in Sources */,
 				84726906261313B100F92E66 /* S_Share.swift in Sources */,
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
 				84726984261479CC00F92E66 /* ShareDetail.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
 				847269A126147C4E00F92E66 /* AlertData.swift in Sources */,
 				847269CF2615B28C00F92E66 /* ApiShare.swift in Sources */,
-				8472697426146A2400F92E66 /* ArchiveSharesPage.swift in Sources */,
+				8472697426146A2400F92E66 /* SharesListPage.swift in Sources */,
 				84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */,
 				848BB2C726184AA600D639DE /* Formatter.swift in Sources */,
 				848BB2C126183F7900D639DE /* SearchView.swift in Sources */,
@@ -940,13 +955,14 @@
 				84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */,
 				8472699726147ABA00F92E66 /* Progress .swift in Sources */,
 				8472699F26147C4E00F92E66 /* TostError.swift in Sources */,
+				84565ABA261C76D7009F9F7D /* ShareEditPage.swift in Sources */,
 				847268DF26130EC700F92E66 /* Share.swift in Sources */,
 				847269C02615B15F00F92E66 /* base.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetailStore.swift in Sources */,
 				8472697826146A2800F92E66 /* ArchiveSharesPageStore.swift in Sources */,
 				848929CE26118E5900006D88 /* PythonManage.swift in Sources */,
 				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,
-				8472697026146A2100F92E66 /* ArchiveShareCell.swift in Sources */,
+				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,
 				847268BF26130CAE00F92E66 /* Date.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
@@ -958,8 +974,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84565ABB261C76D7009F9F7D /* ShareEditPage.swift in Sources */,
 				847269CB2615B18F00F92E66 /* base.swift in Sources */,
-				840E2B9D2615DECC003A84C6 /* SroreCell.swift in Sources */,
+				84565A71261C6001009F9F7D /* Page.swift in Sources */,
 				84807DB025FB7A8900C8CB18 /* Tests_iOS.swift in Sources */,
 				848BB2C826184AA600D639DE /* Formatter.swift in Sources */,
 				8472693426132E9D00F92E66 /* Date.swift in Sources */,
@@ -973,7 +990,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				847269C72615B18E00F92E66 /* base.swift in Sources */,
-				840E2B9E2615DECC003A84C6 /* SroreCell.swift in Sources */,
+				84565A75261C6001009F9F7D /* Page.swift in Sources */,
 				8472692C26132E8600F92E66 /* Store.swift in Sources */,
 				840E2B922615CC25003A84C6 /* HttpServer.swift in Sources */,
 				840E2B872615C3B0003A84C6 /* UDID.swift in Sources */,
@@ -984,6 +1001,7 @@
 				8472691D26132D3E00F92E66 /* Share.swift in Sources */,
 				84807DBB25FB7A8900C8CB18 /* Tests_macOS.swift in Sources */,
 				847269122613299C00F92E66 /* testShare.swift in Sources */,
+				841F2ED6262017D90099B8CB /* PythonTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

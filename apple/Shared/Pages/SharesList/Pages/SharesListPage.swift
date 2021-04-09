@@ -8,11 +8,12 @@
 
 import SwiftUI
 
-struct ArchiveSharesPage: View {
+struct SharesListPage: View {
     
     @ObservedObject var sharesStore =  ArchiveSharesPageStore()
     @State var storeid:Int?
     @State var isNavigation = false
+    @State var isSheet = false
  
     
     
@@ -42,6 +43,9 @@ struct ArchiveSharesPage: View {
                 }
             #endif
         }
+        .sheet(isPresented: $isSheet){
+            ShareEdit(shareStore: ShareDetailStore(id: 0))
+        }
         .onAppear(perform: {
             sharesStore.update()
         })
@@ -52,18 +56,28 @@ struct ArchiveSharesPage: View {
     var content:some View{
         List(){
             
-     
-            SearchView(searchText:$sharesStore.searchText)
+            HStack{
+                SearchView(searchText:$sharesStore.searchText)
+                Button(action: {
+                    isSheet = true
+                }, label: {
+                    Text("+")
+                        .foregroundColor( Color("AccentColor"))
+                        .font(.caption)
+                        .padding(.vertical,4)
+                        .padding(.horizontal,4)
+                        .clipShape(Capsule())
+                })
+                .buttonStyle(BorderlessButtonStyle())
+            }
+            
             
             ForEach(sharesStore.shares) { item in
       
                 NavigationLink(destination:  ShareDetail(shareStore: ShareDetailStore(id:item.id))){
-                    ArchiveShareCell(share: item)
+                    ShareCell(share: item)
                         .padding(.vertical, 4)
-                }
-             
-                
-                 
+                } 
                 
             }
             
@@ -78,6 +92,6 @@ struct ArchiveSharesPage: View {
 
 struct ArchiveSharesPage_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveSharesPage()
+        SharesListPage()
     }
 }

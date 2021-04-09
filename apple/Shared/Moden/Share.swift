@@ -68,12 +68,18 @@ extension Share{
 //        return outstores
 //    }
 //
-    func getAllNum() -> Int {
-        guard let store = self.stores else {
+    // 根据状态获取持仓数量
+    func getAllNum(state:Int?) -> Int {
+        guard self.stores != nil else {
             return 0
         }
+        var t_store = self.stores
+        if (state != nil) {
+            t_store = t_store!.filter { Int($0.state ?? 0) == state}
+        }
         var num = 0
-        for item in store {
+    
+        for item in t_store! {
             if item.num>0 {
                 num = num+item.num
             }
@@ -81,16 +87,20 @@ extension Share{
         return num
     }
     
-    func getAllPrice() -> Float {
+    func getAllPrice(state:Int?) -> Float {
         
-        guard let store = self.stores else {
+        guard self.stores != nil else {
             return 0
         }
-        var inprice:Float = 0
-        for item in store {
-            inprice = inprice+(item.price*Float(item.num))
+        var t_store = self.stores
+        if (state != nil) {
+            t_store = t_store!.filter { Int($0.state ?? 0) == state}
         }
-        return inprice
+        var price:Float = 0
+        for item in t_store! {
+            price = price+(item.price*Float(item.num))
+        }
+        return price
     }
     
     func getInPrice()  -> Float{
@@ -140,20 +150,23 @@ extension Share{
      获取收益
      */
     func getIncome() -> Float {
-        return 0
-//        guard let stores = self.outstores else {
-//            return 0
-//        }
-//        var income:Float = 0
-//        for store in stores {
-//            if store.state == 1 {
-//                let outprice:Float = store.outprice ?? 0.00
-//                let price:Float = store.price
-//                let fee:Float = store.fee ?? 0.00
-//                income = income + ((outprice - price) * Float(store.num))-fee
-//            }
-//        }
-//        return income
+        guard self.stores != nil else {
+            return 0
+        }
+        var t_store = self.stores
+         
+        t_store = t_store!.filter { Int($0.state ?? 0) == 1}
+     
+        var income:Float = 0
+        for store in t_store! {
+            
+            let outprice:Float = store.outprice ?? 0.00
+            let price:Float = store.price
+            let fee:Float = store.fee ?? 0.00
+            income = income + ((outprice - price) * Float(store.num))-fee
+            
+        }
+        return income
     }
     
     

@@ -49,7 +49,7 @@ extension Share{
 // MARK: HTTP
 extension Share{
     
-    static func api_shares_list(finesh:@escaping  (NSError?, [Share]?) ->  ()){
+    static func api_shares_list(finesh:@escaping  (NSError?, UGPage<[Share]?>?) ->  ()){
         
         let url = "\(baseurl)/api/shares/list"
         let parameters = ["page":1,"content":100]
@@ -62,7 +62,7 @@ extension Share{
             case .success(let value):
                 do{
                     let jsonData = try JSONSerialization.data(withJSONObject: value as Any, options: [])
-                    let shares = try JSONDecoder().decode([Share].self, from: jsonData)
+                    let shares = try JSONDecoder().decode(UGPage<[Share]?>.self, from: jsonData)
                     finesh(nil, shares)
                 }
                 catch {

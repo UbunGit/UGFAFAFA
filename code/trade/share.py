@@ -6,10 +6,11 @@ import numpy
 import pandas
 import os,time,logging,json,datetime
 import talib as tl
-logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
+logging.basicConfig(level=logging.DEBUG)  # 设置日志级别
 ts.set_token("8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195")
 formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
-dpath = os.path.join(os.getcwd(),"data","cvs")
+# dpath = os.path.join(os.getcwd(),"data","cvs")
+dpath = '/Users/admin/Documents/GitHub/UGFAFAFA/data/cvs'
 
 ###
 ## 单个股票
@@ -29,12 +30,14 @@ class share:
             return
         tsda = tsda.sort_values(by='date')
         self.cdata = tsda
+   
         if begin is not None:
-            self.cdata = self.cdata[self.cdata['date'] >= begin]
+            tsda = tsda[tsda['date'] >= begin]
         if end is not None:
-            self.cdata = self.cdata[self.cdata['date']<= end]
+            tsda = tsda[tsda['date']<= end]
+        self.cdata = tsda
+        logging.debug(self.cdata)
         logging.debug("share 初始化结束")
-
 
     def appendmacd(self,data):
         logging.info("MACD BEGIN")
@@ -104,13 +107,12 @@ class share:
             return data
 
 
-
+    # 保存数据到本地
     def save(self,data):
         path = os.path.join(dpath,str(self.code)+'.csv')
-     
-        logging.info("保存原始数据:"+path)
         data.to_csv(path)
-
+        logging.info("保存数据完成 path:"+path)
+    # 从缓存加载数据
     def load(self):
         try:
             path = os.path.join(dpath,str(self.code)+'.csv')
@@ -135,6 +137,7 @@ class share:
             logging.warning(e)
             time.sleep(0.1)
             return None
+    # 下载数据
     def download(self):
 
         tsda = ts.pro_bar(ts_code=self.code, adj='qfq')
@@ -178,16 +181,18 @@ class shares:
             temshare = share(code=codes[i])
             temshare.save()
 
-        
 
-if __name__ == '__main__':
-    # SH沪股通SZ
-    cshare = share('600111.SH')
-    logging.info("result：\n%s",cshare.cdata)
-    # result =cshare.appendma(cshare.cdata,30)
-    # logging.info("ma result：\n%s",result)
-    # # print(cshare.cdata.to_json(orient='records'))
+import unittest
 
-    # shares = shares()
+
+class Test(unittest.TestCase):
+
+    def test_share(self):
+        tb =  share(code='600111.SH',begin="20210101", end = "20210301" )
+        logging.info("result：\n%s",tb.cdata)
+        logging.info("result：\n%s",len(tb.cdata))
+ 
+if __name__ == "__main__":
+    unittest.main()
     
  

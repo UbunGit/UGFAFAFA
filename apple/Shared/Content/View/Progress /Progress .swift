@@ -9,7 +9,17 @@ import SwiftUI
 
 struct Progress: View {
     @State var animation:Bool = false
-    var percent: Float = 0
+    var percent:Float = 0
+    private var _percent: Float{
+        get{
+            if percent.isNaN {
+                return 0
+            }else{
+                return percent
+            }
+            
+        }
+    }
     var colors = [Color(#colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)),Color(#colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))]
     
     var body: some View {
@@ -36,7 +46,7 @@ struct Progress: View {
                     .rotation3DEffect(Angle(degrees: 180), axis: (x: 1, y: 0, z: 0))
                     .shadow(color: colors[0].opacity(0.1), radius: 3, x: 0, y: 3)
                 
-                Text("\(Int(percent))%")
+                Text("\(Int(_percent))%")
                     .font(.system(size: 14 * mutiplier))
                     .fontWeight(.bold)
                 

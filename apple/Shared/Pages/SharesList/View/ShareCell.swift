@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ArchiveShareCell: View {
+struct ShareCell: View {
     var share:Share
     var body: some View {
         HStack(alignment: .center){
@@ -26,7 +26,7 @@ struct ArchiveShareCell: View {
             }
             Spacer(minLength: 0)
             VStack(alignment: .leading){
-                Text("持仓:\(share.getAllNum())")
+                Text("持仓:\(share.getAllNum(state: 0))")
                 Text(String(format: "收益:%0.2f", arguments: [share.getIncome()]))
             }
             .font(.caption)
@@ -41,7 +41,7 @@ struct ArchiveShareCell: View {
 
 struct ArchiveShareCell_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveShareCell(share: Share._shares[1])
+        ShareCell(share: Share._shares[1])
             .background(Color("Background 1"))
     }
     

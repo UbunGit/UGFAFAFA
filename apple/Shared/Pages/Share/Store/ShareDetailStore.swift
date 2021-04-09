@@ -15,9 +15,12 @@ class ShareDetailStore: ObservableObject {
     @Published var fitterStore: [Store]?
     @Published var needIn:Bool = false
     @Published var needOut:Bool = false
-    @Published var shizhi:Float = 0
-    @Published var percent:Float = 0
-    @Published var price:Float = 8.00
+    @Published var shizhi:Float = 0 // 市值
+    @Published var profit:Float = 0 // 持仓收益
+    @Published var profited:Float = 0 // 实现收益
+    @Published var allprofit:Float = 0 // 全部收益
+    @Published var percent:Float = 0 // 收益比例
+    @Published var price:Float = 0.00 //股票价格
     @Published var loading = false
     @Published var id:Int
     
@@ -60,11 +63,9 @@ class ShareDetailStore: ObservableObject {
                 self.share.stores?.sort(by: { $0.id > $1.id})
                 self.reloadFitterStores(type: 0)
                 self.updatePrice()
-                //                    self.shizhi = Float(self.share.getAllNum()) * (Float(self.share.price) ?? 0.00)
-                if self.share.getAllPrice() > 0 {
-                    self.percent  = (self.shizhi/self.share.getAllPrice())*100
-                }
-                //                    self.price  = Float(self.share.price) ?? 0.00
+                self.profited = self.share.getIncome()
+      
+              
             }
             self.loading = false
         }
@@ -144,14 +145,17 @@ class ShareDetailStore: ObservableObject {
                         }
                       
                         self.price = Float(datas[3]) ?? 0.00
+                        self.shizhi =  Float(self.share.getAllNum(state: 0)) * self.price; //当前次仓总资产
+                        self.percent  = (self.shizhi/self.share.getAllPrice(state: 0))*100
+                        self.profit =  self.shizhi - self.share.getAllPrice(state: 0)
+                        
                     case .failure(let error):
                         print(error)
                     }
                 }
         }
     }
-    
-    
-    
+
 }
+
 
