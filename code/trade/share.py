@@ -56,7 +56,8 @@ class share:
     def appendma(self,data, ma):
     
         logging.info("ma %s BEGIN",ma)
-        closes = numpy.array(data['close'])
+        # closes = numpy.array(data['close'])
+        closes = data['close']
         madata = tl.MA(closes,timeperiod=ma)
         key = "ma"+str(ma)
         data[key]= madata
@@ -189,6 +190,7 @@ class Test(unittest.TestCase):
 
     def test_share(self):
         tb =  share(code='600111.SH',begin="20210101", end = "20210301" )
+        pd = tb.appendma(tb.cdata,ma=5)
         logging.info("result：\n%s",tb.cdata)
         logging.info("result：\n%s",len(tb.cdata))
  
