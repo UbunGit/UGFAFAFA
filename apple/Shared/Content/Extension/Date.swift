@@ -16,3 +16,13 @@ extension Date{
         return date
     }
 }
+
+extension String{
+    func toDate( dateFormat:String = "yyyy-MM-dd HH:mm:ss") -> Date{
+        let formatter = DateFormatter()
+        formatter.locale = Locale.init(identifier: "zh_CN")
+        formatter.dateFormat = dateFormat
+        let date = formatter.date(from: self)
+        return date!
+    }
+}

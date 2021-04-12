@@ -16,12 +16,17 @@
 		840E2B922615CC25003A84C6 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
 		840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
-		841DEFBF262333D800AF6D7C /* ML_Ma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFBE262333D800AF6D7C /* ML_Ma.mlmodel */; };
-		841DEFC32623342300AF6D7C /* ML_Ma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFBE262333D800AF6D7C /* ML_Ma.mlmodel */; };
 		841DEFD42623351200AF6D7C /* Test_ML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFD32623351200AF6D7C /* Test_ML.swift */; };
-		841DEFD82623352500AF6D7C /* ML_Ma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFBE262333D800AF6D7C /* ML_Ma.mlmodel */; };
-		841DEFDC2623352600AF6D7C /* ML_Ma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFBE262333D800AF6D7C /* ML_Ma.mlmodel */; };
 		841F2ED6262017D90099B8CB /* PythonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F2ED5262017D90099B8CB /* PythonTest.swift */; };
+		841F31FB2623F6BA0099B8CB /* PythonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F2ED5262017D90099B8CB /* PythonTest.swift */; };
+		841F334B2623FCAB0099B8CB /* MLMAOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F31D52623F1C20099B8CB /* MLMAOut.swift */; };
+		841F334F2623FD040099B8CB /* MLMAOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F31D52623F1C20099B8CB /* MLMAOut.swift */; };
+		841F335C2624062F0099B8CB /* MakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F335B2624062F0099B8CB /* MakeData.swift */; };
+		841F335D2624062F0099B8CB /* MakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F335B2624062F0099B8CB /* MakeData.swift */; };
+		841F3477262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
+		841F3478262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
+		841F3479262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
+		841F347A262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
 		84565A69261C5F15009F9F7D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565A68261C5F15009F9F7D /* Page.swift */; };
 		84565A6D261C6000009F9F7D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565A68261C5F15009F9F7D /* Page.swift */; };
 		84565A71261C6001009F9F7D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565A68261C5F15009F9F7D /* Page.swift */; };
@@ -143,9 +148,11 @@
 		3BD726DDCB5A4F80F32A27C1 /* Pods-apple (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apple (iOS).debug.xcconfig"; path = "Target Support Files/Pods-apple (iOS)/Pods-apple (iOS).debug.xcconfig"; sourceTree = "<group>"; };
 		840E2B832615C3B0003A84C6 /* UDID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDID.swift; sourceTree = "<group>"; };
 		840E2B9A2615DECC003A84C6 /* SroreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SroreCell.swift; sourceTree = "<group>"; };
-		841DEFBE262333D800AF6D7C /* ML_Ma.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ML_Ma.mlmodel; sourceTree = "<group>"; };
 		841DEFD32623351200AF6D7C /* Test_ML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_ML.swift; sourceTree = "<group>"; };
 		841F2ED5262017D90099B8CB /* PythonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonTest.swift; sourceTree = "<group>"; };
+		841F31D52623F1C20099B8CB /* MLMAOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLMAOut.swift; sourceTree = "<group>"; };
+		841F335B2624062F0099B8CB /* MakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeData.swift; sourceTree = "<group>"; };
+		841F3476262447300099B8CB /* mlma.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = mlma.mlmodel; path = ../data/traindata/mlma.mlmodel; sourceTree = "<group>"; };
 		84565A68261C5F15009F9F7D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		84565AB5261C76CB009F9F7D /* ShareEditPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEditPage.swift; sourceTree = "<group>"; };
 		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
@@ -262,6 +269,15 @@
 				9648D6D19086E26C3CA8E6C3 /* Pods_Tests_macOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		841F31D42623F1900099B8CB /* ML */ = {
+			isa = PBXGroup;
+			children = (
+				841F31D52623F1C20099B8CB /* MLMAOut.swift */,
+				841F335B2624062F0099B8CB /* MakeData.swift */,
+			);
+			path = ML;
 			sourceTree = "<group>";
 		};
 		84726895261307F300F92E66 /* SharesList */ = {
@@ -427,7 +443,7 @@
 		84807D8B25FB7A8500C8CB18 = {
 			isa = PBXGroup;
 			children = (
-				841DEFBE262333D800AF6D7C /* ML_Ma.mlmodel */,
+				841F3476262447300099B8CB /* mlma.mlmodel */,
 				84807D9025FB7A8500C8CB18 /* Shared */,
 				84807D9D25FB7A8900C8CB18 /* iOS */,
 				84807DA425FB7A8900C8CB18 /* macOS */,
@@ -481,6 +497,7 @@
 		84807DA425FB7A8900C8CB18 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				841F31D42623F1900099B8CB /* ML */,
 				847269032613138300F92E66 /* Moden */,
 				84F291F12611C10D00593144 /* HttpServer */,
 				848929C5261186A100006D88 /* PythonManage */,
@@ -915,6 +932,7 @@
 				847268EF26130F6100F92E66 /* ApiShare.swift in Sources */,
 				84807DC325FB7A8900C8CB18 /* Persistence.swift in Sources */,
 				8472698A261479E700F92E66 /* ShareDetailStore.swift in Sources */,
+				841F3477262447300099B8CB /* mlma.mlmodel in Sources */,
 				840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */,
 				848BB2C626184AA600D639DE /* Formatter.swift in Sources */,
 				84FA4E4A25FBB8B900F93203 /* Socket.swift in Sources */,
@@ -927,7 +945,6 @@
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				848BB2BD26183E1000D639DE /* SearchView.swift in Sources */,
-				841DEFBF262333D800AF6D7C /* ML_Ma.mlmodel in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				847268BE26130CAE00F92E66 /* Date.swift in Sources */,
 				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
@@ -947,6 +964,7 @@
 				840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */,
 				847269B42615AEE900F92E66 /* SegmentedView.swift in Sources */,
 				84565A6D261C6000009F9F7D /* Page.swift in Sources */,
+				841F334B2623FCAB0099B8CB /* MLMAOut.swift in Sources */,
 				84726906261313B100F92E66 /* S_Share.swift in Sources */,
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
 				84726984261479CC00F92E66 /* ShareDetail.swift in Sources */,
@@ -966,6 +984,7 @@
 				8472699726147ABA00F92E66 /* Progress .swift in Sources */,
 				8472699F26147C4E00F92E66 /* TostError.swift in Sources */,
 				84565ABA261C76D7009F9F7D /* ShareEditPage.swift in Sources */,
+				841F3478262447300099B8CB /* mlma.mlmodel in Sources */,
 				847268DF26130EC700F92E66 /* Share.swift in Sources */,
 				847269C02615B15F00F92E66 /* base.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetailStore.swift in Sources */,
@@ -973,9 +992,9 @@
 				848929CE26118E5900006D88 /* PythonManage.swift in Sources */,
 				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,
 				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
-				841DEFC32623342300AF6D7C /* ML_Ma.mlmodel in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,
 				847268BF26130CAE00F92E66 /* Date.swift in Sources */,
+				841F335C2624062F0099B8CB /* MakeData.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
 				840E2B852615C3B0003A84C6 /* UDID.swift in Sources */,
 			);
@@ -992,8 +1011,9 @@
 				848BB2C826184AA600D639DE /* Formatter.swift in Sources */,
 				8472693426132E9D00F92E66 /* Date.swift in Sources */,
 				8472693026132E8900F92E66 /* Store.swift in Sources */,
+				841F3479262447300099B8CB /* mlma.mlmodel in Sources */,
 				840E2B862615C3B0003A84C6 /* UDID.swift in Sources */,
-				841DEFDC2623352600AF6D7C /* ML_Ma.mlmodel in Sources */,
+				841F31FB2623F6BA0099B8CB /* PythonTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1005,11 +1025,13 @@
 				84565A75261C6001009F9F7D /* Page.swift in Sources */,
 				8472692C26132E8600F92E66 /* Store.swift in Sources */,
 				840E2B922615CC25003A84C6 /* HttpServer.swift in Sources */,
+				841F335D2624062F0099B8CB /* MakeData.swift in Sources */,
+				841F334F2623FD040099B8CB /* MLMAOut.swift in Sources */,
+				841F347A262447300099B8CB /* mlma.mlmodel in Sources */,
 				840E2B872615C3B0003A84C6 /* UDID.swift in Sources */,
 				8472693826132E9E00F92E66 /* Date.swift in Sources */,
 				848BB2C926184AA600D639DE /* Formatter.swift in Sources */,
 				8472693C26132EBF00F92E66 /* SQLiteManage.swift in Sources */,
-				841DEFD82623352500AF6D7C /* ML_Ma.mlmodel in Sources */,
 				841DEFD42623351200AF6D7C /* Test_ML.swift in Sources */,
 				8472691926132D2C00F92E66 /* S_Share.swift in Sources */,
 				8472691D26132D3E00F92E66 /* Share.swift in Sources */,

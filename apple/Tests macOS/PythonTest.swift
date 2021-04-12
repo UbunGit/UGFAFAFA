@@ -39,9 +39,6 @@ class PythonTest: XCTestCase {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-   
-         
-  
  
     }
 

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import CreateML
+
 
 class Test_ML: XCTestCase {
 
@@ -19,14 +19,8 @@ class Test_ML: XCTestCase {
     }
 
     func testExample() throws {
-        let mode =  ML_Ma()
-        for td in [1:20]{
-            let re = try mode.prediction(text: 1).lable
-            print(re)
-        }
-      
-        
-        
+     
+        MLMAOut().maprediction(code: "300022.sz")
     }
 
     func testPerformanceExample() throws {
