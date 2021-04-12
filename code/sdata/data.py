@@ -6,19 +6,28 @@
 import os
 import numpy
 import pandas
-
+import time
 import talib as tl
+import tushare as ts
 from matplotlib import pyplot as plt 
 from datetime import datetime
 import logging
+from db import session, SdataUpdateTime
 
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 datapath = "./data/cvs"
 
-# step1 获取数据
 
-def getdata(code="600111.sh"):
-    datafile = os.path.join(datapath,str(code)+'.csv')
+
+
+def filempath(scode):
+    return  os.path.join(datapath,scode+'.csv')
+
+# step1 获取本地数据
+
+def sd_local(code="600111", suffix="sh"):
+    _code = code+'.'+suffix.lower()
+    datafile = filempath(_code)
     if os.path.exists(datafile):
         temdata = pandas.read_csv(datafile ,dtype={"date":"string"}, index_col=0)
         temdata = temdata.sort_values(by='date')
@@ -28,6 +37,45 @@ def getdata(code="600111.sh"):
             raise Exception("temdata id empty")
     else:
         raise Exception("datafile not exists!", datafile)
+
+# 从网络加载股票数据
+def sd_reload(code="600111", suffix="sh"):
+    _code = code+'.'+suffix.lower()
+    try:
+        input = session.query(SdataUpdateTime).filter_by(code=code,suffix=suffix.lower()).first()
+        logging.debug(input)
+        if input == None:
+            downdata = ts.pro_bar(ts_code=_code, adj='qfq')
+            if(downdata is None):
+                raise Exception("error：下载股票数据失败")
+            downdata = downdata.rename(columns={'trade_date':'date'})
+            sd_save(code,suffix,downdata)
+            
+
+        data = sd_local( code = code,suffix=suffix)
+        data = data.sort_values(by='date')
+        date = data.iloc[-1]['date']
+        print(date)
+        return data
+        
+        
+
+    except Exception as e:
+            logging.error('except:', e)
+
+# 保存数据到本地
+def sd_save(code, suffix, data):
+    _code = code+'.'+suffix.lower()
+
+    datafile = filempath(scode=_code)
+    data.to_csv(datafile)
+    updatedata = SdataUpdateTime()
+    updatedata.code = code
+    updatedata.suffix = suffix.lower()
+    updatedata.create_time = time.time()
+    updatedata.change_time = time.time()
+    session.add(updatedata)
+    session.commit()
 
 # 处理数据
 def mapdata(datas):
@@ -70,10 +118,14 @@ def clostlv(data,m):
 
 import unittest
 
+code = '601138'
+type = 'SH'
+
 class TestStores(unittest.TestCase):
 
     def setUp(self):
         logging.info ("setup...")
+
     @unittest.skip("跳过该测试项") 
     def test_getdata(self):
         logging.info("test_getdata.")
@@ -100,11 +152,12 @@ class TestStores(unittest.TestCase):
         except Exception as err:
             logging.error (err)
     
+    @unittest.skip("跳过该测试项")
     def test_matype(self):
         logging.info("test_getdata.")
         try:
             code = "601138.SH"
-            datas = getdata(code=code)
+            datas = sd_local(code=code)
             matype(datas,5,30)
             clostlv(datas,30)
             tdata = datas.loc[datas['mat']==True,['close_v']]
@@ -114,7 +167,10 @@ class TestStores(unittest.TestCase):
         except Exception as err:
             logging.error (err)
 
-      
+    def test_reload(self):
+        data = sd_reload(code=code,suffix=type)
+        logging.debug(data)
+
         
 
 
