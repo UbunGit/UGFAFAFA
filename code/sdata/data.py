@@ -6,25 +6,21 @@
 import os
 import numpy
 import pandas
-import time
+import time,datetime
 import talib as tl
 import tushare as ts
 from matplotlib import pyplot as plt 
-from datetime import datetime
+
 import logging
-from db import session, SdataUpdateTime
+from .db import session, SdataUpdateTime
 
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 datapath = "./data/cvs"
 
-
-
-
 def filempath(scode):
     return  os.path.join(datapath,scode+'.csv')
 
-# step1 获取本地数据
-
+# 获取本地数据
 def sd_local(code="600111", suffix="sh"):
     _code = code+'.'+suffix.lower()
     datafile = filempath(_code)
@@ -43,25 +39,45 @@ def sd_reload(code="600111", suffix="sh"):
     _code = code+'.'+suffix.lower()
     try:
         input = session.query(SdataUpdateTime).filter_by(code=code,suffix=suffix.lower()).first()
-        logging.debug(input)
-        if input == None:
+        datafile = filempath(scode=_code)
+
+        # 1 如果没有数据记录，或文件不存在 下载
+        if input == None or os.path.exists(datafile)==False:
             downdata = ts.pro_bar(ts_code=_code, adj='qfq')
             if(downdata is None):
                 raise Exception("error：下载股票数据失败")
             downdata = downdata.rename(columns={'trade_date':'date'})
             sd_save(code,suffix,downdata)
+
+        # 2 如果当前时间<16点 判断更新时间是否>昨天16点 如果大于不更新
+        # 3 如果当前时间>16点 判断更新时间是否>今天16点，如果大于不更新
+        now = time.localtime(time.time())
+        ctime = datetime.datetime.fromtimestamp(input.change_time)
+        jtime = None
+        if now.tm_hour<16:
+            jtime = datetime.datetime(now.tm_year, now.tm_mon, now.tm_mday-1, 16, 00)
+        else:
+            jtime = datetime.datetime(now.tm_year, now.tm_mon, now.tm_mday, 16, 00)
+        if ctime < jtime:
+            logging.debug("更新...")
+            downdata = ts.pro_bar(ts_code=_code, adj='qfq')
+            if(downdata is None):
+                raise Exception("error：下载股票数据失败")
+            downdata = downdata.rename(columns={'trade_date':'date'})
             
+            downdata.to_csv(datafile)
+            input.change_time = time.time()
+            session.add(input)
+            session.commit()
+            logging.debug("更新完成")
 
         data = sd_local( code = code,suffix=suffix)
         data = data.sort_values(by='date')
-        date = data.iloc[-1]['date']
-        print(date)
         return data
-        
-        
 
     except Exception as e:
-            logging.error('except:', e)
+        logging.error('except:', e)
+        raise Exception(e)
 
 # 保存数据到本地
 def sd_save(code, suffix, data):
@@ -92,17 +108,6 @@ def mapdata(datas):
     logging.debug(df['text'].corr(df['lable'])) 
     return df.loc[:,['date','lable','text','close','xclose']]
 
-# 判断ma5上传ma30
-def matype(data,max,may):
-    df = data
-    df['max'] = tl.MA(df['close'],timeperiod = max)
-    df['may'] = tl.MA(df['close'],timeperiod = may)
-    df['max_'] = df['max'].shift(-1)
-    df['max+'] = df['max'].shift(1)
-    df['may_'] = df['may'].shift(-1)
-    df['may+'] = df['may'].shift(1)
-    df['mat'] =  ((df['max_'] <= df['may_']) & (df['max+'] >= df['may+']))
-    data['mat'] = df['mat']
 
 # 获取后m天的收盘加与当天收盘加比率
 def clostlv(data,m):
@@ -120,7 +125,6 @@ import unittest
 
 code = '601138'
 type = 'SH'
-
 class TestStores(unittest.TestCase):
 
     def setUp(self):
@@ -137,7 +141,6 @@ class TestStores(unittest.TestCase):
             logging.debug(svdata.head())
           
             svdata.to_csv('./data/traindata/%s.csv' %(code))
-
             # pltdata = svdata[30:300]
             # logging.debug(pltdata)
 
@@ -154,12 +157,13 @@ class TestStores(unittest.TestCase):
     
     @unittest.skip("跳过该测试项")
     def test_matype(self):
+
         logging.info("test_getdata.")
         try:
             code = "601138.SH"
-            datas = sd_local(code=code)
-            matype(datas,5,30)
-            clostlv(datas,30)
+            datas = getdata(code=code)
+            matype(datas,5,10)
+            clostlv(datas,3)
             tdata = datas.loc[datas['mat']==True,['close_v']]
             logging.debug(tdata.describe())
             logging.debug(datas.loc[datas['mat']==True,['mat','close_v']])
@@ -170,9 +174,6 @@ class TestStores(unittest.TestCase):
     def test_reload(self):
         data = sd_reload(code=code,suffix=type)
         logging.debug(data)
-
-        
-
 
 if __name__ == '__main__':
     unittest.main()
