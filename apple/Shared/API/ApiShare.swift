@@ -107,42 +107,19 @@ extension Share{
     }
     
     /**新增/修改*/
-    func api_share(id:Int?, finesh:@escaping  (NSError?, Share?) ->  ()){
+    func api_share(id:Int?)->DataRequest{
         
-        var url = "\(baseurl)/shares"
+        var url = "\(baseurl)/api/shares"
         if (id != 0) {
             url.append("/\(id!)")
         }
-        
-        let paramedata = try? JSONEncoder().encode(self)
-        let parameters = try? JSONSerialization.jsonObject(with: paramedata!, options: .mutableContainers)
-    
-        var parame = parameters as? Parameters
+        var parame = try? self.toParameters()
         parame?["stores"] = stores
         
-        AF.request(url, method:  (id != 0) ? .put : .post, parameters: parame){ urlRequest in
+        return AF.request(url, method:  (id != 0) ? .put : .post, parameters: parame){ urlRequest in
             urlRequest.timeoutInterval = 5
-            
-        }.responseJSON { (response) in
-            
-            switch response.result {
-            case .success(let value):
-                do{
-                    
-                    let jsonData = try JSONSerialization.data(withJSONObject: value as Any, options: [])
-                    let share = try JSONDecoder().decode(Share.self, from: jsonData)
-                    finesh(nil, share)
-                }
-                catch {
-                    finesh(error as NSError, nil)
-                }
-            case .failure(let error):
-                print("\(error)")
-                finesh(NSError.init(domain: error.localizedDescription , code: -1, userInfo: nil),nil)
-                
-            }
-            
         }
+        
     }
     
     func api_delete(finesh:@escaping  (NSError?) ->  ()) {

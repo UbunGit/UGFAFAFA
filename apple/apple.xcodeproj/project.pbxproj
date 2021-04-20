@@ -34,6 +34,8 @@
 		84565AB6261C76CB009F9F7D /* ShareEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditPage.swift */; };
 		84565ABA261C76D7009F9F7D /* ShareEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditPage.swift */; };
 		84565ABB261C76D7009F9F7D /* ShareEditPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditPage.swift */; };
+		845C232F262870DB00308C2A /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C232E262870DB00308C2A /* SWWebView.swift */; };
+		845C23422628780000308C2A /* WebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C23412628780000308C2A /* WebPage.swift */; };
 		8472689C261307F300F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
 		8472689E261307F300F92E66 /* SharesListPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListPage.swift */; };
 		847268A0261307F300F92E66 /* ArchiveSharesPageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* ArchiveSharesPageStore.swift */; };
@@ -107,6 +109,14 @@
 		84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DF725FBA4EF00F93203 /* ContentView.swift */; };
 		84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4E3425FBAA2B00F93203 /* SockerServer.swift */; };
 		84FA4E4A25FBB8B900F93203 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4E4925FBB8B900F93203 /* Socket.swift */; };
+		84FBDDC0262C065500983BD3 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDBF262C065500983BD3 /* Loading.swift */; };
+		84FBDDC4262C141100983BD3 /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDBF262C065500983BD3 /* Loading.swift */; };
+		84FBDDCA262D528400983BD3 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDC9262D528400983BD3 /* CloseButton.swift */; };
+		84FBDDCB262D528400983BD3 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDC9262D528400983BD3 /* CloseButton.swift */; };
+		84FBDDD4262D587100983BD3 /* StoreStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDD3262D587100983BD3 /* StoreStatus.swift */; };
+		84FBDDD5262D587100983BD3 /* StoreStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDD3262D587100983BD3 /* StoreStatus.swift */; };
+		84FBDDDD262D812B00983BD3 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDDC262D812B00983BD3 /* Codable.swift */; };
+		84FBDDDE262D812B00983BD3 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDDC262D812B00983BD3 /* Codable.swift */; };
 		ABE41E7854F9611A49B02DB1 /* Pods_apple__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B692F0E0810CA47CAE67000D /* Pods_apple__iOS_.framework */; };
 		CE54A7A2AAB5AC45E15FD96E /* Pods_Tests_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9648D6D19086E26C3CA8E6C3 /* Pods_Tests_macOS.framework */; };
 /* End PBXBuildFile section */
@@ -155,6 +165,8 @@
 		841F3476262447300099B8CB /* mlma.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = mlma.mlmodel; path = ../data/traindata/mlma.mlmodel; sourceTree = "<group>"; };
 		84565A68261C5F15009F9F7D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		84565AB5261C76CB009F9F7D /* ShareEditPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEditPage.swift; sourceTree = "<group>"; };
+		845C232E262870DB00308C2A /* SWWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWWebView.swift; sourceTree = "<group>"; };
+		845C23412628780000308C2A /* WebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPage.swift; sourceTree = "<group>"; };
 		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		84726899261307F300F92E66 /* SharesListPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesListPage.swift; sourceTree = "<group>"; };
 		8472689B261307F300F92E66 /* ArchiveSharesPageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveSharesPageStore.swift; sourceTree = "<group>"; };
@@ -199,6 +211,10 @@
 		84FA4DF725FBA4EF00F93203 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		84FA4E3425FBAA2B00F93203 /* SockerServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SockerServer.swift; sourceTree = "<group>"; };
 		84FA4E4925FBB8B900F93203 /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		84FBDDBF262C065500983BD3 /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
+		84FBDDC9262D528400983BD3 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		84FBDDD3262D587100983BD3 /* StoreStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreStatus.swift; sourceTree = "<group>"; };
+		84FBDDDC262D812B00983BD3 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		9648D6D19086E26C3CA8E6C3 /* Pods_Tests_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B40092AE8C3F1CC640D053B /* Pods-Tests macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests macOS.debug.xcconfig"; path = "Target Support Files/Pods-Tests macOS/Pods-Tests macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B692F0E0810CA47CAE67000D /* Pods_apple__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_apple__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -280,6 +296,31 @@
 			path = ML;
 			sourceTree = "<group>";
 		};
+		845C230C26286CD100308C2A /* AppKit */ = {
+			isa = PBXGroup;
+			children = (
+				845C232E262870DB00308C2A /* SWWebView.swift */,
+			);
+			path = AppKit;
+			sourceTree = "<group>";
+		};
+		845C233F262877D500308C2A /* Paages */ = {
+			isa = PBXGroup;
+			children = (
+				845C2340262877EE00308C2A /* Web */,
+				84E11ED6260D91E80012D151 /* Home */,
+			);
+			path = Paages;
+			sourceTree = "<group>";
+		};
+		845C2340262877EE00308C2A /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				845C23412628780000308C2A /* WebPage.swift */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
 		84726895261307F300F92E66 /* SharesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,6 +372,7 @@
 			children = (
 				847268BD26130CAE00F92E66 /* Date.swift */,
 				840E2B832615C3B0003A84C6 /* UDID.swift */,
+				84FBDDDC262D812B00983BD3 /* Codable.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -388,6 +430,7 @@
 		8472698F26147A8400F92E66 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				84FBDDD2262D582A00983BD3 /* protocol */,
 				8472699B26147C4E00F92E66 /* unit */,
 				8472699326147AAD00F92E66 /* View */,
 				847268BC26130C9300F92E66 /* Extension */,
@@ -398,6 +441,8 @@
 		8472699326147AAD00F92E66 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84FBDDC8262D526600983BD3 /* CloseButton */,
+				84FBDDBE262C063E00983BD3 /* Loading */,
 				848BB2BB26183DF400D639DE /* SearchView */,
 				847269A82615AD9000F92E66 /* Segmented */,
 				8472699426147ABA00F92E66 /* Progress  */,
@@ -497,11 +542,12 @@
 		84807DA425FB7A8900C8CB18 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				845C233F262877D500308C2A /* Paages */,
+				845C230C26286CD100308C2A /* AppKit */,
 				841F31D42623F1900099B8CB /* ML */,
 				847269032613138300F92E66 /* Moden */,
 				84F291F12611C10D00593144 /* HttpServer */,
 				848929C5261186A100006D88 /* PythonManage */,
-				84E11ED6260D91E80012D151 /* Home */,
 				84E11EB3260D8CF50012D151 /* DataBase */,
 				84FA4E3325FBA9E600F93203 /* SocketServer */,
 				84807DA525FB7A8900C8CB18 /* Info.plist */,
@@ -626,6 +672,30 @@
 			children = (
 			);
 			path = Database;
+			sourceTree = "<group>";
+		};
+		84FBDDBE262C063E00983BD3 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				84FBDDBF262C065500983BD3 /* Loading.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
+		84FBDDC8262D526600983BD3 /* CloseButton */ = {
+			isa = PBXGroup;
+			children = (
+				84FBDDC9262D528400983BD3 /* CloseButton.swift */,
+			);
+			path = CloseButton;
+			sourceTree = "<group>";
+		};
+		84FBDDD2262D582A00983BD3 /* protocol */ = {
+			isa = PBXGroup;
+			children = (
+				84FBDDD3262D587100983BD3 /* StoreStatus.swift */,
+			);
+			path = protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -943,11 +1013,15 @@
 				847269B32615AEE900F92E66 /* SegmentedView.swift in Sources */,
 				847269BF2615B15F00F92E66 /* base.swift in Sources */,
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
+				84FBDDDD262D812B00983BD3 /* Codable.swift in Sources */,
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				848BB2BD26183E1000D639DE /* SearchView.swift in Sources */,
+				84FBDDC0262C065500983BD3 /* Loading.swift in Sources */,
+				84FBDDD4262D587100983BD3 /* StoreStatus.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				847268BE26130CAE00F92E66 /* Date.swift in Sources */,
 				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
+				84FBDDCA262D528400983BD3 /* CloseButton.swift in Sources */,
 				84726983261479CC00F92E66 /* ShareDetail.swift in Sources */,
 				84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				840E2B842615C3B0003A84C6 /* UDID.swift in Sources */,
@@ -970,16 +1044,19 @@
 				84726984261479CC00F92E66 /* ShareDetail.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
 				847269A126147C4E00F92E66 /* AlertData.swift in Sources */,
+				84FBDDD5262D587100983BD3 /* StoreStatus.swift in Sources */,
 				847269CF2615B28C00F92E66 /* ApiShare.swift in Sources */,
 				8472697426146A2400F92E66 /* SharesListPage.swift in Sources */,
 				84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */,
 				848BB2C726184AA600D639DE /* Formatter.swift in Sources */,
 				848BB2C126183F7900D639DE /* SearchView.swift in Sources */,
 				847268F626130F7600F92E66 /* Store.swift in Sources */,
+				845C232F262870DB00308C2A /* SWWebView.swift in Sources */,
 				84F292122611D63F00593144 /* HttpServer.swift in Sources */,
 				84807DC425FB7A8900C8CB18 /* Persistence.swift in Sources */,
 				84807DBE25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */,
+				84FBDDDE262D812B00983BD3 /* Codable.swift in Sources */,
 				84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */,
 				8472699726147ABA00F92E66 /* Progress .swift in Sources */,
 				8472699F26147C4E00F92E66 /* TostError.swift in Sources */,
@@ -988,6 +1065,9 @@
 				847268DF26130EC700F92E66 /* Share.swift in Sources */,
 				847269C02615B15F00F92E66 /* base.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetailStore.swift in Sources */,
+				84FBDDC4262C141100983BD3 /* Loading.swift in Sources */,
+				845C23422628780000308C2A /* WebPage.swift in Sources */,
+				84FBDDCB262D528400983BD3 /* CloseButton.swift in Sources */,
 				8472697826146A2800F92E66 /* ArchiveSharesPageStore.swift in Sources */,
 				848929CE26118E5900006D88 /* PythonManage.swift in Sources */,
 				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,

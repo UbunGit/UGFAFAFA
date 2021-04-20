@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct TostError: Error,Identifiable {
-    var id = 0
+public struct TostError: Error {
+
     
     enum TostLevel {
         case debug
@@ -18,8 +18,8 @@ struct TostError: Error,Identifiable {
         case error
     }
 
-    let code: Int
-    let msg: String
-    let title: String
+    let code: Int?
+    let msg: String?
+    let title: String?
     let level: TostLevel
 }

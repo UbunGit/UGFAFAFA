@@ -52,6 +52,12 @@ struct Sidebar: View {
                 Label("收藏", systemImage: "heart")
             }
             .tag(NavigationItem.courses)
+            NavigationLink(destination: WebPage()) {
+                Label("web", systemImage: "heart")
+            }
+            .tag(NavigationItem.courses)
+            
+            
             
            
         }

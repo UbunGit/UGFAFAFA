@@ -9,68 +9,53 @@
 import Foundation
 import Alamofire
 
-class ShareDetailStore: ObservableObject {
+class ShareDetailStore: ObservableObject, StoreAlert  {
+
+    @Published var loading = false
     
-    @Published var share:Share = Share._shares[0]
+    @Published var isalert:Bool = false
+    @Published var alertData:TostError?
+    
+    
+    @Published var share:Share = Share(id: 0)
     @Published var fitterStore: [Store]?
-    @Published var needIn:Bool = false
-    @Published var needOut:Bool = false
+  
     @Published var shizhi:Float = 0 // 市值
     @Published var profit:Float = 0 // 持仓收益
     @Published var profited:Float = 0 // 实现收益
     @Published var allprofit:Float = 0 // 全部收益
     @Published var percent:Float = 0 // 收益比例
     @Published var price:Float = 0.00 //股票价格
-    @Published var loading = false
-    @Published var id:Int
-    
-    @Published var tostError:TostError?
+
+    var id:Int
+
     init(id:Int) {
         self.id = id
     }
     
     func reloadFitterStores(type:Int) {
+        guard let tstore = share.stores else {
+            return
+        }
         if type==0 {
-            fitterStore = share.stores
+            fitterStore = tstore
         }else if (type == 1){
-            fitterStore = share.stores?.filter({ (store) -> Bool in
+            fitterStore = tstore.filter({ (store) -> Bool in
                 return store.state == 0 || store.state == nil
             })
             
         }else if (type == 2){
-            fitterStore = share.stores?.filter({ (store) -> Bool in
+            fitterStore = tstore.filter({ (store) -> Bool in
                 return store.state == 1
             })
         }
         
     }
-    
-    
-    /**
-     更新store
-     */
-    func update()  {
-        
-        guard self.id > 0 else {
-            return
-        }
-        Share.api_shares_detail(id: self.id) { (error, resule) in
-            if(error != nil){
-                print(error?.description as Any)
-                self.tostError = TostError.init(code: -1, msg: error?.description ?? "未知", title: "错误", level: .error)
-            }else{
-                self.share = resule!
-                self.share.stores?.sort(by: { $0.id > $1.id})
-                self.reloadFitterStores(type: 0)
-                self.updatePrice()
-                self.profited = self.share.getIncome()
-      
-              
-            }
-            self.loading = false
-        }
+
+    func loadData()  {
         
     }
+
     /**
      获取详情数据
      */
@@ -156,6 +141,29 @@ class ShareDetailStore: ObservableObject {
         }
     }
 
+}
+
+/**
+ api
+ */
+
+extension ShareDetailStore{
+    
+    
+    //新增/修改数据
+    func api_update()  {
+        share.api_share(id: self.id)
+            .responseModel(Share.self) { [self] (resule) in
+                switch resule{
+                case.success(let value):
+                    self.share = value
+                case.failure(let error):
+                    alert(error: error)
+                }
+            }
+    }
+    
+    
 }
 
 

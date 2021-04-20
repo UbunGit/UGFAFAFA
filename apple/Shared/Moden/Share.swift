@@ -15,7 +15,7 @@ import Combine
 
 struct  Share: Codable , Identifiable {
     
-    var id:Int
+    var id:Int = 0
     var name:String=""
     var code:String=""
     var price:Float?

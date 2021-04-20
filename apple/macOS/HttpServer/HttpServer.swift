@@ -34,6 +34,7 @@ class HttpServer: NSObject,ObservableObject {
             var routes = Routes()
             routes.add(method: .get, uri: "/", handler: handler)
             
+            routes.add(method: .post, uri: "/api/shares", handler: share_update)
             routes.add(method: .get, uri: "/api/shares/list", handler: share_list)
             routes.add(method: .get, uri: "/api/shares/detail", handler: share_detail)
             

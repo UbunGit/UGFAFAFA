@@ -14,6 +14,29 @@ import PerfectHTTP
 
 
 extension Share{
+    
+    func update(callback:@escaping  (Result<Share, Error>) ->  Void){
+        
+        guard let dbPath = UserDefaults.standard.string(forKey: "dbfile") else {
+            print("dbPath is nil")
+            return
+        }
+        let dbfile = "\(dbPath)share.db"
+        
+        do{
+           
+            let db = Database(configuration: try SQLiteDatabaseConfiguration(dbfile))
+            let table = db.table(Share.self)
+            if id != 0 {
+                try table.update(self)
+            }else{
+                try table.insert(self)
+            }
+        }catch {
+            callback(.failure(error))
+        }
+        
+    }
     /**
      每页个数 content
      页码 page
@@ -32,7 +55,6 @@ extension Share{
             let shareTable = db.table(Share.self)
             
             let values = try shareTable
-                
                 .join(\.stores, on: \.id, equals: \.share_id)
                 .limit(content,skip: page)
 //                .where(\Share.name %=% "ETF")
@@ -72,6 +94,40 @@ extension Share{
 
 
 extension HttpServer{
+    
+    func share_update(request: HTTPRequest, response: HTTPResponse)  {
+        defer {
+            response.setHeader(.contentType, value: "application/json")
+            response.completed()
+        }
+        do{
+            let params = request.params()
+            var par = [String:Any]()
+            for p in params {
+                par[p.0] = p.1
+            }
+          
+            let jsonData = try JSONSerialization.data(withJSONObject: par as Any, options: [])
+            let data = try JSONDecoder().decode(Share.self, from: jsonData)
+        }
+        catch {
+            response.appendBody(string: "\(error)")
+          
+       }
+      
+        
+//        guard let page = request.param(name: "name") else {
+//            response.appendBody(string: "page 不能为空")
+//            return
+//        }
+//        guard let content = request.param(name: "content") else {
+//            response.appendBody(string: "content 不能为空")
+//            return
+//        }
+        
+        
+       
+    }
     
     func share_list(request: HTTPRequest, response: HTTPResponse)  {
         defer {

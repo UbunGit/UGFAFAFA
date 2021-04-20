@@ -44,7 +44,7 @@ struct SharesListPage: View {
             #endif
         }
         .sheet(isPresented: $isSheet){
-            ShareEdit(shareStore: ShareDetailStore(id: 0))
+            ShareEdit(store: ShareDetailStore(id: 0))
         }
         .onAppear(perform: {
             sharesStore.update()

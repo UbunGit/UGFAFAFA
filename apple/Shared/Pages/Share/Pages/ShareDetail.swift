@@ -105,7 +105,7 @@ struct ShareDetail: View {
         }
         .onAppear(perform: {
             selectTab = tabs[0]
-            shareStore.update()
+          
             
         })
     }
