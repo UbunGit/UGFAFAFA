@@ -78,45 +78,16 @@ extension Share{
         }
     }
     
-    static func api_shares_detail(id:Int, finesh:@escaping  (NSError?, Share?) ->  ()){
-        
-        let url = "\(baseurl)/api/shares/detail"
-        let parameters = ["id":id]
-        AF.request(url, method: .get,parameters: parameters){ urlRequest in
-            urlRequest.timeoutInterval = 5
-        }.responseJSON { (response) in
-            
-            switch response.result {
-            case .success(let value):
-                do{
-                    let jsonData = try JSONSerialization.data(withJSONObject: value as Any, options: [])
-                    let share = try JSONDecoder().decode(Share.self, from: jsonData)
-                    finesh(nil, share)
-                }
-                catch {
-                    finesh(error as NSError, nil)
-                }
-                
-                
-            case .failure(let error):
-                print("error")
-                finesh(NSError.init(domain: error.localizedDescription , code: -1, userInfo: nil),nil)
-                
-            }
-        }
-    }
+   
     
     /**新增/修改*/
     func api_share(id:Int?)->DataRequest{
         
-        var url = "\(baseurl)/api/shares"
-        if (id != 0) {
-            url.append("/\(id!)")
-        }
+        let url = "\(baseurl)/api/shares"
         var parame = try? self.toParameters()
         parame?["stores"] = stores
         
-        return AF.request(url, method:  (id != 0) ? .put : .post, parameters: parame){ urlRequest in
+        return AF.request(url, method: .post, parameters: parame){ urlRequest in
             urlRequest.timeoutInterval = 5
         }
         

@@ -9,7 +9,7 @@
 import SwiftUI
 
 
-class ArchiveSharesPageStore: ObservableObject {
+class SharesList: ObservableObject {
     
     @Published var shares:[Share] = [Share].init()
     @Published var searchText:String=""

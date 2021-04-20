@@ -15,6 +15,9 @@ import PerfectHTTP
 
 extension Share{
     
+    /*
+     修改股票
+     */
     func update(callback:@escaping  (Result<Share, Error>) ->  Void){
         
         guard let dbPath = UserDefaults.standard.string(forKey: "dbfile") else {
@@ -28,15 +31,21 @@ extension Share{
             let db = Database(configuration: try SQLiteDatabaseConfiguration(dbfile))
             let table = db.table(Share.self)
             if id != 0 {
-                try table.update(self)
+                try table
+                    .where(\Share.id == self.id)
+                    .update(self)
+                
             }else{
-                try table.insert(self)
+               
+                try table.insert(self, ignoreKeys: \.id)
             }
+            callback(.success(self))
         }catch {
             callback(.failure(error))
         }
         
     }
+    
     /**
      每页个数 content
      页码 page
@@ -70,6 +79,9 @@ extension Share{
         
     }
     
+    /*
+     获取股票详情
+     */
     static func detail(id:Int, callback:@escaping  (Result<Share?, Error>) ->  Void) {
         guard let dbPath = UserDefaults.standard.string(forKey: "dbfile") else {
             print("dbPath is nil")
@@ -100,33 +112,35 @@ extension HttpServer{
             response.setHeader(.contentType, value: "application/json")
             response.completed()
         }
-        do{
-            let params = request.params()
-            var par = [String:Any]()
-            for p in params {
-                par[p.0] = p.1
-            }
-          
-            let jsonData = try JSONSerialization.data(withJSONObject: par as Any, options: [])
-            let data = try JSONDecoder().decode(Share.self, from: jsonData)
+        guard let id = Int(request.param(name: "id") ?? "0")  else {
+            response.appendBody(string: "id 错误")
+            return
         }
-        catch {
-            response.appendBody(string: "\(error)")
-          
-       }
-      
-        
-//        guard let page = request.param(name: "name") else {
-//            response.appendBody(string: "page 不能为空")
-//            return
-//        }
-//        guard let content = request.param(name: "content") else {
-//            response.appendBody(string: "content 不能为空")
-//            return
-//        }
-        
-        
-       
+        guard let code = request.param(name: "code")  else {
+            response.appendBody(string: "page 不能为空")
+            return
+        }
+        guard let name = request.param(name: "name")  else {
+            response.appendBody(string: "name 不能为空")
+            return
+        }
+   
+
+        Share(id: id, name: name, code: code).update { (result) in
+            switch result {
+            case .success(let value):
+                let jsonEncoder = JSONEncoder()
+                let jsonData = try? jsonEncoder.encode(value)
+                let jsonstr = String(data: jsonData!, encoding: .utf8)
+                response.appendBody(string: jsonstr!)
+            case .failure(let error):
+                let errjson = ["🐬 code":-1,"msg":error.localizedDescription] as [String : Any]
+                let jsonstr =  try! errjson.jsonEncodedString()
+                response.appendBody(string: jsonstr)
+                
+            }
+        }
+
     }
     
     func share_list(request: HTTPRequest, response: HTTPResponse)  {

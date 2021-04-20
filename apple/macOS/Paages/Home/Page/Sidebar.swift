@@ -48,7 +48,7 @@ struct Sidebar: View {
             }
             .tag(NavigationItem.courses)
             
-            NavigationLink(destination: SharesListPage()) {
+            NavigationLink(destination: SharesListView()) {
                 Label("收藏", systemImage: "heart")
             }
             .tag(NavigationItem.courses)

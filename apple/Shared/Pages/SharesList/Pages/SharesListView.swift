@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct SharesListPage: View {
+struct SharesListView: View {
     
-    @ObservedObject var sharesStore =  ArchiveSharesPageStore()
+    @ObservedObject var sharesStore =  SharesList()
     @State var storeid:Int?
     @State var isNavigation = false
     @State var isSheet = false
@@ -44,7 +44,7 @@ struct SharesListPage: View {
             #endif
         }
         .sheet(isPresented: $isSheet){
-            ShareEdit(store: ShareDetailStore(id: 0))
+            ShareEditView(store: ShareEdit(id: 0))
         }
         .onAppear(perform: {
             sharesStore.update()
@@ -74,7 +74,7 @@ struct SharesListPage: View {
             
             ForEach(sharesStore.shares) { item in
       
-                NavigationLink(destination:  ShareDetail(shareStore: ShareDetailStore(id:item.id))){
+                NavigationLink(destination:  ShareDetailView(shareStore: ShareDetail(id:item.id))){
                     ShareCell(share: item)
                         .padding(.vertical, 4)
                 } 
@@ -92,6 +92,6 @@ struct SharesListPage: View {
 
 struct ArchiveSharesPage_Previews: PreviewProvider {
     static var previews: some View {
-        SharesListPage()
+        SharesListView()
     }
 }

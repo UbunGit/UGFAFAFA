@@ -33,7 +33,11 @@ struct Loading: ViewModifier {
 extension View {
     // use view modifier
     public func loading(isloading:Binding<Bool>) -> some View {
-        self.modifier(Loading(isloading: isloading))
+        withAnimation (.linear(duration: 3)){
+            self.modifier(Loading(isloading: isloading))
+        }
+        
+        
     }
 }
 
