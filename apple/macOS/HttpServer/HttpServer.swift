@@ -37,6 +37,8 @@ class HttpServer: NSObject,ObservableObject {
             routes.add(method: .post, uri: "/api/shares", handler: share_update)
             routes.add(method: .get, uri: "/api/shares/list", handler: share_list)
             routes.add(method: .get, uri: "/api/shares/detail", handler: share_detail)
+            routes.add(method: .get, uri: "/api/shares/delete", handler: share_delete)
+            
             
             routes.add(method: .get, uri: "/**",
                        handler: StaticFileHandler(documentRoot: "./webroot", allowResponseFilters: true).handleRequest)
@@ -61,6 +63,7 @@ class HttpServer: NSObject,ObservableObject {
     
     
 }
+
 extension HttpServer{
     func configData() -> [String:Any] {
         return [

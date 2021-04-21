@@ -7,23 +7,25 @@
 //
 
 import Foundation
+import SwiftUI
 import Alamofire
 
 class ShareEdit: ObservableObject, StoreAlert  {
     
-    
+
     @Published var loading = false
-    
     @Published var isalert:Bool = false
     @Published var alertData:TostError?
   
-    @Published var share:Share = Share._shares[0]
+    @Published var share:Share = Share()
   
     
     var id:Int
     
-    init(id:Int) {
+    init(id:Int ) {
+    
         self.id = id
+        
     }
 
     func loadData()  {
@@ -58,11 +60,27 @@ extension ShareEdit{
         let url = "\(baseurl)/api/shares/detail"
         let parameters = ["id":id]
         AF.request(url, method: .get,parameters: parameters){ urlRequest in
-            urlRequest.timeoutInterval = 5
+            urlRequest.timeoutInterval = 30
         }.responseModel(Share.self) { [self] (resule) in
             switch resule{
             case.success(let value):
                 share = value
+            case.failure(let error):
+                alert(error: error)
+            }
+            
+        }
+    }
+    
+    func api_delete( finesh:@escaping ()->()){
+        let url = "\(baseurl)/api/shares/delete"
+        let parameters = ["id":id]
+        AF.request(url, method: .get,parameters: parameters){ urlRequest in
+            urlRequest.timeoutInterval = 5
+        }.responseModel([String:String].self) { [self](resule) in
+            switch resule{
+            case.success( _):
+                finesh()
             case.failure(let error):
                 alert(error: error)
             }

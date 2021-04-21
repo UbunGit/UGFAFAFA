@@ -100,6 +100,11 @@
 		848BB2C726184AA600D639DE /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BB2C526184AA600D639DE /* Formatter.swift */; };
 		848BB2C826184AA600D639DE /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BB2C526184AA600D639DE /* Formatter.swift */; };
 		848BB2C926184AA600D639DE /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848BB2C526184AA600D639DE /* Formatter.swift */; };
+		8491D952263003910035B7F8 /* HttpServer+terplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D951263003910035B7F8 /* HttpServer+terplate.swift */; };
+		8491D953263003910035B7F8 /* HttpServer+terplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D951263003910035B7F8 /* HttpServer+terplate.swift */; };
+		8491D95E26300ABC0035B7F8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D95D26300ABC0035B7F8 /* APIError.swift */; };
+		8491D95F26300ABC0035B7F8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D95D26300ABC0035B7F8 /* APIError.swift */; };
+		8491D9662630203D0035B7F8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D95D26300ABC0035B7F8 /* APIError.swift */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
 		84E11F15260DBF9A0012D151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E11F14260DBF9A0012D151 /* Assets.xcassets */; };
@@ -205,6 +210,8 @@
 		848929C92611872F00006D88 /* PythonManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonManage.swift; sourceTree = "<group>"; };
 		848BB2BC26183E1000D639DE /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		848BB2C526184AA600D639DE /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		8491D951263003910035B7F8 /* HttpServer+terplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HttpServer+terplate.swift"; sourceTree = "<group>"; };
+		8491D95D26300ABC0035B7F8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F14260DBF9A0012D151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -393,6 +400,7 @@
 			isa = PBXGroup;
 			children = (
 				84726904261313B100F92E66 /* S_Share.swift */,
+				8491D951263003910035B7F8 /* HttpServer+terplate.swift */,
 			);
 			path = Moden;
 			sourceTree = "<group>";
@@ -659,6 +667,7 @@
 			isa = PBXGroup;
 			children = (
 				84F291F22611C13500593144 /* HttpServer.swift */,
+				8491D95D26300ABC0035B7F8 /* APIError.swift */,
 			);
 			path = HttpServer;
 			sourceTree = "<group>";
@@ -1020,6 +1029,7 @@
 				848BB2C626184AA600D639DE /* Formatter.swift in Sources */,
 				84FA4E4A25FBB8B900F93203 /* Socket.swift in Sources */,
 				84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */,
+				8491D9662630203D0035B7F8 /* APIError.swift in Sources */,
 				847268AB2613088700F92E66 /* Share.swift in Sources */,
 				8472699E26147C4E00F92E66 /* TostError.swift in Sources */,
 				84565AB6261C76CB009F9F7D /* ShareEditView.swift in Sources */,
@@ -1069,6 +1079,7 @@
 				84807DC425FB7A8900C8CB18 /* Persistence.swift in Sources */,
 				84807DBE25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */,
+				8491D952263003910035B7F8 /* HttpServer+terplate.swift in Sources */,
 				84FBDDDE262D812B00983BD3 /* Codable.swift in Sources */,
 				84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */,
 				8472699726147ABA00F92E66 /* Progress .swift in Sources */,
@@ -1084,6 +1095,7 @@
 				84FBDDCB262D528400983BD3 /* CloseButton.swift in Sources */,
 				8472697826146A2800F92E66 /* SharesList.swift in Sources */,
 				848929CE26118E5900006D88 /* PythonManage.swift in Sources */,
+				8491D95E26300ABC0035B7F8 /* APIError.swift in Sources */,
 				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,
 				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,
@@ -1115,9 +1127,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8491D95F26300ABC0035B7F8 /* APIError.swift in Sources */,
 				847269C72615B18E00F92E66 /* base.swift in Sources */,
 				84565A75261C6001009F9F7D /* Page.swift in Sources */,
 				8472692C26132E8600F92E66 /* Store.swift in Sources */,
+				8491D953263003910035B7F8 /* HttpServer+terplate.swift in Sources */,
 				840E2B922615CC25003A84C6 /* HttpServer.swift in Sources */,
 				841F335D2624062F0099B8CB /* MakeData.swift in Sources */,
 				841F334F2623FD040099B8CB /* MLMAOut.swift in Sources */,

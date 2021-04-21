@@ -14,9 +14,8 @@ struct ShareEditView: View {
     @Environment(\.presentationMode) var presentationMode
     
     @ObservedObject var store:ShareEdit
-    
     @State var editindex:Int?
-    @State var showSheet = false
+   
     
     
     var body: some View {
@@ -84,7 +83,9 @@ struct ShareEditView: View {
                     .background(Color("AccentColor"))
             })
             Button(action: {
-                store.api_update()
+                store.api_delete(){
+                    presentationMode.wrappedValue.dismiss()
+                }
             }, label: {
                 Text("删除")
                     .frame(width: 150, height: 40, alignment: .center)
