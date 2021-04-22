@@ -10,22 +10,23 @@ import Foundation
 
 public protocol StoreAlert: ObservableObject  {
 
-    
     var isalert:Bool {get set}
-    var alertData:TostError? {get set}
-    func alert(error:Error?)
+    var alertData: APIError? {get set}
+    func alert(error:APIError?)
 }
 
 
 extension StoreAlert{
  
-    func alert(error:Error?){
+    func alert(error:APIError?){
        
         guard error != nil else {
+            self.alertData = APIError(code: -1, msg: "--")
+            self.isalert = true
             return
         }
-        let nserr = error! as NSError
-        self.alertData = TostError(code: nserr.code, msg: nserr.domain, title: nil, level: .error)
+        let nserr = error! as! APIError
+        self.alertData = APIError(code: nserr.code, msg: nserr.msg)
         self.isalert = true
     }
 }

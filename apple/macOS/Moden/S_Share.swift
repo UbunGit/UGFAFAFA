@@ -12,8 +12,19 @@ import PerfectCRUD
 import PerfectHTTP
 
 
+extension Share: CRUDSqliteProtocol{
 
-extension Share{
+    static var dbfile:String {
+        get{
+            guard let dbPath = UserDefaults.standard.string(forKey: "dbfile") else {
+                print("dbPath is nil")
+                return ""
+            }
+            let dbfile = "\(dbPath)share.db"
+            return dbfile
+        }
+    }
+    
     
     /*
      修改股票
@@ -28,18 +39,9 @@ extension Share{
         
         let db = Database(configuration: try SQLiteDatabaseConfiguration(dbfile))
         let table = db.table(Share.self)
-        if id != 0 {
-            try table
-                .where(\Share.id == self.id)
+        try table.where(\Share.id == self.id)
                 .update(self)
-            
-        }else{
-            
-            try table.insert(self, ignoreKeys: \.id)
-        }
-        
-        
-        
+
     }
     
     /**
@@ -97,30 +99,11 @@ extension Share{
         
         
     }
-    
-    static func delete(id:Int, callback:@escaping  (Result<Int, Error>) ->  Void) {
-        
-        guard let dbPath = UserDefaults.standard.string(forKey: "dbfile") else {
-            print("dbPath is nil")
-            return
-        }
-        let dbfile = "\(dbPath)share.db"
-        do {
-            let db = Database(configuration: try SQLiteDatabaseConfiguration(dbfile))
-            try db.table(Self.self)
-                .where(\Share.id == id)
-                .delete()
-            callback(.success(1))
-        } catch {
-            callback(.failure(error))
-        }
-    }
-    
-    
+
 }
 
 
-extension HttpServer{
+extension HttpServer {
     
     func share_update(request: HTTPRequest, response: HTTPResponse)  {
         defer {
@@ -141,21 +124,17 @@ extension HttpServer{
         }
         
         do{
-            let share = Share(id: id, name: name, code: code)
-            try share.update()
-            let jsonEncoder = JSONEncoder()
-            let jsonData = try? jsonEncoder.encode(share)
-            let jsonstr = String(data: jsonData!, encoding: .utf8)
-            response.appendBody(string: jsonstr!)
+            var share = Share(id: id, name: name, code: code)
+            if id == 0 {
+                share.id = try share.insert(ignoreKeys: \Share.id)
+            }else{
+                try share.update()
+            }
+            apiCompleted(response:response, result:share, error: nil)
         }
         catch{
-            let errjson = ["🐬 code":-1,"msg":error.localizedDescription] as [String : Any]
-            let jsonstr =  try! errjson.jsonEncodedString()
-            response.appendBody(string: jsonstr)
-            NSLog(jsonstr)
+            apiCompleted(response:response, result: "", error: error as? APIError)
         }
-        
-        
     }
     
     func share_list(request: HTTPRequest, response: HTTPResponse)  {
@@ -190,9 +169,7 @@ extension HttpServer{
     }
     
     func share_detail(request: HTTPRequest, response: HTTPResponse)  {
-    
-    
-        
+
         guard let id = request.param(name: "id") else {
             response.appendBody(string: "id 不能为空")
             return
@@ -202,12 +179,9 @@ extension HttpServer{
             let share = try Share.detail(id: Int(id)!)
             apiCompleted(response:response, result:share, error: nil)
         } catch {
-
-            apiCompleted(response:response, result: nil, error: error as! APIError)
-           
+            apiCompleted(response:response, result: nil, error: error as? APIError)
         }
-        
-        
+ 
     }
     
     func share_delete(request: HTTPRequest, response: HTTPResponse)  {
@@ -219,23 +193,11 @@ extension HttpServer{
             response.appendBody(string: "id 错误")
             return
         }
-        
-        Share.delete(id: id) { (result) in
-            switch result {
-            case .success( _):
-                let errjson = ["data": "删除成功"] as [String : Any]
-                let jsonstr =  try! errjson.jsonEncodedString()
-                response.appendBody(string: jsonstr)
-            case .failure(let error):
-                let errjson = ["🐬 code":-1,"msg":error.localizedDescription] as [String : Any]
-                let jsonstr =  try! errjson.jsonEncodedString()
-                response.appendBody(string: jsonstr)
-                NSLog(jsonstr)
-                
-            }
+        do {
+            try Share.delete((\Share.id == id))
+            apiCompleted(response:response, result:nil, error: nil)
+        }catch{
+            apiCompleted(response:response, result: nil, error: error as? APIError)
         }
-        
     }
-    
-    
 }

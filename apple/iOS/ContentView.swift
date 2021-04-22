@@ -13,20 +13,20 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            ArchiveSharesPage().tabItem {
+            SharesListView().tabItem {
                 Image(systemName: "house")
                 Text("首页")
             }
-            ArchiveSharesPage().tabItem {
+            SharesListView().tabItem {
                 Image(systemName: "bell")
                 Text("预交易")
             }
-            ArchiveSharesPage().tabItem {
+            SharesListView().tabItem {
                 Image(systemName: "heart")
                 Text("持仓")
             }
             
-            ArchiveSharesPage().tabItem {
+            SharesListView().tabItem {
                 Image(systemName: "gearshape")
                 Text("设置")
             }

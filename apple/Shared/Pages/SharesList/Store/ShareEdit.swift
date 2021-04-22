@@ -15,7 +15,7 @@ class ShareEdit: ObservableObject, StoreAlert  {
 
     @Published var loading = false
     @Published var isalert:Bool = false
-    @Published var alertData:TostError?
+    @Published var alertData:APIError?
   
     @Published var share:Share = Share()
   
@@ -23,9 +23,7 @@ class ShareEdit: ObservableObject, StoreAlert  {
     var id:Int
     
     init(id:Int ) {
-    
         self.id = id
-        
     }
 
     func loadData()  {
@@ -39,8 +37,7 @@ class ShareEdit: ObservableObject, StoreAlert  {
  */
 
 extension ShareEdit{
-    
-    
+
     //新增/修改数据
     func api_update()  {
         share.api_share(id: self.id)
@@ -53,36 +50,37 @@ extension ShareEdit{
                 }
             }
     }
+    
     /**
      获取详情
      */
     func api_shares_detail() {
-        let url = "\(baseurl)/api/shares/detail"
-        let parameters = ["id":id]
-        AF.request(url, method: .get,parameters: parameters){ urlRequest in
-            urlRequest.timeoutInterval = 30
-        }.responseModel(Share.self) { [self] (resule) in
-            switch resule{
-            case.success(let value):
-                share = value
-            case.failure(let error):
-                alert(error: error)
-            }
-            
+        
+        if id != 0 {
+            loading = true
+            AF.request("\(baseurl)/api/shares/detail",
+                       method: .get,
+                       parameters: ["id":id])
+                .responseModel(Share.self) {  (resule) in
+                    switch resule{
+                    case.success(let value):self.share = value
+                    case.failure(let error):self.alert(error: error)
+                    }
+                    self.loading = false
+                }
+        }else{
+            share = Share()
         }
     }
     
     func api_delete( finesh:@escaping ()->()){
+        
         let url = "\(baseurl)/api/shares/delete"
         let parameters = ["id":id]
-        AF.request(url, method: .get,parameters: parameters){ urlRequest in
-            urlRequest.timeoutInterval = 5
-        }.responseModel([String:String].self) { [self](resule) in
+        AF.request(url, method: .get,parameters: parameters).responseModel([String:String].self) { [self](resule) in
             switch resule{
-            case.success( _):
-                finesh()
-            case.failure(let error):
-                alert(error: error)
+            case.success( _):finesh()
+            case.failure(let error): alert(error: error)
             }
             
         }

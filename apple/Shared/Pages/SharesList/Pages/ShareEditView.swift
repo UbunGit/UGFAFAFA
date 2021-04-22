@@ -12,25 +12,33 @@ import Alamofire
 struct ShareEditView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
     @ObservedObject var store:ShareEdit
     @State var editindex:Int?
-   
-    
-    
+
     var body: some View {
-        ZStack(alignment: .topTrailing){
+        ZStack(){
             #if os(iOS)
             content
+                .navigationTitle("section.title")
+                .navigationBarTitleDisplayMode(.inline)
             #else
-            content.frame(minWidth: 800, minHeight: 600)
+            content.frame(minWidth: 600, minHeight: 600)
             #endif
-            
-            CloseButton()
-                .padding(20)
-                .onTapGesture {
-                    presentationMode.wrappedValue.dismiss()
+            HStack(){
+                Spacer()
+                VStack(alignment: .trailing){
+                    
+                    CloseButton()
+                        .padding(20)
+                        .onTapGesture {
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    Spacer()
+                    
                 }
+            }
+           
+         
         }
         
     }
@@ -38,6 +46,8 @@ struct ShareEditView: View {
     var content:some View{
         
         VStack{
+            Text((store.id == 0) ? "新增" : "修改")
+                .font(.title)
             
             VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 5)  {
                 TextFieldView(value: $store.share.name, title: "名称:")
@@ -46,18 +56,17 @@ struct ShareEditView: View {
                 TextFieldView(value: $store.share.ratioOut, title: "卖出比率:")
             }
             .textFieldStyle(PlainTextFieldStyle())
-            .frame(width: 300, alignment: .center)
+            .frame(minWidth: 300, idealWidth: 300, maxWidth: 300,  alignment: .center)
             .overlay(
                 RoundedRectangle(cornerRadius: 4)
-                    .stroke(Color("shadow"), lineWidth: 0.5)
+                    .stroke(Color("shadow"), lineWidth: 0.1)
             )
             
             groupButton
+                .padding()
             
         }
-       
         .loading(isloading: $store.loading)
-        
         .alert(isPresented: $store.isalert){
             Alert(title: Text(store.alertData?.title ?? "--"),
                   message: Text(store.alertData?.msg ?? "--"),
@@ -82,25 +91,24 @@ struct ShareEditView: View {
                     .font(.caption)
                     .background(Color("AccentColor"))
             })
-            Button(action: {
-                store.api_delete(){
-                    presentationMode.wrappedValue.dismiss()
-                }
-            }, label: {
-                Text("删除")
-                    .frame(width: 150, height: 40, alignment: .center)
-                    .foregroundColor(.white)
-                    .font(.caption)
-                    .background(Color("Primary"))
-            })
-            
+            if store.id != 0{
+                Button(action: {
+                    store.api_delete(){
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }, label: {
+                    Text("删除")
+                        .frame(width: 150, height: 40, alignment: .center)
+                        .foregroundColor(.white)
+                        .font(.caption)
+                        .background(Color("Primary"))
+                })
+            }
         }
-        
         .buttonStyle(BorderlessButtonStyle())
         .frame(width: 300, height: 40, alignment: .center)
         .clipShape(Capsule())
         .shadow(radius: 4)
-        
     }
     
 }

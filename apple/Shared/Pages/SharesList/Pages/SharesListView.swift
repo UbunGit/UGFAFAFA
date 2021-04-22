@@ -56,17 +56,18 @@ struct SharesListView: View {
     var content:some View{
         List(){
             
-            HStack{
+            HStack(){
                 SearchView(searchText:$sharesStore.searchText)
                 Button(action: {
                     isSheet = true
                 }, label: {
                     Text("+")
-                        .foregroundColor( Color("AccentColor"))
-                        .font(.caption)
-                        .padding(.vertical,4)
-                        .padding(.horizontal,4)
-                        .clipShape(Capsule())
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding(.all, 8)
+                        .background(Color("AccentColor"))
+                        .mask(Circle())
+                        .shadow(color: Color("shadow"), radius: 4, x: 4, y: 4)
                 })
                 .buttonStyle(BorderlessButtonStyle())
             }
@@ -82,8 +83,6 @@ struct SharesListView: View {
             }
             
         }
-        
-        
         .navigationTitle("关注")
     }
     

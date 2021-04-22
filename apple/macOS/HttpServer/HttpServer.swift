@@ -32,7 +32,7 @@ class HttpServer: NSObject,ObservableObject {
         let p = Int(port) ?? 8181
         do{
             var routes = Routes()
-            routes.add(method: .get, uri: "/", handler: handler)
+//            routes.add(method: .get, uri: "/", handler: handler)
             
             routes.add(method: .post, uri: "/api/shares", handler: share_update)
             routes.add(method: .get, uri: "/api/shares/list", handler: share_list)
@@ -64,40 +64,31 @@ class HttpServer: NSObject,ObservableObject {
     
 }
 
-extension HttpServer{
-    func configData() -> [String:Any] {
-        return [
-                "servers":[
-                    [
-                        "name":"localhost",
-                        "port":8081,
-                        "routes":[
-                       
-                            [
-                                "methods":["get", "post"],
-                                "uri":"/api/tactics",
-                                "handler":"handler",
-                              
-                            ]
-                        ]
-                    ]
-                ]
-        ]
 
-    }
-}
+
 
 extension HttpServer{
     
-    public func handler(request: HTTPRequest, response: HTTPResponse) {
-        // Respond with a simple message.
-        response.setHeader(.contentType, value: "text/html")
-        response.appendBody(string: "<html><title>Hello,  world!</title><body>Hello, world!</body></html>")
-        // Ensure that response.completed() is called when your processing is done.
-        response.completed()
-    }
+    func apiCompleted(response:HTTPResponse, result: Codable?, error:APIError?){
     
+        if error != nil {
 
-    
+            try? response.setBody(json: ["code":error!.code,
+                                         "message":error!.msg]).completed()
+           
+
+        }else{
+           
+            guard let json = try? result?.toParameters() else {
+                try? response.setBody(json: ["code":0, "data":"" ]).completed()
+                return
+            }
+            try? response.setBody(json: ["code":0,
+                                    "data":json
+            ]).completed()
+          
+        }
+       
+    }
 }
 

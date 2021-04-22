@@ -32,7 +32,7 @@ struct ShareDetailView: View {
         #if os(iOS)
         content.listStyle(InsetGroupedListStyle())
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarTitle("\(shareStore.share.name)")
+            .navigationBarTitle("\(store.share.name)")
         
         
         #else
@@ -66,6 +66,7 @@ struct ShareDetailView: View {
             
             
         }
+        .font(.caption)
         .foregroundColor(Color("Background 4"))
         .loading(isloading: $store.loading)
         .sheet(isPresented: $isSheet){

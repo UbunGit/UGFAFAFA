@@ -24,23 +24,17 @@ struct SearchView: View {
          
             
             TextField("Search", value: $searchText, formatter: format, onCommit: {
-                //
+           
             })
             .textFieldStyle(PlainTextFieldStyle())
             .padding(.vertical, 8)
-            
-            
-                
-              
-               
             
         }
         .font(.title3)
         
         .background(Color("Background 1"))
         .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
-       
-        .padding(.vertical, 8)
+        .padding(.vertical, 1)
      
     }
 }
@@ -48,5 +42,7 @@ struct SearchView: View {
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
         SearchView(searchText: .constant(""))
+            .background(Color("Background 4"))
+            
     }
 }

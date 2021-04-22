@@ -13,7 +13,7 @@ class ShareDetail: ObservableObject, StoreAlert  {
 
     @Published var loading = false
     @Published var isalert:Bool = false
-    @Published var alertData:TostError?
+    @Published var alertData:APIError?
     
     
     @Published var share:Share = Share._shares[0]
@@ -71,7 +71,7 @@ class ShareDetail: ObservableObject, StoreAlert  {
         AF.request(url, method: .get,parameters: parameters){ urlRequest in
             urlRequest.timeoutInterval = 5
         }.responseModel(Share.self) { [self] (resule) in
-            DispatchQueue.main.async {
+
                 loading = false
                 switch resule{
                 case.success(let value):
@@ -81,9 +81,6 @@ class ShareDetail: ObservableObject, StoreAlert  {
                 case.failure(let error):
                     alert(error: error)
                 }
-            }
-         
-            
         }
     }
 
