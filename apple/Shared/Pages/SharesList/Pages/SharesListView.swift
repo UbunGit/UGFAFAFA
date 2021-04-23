@@ -14,41 +14,42 @@ struct SharesListView: View {
     @State var storeid:Int?
     @State var isNavigation = false
     @State var isSheet = false
-    
+ 
     
     
     @ViewBuilder
     var body: some View {
         
         UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
-            NavigationView{
-                #if os(iOS)
-                content.listStyle(InsetGroupedListStyle())
-                    .navigationBarItems(
-                        trailing:
-                            
-                            HStack {
-                                Text("Meng To")
-                                Spacer()
-                            }
-                        
-                    )
-                #else
-                content.listStyle(PlainListStyle())
-                    .toolbar {
-                        
-                        ToolbarItem(placement: .confirmationAction) {
-                            Image(systemName: "person.crop.circle")
-                                .imageScale(.large)
+        NavigationView{
+            #if os(iOS)
+         
+            content.listStyle(InsetGroupedListStyle())
+                .navigationBarItems(
+                    trailing:
+                        HStack {
+                            Text("Meng To")
+                            Spacer()
                         }
-                        
+
+                )
+            #else
+            content.listStyle(PlainListStyle())
+                .toolbar {
+                
+                    ToolbarItem(placement: .confirmationAction) {
+                        Image(systemName: "person.crop.circle")
+                            .imageScale(.large)
                     }
-                #endif
-            }
+                    
+                }
+            #endif
+        }
         }
     }
     
     var content:some View{
+   
         List(){
             
             HStack(){
@@ -65,25 +66,26 @@ struct SharesListView: View {
                         .shadow(color: Color("shadow"), radius: 4, x: 4, y: 4)
                 })
                 .buttonStyle(BorderlessButtonStyle())
+                .sheet(isPresented: $isSheet){
+                    ShareEditView(id: 0)
+                }
             }
             
             if store.shares != nil{
                 ForEach(store.shares!) { item in
-                    
-                    NavigationLink(destination:  ShareDetailView(shareStore: ShareDetail(id:item.id))){
+
+                    NavigationLink(destination:  ShareDetailView(id:item.id)){
                         ShareCell(share: item)
                             .padding(.vertical, 4)
                     }
-                    
+
                 }
             }
-            
+           
             
         }
-        .navigationTitle("关注")
-        .sheet(isPresented: $isSheet){
-            ShareEditView(id: 0)
-        }
+
+      
         .onAppear(){
             store.update()
         }

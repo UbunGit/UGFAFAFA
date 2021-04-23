@@ -11,10 +11,17 @@ import SwiftUI
 struct ShareDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
+
+    
     @ObservedObject var store:ShareDetail
     @State var isSheet = false
     @State var sheetCount = 0
+    
 
+    init(id:Int) {
+        store = ShareDetail(id: id)
+    }
+    
     let tabs:[Segmented] = [
         Segmented(id: 0, title: "全部", icon: nil),
         Segmented(id: 1, title: "持仓", icon: nil),
@@ -22,9 +29,6 @@ struct ShareDetailView: View {
     ]
     @State var selectTab:Segmented?
     
-    init(shareStore:ShareDetail) {
-        store = shareStore
-    }
     
 
     @ViewBuilder
@@ -41,12 +45,11 @@ struct ShareDetailView: View {
         #endif
         }
      
-        .sheet(isPresented: $isSheet,onDismiss: {
+        .sheet(isPresented: self.$isSheet,onDismiss: {
             print("999999")
         }){
-       
-                ShareEditView(id: store.id)
-
+            
+            ShareEditView(id: store.id)
         }
        
        
@@ -169,7 +172,7 @@ struct ShareDetailView: View {
 
 struct ShareDetail_Previews: PreviewProvider {
     static var previews: some View {
-        ShareDetailView(shareStore: ShareDetail(id:0))
+        ShareDetailView(id:0)
             .preferredColorScheme(.light)
         
     }

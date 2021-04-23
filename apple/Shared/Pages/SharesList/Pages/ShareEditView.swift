@@ -13,6 +13,7 @@ struct ShareEditView: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    
     @ObservedObject var store:ShareEdit
     @State var editindex:Int?
     

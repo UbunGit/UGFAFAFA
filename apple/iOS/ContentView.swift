@@ -11,25 +11,24 @@ import CoreData
 
 struct ContentView: View {
     
+    @Environment(\.presentationMode) private var viewContext
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         TabView {
             SharesListView().tabItem {
                 Image(systemName: "house")
                 Text("首页")
             }
-            SharesListView().tabItem {
+            ShareEditView(id: 0).tabItem {
                 Image(systemName: "bell")
                 Text("预交易")
             }
-            SharesListView().tabItem {
+            ShareDetailView(id:0).tabItem {
                 Image(systemName: "heart")
                 Text("持仓")
             }
             
-            SharesListView().tabItem {
-                Image(systemName: "gearshape")
-                Text("设置")
-            }
+        
             
             
         }

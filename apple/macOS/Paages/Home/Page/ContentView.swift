@@ -11,8 +11,8 @@ import CoreData
 
 struct ContentView: View {
     
-    @Environment(\.managedObjectContext) private var viewContext
-    
+    @Environment(\.presentationMode) private var viewContext
+ 
     @ObservedObject var socketServer = TcpSocketServer()
     @ObservedObject var httpServer = HttpServer()
 
