@@ -11,16 +11,28 @@ import PerfectCRUD
 
 public typealias CRUDSqliteProtocol = SqliteProtocol & SqliteDeleteProtocol & SqlitInsterProtocol
 
-// MARK: DELETE
+
 public protocol SqliteProtocol:Codable{
     /**
      数据库地址
      */
-    static var dbfile:String{get}
+    static var sqlite:Database<SQLiteDatabaseConfiguration>{get}
 }
 
+extension SqliteProtocol{
+    
+    static var sqlite:Database<SQLiteDatabaseConfiguration> {
+        get{
+            
+            let dbPath = UserDefaults.standard.string(forKey: "dbfile") ?? "" + "share.db"
+            return Database(configuration: try! SQLiteDatabaseConfiguration(dbPath))
+        }
+    }
+}
+
+
+// MARK: DELETE
 public protocol SqliteDeleteProtocol:SqliteProtocol{
-   
     /**
      删除
      */
@@ -33,8 +45,8 @@ extension SqliteDeleteProtocol{
     
     static func delete(_ exp:CRUDBooleanExpression) throws{
         do {
-            let db = Database(configuration: try! SQLiteDatabaseConfiguration(dbfile))
-            try db.table(Self.self)
+//            let db = Database(configuration: try! SQLiteDatabaseConfiguration(dbfile))
+            try sqlite.table(Self.self)
                 .where(exp)
                 .delete()
         }catch{

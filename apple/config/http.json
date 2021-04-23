@@ -1,0 +1,20 @@
+{
+    "servers": [
+        {
+        
+        "name": "localhost",
+        "port": 8181,
+        "routes": [
+            {
+                "methods": "get",
+                "uri": "/api/shares/list",
+                "handler": "apple.HttpServer.share_list"
+                
+            }
+            
+        ]
+        
+    }
+    ]
+    
+}

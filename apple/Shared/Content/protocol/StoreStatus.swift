@@ -12,6 +12,7 @@ public protocol StoreAlert: ObservableObject  {
 
     var isalert:Bool {get set}
     var alertData: APIError? {get set}
+    
     func alert(error:APIError?)
 }
 

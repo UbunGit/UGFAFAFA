@@ -12,14 +12,12 @@ import Alamofire
 
 class ShareEdit: ObservableObject, StoreAlert  {
     
-
     @Published var loading = false
     @Published var isalert:Bool = false
     @Published var alertData:APIError?
-  
-    @Published var share:Share = Share()
-  
     
+    @Published var share:Share = Share()
+
     var id:Int
     
     init(id:Int ) {
@@ -27,7 +25,26 @@ class ShareEdit: ObservableObject, StoreAlert  {
     }
 
     func loadData()  {
-        api_shares_detail()
+        if id != 0 {
+            self.loading = true
+            AF.request("\(baseurl)/api/shares/detail",
+                       method: .get,
+                       parameters: ["id":id])
+            { urlRequest in
+                urlRequest.timeoutInterval = 5
+            }
+                .responseModel(Share.self) { [self]  (resule) in
+                    switch resule{
+                    case.success(let value):self.share = value
+                    case.failure(let error):alert(error: error)
+                    }
+                    
+                    loading = false
+                    print("isloading:\(self.loading)")
+                }
+        }else{
+            share = Share()
+        }
     }
 
 }
@@ -56,21 +73,7 @@ extension ShareEdit{
      */
     func api_shares_detail() {
         
-        if id != 0 {
-            loading = true
-            AF.request("\(baseurl)/api/shares/detail",
-                       method: .get,
-                       parameters: ["id":id])
-                .responseModel(Share.self) {  (resule) in
-                    switch resule{
-                    case.success(let value):self.share = value
-                    case.failure(let error):self.alert(error: error)
-                    }
-                    self.loading = false
-                }
-        }else{
-            share = Share()
-        }
+   
     }
     
     func api_delete( finesh:@escaping ()->()){

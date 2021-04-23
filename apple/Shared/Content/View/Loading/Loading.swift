@@ -9,37 +9,37 @@ import SwiftUI
 
 struct Loading: ViewModifier {
     
-    @Binding var isloading:Bool
+    var isloading:Bool
  
     public func body(content: Content) -> some View {
         
         var loadingView: some View {
             Text("loading...")
                 .opacity(isloading ? 1 : 0.02)
+                
         }
             
         return content
+            .disabled(isloading)
             .opacity(isloading ? 0.02 : 1)
             .overlay( loadingView,
                       alignment: .center)
-           
-            .onAppear(){
-              
-            }
     }
     
 }
 
 extension View {
     // use view modifier
-    public func loading(isloading:Binding<Bool>) -> some View {
+    public func loading(isloading:Bool) -> some View {
         withAnimation (.linear(duration: 3)){
             self.modifier(Loading(isloading: isloading))
         }
-        
-        
     }
 }
+
+
+
+
 
 
 

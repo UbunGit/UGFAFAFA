@@ -13,6 +13,7 @@ struct ShareDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var store:ShareDetail
     @State var isSheet = false
+    @State var sheetCount = 0
 
     let tabs:[Segmented] = [
         Segmented(id: 0, title: "全部", icon: nil),
@@ -28,7 +29,7 @@ struct ShareDetailView: View {
 
     @ViewBuilder
     var body: some View {
-        
+        UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
         #if os(iOS)
         content.listStyle(InsetGroupedListStyle())
             .navigationBarTitleDisplayMode(.inline)
@@ -37,9 +38,18 @@ struct ShareDetailView: View {
         
         #else
         content.listStyle(PlainListStyle())
-        
-        
         #endif
+        }
+     
+        .sheet(isPresented: $isSheet,onDismiss: {
+            print("999999")
+        }){
+       
+                ShareEditView(id: store.id)
+
+        }
+       
+       
     }
     
     var content:some View{
@@ -68,10 +78,7 @@ struct ShareDetailView: View {
         }
         .font(.caption)
         .foregroundColor(Color("Background 4"))
-        .loading(isloading: $store.loading)
-        .sheet(isPresented: $isSheet){
-            ShareEditView(store: ShareEdit(id: store.id))
-        }
+      
         .onAppear(perform: {
             selectTab = tabs[0]
             store.loadData()

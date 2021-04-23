@@ -32,10 +32,9 @@ class HttpServer: NSObject,ObservableObject {
         let p = Int(port) ?? 8181
         do{
             var routes = Routes()
-//            routes.add(method: .get, uri: "/", handler: handler)
-            
+
             routes.add(method: .post, uri: "/api/shares", handler: share_update)
-            routes.add(method: .get, uri: "/api/shares/list", handler: share_list)
+            routes.add(method: .get, uri: "/api/shares/list", handler: Share.list)
             routes.add(method: .get, uri: "/api/shares/detail", handler: share_detail)
             routes.add(method: .get, uri: "/api/shares/delete", handler: share_delete)
             
@@ -67,23 +66,23 @@ class HttpServer: NSObject,ObservableObject {
 
 
 
-extension HttpServer{
+extension HTTPResponse{
     
-    func apiCompleted(response:HTTPResponse, result: Codable?, error:APIError?){
+    func apiCompleted( result: Codable?, error:APIError?){
     
         if error != nil {
 
-            try? response.setBody(json: ["code":error!.code,
+            try? setBody(json: ["code":error!.code,
                                          "message":error!.msg]).completed()
            
 
         }else{
            
             guard let json = try? result?.toParameters() else {
-                try? response.setBody(json: ["code":0, "data":"" ]).completed()
+                try? setBody(json: ["code":0, "data":"" ]).completed()
                 return
             }
-            try? response.setBody(json: ["code":0,
+            try? setBody(json: ["code":0,
                                     "data":json
             ]).completed()
           
