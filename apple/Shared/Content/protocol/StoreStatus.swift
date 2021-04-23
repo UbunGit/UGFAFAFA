@@ -26,8 +26,9 @@ extension StoreAlert{
             self.isalert = true
             return
         }
-        let nserr = error! as! APIError
-        self.alertData = APIError(code: nserr.code, msg: nserr.msg)
+        let nserr = error! 
+        self.alertData?.code = nserr.code
+        self.alertData?.msg = nserr.msg
         self.isalert = true
     }
 }
