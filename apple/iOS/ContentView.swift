@@ -19,7 +19,7 @@ struct ContentView: View {
                 Image(systemName: "house")
                 Text("首页")
             }
-            ShareEditView(id: 0).tabItem {
+            ShareEditView(id: 8).tabItem {
                 Image(systemName: "bell")
                 Text("预交易")
             }

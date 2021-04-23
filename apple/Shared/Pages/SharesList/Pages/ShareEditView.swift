@@ -24,63 +24,64 @@ struct ShareEditView: View {
     }
     
     var body: some View {
-  
-        ZStack(){
-            
-            #if os(iOS)
-            content
-                .navigationTitle("section.title")
-                .navigationBarTitleDisplayMode(.inline)
-            #else
-            content.frame(minWidth: 600, minHeight: 600)
-            #endif
-            
-            HStack(){
-                Spacer()
-                VStack(alignment: .trailing){
-                    
-                    CloseButton()
-                        .padding(20)
-                        .onTapGesture {
-                            presentationMode.wrappedValue.dismiss()
-                        }
+        UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
+            ZStack(){
+                
+                #if os(iOS)
+                content
+                    .navigationTitle("section.title")
+                    .navigationBarTitleDisplayMode(.inline)
+                #else
+                content.frame(minWidth: 600, minHeight: 600)
+                #endif
+                
+                HStack(){
                     Spacer()
-                    
+                    VStack(alignment: .trailing){
+                        
+                        CloseButton()
+                            .padding(20)
+                            .onTapGesture {
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        Spacer()
+                        
+                    }
                 }
+                
             }
-            
         }
         
     }
     
     var content:some View{
-        UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
-            VStack{
-                Text((store.id == 0) ? "新增" : "修改")
-                    .font(.title)
-                
-                VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 5)  {
-                    TextFieldView(value: $store.share.name, title: "名称:")
-                    TextFieldView(value: $store.share.code, title: "代码:")
-                    TextFieldView(value: $store.share.ratioIn, title: "买入比率:")
-                    TextFieldView(value: $store.share.ratioOut, title: "卖出比率:")
-                }
-                .textFieldStyle(PlainTextFieldStyle())
-                .frame(minWidth: 300, idealWidth: 300, maxWidth: 300,  alignment: .center)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 4)
-                        .stroke(Color("shadow"), lineWidth: 0.1)
-                )
-                
-                groupButton
-                    .padding()
-                
+        
+        VStack{
+            Text((store.id == 0) ? "新增" : "修改")
+                .font(.title)
+            
+            VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 5)  {
+                TextFieldView(value: $store.share.name, title: "名称:")
+                TextFieldView(value: $store.share.code, title: "代码:")
+                TextFieldView(value: $store.share.ratioIn, title: "买入比率:")
+                TextFieldView(value: $store.share.ratioOut, title: "卖出比率:")
             }
+            .textFieldStyle(PlainTextFieldStyle())
+            .frame(minWidth: 300, idealWidth: 300, maxWidth: 300,  alignment: .center)
+            .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(Color("shadow"), lineWidth: 0.1)
+            )
+            
+            groupButton
+                .padding()
+            
         }
+        
         .onAppear(){
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 store.loadData()
-            }
+//            }
             
         }
         

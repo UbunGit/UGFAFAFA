@@ -22,11 +22,20 @@ class ShareEdit: ObservableObject, StoreAlert  {
     
     init(id:Int ) {
         self.id = id
+  
     }
 
     func loadData()  {
-        if id != 0 {
-            self.loading = true
+//        self.loading = true
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            self.loading = false
+//        }
+        self.loading = true
+        if( id != 0 ){
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//                self.loading = false
+//            }
+            
             AF.request("\(baseurl)/api/shares/detail",
                        method: .get,
                        parameters: ["id":id])
@@ -34,14 +43,18 @@ class ShareEdit: ObservableObject, StoreAlert  {
                 urlRequest.timeoutInterval = 5
             }
                 .responseModel(Share.self) { [self]  (resule) in
-                    switch resule{
-                    case.success(let value):self.share = value
-                    case.failure(let error):alert(error: error)
+
+
+                        switch resule{
+                        case.success(let value):self.share = value
+                        case.failure(let error):alert(error: error)
+                        }
+
+                        loading = false
+                        print("isloading:\(self.loading)")
                     }
-                    
-                    loading = false
-                    print("isloading:\(self.loading)")
-                }
+                  
+               
         }else{
             share = Share()
         }
