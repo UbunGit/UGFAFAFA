@@ -107,6 +107,16 @@
 		8491D998263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		8491D999263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		8491D9A7263186B60035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
+		8491DA422634FCC30035B7F8 /* UGCoder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8491DA172634FCBF0035B7F8 /* UGCoder.xcdatamodeld */; };
+		8491DA432634FCC30035B7F8 /* UGCoder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8491DA172634FCBF0035B7F8 /* UGCoder.xcdatamodeld */; };
+		8491DA442634FCC30035B7F8 /* UGCoderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491DA192634FCBF0035B7F8 /* UGCoderApp.swift */; };
+		8491DA452634FCC30035B7F8 /* UGCoderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491DA192634FCBF0035B7F8 /* UGCoderApp.swift */; };
+		8491DA462634FCC30035B7F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491DA1A2634FCBF0035B7F8 /* ContentView.swift */; };
+		8491DA472634FCC30035B7F8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491DA1A2634FCBF0035B7F8 /* ContentView.swift */; };
+		8491DA482634FCC30035B7F8 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491DA1B2634FCBF0035B7F8 /* Persistence.swift */; };
+		8491DA492634FCC30035B7F8 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491DA1B2634FCBF0035B7F8 /* Persistence.swift */; };
+		8491DA4A2634FCC30035B7F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8491DA1C2634FCC00035B7F8 /* Assets.xcassets */; };
+		8491DA4B2634FCC30035B7F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8491DA1C2634FCC00035B7F8 /* Assets.xcassets */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
 		84E11F15260DBF9A0012D151 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E11F14260DBF9A0012D151 /* Assets.xcassets */; };
@@ -214,6 +224,20 @@
 		8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDSqliteProtocol.swift; sourceTree = "<group>"; };
 		8491D95D26300ABC0035B7F8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlitInsterProtocol.swift; sourceTree = "<group>"; };
+		8491DA182634FCBF0035B7F8 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
+		8491DA192634FCBF0035B7F8 /* UGCoderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UGCoderApp.swift; sourceTree = "<group>"; };
+		8491DA1A2634FCBF0035B7F8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8491DA1B2634FCBF0035B7F8 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		8491DA1C2634FCC00035B7F8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8491DA212634FCC00035B7F8 /* UGCoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UGCoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8491DA232634FCC20035B7F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8491DA282634FCC20035B7F8 /* UGCoder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UGCoder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8491DA2A2634FCC20035B7F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8491DA2B2634FCC20035B7F8 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		8491DA342634FCC30035B7F8 /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
+		8491DA362634FCC30035B7F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8491DA3F2634FCC30035B7F8 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
+		8491DA412634FCC30035B7F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F14260DBF9A0012D151 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -270,6 +294,20 @@
 				840E2B8E2615CBF4003A84C6 /* PerfectHTTPServer in Frameworks */,
 				CE54A7A2AAB5AC45E15FD96E /* Pods_Tests_macOS.framework in Frameworks */,
 				840E2B8C2615CBF4003A84C6 /* PythonKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8491DA1E2634FCC00035B7F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8491DA252634FCC20035B7F8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +552,11 @@
 				84807DA425FB7A8900C8CB18 /* macOS */,
 				84807DAE25FB7A8900C8CB18 /* Tests iOS */,
 				84807DB925FB7A8900C8CB18 /* Tests macOS */,
+				8491DA162634FCBF0035B7F8 /* Shared */,
+				8491DA222634FCC20035B7F8 /* iOS */,
+				8491DA292634FCC20035B7F8 /* macOS */,
+				8491DA332634FCC30035B7F8 /* Tests iOS */,
+				8491DA3E2634FCC30035B7F8 /* Tests macOS */,
 				84807D9C25FB7A8900C8CB18 /* Products */,
 				2C67830D374A09C1C0E238D9 /* Pods */,
 				5D40FDF617AF237BEEDD97C7 /* Frameworks */,
@@ -544,6 +587,8 @@
 				84807DA325FB7A8900C8CB18 /* apple.app */,
 				84807DAB25FB7A8900C8CB18 /* Tests iOS.xctest */,
 				84807DB625FB7A8900C8CB18 /* Tests macOS.xctest */,
+				8491DA212634FCC00035B7F8 /* UGCoder.app */,
+				8491DA282634FCC20035B7F8 /* UGCoder.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -622,6 +667,53 @@
 				8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */,
 			);
 			path = SqliteProtocol;
+			sourceTree = "<group>";
+		};
+		8491DA162634FCBF0035B7F8 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8491DA192634FCBF0035B7F8 /* UGCoderApp.swift */,
+				8491DA1A2634FCBF0035B7F8 /* ContentView.swift */,
+				8491DA1B2634FCBF0035B7F8 /* Persistence.swift */,
+				8491DA1C2634FCC00035B7F8 /* Assets.xcassets */,
+				8491DA172634FCBF0035B7F8 /* UGCoder.xcdatamodeld */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		8491DA222634FCC20035B7F8 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8491DA232634FCC20035B7F8 /* Info.plist */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		8491DA292634FCC20035B7F8 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				8491DA2A2634FCC20035B7F8 /* Info.plist */,
+				8491DA2B2634FCC20035B7F8 /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		8491DA332634FCC30035B7F8 /* Tests iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8491DA342634FCC30035B7F8 /* Tests_iOS.swift */,
+				8491DA362634FCC30035B7F8 /* Info.plist */,
+			);
+			path = "Tests iOS";
+			sourceTree = "<group>";
+		};
+		8491DA3E2634FCC30035B7F8 /* Tests macOS */ = {
+			isa = PBXGroup;
+			children = (
+				8491DA3F2634FCC30035B7F8 /* Tests_macOS.swift */,
+				8491DA412634FCC30035B7F8 /* Info.plist */,
+			);
+			path = "Tests macOS";
 			sourceTree = "<group>";
 		};
 		84E11EB3260D8CF50012D151 /* DataBase */ = {
@@ -819,6 +911,40 @@
 			productReference = 84807DB625FB7A8900C8CB18 /* Tests macOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		8491DA202634FCC00035B7F8 /* UGCoder (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8491DA4C2634FCC30035B7F8 /* Build configuration list for PBXNativeTarget "UGCoder (iOS)" */;
+			buildPhases = (
+				8491DA1D2634FCC00035B7F8 /* Sources */,
+				8491DA1E2634FCC00035B7F8 /* Frameworks */,
+				8491DA1F2634FCC00035B7F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "UGCoder (iOS)";
+			productName = "UGCoder (iOS)";
+			productReference = 8491DA212634FCC00035B7F8 /* UGCoder.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8491DA272634FCC20035B7F8 /* UGCoder (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8491DA4F2634FCC30035B7F8 /* Build configuration list for PBXNativeTarget "UGCoder (macOS)" */;
+			buildPhases = (
+				8491DA242634FCC20035B7F8 /* Sources */,
+				8491DA252634FCC20035B7F8 /* Frameworks */,
+				8491DA262634FCC20035B7F8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "UGCoder (macOS)";
+			productName = "UGCoder (macOS)";
+			productReference = 8491DA282634FCC20035B7F8 /* UGCoder.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -841,6 +967,12 @@
 					84807DB525FB7A8900C8CB18 = {
 						CreatedOnToolsVersion = 12.4;
 						TestTargetID = 84807DA225FB7A8900C8CB18;
+					};
+					8491DA202634FCC00035B7F8 = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					8491DA272634FCC20035B7F8 = {
+						CreatedOnToolsVersion = 12.4;
 					};
 				};
 			};
@@ -866,6 +998,8 @@
 				84807DA225FB7A8900C8CB18 /* apple (macOS) */,
 				84807DAA25FB7A8900C8CB18 /* Tests iOS */,
 				84807DB525FB7A8900C8CB18 /* Tests macOS */,
+				8491DA202634FCC00035B7F8 /* UGCoder (iOS) */,
+				8491DA272634FCC20035B7F8 /* UGCoder (macOS) */,
 			);
 		};
 /* End PBXProject section */
@@ -898,6 +1032,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8491DA1F2634FCC00035B7F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8491DA4A2634FCC30035B7F8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8491DA262634FCC20035B7F8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8491DA4B2634FCC30035B7F8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1158,6 +1308,28 @@
 				84807DBB25FB7A8900C8CB18 /* Tests_macOS.swift in Sources */,
 				847269122613299C00F92E66 /* testShare.swift in Sources */,
 				841F2ED6262017D90099B8CB /* PythonTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8491DA1D2634FCC00035B7F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8491DA422634FCC30035B7F8 /* UGCoder.xcdatamodeld in Sources */,
+				8491DA482634FCC30035B7F8 /* Persistence.swift in Sources */,
+				8491DA442634FCC30035B7F8 /* UGCoderApp.swift in Sources */,
+				8491DA462634FCC30035B7F8 /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8491DA242634FCC20035B7F8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8491DA432634FCC30035B7F8 /* UGCoder.xcdatamodeld in Sources */,
+				8491DA492634FCC30035B7F8 /* Persistence.swift in Sources */,
+				8491DA452634FCC30035B7F8 /* UGCoderApp.swift in Sources */,
+				8491DA472634FCC30035B7F8 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1480,6 +1652,99 @@
 			};
 			name = Release;
 		};
+		8491DA4D2634FCC30035B7F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HQTXMU76N3;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = UG.UGCoder;
+				PRODUCT_NAME = UGCoder;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8491DA4E2634FCC30035B7F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HQTXMU76N3;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = UG.UGCoder;
+				PRODUCT_NAME = UGCoder;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8491DA502634FCC30035B7F8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HQTXMU76N3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = UG.UGCoder;
+				PRODUCT_NAME = UGCoder;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		8491DA512634FCC30035B7F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = HQTXMU76N3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = UG.UGCoder;
+				PRODUCT_NAME = UGCoder;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1524,6 +1789,24 @@
 			buildConfigurations = (
 				84807DD325FB7A8900C8CB18 /* Debug */,
 				84807DD425FB7A8900C8CB18 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8491DA4C2634FCC30035B7F8 /* Build configuration list for PBXNativeTarget "UGCoder (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8491DA4D2634FCC30035B7F8 /* Debug */,
+				8491DA4E2634FCC30035B7F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8491DA4F2634FCC30035B7F8 /* Build configuration list for PBXNativeTarget "UGCoder (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8491DA502634FCC30035B7F8 /* Debug */,
+				8491DA512634FCC30035B7F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1598,6 +1881,16 @@
 			);
 			currentVersion = 84807D9225FB7A8500C8CB18 /* Shared.xcdatamodel */;
 			path = apple.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		8491DA172634FCBF0035B7F8 /* UGCoder.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8491DA182634FCBF0035B7F8 /* Shared.xcdatamodel */,
+			);
+			currentVersion = 8491DA182634FCBF0035B7F8 /* Shared.xcdatamodel */;
+			path = UGCoder.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
