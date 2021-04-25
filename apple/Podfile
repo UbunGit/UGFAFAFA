@@ -1,33 +1,31 @@
 source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 use_frameworks!
-
-def macOS
+def common
+  
   pod 'CocoaAsyncSocket'
   pod 'SQLite.swift'
   pod 'Alamofire'
-
+  pod 'SwiftUIKit', :path => './SwiftUIKit'
 end
 
-def debugPods
-    
+def macOS
+
+#  /Users/admin/Documents/github/UGFAFAFA/apple/SwiftUIKit
 end
+
+
 target 'apple (iOS)' do
     
-   pod 'CocoaAsyncSocket'
-   pod 'SQLite.swift'
-   pod 'Alamofire'
-    
+    common
 end
 
 
 target 'apple (macOS)' do
-    
-    macOS
+  common
 end
 
 target 'Tests macOS' do
-  
-  macOS
+  common
 
 end

@@ -12,18 +12,14 @@ import Alamofire
 struct ShareEditView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
-    
     @ObservedObject var store:ShareEdit = ShareEdit()
-    @State var editindex:Int?
-    
+  
     init(id:Int) {
-        
         self.store.id = id
     }
     
     var body: some View {
-        UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
+//        UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
             ZStack(){
                 
                 #if os(iOS)
@@ -50,14 +46,15 @@ struct ShareEditView: View {
                 }
                 
             }
-        }
+        
+//        }
         
     }
     
     var content:some View{
         
         VStack{
-            Text(store.share.name + "\(store.alertData?.msg)")
+          
             Text((store.id == 0) ? "新增" : "修改")
                 .font(.title)
             
@@ -81,11 +78,11 @@ struct ShareEditView: View {
         }
         
         .onAppear(){
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                
                 store.loadData()
                 print(String.init(format: "appear store:\(store.share)"))
-            }
+//            }
             
         }
         

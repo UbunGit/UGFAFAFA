@@ -126,6 +126,10 @@
 		84FBDDD5262D587100983BD3 /* StoreStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDD3262D587100983BD3 /* StoreStatus.swift */; };
 		84FBDDDD262D812B00983BD3 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDDC262D812B00983BD3 /* Codable.swift */; };
 		84FBDDDE262D812B00983BD3 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDDDC262D812B00983BD3 /* Codable.swift */; };
+		84FBDE2D26340EBD00983BD3 /* PersenttationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDE2C26340EBD00983BD3 /* PersenttationObservable.swift */; };
+		84FBDE2E26340EBD00983BD3 /* PersenttationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDE2C26340EBD00983BD3 /* PersenttationObservable.swift */; };
+		84FBDE3A2634103B00983BD3 /* SFToastObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDE392634103B00983BD3 /* SFToastObservable.swift */; };
+		84FBDE3B2634103B00983BD3 /* SFToastObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FBDE392634103B00983BD3 /* SFToastObservable.swift */; };
 		ABE41E7854F9611A49B02DB1 /* Pods_apple__iOS_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B692F0E0810CA47CAE67000D /* Pods_apple__iOS_.framework */; };
 		CE54A7A2AAB5AC45E15FD96E /* Pods_Tests_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9648D6D19086E26C3CA8E6C3 /* Pods_Tests_macOS.framework */; };
 /* End PBXBuildFile section */
@@ -227,6 +231,8 @@
 		84FBDDC9262D528400983BD3 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		84FBDDD3262D587100983BD3 /* StoreStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreStatus.swift; sourceTree = "<group>"; };
 		84FBDDDC262D812B00983BD3 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		84FBDE2C26340EBD00983BD3 /* PersenttationObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersenttationObservable.swift; sourceTree = "<group>"; };
+		84FBDE392634103B00983BD3 /* SFToastObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFToastObservable.swift; sourceTree = "<group>"; };
 		9648D6D19086E26C3CA8E6C3 /* Pods_Tests_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tests_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B40092AE8C3F1CC640D053B /* Pods-Tests macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests macOS.debug.xcconfig"; path = "Target Support Files/Pods-Tests macOS/Pods-Tests macOS.debug.xcconfig"; sourceTree = "<group>"; };
 		B692F0E0810CA47CAE67000D /* Pods_apple__iOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_apple__iOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -451,6 +457,7 @@
 		8472698F26147A8400F92E66 /* Content */ = {
 			isa = PBXGroup;
 			children = (
+				84FBDE2A26340E4400983BD3 /* SFUIKit */,
 				84FBDDD2262D582A00983BD3 /* protocol */,
 				8472699B26147C4E00F92E66 /* unit */,
 				8472699326147AAD00F92E66 /* View */,
@@ -727,6 +734,31 @@
 				84FBDDD3262D587100983BD3 /* StoreStatus.swift */,
 			);
 			path = protocol;
+			sourceTree = "<group>";
+		};
+		84FBDE2A26340E4400983BD3 /* SFUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				84FBDE2B26340E5A00983BD3 /* Presentation */,
+			);
+			path = SFUIKit;
+			sourceTree = "<group>";
+		};
+		84FBDE2B26340E5A00983BD3 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				84FBDE3826340FDE00983BD3 /* SFToast */,
+				84FBDE2C26340EBD00983BD3 /* PersenttationObservable.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		84FBDE3826340FDE00983BD3 /* SFToast */ = {
+			isa = PBXGroup;
+			children = (
+				84FBDE392634103B00983BD3 /* SFToastObservable.swift */,
+			);
+			path = SFToast;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1047,11 +1079,13 @@
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
 				84FBDDDD262D812B00983BD3 /* Codable.swift in Sources */,
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
+				84FBDE2D26340EBD00983BD3 /* PersenttationObservable.swift in Sources */,
 				848BB2BD26183E1000D639DE /* SearchView.swift in Sources */,
 				84FBDDC0262C065500983BD3 /* Loading.swift in Sources */,
 				84FBDDD4262D587100983BD3 /* StoreStatus.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				847268BE26130CAE00F92E66 /* Date.swift in Sources */,
+				84FBDE3A2634103B00983BD3 /* SFToastObservable.swift in Sources */,
 				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
 				84FBDDCA262D528400983BD3 /* CloseButton.swift in Sources */,
 				84726983261479CC00F92E66 /* ShareDetailView.swift in Sources */,
@@ -1067,6 +1101,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84FBDE3B2634103B00983BD3 /* SFToastObservable.swift in Sources */,
 				840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */,
 				847269B42615AEE900F92E66 /* SegmentedView.swift in Sources */,
 				84565A6D261C6000009F9F7D /* Page.swift in Sources */,
@@ -1075,6 +1110,7 @@
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
 				84726984261479CC00F92E66 /* ShareDetailView.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
+				84FBDE2E26340EBD00983BD3 /* PersenttationObservable.swift in Sources */,
 				847269A126147C4E00F92E66 /* AlertData.swift in Sources */,
 				84FBDDD5262D587100983BD3 /* StoreStatus.swift in Sources */,
 				847269CF2615B28C00F92E66 /* ApiShare.swift in Sources */,
