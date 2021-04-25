@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import UGSwiftKit
 
 enum NavigationItem {
     case courses
-    case tutorials
+    case appicon
     case livestreams
     case certificates
     case downloads
@@ -52,10 +53,17 @@ struct Sidebar: View {
                 Label("收藏", systemImage: "heart")
             }
             .tag(NavigationItem.courses)
+            
             NavigationLink(destination: WebPage()) {
                 Label("web", systemImage: "heart")
             }
             .tag(NavigationItem.courses)
+            
+        
+            NavigationLink(destination: AppiconContentView()) {
+                Label("Appicon", systemImage: "heart")
+            }
+            .tag(NavigationItem.appicon)
             
             
             

@@ -22,11 +22,8 @@ struct SFToast: ViewModifier {
         
         if observable.isActive {
          
-            return content.overlay(
-            )
-          
-            
-            
+            return content
+
         }else{
             return content
         }

@@ -1,4 +1,4 @@
-source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+#source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 use_frameworks!
 def common
@@ -6,12 +6,13 @@ def common
   pod 'CocoaAsyncSocket'
   pod 'SQLite.swift'
   pod 'Alamofire'
-  pod 'SwiftUIKit', :path => './SwiftUIKit'
+#  pod 'SwiftUIKit', :path => './SwiftUIKit'
 end
 
 def macOS
-
-#  /Users/admin/Documents/github/UGFAFAFA/apple/SwiftUIKit
+  pod 'UGSwiftKit', :path => './UGSwiftKit'
+  pod 'UGSwiftKit/Appicon', :path => './UGSwiftKit'
+  
 end
 
 
@@ -23,6 +24,7 @@ end
 
 target 'apple (macOS)' do
   common
+  macOS
 end
 
 target 'Tests macOS' do
