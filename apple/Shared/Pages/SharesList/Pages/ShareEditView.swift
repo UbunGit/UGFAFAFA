@@ -12,19 +12,14 @@ import Alamofire
 struct ShareEditView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    
-    
-    @ObservedObject var store:ShareEdit
-    @State var editindex:Int?
-    
+    @ObservedObject var store:ShareEdit = ShareEdit()
+  
     init(id:Int) {
-        
-        self.store = ShareEdit(id: id)
-        print(String.init(format: "store:\(store)"))
+        self.store.id = id
     }
     
     var body: some View {
-        UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
+//        UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
             ZStack(){
                 
                 #if os(iOS)
@@ -43,6 +38,7 @@ struct ShareEditView: View {
                             .padding(20)
                             .onTapGesture {
                                 presentationMode.wrappedValue.dismiss()
+//                                store.loadData()
                             }
                         Spacer()
                         
@@ -50,16 +46,19 @@ struct ShareEditView: View {
                 }
                 
             }
-        }
+        
+//        }
         
     }
     
     var content:some View{
         
         VStack{
+          
             Text((store.id == 0) ? "新增" : "修改")
                 .font(.title)
             
+                .padding(.leading)
             VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 5)  {
                 TextFieldView(value: $store.share.name, title: "名称:")
                 TextFieldView(value: $store.share.code, title: "代码:")
@@ -80,7 +79,9 @@ struct ShareEditView: View {
         
         .onAppear(){
 //            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+               
                 store.loadData()
+                print(String.init(format: "appear store:\(store.share)"))
 //            }
             
         }
@@ -136,6 +137,8 @@ struct TextFieldView: View {
         HStack(alignment: .lastTextBaseline, spacing: 8){
             Text(title)
                 .padding(.leading)
+            
+         
             
             TextField(title, text: $value)
                 .frame(height: 44)

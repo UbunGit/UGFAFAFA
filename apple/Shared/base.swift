@@ -7,4 +7,4 @@
 
 import Foundation
 
-var baseurl:String = UserDefaults.standard.string(forKey: "baseurl") ?? "http://10.10.11.158:8181"
+var baseurl:String = UserDefaults.standard.string(forKey: "baseurl") ?? "http://localhost:8181"

@@ -17,24 +17,13 @@ class ShareEdit: ObservableObject, StoreAlert  {
     @Published var alertData:APIError?
     
     @Published var share:Share = Share()
-
-    var id:Int
     
-    init(id:Int ) {
-        self.id = id
-  
-    }
-
+    var id:Int = 0
+    
     func loadData()  {
-//        self.loading = true
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//            self.loading = false
-//        }
-        self.loading = true
+
         if( id != 0 ){
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                self.loading = false
-//            }
+            self.loading = true
             
             AF.request("\(baseurl)/api/shares/detail",
                        method: .get,
@@ -42,24 +31,25 @@ class ShareEdit: ObservableObject, StoreAlert  {
             { urlRequest in
                 urlRequest.timeoutInterval = 5
             }
-                .responseModel(Share.self) { [self]  (resule) in
-
-
-                        switch resule{
-                        case.success(let value):self.share = value
-                        case.failure(let error):alert(error: error)
-                        }
-
-                        loading = false
-                        print("isloading:\(self.loading)")
-                    }
-                  
-               
+            .responseModel(Share.self) { [self]  (resule) in
+                
+                
+                switch resule{
+                case.success(let value):
+                    self.share = value
+                case.failure(let error):alert(error: error)
+                }
+                
+                loading = false
+                print(String.init(format: "store:\(share)"))
+            }
+            
+            
         }else{
-            share = Share()
+            //            share = Share()
         }
     }
-
+    
 }
 
 /**
@@ -67,7 +57,7 @@ class ShareEdit: ObservableObject, StoreAlert  {
  */
 
 extension ShareEdit{
-
+    
     //新增/修改数据
     func api_update()  {
         share.api_share(id: self.id)
@@ -86,7 +76,7 @@ extension ShareEdit{
      */
     func api_shares_detail() {
         
-   
+        
     }
     
     func api_delete( finesh:@escaping ()->()){
