@@ -9,17 +9,19 @@
 import SwiftUI
 import Alamofire
 
-struct ShareEditView: View {
-    
+struct ShareEditView: View,SFPresentation {
+  
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var store:ShareEdit = ShareEdit()
-  
+    @State var context = SFToastObservable()
+    @ObservedObject var loadingObser = SFLoadingObservable()
+    
     init(id:Int) {
         self.store.id = id
     }
     
     var body: some View {
-//        UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
+  
             ZStack(){
                 
                 #if os(iOS)
@@ -38,26 +40,35 @@ struct ShareEditView: View {
                             .padding(20)
                             .onTapGesture {
                                 presentationMode.wrappedValue.dismiss()
-//                                store.loadData()
                             }
                         Spacer()
-                        
                     }
                 }
                 
             }
-        
-//        }
+      
+        .onAppear(){
+            showLoading( VStack{Text("loading...")}.any() )
+            store.loadData { (error) in
+                disLoading()
+                if((error) != nil){
+                    context.present(Text(error!.msg).any())
+                }
+            }
+
+        }
+        .toast(context: context)
+            .loading(context: loadingObser)
         
     }
     
     var content:some View{
         
         VStack{
-          
+            
             Text((store.id == 0) ? "新增" : "修改")
                 .font(.title)
-            
+                
                 .padding(.leading)
             VStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 5)  {
                 TextFieldView(value: $store.share.name, title: "名称:")
@@ -76,17 +87,7 @@ struct ShareEditView: View {
                 .padding()
             
         }
-        
-        .onAppear(){
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-               
-                store.loadData()
-                print(String.init(format: "appear store:\(store.share)"))
-//            }
-            
-        }
-        
-        
+ 
     }
     
     var groupButton:some View{
@@ -96,9 +97,9 @@ struct ShareEditView: View {
             }, label: {
                 Text("保存")
                     .frame(width: 150, height: 40, alignment: .center)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color("Text 1"))
                     .font(.caption)
-                    .background(Color("AccentColor"))
+                    .background(Color("Commit"))
             })
             if store.id != 0{
                 Button(action: {
@@ -108,9 +109,9 @@ struct ShareEditView: View {
                 }, label: {
                     Text("删除")
                         .frame(width: 150, height: 40, alignment: .center)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("Text 1"))
                         .font(.caption)
-                        .background(Color("Primary"))
+                        .background(Color("Cancle"))
                 })
             }
         }
@@ -138,7 +139,7 @@ struct TextFieldView: View {
             Text(title)
                 .padding(.leading)
             
-         
+            
             
             TextField(title, text: $value)
                 .frame(height: 44)

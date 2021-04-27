@@ -205,7 +205,7 @@ struct SettingView: View {
     }
     
     private func dotest(){
-        confitpython()
+  
 //        pythonManageTest1()
     }
 }

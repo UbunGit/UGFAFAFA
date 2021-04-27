@@ -9,7 +9,7 @@
 import SwiftUI
 import Alamofire
 
-class SharesList: ObservableObject, StoreAlert  {
+class SharesList: ObservableObject, StoreAlert{
     
     
     @Published var loading = false

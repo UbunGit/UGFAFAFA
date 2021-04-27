@@ -10,11 +10,10 @@ import UGSwiftKit
 
 enum NavigationItem {
     case courses
+    case like
+    case web
     case appicon
-    case livestreams
-    case certificates
-    case downloads
-    case search
+    case setting
 }
 struct Sidebar: View {
     
@@ -47,17 +46,17 @@ struct Sidebar: View {
             NavigationLink(destination: SettingView()) {
                 Label("设置", systemImage: "book.closed")
             }
-            .tag(NavigationItem.courses)
+            .tag(NavigationItem.setting)
             
             NavigationLink(destination: SharesListView()) {
                 Label("收藏", systemImage: "heart")
             }
-            .tag(NavigationItem.courses)
+            .tag(NavigationItem.like)
             
             NavigationLink(destination: WebPage()) {
                 Label("web", systemImage: "heart")
             }
-            .tag(NavigationItem.courses)
+            .tag(NavigationItem.web)
             
         
             NavigationLink(destination: AppiconContentView()) {

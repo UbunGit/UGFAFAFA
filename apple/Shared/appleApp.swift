@@ -15,6 +15,9 @@ struct appleApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .font(.callout)
+                .foregroundColor(Color("Text 5"))
+            
         }
     }
 }

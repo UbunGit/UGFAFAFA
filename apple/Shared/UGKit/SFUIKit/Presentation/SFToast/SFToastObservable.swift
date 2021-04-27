@@ -8,35 +8,26 @@
 
 import SwiftUI
 
-class SFToastObservable: PersenttationObservable<AnyView> {
+public class SFToastObservable: SFPersentationObservable {
     
-   
-}
-
-
-struct SFToast: ViewModifier {
+    public var duration:TimeInterval = 3
+    private var task: DispatchWorkItem?
     
-    var observable:SFToastObservable
- 
-    public func body(content: Content) -> some View {
+    public func present<Toast: View>(_ toast: @autoclosure @escaping () -> Toast) {
         
-        if observable.isActive {
-         
-            return content
-
-        }else{
-            return content
+        if content != nil {
+            self.dismiss()
         }
+        presentContent(toast().any())
+        task?.cancel()
+        task = DispatchWorkItem {
+            self.dismiss()
+        }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + duration, execute: task!)
     }
+
 }
 
-extension View {
-    // use view modifier
-//    public func sfToast(observable:SFToastObservable<Any>) -> some View {
-//
-//        self.modifier(SFToast(observable: observable))
-//
-//    }
-}
+
 
 

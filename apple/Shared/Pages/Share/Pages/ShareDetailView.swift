@@ -11,13 +11,14 @@ import SwiftUI
 struct ShareDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
-
+    
     
     @ObservedObject var store:ShareDetail
+    @State var context = SFToastObservable()
     @State var isSheet = false
     @State var sheetCount = 0
     
-
+    
     init(id:Int) {
         store = ShareDetail(id: id)
     }
@@ -30,34 +31,38 @@ struct ShareDetailView: View {
     @State var selectTab:Segmented?
     
     
-
+    
     @ViewBuilder
     var body: some View {
+        
         UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
-        #if os(iOS)
-        content.listStyle(InsetGroupedListStyle())
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarTitle("\(store.share.name)")
-        
-        
-        #else
-        content.listStyle(PlainListStyle())
-        #endif
+            #if os(iOS)
+            content.listStyle(InsetGroupedListStyle())
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitle("\(store.share.name)")
+            
+            
+            #else
+            content.listStyle(PlainListStyle())
+            
+            #endif
         }
-     
+        
+        
         .sheet(isPresented: self.$isSheet,onDismiss: {
             print("999999")
         }){
             
             ShareEditView(id: store.id)
         }
-       
-       
+        
+        
+        
     }
     
     var content:some View{
         
-        ZStack(alignment: .bottom){
+        return ZStack(alignment: .bottom){
             VStack {
                 headview
                     .padding(.all)
@@ -74,6 +79,7 @@ struct ShareDetailView: View {
                     .padding(.all)
                 
             }
+            
             addStoreView
             
             
@@ -81,7 +87,7 @@ struct ShareDetailView: View {
         }
         .font(.caption)
         .foregroundColor(Color("Background 4"))
-      
+        
         .onAppear(perform: {
             selectTab = tabs[0]
             store.loadData()
@@ -90,7 +96,7 @@ struct ShareDetailView: View {
     
     
     var headview:some View{
-
+        
         HStack(alignment: .bottom){
             
             VStack(alignment: .leading){
@@ -101,11 +107,11 @@ struct ShareDetailView: View {
             VStack{
                 Progress(percent:store.percent, colors: [Color("Secondary"),Color("Primary")])
                     .frame(width: 60, height: 60)
-           
+                
                 VStack(alignment: .leading) {
-              
-                    VStack(alignment: .leading){
                     
+                    VStack(alignment: .leading){
+                        
                         Text("持仓数量：\(store.share.getAllNum(state: 0))")
                         Text("持仓成本：¥\(store.share.getAllPrice(state: 0), specifier: "%0.3f")")
                         Text("持仓市值：¥\(store.shizhi, specifier: "%0.3f")")
@@ -121,13 +127,13 @@ struct ShareDetailView: View {
                         
                     })
                 }
-              
-               
+                
+                
             }
         }
-   
-       
-       
+        
+        
+        
     }
     
     var storeListView:some View{
@@ -140,7 +146,7 @@ struct ShareDetailView: View {
                     
                     SroreCell(store: index, price: $store.price)
                         .onTapGesture(count: 1, perform: {
-             
+                            
                         })
                 }
             }
@@ -161,7 +167,7 @@ struct ShareDetailView: View {
             .foregroundColor(.secondary)
             .background(Color("Background 3"))
             .onTapGesture(count: 1, perform: {
-             
+                
             })
         }
         .shadow(color: Color("shadow"), radius: 4, x: 4, y: 4)

@@ -21,29 +21,12 @@ class testShare: XCTestCase {
     }
 
     func testShareList() throws {
-        Share.list(page: 1, content: 10) { (result) in
-            
-            switch result {
-            case .success(let value):
-                XCTAssert(true)
-            case .failure(let error):
-                XCTAssert(false, error.localizedDescription)
-                
-            }
-        }
+ 
         
     }
     
     func testdetail()  {
-        Share.detail(id: 8) { (result) in
-            switch result {
-            case .success(let value):
-                XCTAssert(value != nil)
-            case .failure(let error):
-                XCTAssert(false, error.localizedDescription)
-                
-            }
-        }
+   
     }
 
     func testPerformanceExample() throws {
