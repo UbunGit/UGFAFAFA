@@ -14,12 +14,17 @@ let package = Package(
     dependencies: [
         .package(name: "PerfectSQLite", url: "https://github.com/PerfectlySoft/Perfect-SQLite.git", .branch("master")),
         .package(name: "PythonKit", url: "https://github.com/pvieito/PythonKit.git", .branch("master")),
+        .package(name: "SwiftCharts", url: "https://github.com/i-schuetz/SwiftCharts.git", .branch("master")),
     ],
     targets: [
 
         .target(
             name: "UGAnalyse",
-            dependencies: ["PythonKit","PerfectSQLite"]),
+            dependencies: [
+                "PythonKit",
+                "PerfectSQLite",
+                "SwiftCharts",
+            ]),
         .testTarget(
             name: "UGAnalyseTests",
             dependencies: ["UGAnalyse"]),
