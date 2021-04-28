@@ -1,4 +1,4 @@
-
+import Foundation
 import PythonKit
 
 public let py_sys = Python.import("sys")
@@ -17,12 +17,11 @@ public struct UGAnalyse {
 
 extension UGAnalyse{
     /*:
-     
      初始化
      */
     public static func setup(
-        locallib:String = "/Users/admin/Documents/github/UGFAFAFA/code",
-        datapath:String = "/Users/admin/Documents/GitHub/UGFAFAFA/data"
+        locallib:String = "/Users/admin/Documents/github/UGFAFAFA/code/",
+        datapath:String = "/Users/admin/Documents/GitHub/UGFAFAFA/data/"
         ){
 
         print("UGAnalyse setup")
@@ -37,15 +36,48 @@ extension UGAnalyse{
      status 上市状态 L上市 D退市 P暂停上市
      */
     public static func stockBasic(exchange:String="",status:String="L") throws -> PythonObject{
-        
-        let pro = py_ts.pro_api()
-        let data = pro.query("stock_basic")
-        data.rename(columns:["trade_date":"date"])
-        data.sort_index(inplace:true)
-        let savpath  = py_os.path.join(data_path,"base.csv")
-        data.to_csv(savpath)
-        return data
+        let key = "UGAnalyse.stockBasic"
+        let datapath  = py_os.path.join(data_path,"base.csv")
+        if UGAnalyse.needDownload(key){
+            let pro = py_ts.pro_api()
+            let data = pro.query("stock_basic")
+            data.sort_index(inplace:true)
+            
+            data.to_csv(datapath)
+            if let date = Date().toString("yyyy-MM-dd HH:mm:ss"){
+                try DataCache.setvalue(date, for: key)
+            }
+            return data
+        }else{
+             
+            return py_pd.read_csv(datapath)
+        }
     }
 }
+
+extension UGAnalyse{
+    
+    public static func needDownload(_ key:String) -> Bool{
+        /*:
+         更新时间判断
+         1: 上次下载时间晚于当今天16:00 return false
+         2: 现在时间早于16:00 上次下载时间晚于昨天16:00 return false
+         */
+        let now = Date()
+        let laseDownDate = try? DataCache.value(of: key)?.toDate()
+        let tody16 = now.toString("yyyy-MM-dd")?.appending(" 16:00:00").toDate()
+        let yestody16 = Date(timeInterval: -24*60*60, since: tody16!)
+        // date1.compare(date2) == .orderedAscending date1 < date2
+        if tody16!.compare(laseDownDate!) == .orderedAscending  {
+            return false
+        }else if now.compare(tody16!) == .orderedAscending && yestody16.compare(laseDownDate!) == .orderedAscending{
+            return false
+        }
+        return true
+        
+    }
+}
+
+
 
 

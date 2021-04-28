@@ -22,8 +22,4 @@ struct  UGPage<T:Codable>: Codable{
         }
     }
     var datas:T?
-    
-
-
-  
 }
