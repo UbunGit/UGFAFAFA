@@ -8,12 +8,13 @@
 import Foundation
 import PerfectSQLite
 import PerfectCRUD
+
+
+public typealias CodableIdentifiable = Codable&Identifiable
+
 /*:
  数据更新时间记录
  */
-
-
-
 public struct DataCache:CodableIdentifiable{
     
     public var id: UUID
@@ -26,7 +27,7 @@ public struct DataCache:CodableIdentifiable{
         self.id = UUID()
     }
 }
-public typealias CodableIdentifiable = Codable&Identifiable
+
 
 // CRUD
 extension DataCache:CRUDable{

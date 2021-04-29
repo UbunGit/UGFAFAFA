@@ -27,15 +27,6 @@
           "revision": "c77231820148515a77e9bba5016a57e5a88ef007",
           "version": null
         }
-      },
-      {
-        "package": "SwiftCharts",
-        "repositoryURL": "https://github.com/i-schuetz/SwiftCharts.git",
-        "state": {
-          "branch": "master",
-          "revision": "f5cee87337a50af9e41367f73436dafaaacd3f11",
-          "version": null
-        }
       }
     ]
   },

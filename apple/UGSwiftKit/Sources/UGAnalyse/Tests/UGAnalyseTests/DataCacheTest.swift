@@ -6,7 +6,7 @@
     
     @testable import UGAnalyse
 
-    final class InfoCacheTest: XCTestCase {
+    final class DataCacheTest: XCTestCase {
         let t_key = "testdata"
         let t_value = "000000"
         let t_value1 = "11111"

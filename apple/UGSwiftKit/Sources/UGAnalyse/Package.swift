@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "UGAnalyse",
+    platforms: [
+        .macOS(.v10_15)
+    ],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -14,7 +17,7 @@ let package = Package(
     dependencies: [
         .package(name: "PerfectSQLite", url: "https://github.com/PerfectlySoft/Perfect-SQLite.git", .branch("master")),
         .package(name: "PythonKit", url: "https://github.com/pvieito/PythonKit.git", .branch("master")),
-        .package(name: "SwiftCharts", url: "https://github.com/i-schuetz/SwiftCharts.git", .branch("master")),
+//        .package(name: "SwiftCharts", url: "https://github.com/i-schuetz/SwiftCharts.git", .branch("master")),
     ],
     targets: [
 
@@ -23,7 +26,7 @@ let package = Package(
             dependencies: [
                 "PythonKit",
                 "PerfectSQLite",
-                "SwiftCharts",
+//                "SwiftCharts",
             ]),
         .testTarget(
             name: "UGAnalyseTests",
