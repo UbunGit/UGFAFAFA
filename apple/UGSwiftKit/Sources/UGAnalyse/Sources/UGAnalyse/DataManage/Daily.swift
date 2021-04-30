@@ -20,6 +20,9 @@ extension Daily :DataManageProtocol{
      end 结束日期(YYYYMMDD)
      */
     public static func update(_ code:String, start:String? = nil,end:String? = nil) throws -> PythonObject{
+        let py_os =  Python.import("os")
+        let py_ts = Python.import("tushare")
+        let py_pd = Python.import("pandas")
         let cachekey = "UGAnalyse.Daily.\(code)"
         let datapath  = py_os.path.join(data_path,"tushare/\(code).csv")
         if StockBasic.needDownload(cachekey){

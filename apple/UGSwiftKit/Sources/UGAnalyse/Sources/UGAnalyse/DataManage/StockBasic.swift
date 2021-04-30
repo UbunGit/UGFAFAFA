@@ -16,7 +16,10 @@ struct StockBasic:DataManageProtocol {
      */
     public static func update(exchange:String="",status:String="L") throws -> PythonObject{
         let key = "UGAnalyse.stockBasic"
-        let datapath  = py_os.path.join(data_path,"base.csv")
+        let py_os =  Python.import("os")
+        let py_ts = Python.import("tushare")
+        let py_pd = Python.import("pandas")
+        let datapath  = py_os.path.join(data_path,"tushare/base.csv")
         if StockBasic.needDownload(key){
             let pro = py_ts.pro_api()
             let data = pro.query("stock_basic")

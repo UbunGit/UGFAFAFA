@@ -15,7 +15,7 @@ public struct UGMAAnalyse{
      */
     public static func analyse() throws {
        
-        
+        let py_os =  Python.import("os")
         // 0 获取数据
         var data = try Daily.update("000001.SZ")
        

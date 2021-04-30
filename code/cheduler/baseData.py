@@ -13,6 +13,7 @@ logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 formattime = (time.strftime('%Y-%m-%d',time.localtime(time.time())))
 
 def updatebaseData(date):
+    
     if date is None:
         date = formattime
     logging.info("加载股票列表 begin")
