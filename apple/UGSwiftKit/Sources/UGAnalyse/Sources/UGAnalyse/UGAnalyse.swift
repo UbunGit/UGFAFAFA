@@ -19,10 +19,10 @@ extension UGAnalyse{
         locallib:String = "/Users/admin/Documents/github/UGFAFAFA/code/",
         datapath:String = "/Users/admin/Documents/GitHub/UGFAFAFA/data/"
         ){
-        PythonLibrary.useVersion(3)
+     
         print("UGAnalyse setup")
         let py_sys = Python.import("sys")
-//        print("Python Version: \(py_sys.version)")
+        print("Python Version: \(py_sys.version)")
 //        py_sys.path.append(locallib)
         data_path = datapath
   

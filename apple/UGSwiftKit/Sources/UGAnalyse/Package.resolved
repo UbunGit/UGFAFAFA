@@ -21,10 +21,10 @@
       },
       {
         "package": "PythonKit",
-        "repositoryURL": "https://github.com/pvieito/PythonKit.git",
+        "repositoryURL": "https://github.com/ubunfork/PythonKit.git",
         "state": {
           "branch": "master",
-          "revision": "c77231820148515a77e9bba5016a57e5a88ef007",
+          "revision": "24399d8600d7ed7337e02512c10a8c3e8da7438b",
           "version": null
         }
       }

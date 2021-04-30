@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		840E2B8C2615CBF4003A84C6 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 840E2B8B2615CBF4003A84C6 /* PythonKit */; };
 		840E2B8E2615CBF4003A84C6 /* PerfectHTTPServer in Frameworks */ = {isa = PBXBuildFile; productRef = 840E2B8D2615CBF4003A84C6 /* PerfectHTTPServer */; };
 		840E2B922615CC25003A84C6 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
@@ -137,7 +136,6 @@
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
 		84F292122611D63F00593144 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		84F2921E2611FF2E00593144 /* PerfectHTTPServer in Frameworks */ = {isa = PBXBuildFile; productRef = 84F2921D2611FF2E00593144 /* PerfectHTTPServer */; };
-		84FA4DE425FB9C8D00F93203 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84FA4DE325FB9C8D00F93203 /* PythonKit */; };
 		84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */; };
 		84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DF725FBA4EF00F93203 /* ContentView.swift */; };
 		84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4E3425FBAA2B00F93203 /* SockerServer.swift */; };
@@ -270,7 +268,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8472695426133DE700F92E66 /* PerfectSQLite in Frameworks */,
-				84FA4DE425FB9C8D00F93203 /* PythonKit in Frameworks */,
 				84F2921E2611FF2E00593144 /* PerfectHTTPServer in Frameworks */,
 				8489294E260C5C8500006D88 /* Pods_apple__macOS_.framework in Frameworks */,
 			);
@@ -290,7 +287,6 @@
 				847269412613353700F92E66 /* PerfectSQLite in Frameworks */,
 				840E2B8E2615CBF4003A84C6 /* PerfectHTTPServer in Frameworks */,
 				CE54A7A2AAB5AC45E15FD96E /* Pods_Tests_macOS.framework in Frameworks */,
-				840E2B8C2615CBF4003A84C6 /* PythonKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,7 +822,6 @@
 			);
 			name = "apple (macOS)";
 			packageProductDependencies = (
-				84FA4DE325FB9C8D00F93203 /* PythonKit */,
 				84F2921D2611FF2E00593144 /* PerfectHTTPServer */,
 				8472695326133DE700F92E66 /* PerfectSQLite */,
 			);
@@ -870,7 +865,6 @@
 			name = "Tests macOS";
 			packageProductDependencies = (
 				847269402613353700F92E66 /* PerfectSQLite */,
-				840E2B8B2615CBF4003A84C6 /* PythonKit */,
 				840E2B8D2615CBF4003A84C6 /* PerfectHTTPServer */,
 			);
 			productName = "Tests macOS";
@@ -912,7 +906,6 @@
 			);
 			mainGroup = 84807D8B25FB7A8500C8CB18;
 			packageReferences = (
-				84FA4DE225FB9C8D00F93203 /* XCRemoteSwiftPackageReference "PythonKit" */,
 				84F291FA2611C48A00593144 /* XCRemoteSwiftPackageReference "Perfect-SQLite" */,
 				84F2921C2611FF2E00593144 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */,
 			);
@@ -1621,22 +1614,9 @@
 				minimumVersion = 3.0.23;
 			};
 		};
-		84FA4DE225FB9C8D00F93203 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pvieito/PythonKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		840E2B8B2615CBF4003A84C6 /* PythonKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 84FA4DE225FB9C8D00F93203 /* XCRemoteSwiftPackageReference "PythonKit" */;
-			productName = PythonKit;
-		};
 		840E2B8D2615CBF4003A84C6 /* PerfectHTTPServer */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 84F2921C2611FF2E00593144 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */;
@@ -1656,11 +1636,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 84F2921C2611FF2E00593144 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */;
 			productName = PerfectHTTPServer;
-		};
-		84FA4DE325FB9C8D00F93203 /* PythonKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 84FA4DE225FB9C8D00F93203 /* XCRemoteSwiftPackageReference "PythonKit" */;
-			productName = PythonKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 
