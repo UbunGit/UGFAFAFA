@@ -12,6 +12,7 @@ class MAKline:
 
     file = None
     data = None
+    savefile = "/Users/admin/Documents/github/UGFAFAFA/data/tem"
     xaxis = []
     yaxis = []
     vols = []
@@ -101,22 +102,7 @@ class MAKline:
             overlap_kline_line,
             grid_opts=opts.GridOpts(pos_left="10%", pos_right="8%", height="50%"),
         )
-        grid_chart.render("./data/kline_itemstyle.html")
-
-class people:
-    #定义基本属性
-    name = ''
-    age = 0
-    #定义私有属性,私有属性在类外部无法直接进行访问
-    __weight = 0
-    #定义构造方法
-    def __init__(self,n,a,w):
-        self.name = n
-        self.age = a
-        self.__weight = w
-    def speak(self):
-        print("%s 说: 我 %d 岁。" %(self.name,self.age))
- 
+        grid_chart.render(self.savefile+"/result.html")
 
 
 

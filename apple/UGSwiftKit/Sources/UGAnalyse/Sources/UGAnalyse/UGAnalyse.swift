@@ -23,7 +23,7 @@ extension UGAnalyse{
         print("UGAnalyse setup")
         let py_sys = Python.import("sys")
 //        print("Python Version: \(py_sys.version)")
-//        py_sys.path.append(locallib)
+        py_sys.path.append(locallib)
         data_path = datapath
   
         let py_ts = Python.import("tushare")
