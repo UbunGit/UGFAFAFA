@@ -15,13 +15,18 @@ struct SWWebView : NSViewRepresentable{
     
     var url: URL
     typealias NSViewType = WKWebView
+    
     func makeNSView(context: Context) -> WKWebView {
         let request = URLRequest(url: url)
         let webview = WKWebView()
         webview.uiDelegate = context.coordinator
         webview.navigationDelegate = context.coordinator
         webview.allowsBackForwardNavigationGestures = true;
-        webview.load(request)
+//        webview.load(request)
+//        let turl = URL(string: "/Users/admin/Documents/GitHub/UGFAFAFA/data/tem/result.html")!
+        let turl = URL(fileURLWithPath: "/Users/admin/Documents/GitHub/UGFAFAFA/data/tem/result.html")
+        webview.loadFileURL(turl, allowingReadAccessTo: turl)
+
         return webview
     }
     

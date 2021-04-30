@@ -14,6 +14,8 @@ public struct UGMAAnalyse{
      分析均线
      */
     public static func analyse() throws {
+        
+
        
         let py_os =  Python.import("os")
         // 0 获取数据
@@ -53,11 +55,14 @@ public struct UGMAAnalyse{
             ])
         }
         
-        let kline = Kline(xaxis: times, y_axis: datas, points: points)
-        kline.draw()
-
+        UGMAAnalyse.draw()
     }
 
+    static func draw(){
+        let makline = Python.import("charts").MAKline
+        let draw = makline("/Users/admin/Documents/github/UGFAFAFA/data/analyse/base.csv")
+        draw.draw()
+    }
     
 
     
