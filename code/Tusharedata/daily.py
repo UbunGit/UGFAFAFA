@@ -15,7 +15,7 @@ import logging
 from .db import session, DataCache
 
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
-datapath = "./data"
+datapath = "/Users/admin/Documents/GitHub/UGFAFAFA/data"
 
 def filempath(scode):
     return  os.path.join(datapath,"tushare",scode+'.csv')
@@ -53,6 +53,8 @@ def load(code="000001.SZ"):
                 raise Exception("error：下载股票数据失败")
             data = data.rename(columns={'trade_date':'date'})
             sd_save(_code,data)
+            input = DataCache()
+            input.key = _code
             input.value = time.time()
             session.add(input)
             session.commit()

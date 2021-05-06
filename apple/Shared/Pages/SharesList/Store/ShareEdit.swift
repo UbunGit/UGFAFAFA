@@ -37,6 +37,7 @@ class ShareEdit: ObservableObject {
                 
                 switch resule{
                 case.success(let value):
+                    objectWillChange.send()
                     self.share = value
                 case.failure(let error):
                     err = error

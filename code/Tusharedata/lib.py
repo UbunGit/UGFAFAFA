@@ -28,7 +28,7 @@ def ma(data, ma):
     
     logging.info("ma %s BEGIN",ma)
     key = "ma"+str(ma)
-    data[key]= tl.MA(data['close'],timeperiod=ma)
+    data[key]= tl.MA(data['close'],timeperiod=int(ma))
     logging.info("ma %s END",ma)
 
 

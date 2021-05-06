@@ -12,11 +12,13 @@ import Alamofire
 struct ShareEditView: View,SFPresentation {
   
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var store:ShareEdit = ShareEdit()
+    @ObservedObject var store:ShareEdit
     @State var context = SFToastObservable()
     @ObservedObject var loadingObser = SFLoadingObservable()
     
     init(id:Int) {
+        
+        self.store = ShareEdit()
         self.store.id = id
     }
     
@@ -58,7 +60,7 @@ struct ShareEditView: View,SFPresentation {
 
         }
         .toast(context: context)
-            .loading(context: loadingObser)
+        .loading(context: loadingObser)
         
     }
     

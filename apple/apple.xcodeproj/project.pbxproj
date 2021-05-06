@@ -66,7 +66,6 @@
 		845410E32636C40000ECFD9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845410E02636C3FF00ECFD9A /* Assets.xcassets */; };
 		845410E42636C40000ECFD9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845410E02636C3FF00ECFD9A /* Assets.xcassets */; };
 		845410EE2636C48200ECFD9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845410E02636C3FF00ECFD9A /* Assets.xcassets */; };
-		845410F22636CD9000ECFD9A /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		845410F62636CD9300ECFD9A /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		845410FA2636CDAE00ECFD9A /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA526352B8800ECFD9A /* Codable.swift */; };
 		845410FE2636CDAF00ECFD9A /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA526352B8800ECFD9A /* Codable.swift */; };
@@ -131,6 +130,8 @@
 		8491D998263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		8491D999263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		8491D9A7263186B60035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
+		84C6A2B72643C28100880343 /* UGAnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A2B52643C28100880343 /* UGAnalyseView.swift */; };
+		84C6A2B82643C28100880343 /* UGAnalyse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A2B62643C28100880343 /* UGAnalyse.swift */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
 		84E787A6263C0646007D9155 /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E787A5263C0646007D9155 /* SWWebView.swift */; };
@@ -238,6 +239,8 @@
 		8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDSqliteProtocol.swift; sourceTree = "<group>"; };
 		8491D95D26300ABC0035B7F8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlitInsterProtocol.swift; sourceTree = "<group>"; };
+		84C6A2B52643C28100880343 /* UGAnalyseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UGAnalyseView.swift; path = UGSwiftKit/Sources/UGAnalyse/Sources/UGAnalyse/UGAnalyseView.swift; sourceTree = SOURCE_ROOT; };
+		84C6A2B62643C28100880343 /* UGAnalyse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UGAnalyse.swift; path = UGSwiftKit/Sources/UGAnalyse/Sources/UGAnalyse/UGAnalyse.swift; sourceTree = SOURCE_ROOT; };
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
@@ -491,6 +494,7 @@
 		845C233F262877D500308C2A /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				84C6A2B42643C27400880343 /* Analyse */,
 				845C2340262877EE00308C2A /* Web */,
 				84E11ED6260D91E80012D151 /* Home */,
 			);
@@ -709,6 +713,15 @@
 				8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */,
 			);
 			path = SqliteProtocol;
+			sourceTree = "<group>";
+		};
+		84C6A2B42643C27400880343 /* Analyse */ = {
+			isa = PBXGroup;
+			children = (
+				84C6A2B62643C28100880343 /* UGAnalyse.swift */,
+				84C6A2B52643C28100880343 /* UGAnalyseView.swift */,
+			);
+			path = Analyse;
 			sourceTree = "<group>";
 		};
 		84E11EB3260D8CF50012D151 /* DataBase */ = {
@@ -1084,7 +1097,6 @@
 			files = (
 				84540DD126352B8800ECFD9A /* SFToastObservable.swift in Sources */,
 				84807DBF25FB7A8900C8CB18 /* appleApp.swift in Sources */,
-				845410F22636CD9000ECFD9A /* HttpServer.swift in Sources */,
 				847268EF26130F6100F92E66 /* ApiShare.swift in Sources */,
 				84540DB926352B8800ECFD9A /* AlertData.swift in Sources */,
 				8446B446262EBEEF00D2AC8B /* ShareEdit.swift in Sources */,
@@ -1132,6 +1144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */,
+				84C6A2B82643C28100880343 /* UGAnalyse.swift in Sources */,
 				84565A6D261C6000009F9F7D /* Page.swift in Sources */,
 				841F334B2623FCAB0099B8CB /* MLMAOut.swift in Sources */,
 				84726906261313B100F92E66 /* S_Share.swift in Sources */,
@@ -1183,6 +1196,7 @@
 				84540DD026352B8800ECFD9A /* SFPersentationObservable.swift in Sources */,
 				84E787A7263C0646007D9155 /* SWWebView.swift in Sources */,
 				841F335C2624062F0099B8CB /* MakeData.swift in Sources */,
+				84C6A2B72643C28100880343 /* UGAnalyseView.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

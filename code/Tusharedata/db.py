@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
                                                                 
-dbpath = "./data/sqlite/tushare.db"
+dbpath = "/Users/admin/Documents/GitHub/UGFAFAFA/data/sqlite/tushare.db"
 engine = create_engine('sqlite:///{0}'.format(dbpath), echo=True)
 
 session = scoped_session(sessionmaker(autocommit=False,
