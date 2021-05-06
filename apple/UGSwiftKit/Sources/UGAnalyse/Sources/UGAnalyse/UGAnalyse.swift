@@ -1,40 +1,26 @@
+//
+//  File.swift
+//  
+//
+//  Created by admin on 2021/4/29.
+//
+
 import Foundation
 import PythonKit
+import SwiftUI
 
-public var data_path = "./"
-public let analyse_db = "\(data_path)sqlite/analyse.db"
-
-
-public struct UGAnalyse {
+public class UGAnalyse :ObservableObject {
     
-    var text = "Hello, World!"
+    @State var code:String = "300022.sz" //股票代码
+    @State var begin:Date = Date()
+    @State var end:Date = Date()
+    
+    
 
+
+    
+    
+
+    
 }
-
-extension UGAnalyse{
-    /*:
-     初始化
-     */
-    public static func setup(
-        locallib:String = "/Users/admin/Documents/github/UGFAFAFA/code/",
-        datapath:String = "/Users/admin/Documents/GitHub/UGFAFAFA/data/"
-        ){
-     
-        print("UGAnalyse setup")
-        let py_sys = Python.import("sys")
-
-        print("Python Version: \(py_sys.version)")
-        py_sys.path.append(locallib)
-
-        data_path = datapath
-  
-        let py_ts = Python.import("tushare")
-        py_ts.set_token("8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195")
-    }
-}
-
-
-
-
-
 

@@ -36,7 +36,7 @@ extension DataCache:CRUDable{
     
     public static var dbfile:String{
         get{
-            return analyse_db
+            return "./sqlite/analyse.db"
         }
     }
     

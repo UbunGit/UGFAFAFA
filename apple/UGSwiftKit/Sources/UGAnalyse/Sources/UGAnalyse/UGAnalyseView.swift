@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct UGAnalyseView: View {
+    @ObservedObject var store = UGAnalyse()
     
     var body: some View {
         HStack(spacing: 4, content: {
-            
-            UGAnalyseBaseView()
-                .background(Color.secondary.ignoresSafeArea())
+
             ScrollView{
                 
             }
+            UGAnalyseBaseView(code: $store.code, begin: $store.begin, end: $store.end)
+                .frame(width: 200)
+                .background(Color.secondary.ignoresSafeArea())
         })
         
     }
@@ -24,21 +26,25 @@ struct UGAnalyseView: View {
 }
 
 struct UGAnalyseBaseView: View {
-    @State var code:String = "300022.sz" //股票代码
-    @State var begin:Date = Date()
-    @State var end:Date = Date()
+    @Binding var code:String
+    @Binding var begin:Date
+    @Binding var end:Date
     
     var body :some View{
         Form{
-            
-            TextField("LocalizedStringKey", text: $code) { isend in
+            Section{
+                TextField("LocalizedStringKey", text: $code) { isend in
+                    
+                } onCommit: {
+                    
+                }
                 
-            } onCommit: {
-                
+                DatePicker(selection: $begin, label: { Text("开始") })
+                    
+                 
+                DatePicker(selection: $begin, label: { Text("结束") })
             }
             
-            DatePicker(selection: $begin, label: { Text("开始时间") })
-            DatePicker(selection: $begin, label: { Text("结束时间") })
             
             Button(action: {}, label: {
                 /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
