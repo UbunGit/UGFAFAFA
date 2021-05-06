@@ -6,16 +6,12 @@
 //
 
 import Foundation
-import PythonKit
 
-let pysys =  Python.import("sys")
-let pyos =  Python.import("os")
-let codepath = "/Users/admin/Documents/github/UGFAFAFA/code"
-// pandas
-let py_pands = Python.import("pandas")
+
+
 
 public func py_setup(){
-    pysys.path.append(codepath)
+  
 }
 
 

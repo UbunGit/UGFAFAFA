@@ -30,36 +30,22 @@ public struct UGMAAnalyse{
         data["ma5_1"] = data["ma5"].shift(-1)
         data["ma30_1"] = data["ma30"].shift(-1)
         try Talib.shiftv(data, times: [5,10,15,30,50])
-        
+        data = data.dropna(axis:0, how:"any")
         let datapath  = py_os.path.join(data_path,"analyse/base.csv")
         data.to_csv(datapath)
         
-        let ndata = data.dropna(axis:0, how:"any")
-        let tdata = ndata.iloc.filter {
+        
+        let tdata = data.iloc.filter {
             return LineLib.states(line1: LineLib.Line(begin: $0.ma5_1, end: $0.ma5), line2: LineLib.Line(begin: $0.ma30_1, end: $0.ma30)) == .upintersect
         }
-        var datas = [PythonObject]()
-        var times = [String]()
-        
-        for item in data.iloc {
-            datas.append([item.open,item.close,item.low,item.high])
-            times.append("\(item.date)")
-        }
-        var points =  [[String: PythonObject]]()
-        for item in tdata {
-            
-            points.append([
-                "name": PythonObject("\(item.date)"),
-                "value":item.close,
-                "coord": [PythonObject("\(item.date)"), item.close],
-            ])
-        }
+     
+     
         
         UGMAAnalyse.draw()
     }
 
     static func draw(){
-        let makline = Python.import("charts").MAKline
+        let makline = Python.import("Analyse").draw
         let draw = makline("/Users/admin/Documents/github/UGFAFAFA/data/analyse/base.csv")
         draw.draw()
     }

@@ -78,7 +78,6 @@
 		84565AB6261C76CB009F9F7D /* ShareEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditView.swift */; };
 		84565ABA261C76D7009F9F7D /* ShareEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditView.swift */; };
 		84565ABB261C76D7009F9F7D /* ShareEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditView.swift */; };
-		845C232F262870DB00308C2A /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C232E262870DB00308C2A /* SWWebView.swift */; };
 		845C23422628780000308C2A /* WebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C23412628780000308C2A /* WebPage.swift */; };
 		8472689C261307F300F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
 		8472689E261307F300F92E66 /* SharesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListView.swift */; };
@@ -134,6 +133,8 @@
 		8491D9A7263186B60035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
+		84E787A6263C0646007D9155 /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E787A5263C0646007D9155 /* SWWebView.swift */; };
+		84E787A7263C0646007D9155 /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E787A5263C0646007D9155 /* SWWebView.swift */; };
 		84F292122611D63F00593144 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		84F2921E2611FF2E00593144 /* PerfectHTTPServer in Frameworks */ = {isa = PBXBuildFile; productRef = 84F2921D2611FF2E00593144 /* PerfectHTTPServer */; };
 		84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */; };
@@ -208,7 +209,6 @@
 		845410E02636C3FF00ECFD9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84565A68261C5F15009F9F7D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		84565AB5261C76CB009F9F7D /* ShareEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEditView.swift; sourceTree = "<group>"; };
-		845C232E262870DB00308C2A /* SWWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SWWebView.swift; sourceTree = "<group>"; };
 		845C23412628780000308C2A /* WebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPage.swift; sourceTree = "<group>"; };
 		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		84726899261307F300F92E66 /* SharesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesListView.swift; sourceTree = "<group>"; };
@@ -241,6 +241,7 @@
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
+		84E787A5263C0646007D9155 /* SWWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWWebView.swift; sourceTree = "<group>"; };
 		84F291F22611C13500593144 /* HttpServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpServer.swift; sourceTree = "<group>"; };
 		84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonCenter.swift; sourceTree = "<group>"; };
 		84FA4DF725FBA4EF00F93203 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -375,6 +376,7 @@
 		84540DA926352B8800ECFD9A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				84E787A4263C0646007D9155 /* SWWebView */,
 				84540DAA26352B8800ECFD9A /* Loading */,
 				84540DAC26352B8800ECFD9A /* Progress  */,
 				84540DAE26352B8800ECFD9A /* Segmented */,
@@ -486,21 +488,13 @@
 			path = MAResources;
 			sourceTree = "<group>";
 		};
-		845C230C26286CD100308C2A /* AppKit */ = {
-			isa = PBXGroup;
-			children = (
-				845C232E262870DB00308C2A /* SWWebView.swift */,
-			);
-			path = AppKit;
-			sourceTree = "<group>";
-		};
-		845C233F262877D500308C2A /* Paages */ = {
+		845C233F262877D500308C2A /* Pages */ = {
 			isa = PBXGroup;
 			children = (
 				845C2340262877EE00308C2A /* Web */,
 				84E11ED6260D91E80012D151 /* Home */,
 			);
-			path = Paages;
+			path = Pages;
 			sourceTree = "<group>";
 		};
 		845C2340262877EE00308C2A /* Web */ = {
@@ -675,8 +669,7 @@
 			isa = PBXGroup;
 			children = (
 				8491D99626317FE20035B7F8 /* SqliteProtocol */,
-				845C233F262877D500308C2A /* Paages */,
-				845C230C26286CD100308C2A /* AppKit */,
+				845C233F262877D500308C2A /* Pages */,
 				841F31D42623F1900099B8CB /* ML */,
 				847269032613138300F92E66 /* Moden */,
 				84F291F12611C10D00593144 /* HttpServer */,
@@ -749,6 +742,14 @@
 			children = (
 			);
 			path = TextField;
+			sourceTree = "<group>";
+		};
+		84E787A4263C0646007D9155 /* SWWebView */ = {
+			isa = PBXGroup;
+			children = (
+				84E787A5263C0646007D9155 /* SWWebView.swift */,
+			);
+			path = SWWebView;
 			sourceTree = "<group>";
 		};
 		84F291F12611C10D00593144 /* HttpServer */ = {
@@ -1108,6 +1109,7 @@
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				84540DCF26352B8800ECFD9A /* SFPersentationObservable.swift in Sources */,
 				84540DCB26352B8800ECFD9A /* CloseButton.swift in Sources */,
+				84E787A6263C0646007D9155 /* SWWebView.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
 				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
@@ -1148,7 +1150,6 @@
 				84540DC226352B8800ECFD9A /* UDID.swift in Sources */,
 				84540DCA26352B8800ECFD9A /* SegmentedView.swift in Sources */,
 				8454109C26368CE500ECFD9A /* View+Loading.swift in Sources */,
-				845C232F262870DB00308C2A /* SWWebView.swift in Sources */,
 				84540DD226352B8800ECFD9A /* SFToastObservable.swift in Sources */,
 				84F292122611D63F00593144 /* HttpServer.swift in Sources */,
 				84807DC425FB7A8900C8CB18 /* Persistence.swift in Sources */,
@@ -1180,6 +1181,7 @@
 				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,
 				84540DD026352B8800ECFD9A /* SFPersentationObservable.swift in Sources */,
+				84E787A7263C0646007D9155 /* SWWebView.swift in Sources */,
 				841F335C2624062F0099B8CB /* MakeData.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
 			);
