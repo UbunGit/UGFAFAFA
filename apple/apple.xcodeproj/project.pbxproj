@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		840E2B8E2615CBF4003A84C6 /* PerfectHTTPServer in Frameworks */ = {isa = PBXBuildFile; productRef = 840E2B8D2615CBF4003A84C6 /* PerfectHTTPServer */; };
 		840E2B922615CC25003A84C6 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
 		840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
@@ -94,8 +93,6 @@
 		8472692C26132E8600F92E66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268AA2613088700F92E66 /* Store.swift */; };
 		8472693026132E8900F92E66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268AA2613088700F92E66 /* Store.swift */; };
 		8472693C26132EBF00F92E66 /* SQLiteManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */; };
-		847269412613353700F92E66 /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 847269402613353700F92E66 /* PerfectSQLite */; };
-		8472695426133DE700F92E66 /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8472695326133DE700F92E66 /* PerfectSQLite */; };
 		8472697026146A2100F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
 		8472697426146A2400F92E66 /* SharesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListView.swift */; };
 		8472697826146A2800F92E66 /* SharesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* SharesList.swift */; };
@@ -132,12 +129,12 @@
 		8491D9A7263186B60035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		84C6A2B72643C28100880343 /* UGAnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A2B52643C28100880343 /* UGAnalyseView.swift */; };
 		84C6A2B82643C28100880343 /* UGAnalyse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A2B62643C28100880343 /* UGAnalyse.swift */; };
+		84D215EA264523980057B412 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84D215E9264523980057B412 /* PythonKit */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
 		84E787A6263C0646007D9155 /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E787A5263C0646007D9155 /* SWWebView.swift */; };
 		84E787A7263C0646007D9155 /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E787A5263C0646007D9155 /* SWWebView.swift */; };
 		84F292122611D63F00593144 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
-		84F2921E2611FF2E00593144 /* PerfectHTTPServer in Frameworks */ = {isa = PBXBuildFile; productRef = 84F2921D2611FF2E00593144 /* PerfectHTTPServer */; };
 		84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */; };
 		84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DF725FBA4EF00F93203 /* ContentView.swift */; };
 		84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4E3425FBAA2B00F93203 /* SockerServer.swift */; };
@@ -264,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABE41E7854F9611A49B02DB1 /* Pods_apple__iOS_.framework in Frameworks */,
+				84D215EA264523980057B412 /* PythonKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,8 +269,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8472695426133DE700F92E66 /* PerfectSQLite in Frameworks */,
-				84F2921E2611FF2E00593144 /* PerfectHTTPServer in Frameworks */,
 				8489294E260C5C8500006D88 /* Pods_apple__macOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,8 +284,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				847269412613353700F92E66 /* PerfectSQLite in Frameworks */,
-				840E2B8E2615CBF4003A84C6 /* PerfectHTTPServer in Frameworks */,
 				CE54A7A2AAB5AC45E15FD96E /* Pods_Tests_macOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -815,6 +809,9 @@
 			dependencies = (
 			);
 			name = "apple (iOS)";
+			packageProductDependencies = (
+				84D215E9264523980057B412 /* PythonKit */,
+			);
 			productName = "apple (iOS)";
 			productReference = 84807D9B25FB7A8900C8CB18 /* apple.app */;
 			productType = "com.apple.product-type.application";
@@ -836,8 +833,6 @@
 			);
 			name = "apple (macOS)";
 			packageProductDependencies = (
-				84F2921D2611FF2E00593144 /* PerfectHTTPServer */,
-				8472695326133DE700F92E66 /* PerfectSQLite */,
 			);
 			productName = "apple (macOS)";
 			productReference = 84807DA325FB7A8900C8CB18 /* apple.app */;
@@ -878,8 +873,6 @@
 			);
 			name = "Tests macOS";
 			packageProductDependencies = (
-				847269402613353700F92E66 /* PerfectSQLite */,
-				840E2B8D2615CBF4003A84C6 /* PerfectHTTPServer */,
 			);
 			productName = "Tests macOS";
 			productReference = 84807DB625FB7A8900C8CB18 /* Tests macOS.xctest */;
@@ -920,8 +913,7 @@
 			);
 			mainGroup = 84807D8B25FB7A8500C8CB18;
 			packageReferences = (
-				84F291FA2611C48A00593144 /* XCRemoteSwiftPackageReference "Perfect-SQLite" */,
-				84F2921C2611FF2E00593144 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */,
+				84D215E8264523980057B412 /* XCRemoteSwiftPackageReference "PythonKit" */,
 			);
 			productRefGroup = 84807D9C25FB7A8900C8CB18 /* Products */;
 			projectDirPath = "";
@@ -1614,44 +1606,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		84F291FA2611C48A00593144 /* XCRemoteSwiftPackageReference "Perfect-SQLite" */ = {
+		84D215E8264523980057B412 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/PerfectlySoft/Perfect-SQLite.git";
+			repositoryURL = "https://gitee.com/UbunGit/PythonKit.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-		84F2921C2611FF2E00593144 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/PerfectlySoft/Perfect-HTTPServer.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.23;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		840E2B8D2615CBF4003A84C6 /* PerfectHTTPServer */ = {
+		84D215E9264523980057B412 /* PythonKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84F2921C2611FF2E00593144 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */;
-			productName = PerfectHTTPServer;
-		};
-		847269402613353700F92E66 /* PerfectSQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 84F291FA2611C48A00593144 /* XCRemoteSwiftPackageReference "Perfect-SQLite" */;
-			productName = PerfectSQLite;
-		};
-		8472695326133DE700F92E66 /* PerfectSQLite */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 84F291FA2611C48A00593144 /* XCRemoteSwiftPackageReference "Perfect-SQLite" */;
-			productName = PerfectSQLite;
-		};
-		84F2921D2611FF2E00593144 /* PerfectHTTPServer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 84F2921C2611FF2E00593144 /* XCRemoteSwiftPackageReference "Perfect-HTTPServer" */;
-			productName = PerfectHTTPServer;
+			package = 84D215E8264523980057B412 /* XCRemoteSwiftPackageReference "PythonKit" */;
+			productName = PythonKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -1,57 +1,49 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import sys
+sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
+
+import datetime
 import pandas as pd
 from pyecharts.charts import Kline
 from pyecharts.charts import Line, Bar, Grid, Pie,Scatter
 from pyecharts import options as opts
 from pyecharts.commons.utils import JsCode
-import datetime
+from config import dataPath as root
+from file import mkdir
+from Tusharedata import lib, loadDaily
+
 
 
 class draw:
 
-    file = None
+    code = ""
+    analys = ""
+    ma = [5,10,20,30]
     data = None
-    savefile = "/Users/admin/Documents/github/UGFAFAFA/data/tem"
-    xaxis = []
-    yaxis = []
-    vols = []
-
+    resuledata = None
+    savefile = root
     begin = (datetime.datetime.now() +
              datetime.timedelta(days=-100)).strftime('%Y%m%d')
     end = (datetime.datetime.now()).strftime('%Y%m%d')
 
-    def __init__(self, file):
-        print(self.begin)
-        self.file = file
-        self.data = pd.read_csv(file).sort_values(by='date')
+    def __init__(self, code, analys):
+        self.code = code
+        self.analys = analys
 
-        # self.data = self.data[(self.data["date"] > int(self.begin)) & (self.data["date"] < int(self.end))]
-
-    def get_baseData(self):
-
-        self.xaxis = self.data["date"].astype('str').values.tolist()
-        self.yaxis = self.data[["open", "close", "high",
-                                "low"]].values.tolist()
-        self.vols = self.data["vol"].values.tolist()
-        print(self.vols)
-        print(type(self.vols))
-
-    def calculate_ma(self, day_count: int):
-        result = self.data["ma" + str(day_count)].values.tolist()
-        return result
     
     def kline(self):
-        xaxis = self.data["date"].astype('str').values.tolist()
-        yaxis = self.data[["open", "close", "high",
+        klinedata = self.data
+        xaxis = klinedata["date"].astype('str').values.tolist()
+        yaxis = klinedata[["open", "close", "high",
                                 "low"]].values.tolist()
         return (
             Kline()
                 .add_xaxis(xaxis)
                 .add_yaxis(
                     "kline",
-                    self.yaxis,
+                    yaxis,
                     itemstyle_opts=opts.ItemStyleOpts(
                         color="#ec0000",
                         color0="#00da3c",
@@ -63,34 +55,57 @@ class draw:
                     xaxis_opts=opts.AxisOpts(is_scale=True),
                     yaxis_opts=opts.AxisOpts(
                         is_scale=True,
+                        
                         splitarea_opts=opts.SplitAreaOpts(
                             is_show=True,
-                            areastyle_opts=opts.AreaStyleOpts(opacity=1)),
+                            areastyle_opts=opts.AreaStyleOpts(
+                                opacity=1,
+                                
+                            )
+                        ),
+                            
+                    )
+                  
+                        
+                )
+                .set_global_opts(
+                    xaxis_opts=opts.AxisOpts(is_scale=True),
+                    yaxis_opts=opts.AxisOpts(
+                        is_scale=True,
+                        splitarea_opts=opts.SplitAreaOpts(
+                            is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                        ),
                     ),
-                    datazoom_opts=[opts.DataZoomOpts(type_="inside")],
+                    datazoom_opts=[opts.DataZoomOpts(
+                        pos_bottom="60%",
+                        range_start= 100.00-(5000.00/len(xaxis)),
+                        range_end= 100.00,
+                        )],
                     title_opts=opts.TitleOpts(title="MA均线交易"),
                 )
-            )
+        )
 
-    def maline(self,mas):
-        xaxis = self.data["date"].astype('str').values.tolist()
+    def maline(self):
+        malinedata = self.data
+        xaxis = malinedata["date"].astype('str').values.tolist()
         line = Line()
-        line.add_xaxis(self.xaxis)
-        for item in mas:
+        line.add_xaxis(xaxis)
+        for item in self.ma:
             line.add_yaxis(
-                series_name="MA"+str(item),
-                y_axis=self.calculate_ma(day_count=int(item)),
+                series_name="ma"+str(item),
+                y_axis=malinedata["ma"+str(item)],
                 is_smooth=True,
                 is_hover_animation=False,
                 linestyle_opts=opts.LineStyleOpts(width=3, opacity=0.5),
                 label_opts=opts.LabelOpts(is_show=False),
             )
         return (
-            line.set_global_opts(title_opts=opts.TitleOpts(title="Grid-Bar"))\
-            )
+            line.set_global_opts(title_opts=opts.TitleOpts(title="Grid-Bar"))
+        )
 
     def pie(self):
-        bardata = self.data[self.data["select"] == True]
+       
+        bardata = self.resuledata[self.resuledata["b"] == True]
         bardata = bardata["close" + "5" + "v"].astype('int').value_counts(
             normalize=True, ascending=True)
         return (
@@ -108,41 +123,54 @@ class draw:
         ))
 
     def point(self):
-        pointdata = self.data[self.data["select"] == True]
+        pointdata = self.resuledata
+        pointdata = pointdata[pointdata["b"] == True]
         xaxis = pointdata["date"].astype('str').values.tolist()
         yaxis = pointdata["close"].values.tolist()
-        return(
-            Scatter()
-            .add_xaxis(xaxis_data=xaxis)
-            .add_yaxis(
-                series_name="",
+        
+        scatter = Scatter()
+        scatter.add_xaxis(xaxis_data=xaxis)
+        scatter.add_yaxis(
+                series_name="B",
                 y_axis=yaxis,
-                symbol_size=20,
-                label_opts=opts.LabelOpts(is_show=False),
-            )
+                symbol_size=14,
+                itemstyle_opts=opts.ItemStyleOpts(
+                    color="#ef232a",
+                ),      
         )
+        scatter.set_global_opts(
+          
+            title_opts=opts.TitleOpts(title="Scatter-VisualMap(Size)"),
+            visualmap_opts=opts.VisualMapOpts(max_=150),
+           
+        )
+
+        return (scatter)
+    
     def draw(self):
-        self.get_baseData()
+        self.data = loadDaily(self.code)
+        self.resuledata = pd.read_csv(root+"/output/"+self.analys+"/"+self.code+"/result.csv")
+        for item in self.ma:
+            lib.ma(self.data, item)
 
         kline = self.kline()
-        # 均线
-        line = self.maline([5,30])
+        kline = kline.overlap(self.maline())
+        kline = kline.overlap(self.point())
 
-        pie = self.pie()
-        point = self.point()
-
-        k = kline.overlap(line)
-        k = k.overlap(point)
-
-        grid = (Grid(init_opts=opts.InitOpts(height="800px")).add(
-            k, grid_opts=opts.GridOpts(pos_bottom="60%")).add(
-                pie,
-                grid_opts=opts.GridOpts(pos_top="60%")).render(self.savefile +
-                                                               "/result.html"))
+        grid = (Grid(init_opts=opts.InitOpts(height="800px"))
+        .add(
+            kline,
+            grid_opts=opts.GridOpts(pos_bottom="60%")
+        )
+        .add(
+            self.pie(),
+            grid_opts=opts.GridOpts(pos_top="60%")
+        )
+        .render(self.savefile +"/result.html"))
 
 
 
 if __name__ == '__main__':
 
-    draw = draw("/Users/admin/Documents/github/UGFAFAFA/data/tem/tem.csv")
+    draw = draw(code="000002.sz",analys="maline")
     draw.draw()

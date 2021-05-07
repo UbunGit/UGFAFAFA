@@ -8,16 +8,15 @@ import json
 import pandas as pd
 from .line import lineType
 from Tusharedata import lib, loadDaily
+from config import dataPath as root
+from file import mkdir
 
-
-datapath = "/Users/admin/Documents/github/UGFAFAFA/data/tem"
+datapath = root+"/output"
 
 
 # 获取策略的信息
 def info():
-
-    return '{"name": "Maline", "des": "均线相交", "params": [{"key": "ma1", "des": "第一条均线", "value":"5"},{"key": "ma2", "des": "第二条均线", "value":"30"}]}'
-
+    return '{"name": "maline", "des": "均线相交", "params": [{"key": "ma1", "des": "第一条均线", "value":"5"},{"key": "ma2", "des": "第二条均线", "value":"30"}]}'
 
 # 分析
 def analyse(code, begin=None, end=None, param=None):
@@ -29,6 +28,7 @@ def analyse(code, begin=None, end=None, param=None):
 
     ma1 = int(paramjson["ma1"])
     ma2 = int(paramjson["ma2"])
+    ma2 = int(paramjson["ma2"])
     # 0 获取数据
     data = loadDaily(code=code)
     # 计算所需数据
@@ -37,11 +37,15 @@ def analyse(code, begin=None, end=None, param=None):
     lib.shift(data, ["ma" + str(ma1), "ma" + str(ma2)], [-1])
     lib.itemv(data, items=["close"], axis=[5, 10, 20, 30])
     data = data.dropna(axis=0, how="any")
-    data["select"] = (
+    data["b"] = (
         (data["ma" + str(ma1) + "_-1"] <= data["ma" + str(ma2) + "_-1"]) &
         (data["ma" + str(ma1)] > data["ma" + str(ma2)]))
-    data.to_csv(datapath + "/tem.csv")
-    return
+    outpath = datapath+"/maline/"+code
+    mkdir(outpath)
+    data.to_csv(outpath + "/result.csv")
+    rdata = data[data["b"]==True]
+    print(rdata.values)
+    return rdata
 
 
 if __name__ == '__main__':
