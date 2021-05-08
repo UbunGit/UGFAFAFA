@@ -18,6 +18,12 @@ datapath = root+"/output"
 def info():
     return '{"name": "maline", "des": "均线相交", "params": [{"key": "ma1", "des": "第一条均线", "value":"5"},{"key": "ma2", "des": "第二条均线", "value":"30"}]}'
 
+def signal(series,ma1,ma2):
+    return int(
+        (series["ma" + str(ma1) + "_-1"] <= series["ma" + str(ma2) + "_-1"]) &
+        (series["ma" + str(ma1)] > series["ma" + str(ma2)])
+    )
+     
 # 分析
 def analyse(code, begin=None, end=None, param=None):
     paramjson = json.loads(param)
@@ -28,7 +34,7 @@ def analyse(code, begin=None, end=None, param=None):
 
     ma1 = int(paramjson["ma1"])
     ma2 = int(paramjson["ma2"])
-    ma2 = int(paramjson["ma2"])
+
     # 0 获取数据
     data = loadDaily(code=code)
     # 计算所需数据
@@ -37,15 +43,16 @@ def analyse(code, begin=None, end=None, param=None):
     lib.shift(data, ["ma" + str(ma1), "ma" + str(ma2)], [-1])
     lib.itemv(data, items=["close"], axis=[5, 10, 20, 30])
     data = data.dropna(axis=0, how="any")
-    data["b"] = (
-        (data["ma" + str(ma1) + "_-1"] <= data["ma" + str(ma2) + "_-1"]) &
-        (data["ma" + str(ma1)] > data["ma" + str(ma2)]))
+    
+    data["b"] = data.apply(signal,axis=1,args=(ma1,ma2))
+
     outpath = datapath+"/maline/"+code
     mkdir(outpath)
     data.to_csv(outpath + "/result.csv")
-    rdata = data[data["b"]==True]
+    rdata = data[data["b"]==1]
     print(rdata.values)
     return rdata
+
 
 
 if __name__ == '__main__':

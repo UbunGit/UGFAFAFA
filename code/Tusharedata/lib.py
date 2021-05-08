@@ -3,6 +3,7 @@
 
 import logging
 import talib as tl
+import pandas as pd
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
 # 数据错位
@@ -30,6 +31,29 @@ def ma(data, ma):
     key = "ma"+str(ma)
     data[key]= tl.MA(data['close'],timeperiod=int(ma))
     logging.info("ma %s END",ma)
+
+# 批量计算均值
+def mas(data, mas):
+    logging.info("mas BEGIN")
+    for ma in mas:
+        key = "ma"+str(ma)
+        data[key]= tl.MA(data['close'],timeperiod=int(ma))
+    logging.info("mas  END")
+
+# 趋势
+# data 数据
+# column 类型
+# axis 多少天
+def rank(data,column,axis):
+    df = data
+    key = column+"_rank"
+    df[key] = df[column].rolling(axis+1).apply(lambda x: pd.Series(x).rank().iloc[-1])
+    df[key+"_standard"] = 2 * (df[key] - axis -1)/ axis + 1
+    print(df[[key,key+"_standard"]])
+    print(data[[key,key+"_standard"]])
+
+
+
 
 
 

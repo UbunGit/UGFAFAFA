@@ -17,22 +17,20 @@ from Tusharedata import lib, loadDaily
 
 
 class draw:
-
+    title = "fenxi"
     code = ""
-    analys = ""
+    signal = "signal"
     ma = [5,10,20,30]
     data = None
-    resuledata = None
+
     savefile = root
     begin = (datetime.datetime.now() +
              datetime.timedelta(days=-100)).strftime('%Y%m%d')
     end = (datetime.datetime.now()).strftime('%Y%m%d')
 
-    def __init__(self, code, analys):
-        self.code = code
-        self.analys = analys
+    def __init__(self, data):
+        self.data = data
 
-    
     def kline(self):
         klinedata = self.data
         xaxis = klinedata["date"].astype('str').values.tolist()
@@ -77,7 +75,8 @@ class draw:
                         ),
                     ),
                     datazoom_opts=[opts.DataZoomOpts(
-                        pos_bottom="60%",
+                        pos_top="350px",
+                   
                         range_start= 100.00-(5000.00/len(xaxis)),
                         range_end= 100.00,
                         )],
@@ -105,7 +104,7 @@ class draw:
 
     def pie(self):
        
-        bardata = self.resuledata[self.resuledata["b"] == True]
+        bardata = self.data.dropna(axis=0, how="any")[self.data["count"] >0.8]
         bardata = bardata["close" + "5" + "v"].astype('int').value_counts(
             normalize=True, ascending=True)
         return (
@@ -113,18 +112,19 @@ class draw:
             .add(
                 "b",
                 [list(z) for z in zip(bardata.index, bardata.values)],
-                radius="35%",
-                center=["25%", "80%"],
+                radius="80px",
+                center=["25%", "950px"],
             )
             .set_global_opts(
-                title_opts=opts.TitleOpts(title="Grid-Line", pos_top="48%"),
-                legend_opts=opts.LegendOpts(pos_top="48%"
-            ),
-        ))
+                title_opts=opts.TitleOpts(title="Pie", pos_top="820px"),
+                legend_opts=opts.LegendOpts(pos_top="820px"),
+                )
+            )
 
     def point(self):
-        pointdata = self.resuledata
-        pointdata = pointdata[pointdata["b"] == True]
+        pointdata = self.data
+        print(pointdata)
+        pointdata = pointdata[pointdata["count"] >0.8]
         xaxis = pointdata["date"].astype('str').values.tolist()
         yaxis = pointdata["close"].values.tolist()
         
@@ -147,30 +147,61 @@ class draw:
 
         return (scatter)
     
-    def draw(self):
-        self.data = loadDaily(self.code)
-        self.resuledata = pd.read_csv(root+"/output/"+self.analys+"/"+self.code+"/result.csv")
+    def cline(self,clume):
+        clinedata = self.data[self.data["bandans"] >= 0]
+        xaxis = clinedata["date"].astype('str').values.tolist()
+    
+        line = Line()
+        line.add_xaxis(xaxis)
+        for item in clume:
+            line.add_yaxis(
+                series_name=item,
+                y_axis=clinedata[item].values.tolist(),
+                is_smooth=True,
+                is_hover_animation=False,
+                linestyle_opts=opts.LineStyleOpts(width=3, opacity=0.5),
+                label_opts=opts.LabelOpts(is_show=False),
+            )
+        return (
+            line.set_global_opts(
+                legend_opts=opts.LegendOpts(pos_top="420px"),
+                title_opts=opts.TitleOpts(
+                    title="bandans",
+                    pos_top="420px"
+                )
+            )
+        )
+    def draw(self,signal = "signal"):
+        self.signal = signal
+      
         for item in self.ma:
             lib.ma(self.data, item)
 
         kline = self.kline()
         kline = kline.overlap(self.maline())
         kline = kline.overlap(self.point())
+        # kline = kline.overlap(self.cline("bandans"))
 
-        grid = (Grid(init_opts=opts.InitOpts(height="800px"))
+        grid = (Grid(init_opts=opts.InitOpts(height="1200px"))
         .add(
             kline,
-            grid_opts=opts.GridOpts(pos_bottom="60%")
+            grid_opts=opts.GridOpts(pos_top="0px",height="380px")
+        )
+        
+        .add(
+            self.cline(["bandans","close"]),
+            grid_opts=opts.GridOpts(pos_top="420px",height="360px")
         )
         .add(
             self.pie(),
-            grid_opts=opts.GridOpts(pos_top="60%")
+            grid_opts=opts.GridOpts(pos_top="800px",height="380px")
         )
         .render(self.savefile +"/result.html"))
 
 
 
 if __name__ == '__main__':
-
-    draw = draw(code="000002.sz",analys="maline")
+    data = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/000001.SZ/result.csv")
+    print(data)
+    draw = draw(data)
     draw.draw()
