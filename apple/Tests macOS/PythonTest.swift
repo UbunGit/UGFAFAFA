@@ -12,7 +12,7 @@ import PythonKit
 class PythonTest: XCTestCase {
 
     override func setUpWithError() throws {
-        
+    
     }
 
     override func tearDownWithError() throws {
@@ -20,7 +20,7 @@ class PythonTest: XCTestCase {
     }
 
     func test_PythonKit() throws {
-
+        
     }
 
     func testPerformanceExample() throws {

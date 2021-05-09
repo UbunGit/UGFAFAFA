@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   description.
                        DESC
 
-  s.homepage         = 'https://github.com/UbunGit'
+  s.homepage         = 'https://github.com/pvieito/PythonKit.git'
   s.license          = { :type => 'MIT' }
   s.author           = { '静静的白色外套' => '296019487@qq.com' }
   s.source           = { :git => '', :tag => s.version.to_s }
@@ -38,6 +38,14 @@ Pod::Spec.new do |s|
 #    spec.resource_bundles = {
 #      'AppiconBundle' =>   ['Sources/Appicon/resources/**/*.xcassets']
 #    }
+  end
+  
+  s.subspec 'UGAnalyse' do |spec|
+    spec.ios.dependency 'UGSwiftKit/UGKit'
+    spec.dependency 'PythonKit'
+    spec.source_files = 'Sources/UGAnalyse/Sources/**/*.swift'
+    spec.resource = ['Sources/Appicon/resources/**/*.xcassets']
+
   end
   
   

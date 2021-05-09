@@ -15,8 +15,7 @@ struct SettingView: View {
     @State var httpPort = "8181"
     @State var dbfile = UserDefaults.standard.string(forKey: "dbfile")
     
-    @ObservedObject var socketServer = TcpSocketServer()
-    @ObservedObject var httpServer = HttpServer()
+ 
     var body: some View {
         VStack(alignment: .leading){
             
@@ -65,19 +64,7 @@ struct SettingView: View {
                 }
                 
                 
-                if(socketServer.state == false){
-                    Button(action: start) {
-                        Text("start")
-                    }
-                    .frame(alignment: .bottomTrailing)
-
-                }else{
-                    Button(action: stop) {
-                        Text("starting")
-                    }
-                    .frame(alignment: .bottomTrailing)
-                    
-                }
+             
                 
             }
             
@@ -106,20 +93,7 @@ struct SettingView: View {
                     }
                 }
                 
-                
-                if(httpServer.state == false){
-                    Button(action: httpStart) {
-                        Text("start")
-                    }
-                    .frame(alignment: .bottomTrailing)
-
-                }else{
-                    Button(action: stop) {
-                        Text("starting")
-                    }
-                    .frame(alignment: .bottomTrailing)
-                    
-                }
+               
                 
             }
             
@@ -168,19 +142,14 @@ struct SettingView: View {
     }
     
     func start() {
-        if (socketServer.state==false) {
-            socketServer.start(port: port)
-        }
+    
     }
     
     func stop() {
-        if (socketServer.state==true) {
-            socketServer.stop()
-            
-        }
+      
     }
     func httpStart(){
-        httpServer.start(port:httpPort)
+       
     }
     
     private func findFile(){
@@ -197,8 +166,6 @@ struct SettingView: View {
                 defaults.set(openPanel.url?.absoluteString, forKey: "dbfile")
                 dbfile = openPanel.url?.absoluteString
                 SQLiteManage.updatefile()
-         
-                
                 print(defaults.string(forKey: "dbfile")!)
             }
         }

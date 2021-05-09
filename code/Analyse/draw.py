@@ -199,7 +199,6 @@ class draw:
         .render(self.savefile +"/result.html"))
 
 
-
 if __name__ == '__main__':
     data = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/000001.SZ/result.csv")
     print(data)

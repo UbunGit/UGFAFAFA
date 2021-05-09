@@ -18,19 +18,12 @@ public struct UGAnalyseView: View {
         HStack(spacing: 4, content: {
        
             ScrollView {
-                LazyVStack(alignment: .leading) {
-                    ForEach(0..<store.point.count, id: \.self) {
-                        let item = store.point[$0]
-                        HStack{
-                            Text("\(item["date"] ?? "-" as NSObject)")
-                            Text("\(item["close20v"] ?? "-" as NSObject)")
-                        }
-                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                        
-                    }
-                }
+                ResultRateView(anglyse: "damrey", code: "000002.SZ")
+                    .frame( height: 300, alignment: .center)
+                    .background(Color.yellow)
+                
             }
-            .padding()
+    
             Form{
                 Image(systemName:"arrow.backward.circle")
                     .font(.system(size: 17, weight: .bold))
@@ -67,7 +60,7 @@ public struct UGAnalyseView: View {
                 
             }
             .padding()
-            .frame(width: 300, height: .infinity , alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .frame(width: 300, height: .infinity , alignment: .center)
             
             .datePickerStyle(DefaultDatePickerStyle())
             .textFieldStyle(RoundedBorderTextFieldStyle())

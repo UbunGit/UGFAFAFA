@@ -13,22 +13,14 @@ struct ContentView: View {
     
     @Environment(\.presentationMode) private var viewContext
  
-    @ObservedObject var socketServer = TcpSocketServer()
-    @ObservedObject var httpServer = HttpServer()
-
+  
     var body: some View {
         
         Sidebar()
             .onAppear(){
-                socketServer.start()
-                httpServer.start()
             }
-
     }
-    
-  
-    
-    
+ 
 }
 
 

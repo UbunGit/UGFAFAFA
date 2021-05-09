@@ -9,7 +9,6 @@ import unittest
 import Analyse.damrey as damrey
 
 class Test(unittest.TestCase):
-
     def test_pro_bar(self):
         damrey.analyse(code="000001.SZ", param='{"ma2":"5","ma1":"30"}')
 

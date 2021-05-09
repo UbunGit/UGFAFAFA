@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (5.4.1)
   - CocoaAsyncSocket (7.6.5)
+  - PythonKit (1.0.1)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
@@ -8,31 +9,39 @@ PODS:
     - UGSwiftKit/UGKit (= 1.0.1)
   - UGSwiftKit/Appicon (1.0.1):
     - UGSwiftKit/UGKit
+  - UGSwiftKit/UGAnalyse (1.0.1):
+    - PythonKit
+    - UGSwiftKit/UGKit
   - UGSwiftKit/UGKit (1.0.1)
 
 DEPENDENCIES:
   - Alamofire
   - CocoaAsyncSocket
+  - PythonKit (from `/Users/admin/Documents/github/PythonKit`)
   - SQLite.swift
   - UGSwiftKit (from `./UGSwiftKit`)
   - UGSwiftKit/Appicon (from `./UGSwiftKit`)
+  - UGSwiftKit/UGAnalyse (from `./UGSwiftKit`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Alamofire
     - CocoaAsyncSocket
     - SQLite.swift
 
 EXTERNAL SOURCES:
+  PythonKit:
+    :path: "/Users/admin/Documents/github/PythonKit"
   UGSwiftKit:
     :path: "./UGSwiftKit"
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  PythonKit: 80d7cc257e135961a0aa09d66198c6abdf8ebb19
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
-  UGSwiftKit: d27035b54572add406b979a89760ebf09e556a77
+  UGSwiftKit: 023ae14ca1c45c233eb3312d4fce36755c739fc4
 
-PODFILE CHECKSUM: b6ff3c714ed416b158a682a165f23c3cf809a4f6
+PODFILE CHECKSUM: 951b2bbc95b38c6181c36ee7d0cc5f7a6a6e8267
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0

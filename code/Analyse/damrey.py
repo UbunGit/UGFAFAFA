@@ -6,6 +6,7 @@
 import sys
 sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
 
+import os
 import json
 import pandas as pd
 from .line import lineType
@@ -56,7 +57,6 @@ def analyse(code, param=None):
     data = data.dropna(axis=0, how="any")
     data = back_trading(data,"signal")
 
-
     outpath = datapath+"/damrey/"+code
     mkdir(outpath)
     data.to_csv(outpath + "/result.csv")
@@ -64,7 +64,12 @@ def analyse(code, param=None):
     # tdraw = draw(data)
     # tdraw.draw()
 
-
+def catchdata(code):
+    outfile = datapath+"/damrey/"+code+"/result.csv"
+    if os.path.exists(outfile):
+        return pd.read_csv(outfile)
+    else: 
+        return None
    
 
 

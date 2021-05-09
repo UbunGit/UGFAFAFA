@@ -15,7 +15,7 @@ public struct SettingView: View {
     }
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
+struct SettingView_Previews: PreviewProvider {
     @available(iOS 13.0.0, *)
     static var previews: some View {
         SettingView()

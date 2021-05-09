@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		840E2B922615CC25003A84C6 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
 		840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
 		841DEFD42623351200AF6D7C /* Test_ML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFD32623351200AF6D7C /* Test_ML.swift */; };
@@ -21,6 +20,9 @@
 		841F3478262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
 		841F3479262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
 		841F347A262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
+		8428EC942647AE110008CDFB /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8428EC932647AE110008CDFB /* PerfectSQLite */; };
+		8428EC962647AEC00008CDFB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428EC952647AEC00008CDFB /* APIError.swift */; };
+		8428EC972647AEC00008CDFB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428EC952647AEC00008CDFB /* APIError.swift */; };
 		8446B446262EBEEF00D2AC8B /* ShareEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446B445262EBEEF00D2AC8B /* ShareEdit.swift */; };
 		8446B447262EBEEF00D2AC8B /* ShareEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446B445262EBEEF00D2AC8B /* ShareEdit.swift */; };
 		84540DB926352B8800ECFD9A /* AlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA126352B8800ECFD9A /* AlertData.swift */; };
@@ -65,7 +67,6 @@
 		845410E32636C40000ECFD9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845410E02636C3FF00ECFD9A /* Assets.xcassets */; };
 		845410E42636C40000ECFD9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845410E02636C3FF00ECFD9A /* Assets.xcassets */; };
 		845410EE2636C48200ECFD9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845410E02636C3FF00ECFD9A /* Assets.xcassets */; };
-		845410F62636CD9300ECFD9A /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		845410FA2636CDAE00ECFD9A /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA526352B8800ECFD9A /* Codable.swift */; };
 		845410FE2636CDAF00ECFD9A /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA526352B8800ECFD9A /* Codable.swift */; };
 		845411022636CDCE00ECFD9A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA426352B8800ECFD9A /* Date.swift */; };
@@ -76,7 +77,6 @@
 		84565AB6261C76CB009F9F7D /* ShareEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditView.swift */; };
 		84565ABA261C76D7009F9F7D /* ShareEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditView.swift */; };
 		84565ABB261C76D7009F9F7D /* ShareEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditView.swift */; };
-		845C23422628780000308C2A /* WebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C23412628780000308C2A /* WebPage.swift */; };
 		8472689C261307F300F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
 		8472689E261307F300F92E66 /* SharesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListView.swift */; };
 		847268A0261307F300F92E66 /* SharesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* SharesList.swift */; };
@@ -86,9 +86,7 @@
 		847268EF26130F6100F92E66 /* ApiShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268D626130EB600F92E66 /* ApiShare.swift */; };
 		847268F626130F7600F92E66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268AA2613088700F92E66 /* Store.swift */; };
 		847268FB26130F8600F92E66 /* ApiStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268FA26130F8600F92E66 /* ApiStore.swift */; };
-		84726906261313B100F92E66 /* S_Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726904261313B100F92E66 /* S_Share.swift */; };
 		847269122613299C00F92E66 /* testShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847269112613299C00F92E66 /* testShare.swift */; };
-		8472691926132D2C00F92E66 /* S_Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726904261313B100F92E66 /* S_Share.swift */; };
 		8472691D26132D3E00F92E66 /* Share.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268A92613088700F92E66 /* Share.swift */; };
 		8472692C26132E8600F92E66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268AA2613088700F92E66 /* Store.swift */; };
 		8472693026132E8900F92E66 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847268AA2613088700F92E66 /* Store.swift */; };
@@ -120,21 +118,13 @@
 		848929CE26118E5900006D88 /* PythonManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929C92611872F00006D88 /* PythonManage.swift */; };
 		8491D952263003910035B7F8 /* CRUDSqliteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */; };
 		8491D953263003910035B7F8 /* CRUDSqliteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */; };
-		8491D95E26300ABC0035B7F8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D95D26300ABC0035B7F8 /* APIError.swift */; };
-		8491D95F26300ABC0035B7F8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D95D26300ABC0035B7F8 /* APIError.swift */; };
-		8491D97C2631213E0035B7F8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D95D26300ABC0035B7F8 /* APIError.swift */; };
-		8491D983263128480035B7F8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D95D26300ABC0035B7F8 /* APIError.swift */; };
 		8491D998263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		8491D999263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		8491D9A7263186B60035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
-		84C6A2B72643C28100880343 /* UGAnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A2B52643C28100880343 /* UGAnalyseView.swift */; };
-		84C6A2B82643C28100880343 /* UGAnalyse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C6A2B62643C28100880343 /* UGAnalyse.swift */; };
-		84D215EA264523980057B412 /* PythonKit in Frameworks */ = {isa = PBXBuildFile; productRef = 84D215E9264523980057B412 /* PythonKit */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
 		84E787A6263C0646007D9155 /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E787A5263C0646007D9155 /* SWWebView.swift */; };
 		84E787A7263C0646007D9155 /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E787A5263C0646007D9155 /* SWWebView.swift */; };
-		84F292122611D63F00593144 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F291F22611C13500593144 /* HttpServer.swift */; };
 		84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */; };
 		84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DF725FBA4EF00F93203 /* ContentView.swift */; };
 		84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4E3425FBAA2B00F93203 /* SockerServer.swift */; };
@@ -184,6 +174,7 @@
 		841F31D52623F1C20099B8CB /* MLMAOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLMAOut.swift; sourceTree = "<group>"; };
 		841F335B2624062F0099B8CB /* MakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeData.swift; sourceTree = "<group>"; };
 		841F3476262447300099B8CB /* mlma.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mlma.mlmodel; sourceTree = "<group>"; };
+		8428EC952647AEC00008CDFB /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIError.swift; path = "../../../swift-service/HttpServer/APIError.swift"; sourceTree = "<group>"; };
 		8446B445262EBEEF00D2AC8B /* ShareEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEdit.swift; sourceTree = "<group>"; };
 		84540DA126352B8800ECFD9A /* AlertData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertData.swift; sourceTree = "<group>"; };
 		84540DA226352B8800ECFD9A /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -207,7 +198,6 @@
 		845410E02636C3FF00ECFD9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84565A68261C5F15009F9F7D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		84565AB5261C76CB009F9F7D /* ShareEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEditView.swift; sourceTree = "<group>"; };
-		845C23412628780000308C2A /* WebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPage.swift; sourceTree = "<group>"; };
 		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		84726899261307F300F92E66 /* SharesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesListView.swift; sourceTree = "<group>"; };
 		8472689B261307F300F92E66 /* SharesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesList.swift; sourceTree = "<group>"; };
@@ -215,7 +205,6 @@
 		847268AA2613088700F92E66 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		847268D626130EB600F92E66 /* ApiShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiShare.swift; sourceTree = "<group>"; };
 		847268FA26130F8600F92E66 /* ApiStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiStore.swift; sourceTree = "<group>"; };
-		84726904261313B100F92E66 /* S_Share.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S_Share.swift; sourceTree = "<group>"; };
 		847269112613299C00F92E66 /* testShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testShare.swift; sourceTree = "<group>"; };
 		84726982261479CC00F92E66 /* ShareDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDetailView.swift; sourceTree = "<group>"; };
 		84726989261479E700F92E66 /* ShareDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareDetail.swift; sourceTree = "<group>"; };
@@ -234,15 +223,11 @@
 		84807DBC25FB7A8900C8CB18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848929C92611872F00006D88 /* PythonManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonManage.swift; sourceTree = "<group>"; };
 		8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDSqliteProtocol.swift; sourceTree = "<group>"; };
-		8491D95D26300ABC0035B7F8 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlitInsterProtocol.swift; sourceTree = "<group>"; };
-		84C6A2B52643C28100880343 /* UGAnalyseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UGAnalyseView.swift; path = UGSwiftKit/Sources/UGAnalyse/Sources/UGAnalyse/UGAnalyseView.swift; sourceTree = SOURCE_ROOT; };
-		84C6A2B62643C28100880343 /* UGAnalyse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UGAnalyse.swift; path = UGSwiftKit/Sources/UGAnalyse/Sources/UGAnalyse/UGAnalyse.swift; sourceTree = SOURCE_ROOT; };
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
 		84E787A5263C0646007D9155 /* SWWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWWebView.swift; sourceTree = "<group>"; };
-		84F291F22611C13500593144 /* HttpServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpServer.swift; sourceTree = "<group>"; };
 		84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonCenter.swift; sourceTree = "<group>"; };
 		84FA4DF725FBA4EF00F93203 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		84FA4E3425FBAA2B00F93203 /* SockerServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SockerServer.swift; sourceTree = "<group>"; };
@@ -261,7 +246,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ABE41E7854F9611A49B02DB1 /* Pods_apple__iOS_.framework in Frameworks */,
-				84D215EA264523980057B412 /* PythonKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8428EC942647AE110008CDFB /* PerfectSQLite in Frameworks */,
 				8489294E260C5C8500006D88 /* Pods_apple__macOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,19 +473,9 @@
 		845C233F262877D500308C2A /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				84C6A2B42643C27400880343 /* Analyse */,
-				845C2340262877EE00308C2A /* Web */,
 				84E11ED6260D91E80012D151 /* Home */,
 			);
 			path = Pages;
-			sourceTree = "<group>";
-		};
-		845C2340262877EE00308C2A /* Web */ = {
-			isa = PBXGroup;
-			children = (
-				845C23412628780000308C2A /* WebPage.swift */,
-			);
-			path = Web;
 			sourceTree = "<group>";
 		};
 		84726895261307F300F92E66 /* SharesList */ = {
@@ -551,14 +526,6 @@
 			path = Moden;
 			sourceTree = "<group>";
 		};
-		847269032613138300F92E66 /* Moden */ = {
-			isa = PBXGroup;
-			children = (
-				84726904261313B100F92E66 /* S_Share.swift */,
-			);
-			path = Moden;
-			sourceTree = "<group>";
-		};
 		847269102613295800F92E66 /* ApiTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -604,6 +571,7 @@
 		847269D32615B2B100F92E66 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				8428EC952647AEC00008CDFB /* APIError.swift */,
 				847268FA26130F8600F92E66 /* ApiStore.swift */,
 				847268D626130EB600F92E66 /* ApiShare.swift */,
 			);
@@ -669,8 +637,6 @@
 				8491D99626317FE20035B7F8 /* SqliteProtocol */,
 				845C233F262877D500308C2A /* Pages */,
 				841F31D42623F1900099B8CB /* ML */,
-				847269032613138300F92E66 /* Moden */,
-				84F291F12611C10D00593144 /* HttpServer */,
 				848929C5261186A100006D88 /* PythonManage */,
 				84E11EB3260D8CF50012D151 /* DataBase */,
 				84FA4E3325FBA9E600F93203 /* SocketServer */,
@@ -707,15 +673,6 @@
 				8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */,
 			);
 			path = SqliteProtocol;
-			sourceTree = "<group>";
-		};
-		84C6A2B42643C27400880343 /* Analyse */ = {
-			isa = PBXGroup;
-			children = (
-				84C6A2B62643C28100880343 /* UGAnalyse.swift */,
-				84C6A2B52643C28100880343 /* UGAnalyseView.swift */,
-			);
-			path = Analyse;
 			sourceTree = "<group>";
 		};
 		84E11EB3260D8CF50012D151 /* DataBase */ = {
@@ -757,15 +714,6 @@
 				84E787A5263C0646007D9155 /* SWWebView.swift */,
 			);
 			path = SWWebView;
-			sourceTree = "<group>";
-		};
-		84F291F12611C10D00593144 /* HttpServer */ = {
-			isa = PBXGroup;
-			children = (
-				84F291F22611C13500593144 /* HttpServer.swift */,
-				8491D95D26300ABC0035B7F8 /* APIError.swift */,
-			);
-			path = HttpServer;
 			sourceTree = "<group>";
 		};
 		84FA4E3325FBA9E600F93203 /* SocketServer */ = {
@@ -810,7 +758,6 @@
 			);
 			name = "apple (iOS)";
 			packageProductDependencies = (
-				84D215E9264523980057B412 /* PythonKit */,
 			);
 			productName = "apple (iOS)";
 			productReference = 84807D9B25FB7A8900C8CB18 /* apple.app */;
@@ -833,6 +780,7 @@
 			);
 			name = "apple (macOS)";
 			packageProductDependencies = (
+				8428EC932647AE110008CDFB /* PerfectSQLite */,
 			);
 			productName = "apple (macOS)";
 			productReference = 84807DA325FB7A8900C8CB18 /* apple.app */;
@@ -913,7 +861,7 @@
 			);
 			mainGroup = 84807D8B25FB7A8500C8CB18;
 			packageReferences = (
-				84D215E8264523980057B412 /* XCRemoteSwiftPackageReference "PythonKit" */,
+				8428EC922647AE110008CDFB /* XCRemoteSwiftPackageReference "Perfect-SQLite" */,
 			);
 			productRefGroup = 84807D9C25FB7A8900C8CB18 /* Products */;
 			projectDirPath = "";
@@ -1106,7 +1054,6 @@
 				8454109726368CE000ECFD9A /* SFLoadingObservable.swift in Sources */,
 				84565AB6261C76CB009F9F7D /* ShareEditView.swift in Sources */,
 				84541088263654AF00ECFD9A /* View+Shadow.swift in Sources */,
-				8491D983263128480035B7F8 /* APIError.swift in Sources */,
 				84540DBF26352B8800ECFD9A /* Codable.swift in Sources */,
 				847269BF2615B15F00F92E66 /* base.swift in Sources */,
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
@@ -1128,6 +1075,7 @@
 				8472689E261307F300F92E66 /* SharesListView.swift in Sources */,
 				847268A0261307F300F92E66 /* SharesList.swift in Sources */,
 				84540DC726352B8800ECFD9A /* Progress .swift in Sources */,
+				8428EC962647AEC00008CDFB /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1136,10 +1084,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */,
-				84C6A2B82643C28100880343 /* UGAnalyse.swift in Sources */,
 				84565A6D261C6000009F9F7D /* Page.swift in Sources */,
 				841F334B2623FCAB0099B8CB /* MLMAOut.swift in Sources */,
-				84726906261313B100F92E66 /* S_Share.swift in Sources */,
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
 				84726984261479CC00F92E66 /* ShareDetailView.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
@@ -1156,8 +1102,8 @@
 				84540DCA26352B8800ECFD9A /* SegmentedView.swift in Sources */,
 				8454109C26368CE500ECFD9A /* View+Loading.swift in Sources */,
 				84540DD226352B8800ECFD9A /* SFToastObservable.swift in Sources */,
-				84F292122611D63F00593144 /* HttpServer.swift in Sources */,
 				84807DC425FB7A8900C8CB18 /* Persistence.swift in Sources */,
+				8428EC972647AEC00008CDFB /* APIError.swift in Sources */,
 				84807DBE25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */,
 				84540DC426352B8800ECFD9A /* StoreStatus.swift in Sources */,
@@ -1177,18 +1123,15 @@
 				8472698B261479E700F92E66 /* ShareDetail.swift in Sources */,
 				84540DC826352B8800ECFD9A /* Progress .swift in Sources */,
 				8491D998263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */,
-				845C23422628780000308C2A /* WebPage.swift in Sources */,
 				8472697826146A2800F92E66 /* SharesList.swift in Sources */,
 				848929CE26118E5900006D88 /* PythonManage.swift in Sources */,
 				84540DCC26352B8800ECFD9A /* CloseButton.swift in Sources */,
-				8491D95E26300ABC0035B7F8 /* APIError.swift in Sources */,
 				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,
 				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,
 				84540DD026352B8800ECFD9A /* SFPersentationObservable.swift in Sources */,
 				84E787A7263C0646007D9155 /* SWWebView.swift in Sources */,
 				841F335C2624062F0099B8CB /* MakeData.swift in Sources */,
-				84C6A2B72643C28100880343 /* UGAnalyseView.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1202,11 +1145,9 @@
 				847269CB2615B18F00F92E66 /* base.swift in Sources */,
 				84565A71261C6001009F9F7D /* Page.swift in Sources */,
 				8472693026132E8900F92E66 /* Store.swift in Sources */,
-				845410F62636CD9300ECFD9A /* HttpServer.swift in Sources */,
 				841F3479262447300099B8CB /* mlma.mlmodel in Sources */,
 				841F31FB2623F6BA0099B8CB /* PythonTest.swift in Sources */,
 				845410FE2636CDAF00ECFD9A /* Codable.swift in Sources */,
-				8491D97C2631213E0035B7F8 /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1214,19 +1155,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8491D95F26300ABC0035B7F8 /* APIError.swift in Sources */,
 				847269C72615B18E00F92E66 /* base.swift in Sources */,
 				8491D999263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */,
 				84565A75261C6001009F9F7D /* Page.swift in Sources */,
 				8472692C26132E8600F92E66 /* Store.swift in Sources */,
 				8491D953263003910035B7F8 /* CRUDSqliteProtocol.swift in Sources */,
-				840E2B922615CC25003A84C6 /* HttpServer.swift in Sources */,
 				841F335D2624062F0099B8CB /* MakeData.swift in Sources */,
 				841F334F2623FD040099B8CB /* MLMAOut.swift in Sources */,
 				841F347A262447300099B8CB /* mlma.mlmodel in Sources */,
 				8472693C26132EBF00F92E66 /* SQLiteManage.swift in Sources */,
 				841DEFD42623351200AF6D7C /* Test_ML.swift in Sources */,
-				8472691926132D2C00F92E66 /* S_Share.swift in Sources */,
 				8472691D26132D3E00F92E66 /* Share.swift in Sources */,
 				845410FA2636CDAE00ECFD9A /* Codable.swift in Sources */,
 				84807DBB25FB7A8900C8CB18 /* Tests_macOS.swift in Sources */,
@@ -1431,7 +1369,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				PRODUCT_BUNDLE_IDENTIFIER = UG.apple;
 				PRODUCT_NAME = apple;
 				SDKROOT = macosx;
@@ -1456,7 +1394,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
 				PRODUCT_BUNDLE_IDENTIFIER = UG.apple;
 				PRODUCT_NAME = apple;
 				SDKROOT = macosx;
@@ -1606,21 +1544,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		84D215E8264523980057B412 /* XCRemoteSwiftPackageReference "PythonKit" */ = {
+		8428EC922647AE110008CDFB /* XCRemoteSwiftPackageReference "Perfect-SQLite" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://gitee.com/UbunGit/PythonKit.git";
+			repositoryURL = "https://github.com/PerfectlySoft/Perfect-SQLite.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		84D215E9264523980057B412 /* PythonKit */ = {
+		8428EC932647AE110008CDFB /* PerfectSQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 84D215E8264523980057B412 /* XCRemoteSwiftPackageReference "PythonKit" */;
-			productName = PythonKit;
+			package = 8428EC922647AE110008CDFB /* XCRemoteSwiftPackageReference "Perfect-SQLite" */;
+			productName = PerfectSQLite;
 		};
 /* End XCSwiftPackageProductDependency section */
 

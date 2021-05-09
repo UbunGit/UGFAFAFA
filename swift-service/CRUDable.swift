@@ -28,8 +28,5 @@ extension CRUDable{
     public static func table() throws -> Table<T, Database<SQLiteDatabaseConfiguration>> {
         return try sqlite().table(T.self)
     }
-   
-  
-
 }
 

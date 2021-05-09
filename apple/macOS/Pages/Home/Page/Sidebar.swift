@@ -53,7 +53,7 @@ struct Sidebar: View {
             }
             .tag(NavigationItem.like)
             
-            NavigationLink(destination: WebPage()) {
+            NavigationLink(destination: UGAnalyseView(store: UGAnalyse())) {
                 Label("web", systemImage: "heart")
             }
             .tag(NavigationItem.web)
