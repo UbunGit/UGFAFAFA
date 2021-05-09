@@ -59,7 +59,7 @@ def analyse(code, param=None):
 
     outpath = datapath+"/damrey/"+code
     mkdir(outpath)
-    data.to_csv(outpath + "/result.csv")
+    data.to_csv(outpath + "/result.csv",dtype={"sdate":"string"})
 
     # tdraw = draw(data)
     # tdraw.draw()

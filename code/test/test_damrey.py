@@ -3,7 +3,7 @@
 
 import os,sys
 import logging
-sys.path.append('./code')
+sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
 
 import unittest
 import Analyse.damrey as damrey
