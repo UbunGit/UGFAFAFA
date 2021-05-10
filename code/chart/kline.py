@@ -15,14 +15,14 @@ def bspoint(data):
         if data["count"] > 0:
             bspoints.append(
                 opts.MarkPointItem(
-                    coord = [str(data["date"]), data["close"]],
+                    coord = [str(data["date"]), data["bprice"]],
                     symbol_size = 10,
                     itemstyle_opts = opts.ItemStyleOpts(color="#ec0000"),
                 )
             )
             bspoints.append(
                 opts.MarkPointItem(
-                    coord = [str(data["sdate"]), data["close"]],
+                    coord = [str(data["sdate"]), data["sprice"]],
                     symbol_size = 10,
                     # value = data["earnings"],
                     itemstyle_opts = opts.ItemStyleOpts(
@@ -44,13 +44,13 @@ def bspoint(data):
 
 
 
-def kline(data, title = "K线图"):
+def kline(data, title = "K线图", height = "250px"):
         
         xaxis = data["date"].astype('str').values.tolist()
         yaxis = data[["open", "close", "high",
                                 "low"]].values.tolist()
         
-        chart = Kline(init_opts=opts.InitOpts(width="100%", height="300px"))
+        chart = Kline(init_opts=opts.InitOpts(width="100%", height= height))
         chart.add_xaxis(xaxis)
         chart.add_yaxis(
             "kline",

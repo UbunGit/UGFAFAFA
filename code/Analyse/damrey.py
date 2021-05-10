@@ -59,7 +59,7 @@ def analyse(code, param=None):
 
     outpath = datapath+"/damrey/"+code
     mkdir(outpath)
-    data.to_csv(outpath + "/result.csv",dtype={"sdate":"string"})
+    data.to_csv(outpath + "/result.csv")
 
     # tdraw = draw(data)
     # tdraw.draw()
@@ -67,7 +67,7 @@ def analyse(code, param=None):
 def catchdata(code):
     outfile = datapath+"/damrey/"+code+"/result.csv"
     if os.path.exists(outfile):
-        return pd.read_csv(outfile)
+        return pd.read_csv(outfile,dtype={"sdate":"string"})
     else: 
         return None
    

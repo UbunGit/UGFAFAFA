@@ -40,8 +40,6 @@ public extension View {
             .overlay(
                 loadingOverlay(isPresented: context.isActive, content: context.content ?? EmptyView().any)
             )
-
-      
     }
 
     

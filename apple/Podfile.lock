@@ -24,7 +24,7 @@ DEPENDENCIES:
   - UGSwiftKit/UGAnalyse (from `./UGSwiftKit`)
 
 SPEC REPOS:
-  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - CocoaAsyncSocket
     - SQLite.swift
@@ -42,6 +42,6 @@ SPEC CHECKSUMS:
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   UGSwiftKit: 023ae14ca1c45c233eb3312d4fce36755c739fc4
 
-PODFILE CHECKSUM: 951b2bbc95b38c6181c36ee7d0cc5f7a6a6e8267
+PODFILE CHECKSUM: 58dbac275b4855b689d56d23f9834e305aa95007
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.9.1

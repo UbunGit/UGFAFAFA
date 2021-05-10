@@ -123,8 +123,6 @@
 		8491D9A7263186B60035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
-		84E787A6263C0646007D9155 /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E787A5263C0646007D9155 /* SWWebView.swift */; };
-		84E787A7263C0646007D9155 /* SWWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E787A5263C0646007D9155 /* SWWebView.swift */; };
 		84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */; };
 		84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DF725FBA4EF00F93203 /* ContentView.swift */; };
 		84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4E3425FBAA2B00F93203 /* SockerServer.swift */; };
@@ -227,7 +225,6 @@
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
-		84E787A5263C0646007D9155 /* SWWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SWWebView.swift; sourceTree = "<group>"; };
 		84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonCenter.swift; sourceTree = "<group>"; };
 		84FA4DF725FBA4EF00F93203 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		84FA4E3425FBAA2B00F93203 /* SockerServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SockerServer.swift; sourceTree = "<group>"; };
@@ -358,7 +355,6 @@
 		84540DA926352B8800ECFD9A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				84E787A4263C0646007D9155 /* SWWebView */,
 				84540DAA26352B8800ECFD9A /* Loading */,
 				84540DAC26352B8800ECFD9A /* Progress  */,
 				84540DAE26352B8800ECFD9A /* Segmented */,
@@ -708,14 +704,6 @@
 			path = TextField;
 			sourceTree = "<group>";
 		};
-		84E787A4263C0646007D9155 /* SWWebView */ = {
-			isa = PBXGroup;
-			children = (
-				84E787A5263C0646007D9155 /* SWWebView.swift */,
-			);
-			path = SWWebView;
-			sourceTree = "<group>";
-		};
 		84FA4E3325FBA9E600F93203 /* SocketServer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1060,7 +1048,6 @@
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				84540DCF26352B8800ECFD9A /* SFPersentationObservable.swift in Sources */,
 				84540DCB26352B8800ECFD9A /* CloseButton.swift in Sources */,
-				84E787A6263C0646007D9155 /* SWWebView.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
 				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
@@ -1130,7 +1117,6 @@
 				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,
 				84540DD026352B8800ECFD9A /* SFPersentationObservable.swift in Sources */,
-				84E787A7263C0646007D9155 /* SWWebView.swift in Sources */,
 				841F335C2624062F0099B8CB /* MakeData.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
 			);
@@ -1369,7 +1355,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = UG.apple;
 				PRODUCT_NAME = apple;
 				SDKROOT = macosx;
@@ -1394,7 +1380,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = UG.apple;
 				PRODUCT_NAME = apple;
 				SDKROOT = macosx;

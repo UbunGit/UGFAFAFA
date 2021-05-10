@@ -4,9 +4,9 @@ from pyecharts.charts import Line, Bar, Grid, Pie,Scatter
 from pyecharts import options as opts
 from pyecharts.commons.utils import JsCode
 
-def pie(data):
+def pie(data,name = "pie", width = "100%",height="300px"):
     print(data)
-    pie = Pie(init_opts=opts.InitOpts(width="100%" ,height="300px"))
+    pie = Pie(init_opts=opts.InitOpts(width=width ,height=height))
     pie.add(
             "b",
             [list(z) for z in zip(data.index, data.values)],

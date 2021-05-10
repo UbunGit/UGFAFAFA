@@ -6,23 +6,40 @@
 //
 
 import SwiftUI
+import PythonKit
 
 public struct UGAnalyseView: View {
-    @State var isShowForm = true
+ 
     @ObservedObject var store:UGAnalyse
+    @State var isShowForm = true
+    @StateObject var klineStore = SWWebViewStore() // K线
+    @StateObject var pieStore = SWWebViewStore() // 收益pie
+    @StateObject var lineStore = SWWebViewStore() // 收益曲线
     
     public init(store:UGAnalyse) {
         self.store = store
+        self.store.plot.name = "damrey"
+        self.store.code = "000001.SZ"
     }
     public var body: some View {
         HStack(spacing: 4, content: {
        
             ScrollView {
-                ResultRateView(anglyse: "damrey", code: "000002.SZ")
+                WebChartView(store: klineStore)
                     .frame( height: 300, alignment: .center)
-                    .background(Color.yellow)
+                    
+               
                 
+                WebChartView(store: pieStore)
+                    .frame( height: 300, alignment: .center)
+              
+                
+                WebChartView(store: lineStore)
+                    .frame( height: 300, alignment: .center)
+              
+          
             }
+    
     
             Form{
                 Image(systemName:"arrow.backward.circle")
@@ -60,8 +77,7 @@ public struct UGAnalyseView: View {
                 
             }
             .padding()
-            .frame(width: 300, height: .infinity , alignment: .center)
-            
+            .frame(width: 300)
             .datePickerStyle(DefaultDatePickerStyle())
             .textFieldStyle(RoundedBorderTextFieldStyle())
             
@@ -70,7 +86,9 @@ public struct UGAnalyseView: View {
             )
             .offset(x: isShowForm ? 0 : 300)
         })
-        
+        .onAppear(){
+            setup()
+        }
     }
     
     //
@@ -112,6 +130,8 @@ public struct UGAnalyseView: View {
         TextField("LocalizedStringKey", text: $store.code)
     }
     
+  
+    
     
 }
 
@@ -124,6 +144,48 @@ struct ParamView: View {
 struct UGAnalyseBodyView: View  {
     var body :some View{
         Text("body")
+    }
+}
+
+extension UGAnalyseView{
+    func setup() {
+        let py_sys = Python.import("sys")
+        print("Python Version: \(py_sys.version)")
+        py_sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
+        let anglyse = Python.import("Analyse.\(store.plot.name)")
+        let df = anglyse.catchdata("000001.SZ")
+        reloadklineStore(df:df)
+        reloadpieStore(df: df)
+        reloadlineStore(df: df)
+    }
+    func reloadklineStore(df:PythonObject)  {
+        
+        
+        let kline = Python.import("chart.kline")
+        let webpath = kline.kline(df,"k线bs图",height:"250px").render("/Users/admin/Documents/github/UGFAFAFA/data/tem/kline.html")
+        let url = URL(fileURLWithPath: "\(webpath)")
+        klineStore.webView.loadFileURL(url, allowingReadAccessTo: url)
+    }
+    func reloadpieStore(df:PythonObject)  {
+        let pie = Python.import("chart.pie")
+        let piedata = df[df["earnings"].notnull() == true]
+        let earnings = (piedata["smoney"]*10/piedata["bmoney"]).astype("int").value_counts(
+            normalize:true, ascending:true)
+        let piepath = pie.pie(earnings,name:"交易收益率",height:"250px").render("/Users/admin/Documents/github/UGFAFAFA/data/tem/pie.html")
+        let pieurl = URL(fileURLWithPath: "\(piepath)")
+        pieStore.webView.loadFileURL(pieurl, allowingReadAccessTo: pieurl)
+    }
+    
+    func reloadlineStore(df:PythonObject)  {
+        let line = Python.import("chart.line")
+        let pd = Python.import("pandas")
+        let ndf = pd.DataFrame()
+        ndf["date"] = df["date"]
+        ndf["closev"] = df["close"]/(df["close"].iloc[1])
+        ndf["assetsv"] = df["assets"]/10000
+        let piepath = line.line(ndf,name:"交易收益率",height:"250px").render("/Users/admin/Documents/github/UGFAFAFA/data/tem/line.html")
+        let pieurl = URL(fileURLWithPath: "\(piepath)")
+        lineStore.webView.loadFileURL(pieurl, allowingReadAccessTo: pieurl)
     }
 }
 

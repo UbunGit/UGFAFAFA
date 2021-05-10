@@ -17,7 +17,8 @@ class Store:
 def back_trading(data,signal):
     store = Store()
     store.signal = signal
-    data.apply(tadding,axis=1,args=(store,))
+    print(data)
+    data["assets"] = data.apply(tadding,axis=1,args=(store,))
     orders = pd.DataFrame(store.orders)
     print("初始金额 10000")
     print("结余持仓："+str(store.order))
@@ -40,13 +41,13 @@ def tadding(data,store):
                 smoney = order["count"]*data["close"]
                 store.bandans = store.bandans + smoney*store.free
                 order["smoney"] = smoney
+                order["sprice"] = data["close"]
                 order["free"] = smoney*(1-store.free)
-                order["bandans"] = store.bandans
                 order["earnings"] = smoney-order["bmoney"]
                 store.orders.append(order)
                 print(str(data["date"])+"seller ----")
                 store.order = None
-                return
+              
         else:
             if data[store.signal]>0.8:
                 order = {}
@@ -55,14 +56,18 @@ def tadding(data,store):
                 bmoney = count*data["close"]
                 store.bandans = store.bandans - bmoney
                 order["bmoney"] = bmoney
-                order["bandans"] = store.bandans
                 order["count"] = count
+                order["bprice"] = data["close"]
                 store.order = order
                 print(str(data["date"])+"buy ----")
-                return
+            
         print(str(data["date"])+"witting----")
+        assets = store.bandans+ 0 if store.order == None else store.order["count"]*data["close"]
+        return assets
+        
 
 
 if __name__ == '__main__':
     data = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/000001.SZ/result.csv")
     back_trading(data,"signal")
+    data.to_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/tem/test.csv")
