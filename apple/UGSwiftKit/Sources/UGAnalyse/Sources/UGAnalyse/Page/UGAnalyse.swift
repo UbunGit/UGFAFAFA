@@ -28,9 +28,9 @@ public struct Plot:Codable{
 
 public class UGAnalyse :ObservableObject {
     
-    @State var code:String = "300022.sz" //股票代码
-    @State var begin:Date = Date()
-    @State var end:Date = Date()
+    @Published var code:String = "300022.sz" //股票代码
+    @Published var begin:Date = Date()
+    @Published var end:Date = Date()
     @Published public var plot = Plot()
     @Published public var point:[[String:NSObject]] = [[String:NSObject]]()
     public init() {}

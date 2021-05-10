@@ -13,17 +13,17 @@ from matplotlib import pyplot as plt
 
 import logging
 from .db import session, DataCache
+from config import dataPath as root
+
 
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
-datapath = "/Users/admin/Documents/GitHub/UGFAFAFA/data"
+datapath = root
 
 def filempath(scode):
     return  os.path.join(datapath,"tushare",scode+'.csv')
 
 def cacheKey(code):
     return "daily." + code
-
-
 
 # 获取本地数据
 def sd_local(code="000001.SZ"):

@@ -34,9 +34,11 @@ params = [
         "value":""
     }
 ]
-
+def info():
+    return '{"name": "damrey", "des": "达维", "params": [{"key": "ma1", "des": "第一条均线", "value":"5"},{"key": "ma2", "des": "第二条均线", "value":"30"}]}'
 
 def analyse(code, param=None):
+
     paramjson = json.loads(param)
     ma1 = int(paramjson["ma1"])
     ma2 = int(paramjson["ma2"])

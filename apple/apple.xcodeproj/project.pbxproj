@@ -43,8 +43,6 @@
 		84540DC826352B8800ECFD9A /* Progress .swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DAD26352B8800ECFD9A /* Progress .swift */; };
 		84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DAF26352B8800ECFD9A /* SegmentedView.swift */; };
 		84540DCA26352B8800ECFD9A /* SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DAF26352B8800ECFD9A /* SegmentedView.swift */; };
-		84540DCB26352B8800ECFD9A /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB126352B8800ECFD9A /* CloseButton.swift */; };
-		84540DCC26352B8800ECFD9A /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB126352B8800ECFD9A /* CloseButton.swift */; };
 		84540DCD26352B8800ECFD9A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB326352B8800ECFD9A /* SearchView.swift */; };
 		84540DCE26352B8800ECFD9A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB326352B8800ECFD9A /* SearchView.swift */; };
 		84540DCF26352B8800ECFD9A /* SFPersentationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB626352B8800ECFD9A /* SFPersentationObservable.swift */; };
@@ -183,7 +181,6 @@
 		84540DAB26352B8800ECFD9A /* Loading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		84540DAD26352B8800ECFD9A /* Progress .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Progress .swift"; sourceTree = "<group>"; };
 		84540DAF26352B8800ECFD9A /* SegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedView.swift; sourceTree = "<group>"; };
-		84540DB126352B8800ECFD9A /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		84540DB326352B8800ECFD9A /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		84540DB626352B8800ECFD9A /* SFPersentationObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFPersentationObservable.swift; sourceTree = "<group>"; };
 		84540DB826352B8800ECFD9A /* SFToastObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFToastObservable.swift; sourceTree = "<group>"; };
@@ -358,7 +355,6 @@
 				84540DAA26352B8800ECFD9A /* Loading */,
 				84540DAC26352B8800ECFD9A /* Progress  */,
 				84540DAE26352B8800ECFD9A /* Segmented */,
-				84540DB026352B8800ECFD9A /* CloseButton */,
 				84540DB226352B8800ECFD9A /* SearchView */,
 			);
 			path = View;
@@ -386,14 +382,6 @@
 				84540DAF26352B8800ECFD9A /* SegmentedView.swift */,
 			);
 			path = Segmented;
-			sourceTree = "<group>";
-		};
-		84540DB026352B8800ECFD9A /* CloseButton */ = {
-			isa = PBXGroup;
-			children = (
-				84540DB126352B8800ECFD9A /* CloseButton.swift */,
-			);
-			path = CloseButton;
 			sourceTree = "<group>";
 		};
 		84540DB226352B8800ECFD9A /* SearchView */ = {
@@ -1047,7 +1035,6 @@
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				84540DCF26352B8800ECFD9A /* SFPersentationObservable.swift in Sources */,
-				84540DCB26352B8800ECFD9A /* CloseButton.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
 				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
@@ -1112,7 +1099,6 @@
 				8491D998263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */,
 				8472697826146A2800F92E66 /* SharesList.swift in Sources */,
 				848929CE26118E5900006D88 /* PythonManage.swift in Sources */,
-				84540DCC26352B8800ECFD9A /* CloseButton.swift in Sources */,
 				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,
 				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,

@@ -12,6 +12,7 @@ public struct UGAnalyseView: View {
  
     @ObservedObject var store:UGAnalyse
     @State var isShowForm = true
+    @State var isshowShareList = false
     @StateObject var klineStore = SWWebViewStore() // K线
     @StateObject var pieStore = SWWebViewStore() // 收益pie
     @StateObject var lineStore = SWWebViewStore() // 收益曲线
@@ -27,20 +28,15 @@ public struct UGAnalyseView: View {
             ScrollView {
                 WebChartView(store: klineStore)
                     .frame( height: 300, alignment: .center)
-                    
-               
-                
+      
                 WebChartView(store: pieStore)
                     .frame( height: 300, alignment: .center)
               
-                
                 WebChartView(store: lineStore)
                     .frame( height: 300, alignment: .center)
-              
-          
+
             }
-    
-    
+            
             Form{
                 Image(systemName:"arrow.backward.circle")
                     .font(.system(size: 17, weight: .bold))
@@ -93,15 +89,30 @@ public struct UGAnalyseView: View {
     
     //
     var baseView:some View{
-        
+
         Group{
-            TextField("LocalizedStringKey", text: $store.code) { isend in
-            }
+            TextField("LocalizedStringKey", text: $store.code)
+                .overlay(
+                    Image(systemName: "filemenu.and.selection")
+                        .onTapGesture {
+                            isshowShareList.toggle()
+                        }
+                        .sheet(isPresented: $isshowShareList, content: {
+                            SheetWithCloseView {
+                                ShareListView(name: $store.code)
+                            }
+                            .frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity)
+                            .padding(EdgeInsets.init(top: 10, leading: 20, bottom: 30, trailing: 40))
+                        
+                        }),
+                    alignment: .trailing
+                )
+            
             DatePicker(
                    "开始",
                    selection: $store.begin,
                    displayedComponents: [.date]
-               )
+            )
  
             DatePicker(
                    "结束",
@@ -149,18 +160,25 @@ struct UGAnalyseBodyView: View  {
 
 extension UGAnalyseView{
     func setup() {
-        let py_sys = Python.import("sys")
-        print("Python Version: \(py_sys.version)")
-        py_sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
-        let anglyse = Python.import("Analyse.\(store.plot.name)")
-        let df = anglyse.catchdata("000001.SZ")
-        reloadklineStore(df:df)
-        reloadpieStore(df: df)
-        reloadlineStore(df: df)
+        
+        DispatchQueue(label: "python").async {
+            let py_sys = Python.import("sys")
+            print("Python Version: \(py_sys.version)")
+            py_sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
+            let anglyse = Python.import("Analyse.\(store.plot.name)")
+            let df = anglyse.catchdata("000001.SZ")
+            DispatchQueue.main.async {
+                reloadklineStore(df:df)
+                reloadpieStore(df: df)
+                reloadlineStore(df: df)
+            }
+        }
+
+        
+    
     }
     func reloadklineStore(df:PythonObject)  {
-        
-        
+ 
         let kline = Python.import("chart.kline")
         let webpath = kline.kline(df,"k线bs图",height:"250px").render("/Users/admin/Documents/github/UGFAFAFA/data/tem/kline.html")
         let url = URL(fileURLWithPath: "\(webpath)")
