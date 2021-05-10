@@ -24,6 +24,7 @@ def search(keyword):
         return None
     df = pd.read_csv(filepath , index_col=0).rename(columns={'ts_code':'code'})
     return df[df["name"].str.contains(keyword) | df["code"].str.contains(keyword)].to_json(orient='records',force_ascii=False)
+
 # 下载数据
 def reload():
     data = ts.pro_api().query('stock_basic')

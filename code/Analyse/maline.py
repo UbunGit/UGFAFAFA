@@ -16,7 +16,7 @@ datapath = root+"/output"
 
 # 获取策略的信息
 def info():
-    return '{"name": "maline", "des": "均线相交", "params": [{"key": "ma1", "des": "第一条均线", "value":"5"},{"key": "ma2", "des": "第二条均线", "value":"30"}]}'
+    return {"name": "maline", "des": "均线相交", "params": [{"key": "ma1", "des": "第一条均线", "value":"5"},{"key": "ma2", "des": "第二条均线", "value":"30"}]}
 
 def signal(series,ma1,ma2):
     return int(

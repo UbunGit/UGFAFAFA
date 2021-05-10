@@ -1,5 +1,0 @@
-cheduler
-fitter
-share
-tactics
-trade

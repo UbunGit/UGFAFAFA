@@ -35,7 +35,7 @@ params = [
     }
 ]
 def info():
-    return '{"name": "damrey", "des": "达维", "params": [{"key": "ma1", "des": "第一条均线", "value":"5"},{"key": "ma2", "des": "第二条均线", "value":"30"}]}'
+    return {"name": "damrey", "des": "达维", "params": [{"key": "ma1", "des": "第一条均线", "value":"5"},{"key": "ma2", "des": "第二条均线", "value":"30"}]}
 
 def analyse(code, param=None):
 
