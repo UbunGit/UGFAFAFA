@@ -37,6 +37,11 @@ params = [
         "name":"ma2",
         "des":"第二条均线",
         "value":"30"
+    },
+    {
+        "name":"r",
+        "des":"趋势标记",
+        "value":"5"
     }
 ]
 def info():
@@ -47,6 +52,7 @@ def analyse(code,begin = None,end= None, param=None):
     paramjson = json.loads(param)
     ma1 = int(paramjson["ma1"])
     ma2 = int(paramjson["ma2"])
+    trank = int(paramjson["r"])
 
     # 0 获取数据
     data = loadDaily(code=code)
@@ -55,8 +61,8 @@ def analyse(code,begin = None,end= None, param=None):
     ## ma1 ma2
     lib.mas(data, [ma1,ma2])
     ## ma1 ma2 趋势
-    lib.rank(data,"ma"+str(ma1),10)
-    lib.rank(data,"ma"+str(ma2),10)
+    lib.rank(data,"ma"+str(ma1),trank)
+    lib.rank(data,"ma"+str(ma2),trank)
 
     data["signal"] = data["ma"+str(ma2)+"_rank_standard"]
 
