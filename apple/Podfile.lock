@@ -6,13 +6,13 @@ PODS:
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
   - UGSwiftKit (1.0.1):
-    - UGSwiftKit/UGKit (= 1.0.1)
+    - UGSwiftKit/Base (= 1.0.1)
   - UGSwiftKit/Appicon (1.0.1):
-    - UGSwiftKit/UGKit
+    - UGSwiftKit/Base
+  - UGSwiftKit/Base (1.0.1)
   - UGSwiftKit/UGAnalyse (1.0.1):
     - PythonKit
-    - UGSwiftKit/UGKit
-  - UGSwiftKit/UGKit (1.0.1)
+    - UGSwiftKit/Base
 
 DEPENDENCIES:
   - Alamofire
@@ -40,7 +40,7 @@ SPEC CHECKSUMS:
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   PythonKit: 80d7cc257e135961a0aa09d66198c6abdf8ebb19
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
-  UGSwiftKit: 023ae14ca1c45c233eb3312d4fce36755c739fc4
+  UGSwiftKit: 89fe28b3d965a532eea1530132ed60ca6fdf34a5
 
 PODFILE CHECKSUM: 58dbac275b4855b689d56d23f9834e305aa95007
 

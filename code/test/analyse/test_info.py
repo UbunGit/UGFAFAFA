@@ -15,11 +15,7 @@ class Test(unittest.TestCase):
     @unittest.skipIf((tindex!=0 and tindex!=1),"reason")
     def test_base(self):
         time = analyses()
-        print(time)
-
-
-
-   
+        print(type(time))
 
 if __name__ == "__main__":
     unittest.main()

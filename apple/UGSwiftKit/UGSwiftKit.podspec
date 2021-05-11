@@ -22,17 +22,17 @@ Pod::Spec.new do |s|
   s.macos.deployment_target = '11.0'
   s.watchos.deployment_target = '6.0'
   
-  s.default_subspec = 'UGKit'
+  s.default_subspec = 'Base'
    
-   s.subspec 'UGKit' do |spec|
-     spec.source_files = 'Sources/UGKit/Sources/**/*.swift'
+   s.subspec 'Base' do |spec|
+     spec.source_files = 'Sources/UGSwiftKit/Sources/**/*.swift'
      spec.resource_bundles = {
-       'UGKitBundle' =>   ['Sources/UGKit/resources/**/*.xcassets']
+       'UGKitBundle' =>   ['Sources/UGSwiftKit/resources/**/*.xcassets']
      }
    end
  
   s.subspec 'Appicon' do |spec|
-    spec.ios.dependency 'UGSwiftKit/UGKit'
+    spec.ios.dependency 'UGSwiftKit/Base'
     spec.source_files = 'Sources/Appicon/Sources/**/*.swift'
     spec.resource = ['Sources/Appicon/resources/**/*.xcassets']
 #    spec.resource_bundles = {
@@ -41,7 +41,7 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'UGAnalyse' do |spec|
-    spec.ios.dependency 'UGSwiftKit/UGKit'
+    spec.ios.dependency 'UGSwiftKit/Base'
     spec.dependency 'PythonKit'
     spec.source_files = 'Sources/UGAnalyse/Sources/**/*.swift'
     spec.resource = ['Sources/Appicon/resources/**/*.xcassets']

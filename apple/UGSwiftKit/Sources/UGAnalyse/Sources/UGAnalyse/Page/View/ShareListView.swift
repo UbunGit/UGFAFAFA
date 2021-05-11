@@ -14,11 +14,7 @@ class ShareList: ObservableObject {
     
     @Published var bases:[ShareBase] = []
     
-    struct ShareBase:Codable {
-        var name:String
-        var code:String
-        var industry:String
-    }
+    
     
     public func loaddata(kewword:String?)  {
         let tudata = Python.import("Tusharedata.base")
@@ -34,8 +30,9 @@ struct ShareListView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var observed = ShareList()
     
-    @Binding var name:String
+    @Binding var share:ShareBase
     var body: some View {
+        
         ScrollView {
             LazyVStack(alignment: .leading) {
                 ForEach(0..<observed.bases.count, id: \.self) {
@@ -47,14 +44,13 @@ struct ShareListView: View {
                     }
                     .padding(/*@START_MENU_TOKEN@*/.all, 2.0/*@END_MENU_TOKEN@*/)
                     .onTapGesture {
-                        name = base.code
+                        share = base
                         presentationMode.wrappedValue.dismiss()
                     }
-                }
-                
-                
+                } 
             }
-        }.frame( minHeight: 300, idealHeight: 300, maxHeight: .infinity, alignment: .center)
+        }
+        .frame( minHeight: 300, idealHeight: 300, maxHeight: .infinity, alignment: .center)
         .onAppear(){
             observed.loaddata(kewword: "思")
             print(observed.bases.count)
@@ -62,8 +58,9 @@ struct ShareListView: View {
     }
 }
 
+
 struct ShareListView_Previews: PreviewProvider {
     static var previews: some View {
-        ShareListView(name: .constant("000001.SZ"))
+        ShareListView(share: .constant(ShareBase()))
     }
 }

@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import sys
+import sys, json
 sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
 
-from code.Analyse.draw import draw
-# from .damrey import * 
-# from .damrey import * 
-# import .maline
+from .draw import *
+from .damrey import * 
+from .maline import * 
 
-# # 返回策略列表
-# def analyses():
-#     return [
-#         damrey.info(),
-#         maline.info()
-#     ]
+# 返回策略列表
+def analyses():
+    return  json.dumps(
+        [
+            damrey.info(),
+            maline.info()
+        ]
+        , ensure_ascii=False
+    )

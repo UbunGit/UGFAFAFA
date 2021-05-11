@@ -18,15 +18,6 @@
           "revision": "43c0e16cfce1dada7914d8334e43ffa887e66f8e",
           "version": null
         }
-      },
-      {
-        "package": "PythonKit",
-        "repositoryURL": "https://github.com/ubunfork/PythonKit.git",
-        "state": {
-          "branch": "master",
-          "revision": "24399d8600d7ed7337e02512c10a8c3e8da7438b",
-          "version": null
-        }
       }
     ]
   },

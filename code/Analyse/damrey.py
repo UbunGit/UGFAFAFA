@@ -29,15 +29,20 @@ creatTime = "2021-05-08"
 changeTime = "2021-05-08"
 params = [
     {
-        "key":"",
-        "des":"",
-        "value":""
+        "name":"ma1",
+        "des":"第一条均线",
+        "value":"5"
+    },
+    {
+        "name":"ma2",
+        "des":"第二条均线",
+        "value":"30"
     }
 ]
 def info():
-    return {"name": "damrey", "des": "达维", "params": [{"key": "ma1", "des": "第一条均线", "value":"5"},{"key": "ma2", "des": "第二条均线", "value":"30"}]}
+    return {"name": name, "des": des, "params": params}
 
-def analyse(code, param=None):
+def analyse(code,begin = None,end= None, param=None):
 
     paramjson = json.loads(param)
     ma1 = int(paramjson["ma1"])
@@ -67,6 +72,7 @@ def analyse(code, param=None):
     # tdraw.draw()
 
 def catchdata(code):
+    print("catchdata:"+code)
     outfile = datapath+"/damrey/"+code+"/result.csv"
     if os.path.exists(outfile):
         return pd.read_csv(outfile,dtype={"sdate":"string"})
