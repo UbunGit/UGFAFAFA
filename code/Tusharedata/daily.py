@@ -106,9 +106,10 @@ def sd_save(code, data):
 
 import unittest
 
-code = '601138'
-type = 'SH'
+
 class TestStores(unittest.TestCase):
+    code = '601138'
+    type = 'SH'
 
     def setUp(self):
         logging.info ("setup...")

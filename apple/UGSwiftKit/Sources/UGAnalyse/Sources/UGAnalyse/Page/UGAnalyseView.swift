@@ -79,9 +79,17 @@ public struct UGAnalyseView: View {
         })
         .loading(isloading: isLoading)
         .onAppear(){
-            let py_sys = Python.import("sys")
-            print("Python Version: \(py_sys.version)")
-            py_sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
+            isLoading = true
+            DispatchQueue(label: "python").async {
+                let py_sys = Python.import("sys")
+                print("Python Version: \(py_sys.version)")
+                py_sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
+                _ = Python.import("Analyse.back_trading")
+                DispatchQueue.main.async {
+                    
+                    isLoading = false
+                }
+            }
         }
     }
 }
@@ -130,12 +138,14 @@ extension UGAnalyseView{
                                                     begin:paramStore.begin.toString("yyyyMMdd"),
                                                     end:paramStore.end.toString("yyyyMMdd")
             )
-            if Bool(traddata.empty) == true {
+            if traddata.empty == true {
                 DispatchQueue.main.async {
-                    print("数据分析完成")
+                    print("数据回测完成")
                     isLoading = false
                 }
+                return
             }
+//            print("绘制数据：\(traddata)")
             reloadklineStore(df:traddata)
             reloadpieStore(df: traddata)
             reloadlineStore(df: traddata)

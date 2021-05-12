@@ -4,8 +4,6 @@
 # 达维策略
 
 import sys
-sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
-
 import os
 import json
 import pandas as pd

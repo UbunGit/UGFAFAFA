@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime  # For datetime objects
-
+import logging
 import pandas as pd
 
 class Store:
@@ -23,9 +23,10 @@ class Store:
 
 # 回测系统
 def back_trading(data,begin=None, end = None, signal="signal"):
-    print("begin... back_trading")
-    print("data:")
-    print(data)
+    logging.debug("begin... back_trading")
+    logging.debug("data:")
+    # logging.debug(data)
+   
     print("begin:"+str(begin))
     print("end:"+str(end))
     print("signal:"+signal)
@@ -41,18 +42,19 @@ def back_trading(data,begin=None, end = None, signal="signal"):
     if df.empty:
         print("back_trading fitter data is empty ")
     else:
-        df["assets"] = df.apply(tadding, axis=1,args=(store,))        
+        assets = df.apply(tadding, axis=1,args=(store,))  
+        df["assets"] = assets       
         orders = pd.DataFrame(store.orders)
-        print("initial:10000")
-        print("end:"+str(store.order))
-        print("count:"+str(len(store.orders)))
-        print("bandans:"+str(store.bandans))
-        print("free:"+str(orders["free"].sum()))
-        print(orders.info())
-        print(df.info())
+        # print("initial:10000")
+        # print("end:"+str(store.order))
+        # print("count:"+str(len(store.orders)))
+        # print("bandans:"+str(store.bandans))
+        # print("free:"+str(orders["free"].sum()))
+        # print(orders.info())
+        # print(df.info())
         orders["date"].astype('int64')
         df = pd.merge(df,orders,on='date',how='left')
-        print(df.info()) 
+        # print(df.info()) 
         print("end... back_trading")
     return df
 

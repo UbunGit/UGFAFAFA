@@ -72,7 +72,7 @@ def maline(data,mas=[5,10,20,30]):
 def kline(data, title = "K线图", height = "250px"):
 
     logging.debug("kline begin")
-    logging.debug(data)
+    # logging.debug(data)
     if data.empty:
         return Kline(init_opts=opts.InitOpts(width="100%", height= height))
 
