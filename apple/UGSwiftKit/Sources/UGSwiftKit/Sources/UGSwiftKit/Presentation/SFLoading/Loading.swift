@@ -14,7 +14,9 @@ struct Loading: ViewModifier {
     public func body(content: Content) -> some View {
         
         var loadingView: some View {
-            Text("loading...")
+            ProgressView(label: {
+                Text("loading...")
+            })
                 .opacity(isloading ? 1 : 0.02)
                 
         }
@@ -28,9 +30,9 @@ struct Loading: ViewModifier {
     
 }
 
-extension View {
+public extension View {
     // use view modifier
-    public func loading(isloading:Bool) -> some View {
+    func loading(isloading:Bool) -> some View {
         
         self.modifier(Loading(isloading: isloading))
         

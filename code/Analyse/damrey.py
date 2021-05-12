@@ -29,18 +29,14 @@ creatTime = "2021-05-08"
 changeTime = "2021-05-08"
 params = [
     {
-        "name":"ma1",
-        "des":"第一条均线",
+        "name":"ma",
+        "des":"均线",
         "value":"5"
     },
+
     {
-        "name":"ma2",
-        "des":"第二条均线",
-        "value":"30"
-    },
-    {
-        "name":"r",
-        "des":"趋势标记",
+        "name":"rankDay",
+        "des":"趋势确定天数",
         "value":"5"
     }
 ]
@@ -50,38 +46,34 @@ def info():
 def analyse(code,begin = None,end= None, param=None):
 
     paramjson = json.loads(param)
-    ma1 = int(paramjson["ma1"])
-    ma2 = int(paramjson["ma2"])
-    trank = int(paramjson["r"])
+    ma = int(paramjson["ma"])
+    rankDay = int(paramjson["rankDay"])
 
     # 0 获取数据
     data = loadDaily(code=code)
-
+    print(data)
     # 计算所需的数据
-    ## ma1 ma2
-    lib.mas(data, [ma1,ma2])
-    ## ma1 ma2 趋势
-    lib.rank(data,"ma"+str(ma1),trank)
-    lib.rank(data,"ma"+str(ma2),trank)
+    ## ma 
+    mas = [5,10,20,30]
+    if ma not in mas:
+        mas.append(ma)
+    lib.mas(data, mas)
 
-    data["signal"] = data["ma"+str(ma2)+"_rank_standard"]
-
+    lib.rank(data,"ma"+str(ma),rankDay)
+    data["signal"] = data["ma"+str(ma)+"_rank_standard"]
     lib.itemv(data, items=["close"], axis=[5, 10, 20, 30])
-    data = data.dropna(axis=0, how="any")
-    data = back_trading(data,"signal")
-
     outpath = datapath+"/damrey/"+code
     mkdir(outpath)
     data.to_csv(outpath + "/result.csv")
+    return data
 
-    # tdraw = draw(data)
-    # tdraw.draw()
+
 
 def catchdata(code):
-    print("catchdata:"+code)
+    
     outfile = datapath+"/damrey/"+code+"/result.csv"
     if os.path.exists(outfile):
-        return pd.read_csv(outfile,dtype={"sdate":"string"})
+        return pd.read_csv(outfile)
     else: 
         return None
    

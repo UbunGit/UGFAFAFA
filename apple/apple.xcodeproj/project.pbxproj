@@ -37,30 +37,12 @@
 		84540DC226352B8800ECFD9A /* UDID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA626352B8800ECFD9A /* UDID.swift */; };
 		84540DC326352B8800ECFD9A /* StoreStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA826352B8800ECFD9A /* StoreStatus.swift */; };
 		84540DC426352B8800ECFD9A /* StoreStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA826352B8800ECFD9A /* StoreStatus.swift */; };
-		84540DC526352B8800ECFD9A /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DAB26352B8800ECFD9A /* Loading.swift */; };
-		84540DC626352B8800ECFD9A /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DAB26352B8800ECFD9A /* Loading.swift */; };
 		84540DC726352B8800ECFD9A /* Progress .swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DAD26352B8800ECFD9A /* Progress .swift */; };
 		84540DC826352B8800ECFD9A /* Progress .swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DAD26352B8800ECFD9A /* Progress .swift */; };
 		84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DAF26352B8800ECFD9A /* SegmentedView.swift */; };
 		84540DCA26352B8800ECFD9A /* SegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DAF26352B8800ECFD9A /* SegmentedView.swift */; };
 		84540DCD26352B8800ECFD9A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB326352B8800ECFD9A /* SearchView.swift */; };
 		84540DCE26352B8800ECFD9A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB326352B8800ECFD9A /* SearchView.swift */; };
-		84540DCF26352B8800ECFD9A /* SFPersentationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB626352B8800ECFD9A /* SFPersentationObservable.swift */; };
-		84540DD026352B8800ECFD9A /* SFPersentationObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB626352B8800ECFD9A /* SFPersentationObservable.swift */; };
-		84540DD126352B8800ECFD9A /* SFToastObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB826352B8800ECFD9A /* SFToastObservable.swift */; };
-		84540DD226352B8800ECFD9A /* SFToastObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DB826352B8800ECFD9A /* SFToastObservable.swift */; };
-		84540E122635451400ECFD9A /* ToastStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540E112635451400ECFD9A /* ToastStyle.swift */; };
-		84540E132635451400ECFD9A /* ToastStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540E112635451400ECFD9A /* ToastStyle.swift */; };
-		84540E192635455D00ECFD9A /* ShadowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540E182635455D00ECFD9A /* ShadowStyle.swift */; };
-		84540E1A2635455D00ECFD9A /* ShadowStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540E182635455D00ECFD9A /* ShadowStyle.swift */; };
-		8454103326354DE800ECFD9A /* View+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454103226354DE800ECFD9A /* View+Toast.swift */; };
-		8454103426354DE800ECFD9A /* View+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454103226354DE800ECFD9A /* View+Toast.swift */; };
-		84541088263654AF00ECFD9A /* View+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84541087263654AF00ECFD9A /* View+Shadow.swift */; };
-		84541089263654AF00ECFD9A /* View+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84541087263654AF00ECFD9A /* View+Shadow.swift */; };
-		8454109226368B1B00ECFD9A /* View+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454109126368B1B00ECFD9A /* View+Loading.swift */; };
-		8454109726368CE000ECFD9A /* SFLoadingObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454109626368CE000ECFD9A /* SFLoadingObservable.swift */; };
-		8454109826368CE000ECFD9A /* SFLoadingObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454109626368CE000ECFD9A /* SFLoadingObservable.swift */; };
-		8454109C26368CE500ECFD9A /* View+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8454109126368B1B00ECFD9A /* View+Loading.swift */; };
 		845410E12636C40000ECFD9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845410E02636C3FF00ECFD9A /* Assets.xcassets */; };
 		845410E32636C40000ECFD9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845410E02636C3FF00ECFD9A /* Assets.xcassets */; };
 		845410E42636C40000ECFD9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 845410E02636C3FF00ECFD9A /* Assets.xcassets */; };
@@ -178,18 +160,9 @@
 		84540DA526352B8800ECFD9A /* Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		84540DA626352B8800ECFD9A /* UDID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDID.swift; sourceTree = "<group>"; };
 		84540DA826352B8800ECFD9A /* StoreStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreStatus.swift; sourceTree = "<group>"; };
-		84540DAB26352B8800ECFD9A /* Loading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		84540DAD26352B8800ECFD9A /* Progress .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Progress .swift"; sourceTree = "<group>"; };
 		84540DAF26352B8800ECFD9A /* SegmentedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedView.swift; sourceTree = "<group>"; };
 		84540DB326352B8800ECFD9A /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
-		84540DB626352B8800ECFD9A /* SFPersentationObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFPersentationObservable.swift; sourceTree = "<group>"; };
-		84540DB826352B8800ECFD9A /* SFToastObservable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFToastObservable.swift; sourceTree = "<group>"; };
-		84540E112635451400ECFD9A /* ToastStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastStyle.swift; sourceTree = "<group>"; };
-		84540E182635455D00ECFD9A /* ShadowStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShadowStyle.swift; sourceTree = "<group>"; };
-		8454103226354DE800ECFD9A /* View+Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Toast.swift"; sourceTree = "<group>"; };
-		84541087263654AF00ECFD9A /* View+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Shadow.swift"; sourceTree = "<group>"; };
-		8454109126368B1B00ECFD9A /* View+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Loading.swift"; sourceTree = "<group>"; };
-		8454109626368CE000ECFD9A /* SFLoadingObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFLoadingObservable.swift; sourceTree = "<group>"; };
 		845410E02636C3FF00ECFD9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84565A68261C5F15009F9F7D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		84565AB5261C76CB009F9F7D /* ShareEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEditView.swift; sourceTree = "<group>"; };
@@ -312,12 +285,10 @@
 		84540D9F26352B8800ECFD9A /* UGKit */ = {
 			isa = PBXGroup;
 			children = (
-				8454108026364D3300ECFD9A /* Style */,
 				84540DA026352B8800ECFD9A /* unit */,
 				84540DA326352B8800ECFD9A /* Extension */,
 				84540DA726352B8800ECFD9A /* protocol */,
 				84540DA926352B8800ECFD9A /* View */,
-				84540DB426352B8800ECFD9A /* SFUIKit */,
 			);
 			path = UGKit;
 			sourceTree = "<group>";
@@ -352,20 +323,11 @@
 		84540DA926352B8800ECFD9A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				84540DAA26352B8800ECFD9A /* Loading */,
 				84540DAC26352B8800ECFD9A /* Progress  */,
 				84540DAE26352B8800ECFD9A /* Segmented */,
 				84540DB226352B8800ECFD9A /* SearchView */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		84540DAA26352B8800ECFD9A /* Loading */ = {
-			isa = PBXGroup;
-			children = (
-				84540DAB26352B8800ECFD9A /* Loading.swift */,
-			);
-			path = Loading;
 			sourceTree = "<group>";
 		};
 		84540DAC26352B8800ECFD9A /* Progress  */ = {
@@ -390,52 +352,6 @@
 				84540DB326352B8800ECFD9A /* SearchView.swift */,
 			);
 			path = SearchView;
-			sourceTree = "<group>";
-		};
-		84540DB426352B8800ECFD9A /* SFUIKit */ = {
-			isa = PBXGroup;
-			children = (
-				84540DB526352B8800ECFD9A /* Presentation */,
-			);
-			path = SFUIKit;
-			sourceTree = "<group>";
-		};
-		84540DB526352B8800ECFD9A /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				84540DB626352B8800ECFD9A /* SFPersentationObservable.swift */,
-				8454109026368AFB00ECFD9A /* SFLoading */,
-				84540DB726352B8800ECFD9A /* SFToast */,
-			);
-			path = Presentation;
-			sourceTree = "<group>";
-		};
-		84540DB726352B8800ECFD9A /* SFToast */ = {
-			isa = PBXGroup;
-			children = (
-				8454103226354DE800ECFD9A /* View+Toast.swift */,
-				84540DB826352B8800ECFD9A /* SFToastObservable.swift */,
-				84540E112635451400ECFD9A /* ToastStyle.swift */,
-			);
-			path = SFToast;
-			sourceTree = "<group>";
-		};
-		8454108026364D3300ECFD9A /* Style */ = {
-			isa = PBXGroup;
-			children = (
-				84540E182635455D00ECFD9A /* ShadowStyle.swift */,
-				84541087263654AF00ECFD9A /* View+Shadow.swift */,
-			);
-			path = Style;
-			sourceTree = "<group>";
-		};
-		8454109026368AFB00ECFD9A /* SFLoading */ = {
-			isa = PBXGroup;
-			children = (
-				8454109126368B1B00ECFD9A /* View+Loading.swift */,
-				8454109626368CE000ECFD9A /* SFLoadingObservable.swift */,
-			);
-			path = SFLoading;
 			sourceTree = "<group>";
 		};
 		845410CA2636C13C00ECFD9A /* resources */ = {
@@ -1011,36 +927,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84540DD126352B8800ECFD9A /* SFToastObservable.swift in Sources */,
 				84807DBF25FB7A8900C8CB18 /* appleApp.swift in Sources */,
 				847268EF26130F6100F92E66 /* ApiShare.swift in Sources */,
 				84540DB926352B8800ECFD9A /* AlertData.swift in Sources */,
 				8446B446262EBEEF00D2AC8B /* ShareEdit.swift in Sources */,
-				84540E122635451400ECFD9A /* ToastStyle.swift in Sources */,
 				84807DC325FB7A8900C8CB18 /* Persistence.swift in Sources */,
-				84540DC526352B8800ECFD9A /* Loading.swift in Sources */,
 				8472698A261479E700F92E66 /* ShareDetail.swift in Sources */,
 				841F3477262447300099B8CB /* mlma.mlmodel in Sources */,
 				840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */,
-				8454103326354DE800ECFD9A /* View+Toast.swift in Sources */,
 				84540DCD26352B8800ECFD9A /* SearchView.swift in Sources */,
 				84FA4E4A25FBB8B900F93203 /* Socket.swift in Sources */,
 				84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */,
 				847268AB2613088700F92E66 /* Share.swift in Sources */,
-				8454109726368CE000ECFD9A /* SFLoadingObservable.swift in Sources */,
 				84565AB6261C76CB009F9F7D /* ShareEditView.swift in Sources */,
-				84541088263654AF00ECFD9A /* View+Shadow.swift in Sources */,
 				84540DBF26352B8800ECFD9A /* Codable.swift in Sources */,
 				847269BF2615B15F00F92E66 /* base.swift in Sources */,
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
-				84540DCF26352B8800ECFD9A /* SFPersentationObservable.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
 				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
 				84540DC326352B8800ECFD9A /* StoreStatus.swift in Sources */,
-				8454109226368B1B00ECFD9A /* View+Loading.swift in Sources */,
-				84540E192635455D00ECFD9A /* ShadowStyle.swift in Sources */,
 				84726983261479CC00F92E66 /* ShareDetailView.swift in Sources */,
 				84540DBB26352B8800ECFD9A /* Formatter.swift in Sources */,
 				84540DC126352B8800ECFD9A /* UDID.swift in Sources */,
@@ -1063,29 +970,21 @@
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
 				84726984261479CC00F92E66 /* ShareDetailView.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
-				84540E132635451400ECFD9A /* ToastStyle.swift in Sources */,
-				84540DC626352B8800ECFD9A /* Loading.swift in Sources */,
 				847269CF2615B28C00F92E66 /* ApiShare.swift in Sources */,
 				8472697426146A2400F92E66 /* SharesListView.swift in Sources */,
 				84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */,
-				8454109826368CE000ECFD9A /* SFLoadingObservable.swift in Sources */,
-				8454103426354DE800ECFD9A /* View+Toast.swift in Sources */,
 				84540DBC26352B8800ECFD9A /* Formatter.swift in Sources */,
 				847268F626130F7600F92E66 /* Store.swift in Sources */,
 				84540DC226352B8800ECFD9A /* UDID.swift in Sources */,
 				84540DCA26352B8800ECFD9A /* SegmentedView.swift in Sources */,
-				8454109C26368CE500ECFD9A /* View+Loading.swift in Sources */,
-				84540DD226352B8800ECFD9A /* SFToastObservable.swift in Sources */,
 				84807DC425FB7A8900C8CB18 /* Persistence.swift in Sources */,
 				8428EC972647AEC00008CDFB /* APIError.swift in Sources */,
 				84807DBE25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */,
 				84540DC426352B8800ECFD9A /* StoreStatus.swift in Sources */,
-				84540E1A2635455D00ECFD9A /* ShadowStyle.swift in Sources */,
 				8491D952263003910035B7F8 /* CRUDSqliteProtocol.swift in Sources */,
 				84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */,
 				84540DCE26352B8800ECFD9A /* SearchView.swift in Sources */,
-				84541089263654AF00ECFD9A /* View+Shadow.swift in Sources */,
 				8446B447262EBEEF00D2AC8B /* ShareEdit.swift in Sources */,
 				84540DBA26352B8800ECFD9A /* AlertData.swift in Sources */,
 				84565ABA261C76D7009F9F7D /* ShareEditView.swift in Sources */,
@@ -1102,7 +1001,6 @@
 				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,
 				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,
-				84540DD026352B8800ECFD9A /* SFPersentationObservable.swift in Sources */,
 				841F335C2624062F0099B8CB /* MakeData.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
 			);

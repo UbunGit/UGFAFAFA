@@ -15,20 +15,18 @@ public struct SheetWithCloseView <Content: View>: View{
     let content:Content
     
     public init(@ViewBuilder content: () -> Content) {
-           self.content = content()
+        self.content = content()
     }
     public var body:some View{
-        content
-            
-            .frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity, minHeight: 300, idealHeight: 300, maxHeight: .infinity, alignment: .center)
-         
-            .overlay(
-                CloseButton().onTapGesture {
+        ZStack(alignment: .topTrailing){
+            content
+           
+            CloseButton()
+                .onTapGesture {
                     presentationMode.wrappedValue.dismiss()
-                },
-                alignment: .topTrailing
-                
-            )
+                }
+        }
+        
     }
 }
 struct SheetWithCloseView_Previews: PreviewProvider {

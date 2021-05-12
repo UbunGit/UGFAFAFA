@@ -38,17 +38,54 @@ struct AnalyseParamView: View {
     }
     var body: some View {
         
-        Form{
+        List{
             
             Section{
-                Text("基础")
+                Text("基础参数")
+                    .padding()
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                 baseView
             }
             Section{
                 
-                Text("方案入参")
+                Text("方案参数")
+                    .padding()
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                
+                HStack{
+                    Text("\(store.analyse.name)")
+                        .padding(4)
+                    
+                    Spacer()
+                    EmptyView()
+                }
+                .padding(4)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color("Text 2"), lineWidth: 1)
+                )
+                
+                .background(Color.white)
+                .overlay(
+                    Image(systemName: "chevron.forward")
+                        .padding()
+                    ,
+                    alignment: .trailing
+                )
+                .onTapGesture {
+                    isshowAnalyseList.toggle()
+                }
+                .sheet(isPresented: $isshowAnalyseList, content: {
+                    
+                    SheetWithCloseView {
+                        AnalyseListView(analyse: $store.analyse)
+                            .padding(20)
+                            .frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity)
+                    }
+                    
+                   
+                    
+                })
                 
                 ForEach(0..<store.analyse.params.count, id: \.self) {
                     
@@ -64,32 +101,57 @@ struct AnalyseParamView: View {
     var baseView:some View{
         
         Group{
-            HStack{
-                Text("\(store.share.code)")
-                Spacer()
-                EmptyView()
-            }.padding()
+            VStack(alignment: .trailing, spacing: 2){
+                
+                HStack{
+                    
+                    Text("\(store.share.code) \(store.share.name)")
+                    Spacer()
+                    EmptyView()
+                }
+                .padding(.all,4)
                 .overlay(
-                    Image(systemName: "filemenu.and.selection")
-                        .onTapGesture {
-                            isshowShareList.toggle()
-                        }
-                        .sheet(isPresented: $isshowShareList, content: {
-                            
-                            SheetWithCloseView {
-                                ShareListView(share: $store.share)
-                            }
-                            .frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity)
-                            .padding(EdgeInsets.init(top: 10, leading: 20, bottom: 30, trailing: 40))
-                            
-                        }),
-                    alignment: .trailing
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color("Text 2"), lineWidth: 1)
                 )
+                .overlay(
+                        Image(systemName: "filemenu.and.selection")
+                            .padding()
+                            .onTapGesture {
+                                isshowShareList.toggle()
+                            }
+                            .sheet(isPresented: $isshowShareList, content: {
+                                
+                                SheetWithCloseView {
+                                    ShareListView(share: $store.share)
+                                        .frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity)
+                                        .padding(20)
+                                }
+                              
+                                
+                            }),
+                        alignment: .trailing
+                    )
+                
+                Text("点击选择股票")
+                    .foregroundColor(Color("Text 4"))
+                    .font(.caption2)
+                
+                
+         
+            }
             
+           
             DatePicker(
                 "开始",
                 selection: $store.begin,
                 displayedComponents: [.date]
+            )
+            .textFieldStyle(DefaultTextFieldStyle())
+            .padding(2)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color("Text 2"), lineWidth: 1)
             )
             
             DatePicker(
@@ -97,46 +159,28 @@ struct AnalyseParamView: View {
                 selection: $store.end,
                 displayedComponents: [.date]
             )
+            .padding(2)
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color("Text 2"), lineWidth: 1)
+            )
             
  
-            HStack{
-                Text("\(store.analyse.name)")
-                
-                Spacer()
-                EmptyView()
-            }
-            .padding(4)
-            .background(Color.white)
-            .overlay(
-                Image(systemName: "chevron.forward")
-                ,
-                alignment: .trailing
-            )
-            .onTapGesture {
-                isshowAnalyseList.toggle()
-            }
-            .sheet(isPresented: $isshowAnalyseList, content: {
-                
-                SheetWithCloseView {
-                    AnalyseListView(analyse: $store.analyse)
-                }
-                .frame(minWidth: 300, idealWidth: 300, maxWidth: .infinity)
-                .padding(EdgeInsets.init(top: 10, leading: 20, bottom: 30, trailing: 40))
-                
-            })
+      
         }
     }
-    
-//    public var plotView:some View{
-//        TextField("LocalizedStringKey", text: $store.code)
-//    }
+
 }
 
 
 struct ParamView: View {
     @Binding var item:Analyse.Param
     var body :some View{
-        TextField(item.name, text: $item.value)
+        HStack{
+            Text(item.name)
+            TextField(item.name, text: $item.value)
+        }
+        
     }
 }
 

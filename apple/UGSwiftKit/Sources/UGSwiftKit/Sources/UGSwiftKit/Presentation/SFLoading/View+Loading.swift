@@ -16,7 +16,7 @@ public protocol SFPresentation{
     func disLoading();
 }
 
-extension SFPresentation{
+public extension SFPresentation{
     
     func showLoading(_ content:AnyView){
         loadingObser.present(content)

@@ -10,7 +10,7 @@ import SwiftUI
 
 public class SFLoadingObservable: SFPersentationObservable{
     
-    public var duration:TimeInterval = 3
+
     private var task: DispatchWorkItem?
     
     public func present<Loading: View>(_ loading: @autoclosure @escaping () -> Loading) {

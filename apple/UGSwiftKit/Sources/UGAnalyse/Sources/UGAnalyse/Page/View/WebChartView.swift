@@ -20,7 +20,7 @@ struct WebChartView: View {
             .overlay(
                 Image(systemName: "arrow.counterclockwise")
                     .onTapGesture(perform: {
-                        
+                        store.webView.reload()
                     }),
                 alignment: .topTrailing
             )

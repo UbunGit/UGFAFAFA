@@ -13,7 +13,7 @@ public struct UGAnalyseView: View {
     
 //    @ObservedObject var store:UGAnalyse
     @State var isShowForm = true
-
+    @State var isLoading = false
     @StateObject var paramStore = AnalyseParam()
     @StateObject var klineStore = SWWebViewStore() // K线
     @StateObject var pieStore = SWWebViewStore() // 收益pie
@@ -52,12 +52,19 @@ public struct UGAnalyseView: View {
                         
                 })
                 AnalyseParamView(store:paramStore)
-                Button("开始回测", action: {
-                    analyse()
-                })
-                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 40, alignment: .center)
-               
                 
+                HStack{
+                    Button("开始分析", action: {
+                        analyse()
+                    })
+                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 40, alignment: .center)
+                    
+                    Button("开始回测", action: {
+                        backtrade()
+                    })
+                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 40, alignment: .center)
+                    
+                }
                 Spacer()
             }
             
@@ -70,6 +77,7 @@ public struct UGAnalyseView: View {
             )
             .offset(x: isShowForm ? 0 : 300)
         })
+        .loading(isloading: isLoading)
         .onAppear(){
             let py_sys = Python.import("sys")
             print("Python Version: \(py_sys.version)")
@@ -89,37 +97,55 @@ extension UGAnalyseView{
     
     func analyse() {
         
-        print("plotparam begin")
-     
-       
-        var rparam:[String:String] = [:]
-        for item in paramStore.analyse.params {
-            rparam[item.name] = item.value
-        }
-        let tdata = try! JSONEncoder().encode(rparam)
-        let str = String(data: tdata, encoding: .utf8)!
-        let tplot = Python.import("Analyse.\(paramStore.analyse.name)")
-        tplot.analyse(code:paramStore.share.code,
-                      begin:paramStore.begin.toString("yyyyMMdd"),
-                      end:paramStore.end.toString("yyyyMMdd"),
-                      param:str)
-        self.draw()
-        
-       
-        
-    }
-    func draw() {
-        
+        isLoading = true
         DispatchQueue(label: "python").async {
             
-          
+            var rparam:[String:String] = [:]
+            for item in paramStore.analyse.params {
+                rparam[item.name] = item.value
+            }
+            let tdata = try! JSONEncoder().encode(rparam)
+            let str = String(data: tdata, encoding: .utf8)!
+            let tplot = Python.import("Analyse.\(paramStore.analyse.name)")
+            tplot.analyse(code:paramStore.share.code,
+                          begin:paramStore.begin.toString("yyyyMMdd"),
+                          end:paramStore.end.toString("yyyyMMdd"),
+                          param:str)
+            
+            DispatchQueue.main.async {
+                print("数据分析完成")
+                isLoading = false
+            }
+        }
+  
+    }
+    // 回测
+    func backtrade(){
+        isLoading = true
+        DispatchQueue(label: "python").async {
             let anglyse = Python.import("Analyse.\(paramStore.analyse.name)")
             let df = anglyse.catchdata(paramStore.share.code)
-            reloadklineStore(df:df)
-            reloadpieStore(df: df)
-            reloadlineStore(df: df)
+            let backtrading = Python.import("Analyse.back_trading")
+            let traddata = backtrading.back_trading(df,
+                                                    begin:paramStore.begin.toString("yyyyMMdd"),
+                                                    end:paramStore.end.toString("yyyyMMdd")
+            )
+            if Bool(traddata.empty) == true {
+                DispatchQueue.main.async {
+                    print("数据分析完成")
+                    isLoading = false
+                }
+            }
+            reloadklineStore(df:traddata)
+            reloadpieStore(df: traddata)
+            reloadlineStore(df: traddata)
+            DispatchQueue.main.async {
+                print("数据分析完成")
+                isLoading = false
+            }
         }
     }
+  
     
     func reloadklineStore(df:PythonObject)  {
         
@@ -133,6 +159,7 @@ extension UGAnalyseView{
     }
     
     func reloadpieStore(df:PythonObject)  {
+        if Bool(df.empty) == true {return}
         let pie = Python.import("chart.pie")
         let piedata = df[df["earnings"].notnull() == true]
         let earnings = (piedata["smoney"]*10/piedata["bmoney"]).astype("int").value_counts(

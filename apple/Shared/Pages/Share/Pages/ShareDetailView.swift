@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-
+import UGSwiftKit
 struct ShareDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode

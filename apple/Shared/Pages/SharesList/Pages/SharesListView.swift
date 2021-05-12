@@ -112,7 +112,9 @@ public struct UGPageView<Content> : View where Content : View {
     
     public var body: some View {
         content
-            .loading(isloading: loading)
+//            .loading(isloading: loading){
+//                Text("loading...")
+//            }
             .alert(isPresented: alert){
                 Alert(title: Text(title ?? "--"),
                       message: Text(message ?? "--"),

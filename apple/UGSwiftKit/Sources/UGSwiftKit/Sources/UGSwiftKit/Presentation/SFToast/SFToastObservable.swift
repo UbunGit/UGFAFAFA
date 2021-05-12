@@ -10,6 +10,7 @@ import SwiftUI
 
 public class SFToastObservable: SFPersentationObservable {
     
+    public override init() {}
     public var duration:TimeInterval = 3
     private var task: DispatchWorkItem?
     

@@ -34,40 +34,7 @@ public class UGAnalyse :ObservableObject {
         self.analyse = tdata
         
     }
-    
-    /*:
-     获取策略参数
-     */
-    func plotparam() throws {
-//        print("plotparam begin")
-//        print("param:\(self.plot)")
-//        var rparam:[String:String] = [:]
-//        guard let params = self.plot.params else {
-//            return
-//        }
-//        for item in params {
-//            guard let titem = item? else {
-//                return
-//            }
-//            rparam[titem.key] = titem.value
-//        }
-//        let tdata = try JSONEncoder().encode(rparam)
-//        let str = String(data: tdata, encoding: .utf8)!
-//        
-//        let tplot = Python.import("Analyse.\(plot.name ?? "--")")
-//        let points = tplot.analyse(code:self.code,
-//                                   begin:self.begin.toString("yyyyMMdd"),
-//                                   end:self.end.toString("yyyyMMdd"),
-//                                   param:str)
-//            .to_json(orient:"records")
-//        
-//        let jsondata = "\(points)".data(using: .utf8)!
-//        let test = try JSONSerialization.jsonObject(with: jsondata, options: .mutableContainers)
-//        self.point = test as! [[String : NSObject]]
-//        print("plotparam end")
-    }
-    
-    
+
     func setup() {
         let py_sys = Python.import("sys")
         py_sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")

@@ -13,11 +13,13 @@ public struct CloseButton: View {
     }
     public var body: some View {
         Image(systemName: "xmark")
+            .padding(10)
             .font(.system(size: 14, weight: .bold))
             .foregroundColor(.white)
-            .padding(.all, 10)
-            .background(Color.black.opacity(0.6))
+            .background(Color.black.opacity(0.3))
             .mask(Circle())
+            .padding(10)
+            
     }
 }
 
