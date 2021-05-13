@@ -24,8 +24,8 @@ def done(df,ma=5):
     df["close_ma_v"] = df.apply(masignal,axis=1,args=(ma,))
     df["close_s_1"] = df["close"].shift(-1)
     df["close_v"] = (df["close"].shift(-1) - df["close"] )/df["close"]
-    desdf = df["close_ma_v"].describe()
-    print(desdf.info())
+    print(df.corr())
+   
     df["close_ma_v"].describe().plot().bar(x=df.index,height="max")
     plt.show()
     

@@ -41,4 +41,7 @@ result=pandas.cut(df.cost,bins=bins,right=False,labels=labels)
 #数据统计信息，有四分位数，中位数等df.describe()
 #平均值df.mean()
 #中位数值df.median() 
+# 计算pearson相关系数data.corr() 
+# Kendall Tau相关系数data.corr('kendall')  
+# spearman秩相data.corr('spearman')     关  
 ```
