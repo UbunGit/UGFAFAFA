@@ -21,43 +21,6 @@ class Store:
         self.order = None
         self.signal = "signal"
 
-# 回测系统
-def back_trading(data,begin=None, end = None, signal="signal"):
-    logging.debug("begin... back_trading")
-    logging.debug("data:")
-    # logging.debug(data)
-   
-    print("begin:"+str(begin))
-    print("end:"+str(end))
-    print("signal:"+signal)
-    df = data
-    if begin != None:
-        df = df[df["date"]>int(begin)]
-    if end != None:
-        df == df[df["date"]<=int(end)]
-    store = Store()
-    print(store.orders)
-    store.signal = signal
-    print("back_trading --1")
-    if df.empty:
-        print("back_trading fitter data is empty ")
-    else:
-        assets = df.apply(tadding, axis=1,args=(store,))  
-        df["assets"] = assets       
-        orders = pd.DataFrame(store.orders)
-        # print("initial:10000")
-        # print("end:"+str(store.order))
-        # print("count:"+str(len(store.orders)))
-        # print("bandans:"+str(store.bandans))
-        # print("free:"+str(orders["free"].sum()))
-        # print(orders.info())
-        # print(df.info())
-        orders["date"].astype('int64')
-        df = pd.merge(df,orders,on='date',how='left')
-        # print(df.info()) 
-        print("end... back_trading")
-    return df
-
 def tadding(data,store):
     
     if store.order != None:
@@ -91,15 +54,56 @@ def tadding(data,store):
     # print(str(data["date"])+"witting----")
     assets = store.bandans+ 0 if store.order == None else store.order["count"]*data["close"]
     return assets
+ 
+
+# 回测系统
+def back_trading(data, begin=None, end = None, signal="signal"):
+
+    logging.debug("begin... back_trading")
+    logging.debug("data:")
+    # logging.debug(data)
+   
+    print("begin:"+str(begin))
+    print("end:"+str(end))
+    print("signal:"+signal)
+    df = data
+    if begin != None:
+        df = df[df["date"]>int(begin)]
+    if end != None:
+        df = df[df["date"]<=int(end)]
+    store = Store()
+    store.signal = signal
+  
+    if df.empty:
+        print("back_trading fitter data is empty ")
+    else:
+        assets = df.apply(tadding, axis=1,args=(store,))  
+        df["assets"] = assets     
+        orders = pd.DataFrame(store.orders)
+        print("initial:10000")
+        print("end:"+str(store.order))
+        print("count:"+str(len(store.orders)))
+        print("bandans:"+str(store.bandans))
+        print("free:"+str(orders["free"].sum()))
+      
+        orders["date"].astype('int64')
+        df = pd.merge(df,orders,on='date',how='left')
         
-# import sys
-# sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
-import chart.kline as kline
+        print(df[["date","assets"]])  
+        print("end... back_trading")
+    return df
+
+       
+
 if __name__ == '__main__':
 
+    import sys
+    sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
+    import chart.kline as kline
+
     df = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/002028.SZ/result.csv")
-    # print(df.info()) 
-    # df = back_trading(df,begin="20210512",end="20210512")
+    print(df.info()) 
+    df = back_trading(df,begin="20200512",end="20210512")
     # print(df.info()) 
     # df = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/002028.SZ/result.csv")
     # print(df.info()) 

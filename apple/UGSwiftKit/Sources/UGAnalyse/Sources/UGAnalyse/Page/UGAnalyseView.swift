@@ -101,12 +101,13 @@ struct UGAnalyseBodyView: View  {
     }
 }
 
-extension UGAnalyseView{
+extension UGAnalyseView:PyRequest{
     
     func analyse() {
         
-        isLoading = true
-        DispatchQueue(label: "python").async {
+//        isLoading = true
+        
+//        DispatchQueue(label: "python").sync {
             
             var rparam:[String:String] = [:]
             for item in paramStore.analyse.params {
@@ -116,55 +117,47 @@ extension UGAnalyseView{
             let str = String(data: tdata, encoding: .utf8)!
             let tplot = Python.import("Analyse.\(paramStore.analyse.name)")
             tplot.analyse(code:paramStore.share.code,
-                          begin:paramStore.begin.toString("yyyyMMdd"),
-                          end:paramStore.end.toString("yyyyMMdd"),
                           param:str)
             
-            DispatchQueue.main.async {
-                print("数据分析完成")
-                isLoading = false
-            }
-        }
+//            DispatchQueue.main.async {
+//                print("数据分析完成")
+//                isLoading = false
+//            }
+//        }
   
     }
     // 回测
     func backtrade(){
         isLoading = true
-        DispatchQueue(label: "python").async {
-            let anglyse = Python.import("Analyse.\(paramStore.analyse.name)")
-            let df = anglyse.catchdata(paramStore.share.code)
-            let backtrading = Python.import("Analyse.back_trading")
-            let traddata = backtrading.back_trading(df,
-                                                    begin:paramStore.begin.toString("yyyyMMdd"),
-                                                    end:paramStore.end.toString("yyyyMMdd")
-            )
-            if traddata.empty == true {
-                DispatchQueue.main.async {
-                    print("数据回测完成")
-                    isLoading = false
+        backtrading(analyse: paramStore.analyse.name,
+                    code: paramStore.share.code,
+                    begin: paramStore.begin.toString("yyyyMMdd"),
+                    end: paramStore.end.toString("yyyyMMdd")) { result in
+            isLoading = false
+            switch result{
+            case .success(let pyobj):
+                if pyobj.empty == true {
+                    print("数据回测数据为空： \(pyobj) ｜🔚")
+                    return
                 }
-                return
-            }
-//            print("绘制数据：\(traddata)")
-            reloadklineStore(df:traddata)
-            reloadpieStore(df: traddata)
-            reloadlineStore(df: traddata)
-            DispatchQueue.main.async {
-                print("数据分析完成")
-                isLoading = false
+                reloadklineStore(df:pyobj)
+                reloadpieStore(df: pyobj)
+                reloadlineStore(df: pyobj)
+            case .failure(let error):
+                print("🐜 数据回测错误： \(error)")
             }
         }
+
     }
   
     
     func reloadklineStore(df:PythonObject)  {
-        
+     
         let kline = Python.import("chart.kline")
         let webpath = kline.kline(df,"k线bs图",height:"250px").render("/Users/admin/Documents/github/UGFAFAFA/data/tem/kline.html")
         let url = URL(fileURLWithPath: "\(webpath)")
-        DispatchQueue.main.async {
-            klineStore.webView.loadFileURL(url, allowingReadAccessTo: url)
-        }
+        klineStore.webView.loadFileURL(url, allowingReadAccessTo: url)
+        
         
     }
     

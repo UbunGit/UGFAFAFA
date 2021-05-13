@@ -12,8 +12,6 @@ struct APIData<T:Codable>:Codable{
     var code:Int
     var message:String?
     var data:T?
-   
-    
 }
 
 extension DataRequest{

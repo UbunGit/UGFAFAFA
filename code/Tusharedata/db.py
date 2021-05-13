@@ -7,7 +7,7 @@ from config import dataPath as root
 from file import mkdir
 
                                                             
-dbpath = root+"/sqlite/tushare.db"
+dbpath = root+"/sqlite/tushare.db?check_same_thread=true"
 engine = create_engine('sqlite:///{0}'.format(dbpath), echo=True)
 
 session = scoped_session(sessionmaker(autocommit=False,

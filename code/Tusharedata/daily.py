@@ -4,7 +4,7 @@
 # 目的
 # 创建股票前n天的收盘集合与后m天的收盘价
 import os
-import numpy
+import numpy, logging
 import pandas
 import time,datetime
 import talib as tl
@@ -43,21 +43,19 @@ def sd_local(code="000001.SZ"):
 def load(code="000001.SZ"):
     _code = code.lower()
     try:
+        logging.debug(">>>>> load DataCache")
         input = session.query(DataCache).filter_by(key = cacheKey(_code)).first()
+        logging.debug(">>>>> load DataCache end")
         datafile = filempath(scode=_code)
 
         # 1 如果没有数据记录，或文件不存在 下载
         if input == None or os.path.exists(datafile)==False:
+            logging.debug(">>>>> 如果没有数据记录，或文件不存在 下载")
             data = ts.pro_bar(ts_code=_code, adj='qfq')
             if(data is None):
                 raise Exception("error：下载股票数据失败")
             data = data.rename(columns={'trade_date':'date'})
             sd_save(_code,data)
-            input = DataCache()
-            input.key = _code
-            input.value = time.time()
-            session.add(input)
-            session.commit()
             logging.debug("更新完成")
         else:
             # 2 如果当前时间<16点 判断更新时间是否>昨天16点 如果大于不更新
@@ -70,7 +68,7 @@ def load(code="000001.SZ"):
             else:
                 jtime = datetime.datetime(now.tm_year, now.tm_mon, now.tm_mday, 16, 00)
             if ctime <= jtime:
-                logging.debug("更新...")
+                logging.debug(">>>>> 更新...")
                 data = ts.pro_bar(ts_code=_code, adj='qfq')
                 if(data is None):
                     raise Exception("error：下载股票数据失败")
@@ -83,23 +81,26 @@ def load(code="000001.SZ"):
 
         data = sd_local( code = _code)
         data = data.sort_values(by='date')
+        logging.debug(">>>>> load return data")
         return data
 
-    except Exception as e:
-        logging.error('except:', e)
+    except:
+        logging.error('load except:', e)
         raise Exception(e)
 
 # 保存数据到本地
 def sd_save(code, data):
     _code = code
-
     datafile = filempath(scode=_code)
     data.to_csv(datafile)
+    logging.debug(">>>>> sd_save to_csv")
     datacache = DataCache()
     datacache.key = cacheKey(_code)
     datacache.value = time.time() 
     session.add(datacache)
+    logging.debug(">>>>> sd_save session")
     session.commit()
+    logging.debug(">>>>> sd_save commit")
 
 
 

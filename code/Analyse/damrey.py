@@ -3,12 +3,10 @@
 
 # 达维策略
 
-import sys
+import sys,traceback
 import os
-import json
+import json, logging
 import pandas as pd
-from .line import lineType
-from .draw import draw
 from .back_trading import back_trading
 from Tusharedata import lib, loadDaily
 from config import dataPath as root
@@ -41,39 +39,58 @@ params = [
 def info():
     return {"name": name, "des": des, "params": params}
 
-def analyse(code,begin = None,end= None, param=None):
+def analyse(code, param=None):
+    try:
+        paramjson = json.loads(param)
+        ma = int(paramjson["ma"])
+        rankDay = int(paramjson["rankDay"])
+        # 0 获取数据
+        data = loadDaily(code=code)
+        logging.debug(">>>>> analyse loadDaily end")
+        # 计算所需的数据
+        ## ma 
+        mas = [5,10,20,30]
+        if ma not in mas:
+            mas.append(ma)
+        lib.mas(data, mas)
+        logging.debug(">>>>> analyse mas end")
+        lib.rank(data,"ma"+str(ma),rankDay)
+        logging.debug(">>>>> analyse rank end")
+        data["signal"] = data["ma"+str(ma)+"_rank_standard"]
+        logging.debug(">>>>> analyse signal end")
+        lib.itemv(data, items=["close"], axis=[5, 10, 20, 30])
+        logging.debug(">>>>> analyse closev end")
+        outpath = datapath+"/damrey/"+code
+        mkdir(outpath)
+        logging.debug(">>>>> analyse mkdir end")
+        data.to_csv(outpath + "/result.csv")
+        logging.debug(">>>>> analyse to_csv end")
+       
+    except:
+        print('---- error begin ----')
+        traceback.print_stack()
+        print('---- error end ----')
+      
+def backtrading(code=None ,begin=None, end = None, signal="signal"):
+    try:
+        outfile = datapath+"/damrey/"+code+"/result.csv"
+        if os.path.exists(outfile):
+            df = pd.read_csv(outfile)
+            logging.debug(">>>>> analyse backtrading read_csv end")
+            df = back_trading(df,begin,end,signal)
+            logging.debug(">>>>> analyse back_trading  end")
+            logging.debug(df.info())
+            return df
+        logging.debug(">>>>> analyse backtrading os.path.exists else")
+        pd.DataFrame()
+    except:
+        print('---- error begin ----')
+        traceback.print_stack()
+        print('---- error end ----')
+        return pd.DataFrame()
 
-    paramjson = json.loads(param)
-    ma = int(paramjson["ma"])
-    rankDay = int(paramjson["rankDay"])
 
-    # 0 获取数据
-    data = loadDaily(code=code)
-    print(data)
-    # 计算所需的数据
-    ## ma 
-    mas = [5,10,20,30]
-    if ma not in mas:
-        mas.append(ma)
-    lib.mas(data, mas)
-
-    lib.rank(data,"ma"+str(ma),rankDay)
-    data["signal"] = data["ma"+str(ma)+"_rank_standard"]
-    lib.itemv(data, items=["close"], axis=[5, 10, 20, 30])
-    outpath = datapath+"/damrey/"+code
-    mkdir(outpath)
-    data.to_csv(outpath + "/result.csv")
-    return data
-
-
-
-def catchdata(code):
     
-    outfile = datapath+"/damrey/"+code+"/result.csv"
-    if os.path.exists(outfile):
-        return pd.read_csv(outfile)
-    else: 
-        return None
    
 
 

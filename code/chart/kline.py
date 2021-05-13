@@ -122,13 +122,11 @@ def kline(data, title = "K线图", height = "250px"):
     )
     return chart
 
-# import sys
-# sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
-# from Analyse.back_trading import back_trading
-if __name__ == '__main__':
-    df = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/002028.SZ/result.csv")
-    # df = back_trading(df, begin=20200512,end=20210512)
-   
-    # print(kline(df).render("/Users/admin/Documents/github/UGFAFAFA/data/tem/result.html"))
 
-    # print(bspoint(data))
+if __name__ == '__main__':
+    import sys
+    sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
+    from Analyse.back_trading import back_trading
+    df = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/002028.SZ/result.csv")
+    df = back_trading(df, begin=20200513,end=20210513,signal="signal")
+    print(kline(df).render("/Users/admin/Documents/github/UGFAFAFA/data/tem/result.html"))

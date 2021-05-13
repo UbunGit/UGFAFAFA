@@ -5,6 +5,7 @@
 
     final class UGAnalyseTests: XCTestCase {
         
+        
         func testExample() {
  
         }
@@ -25,9 +26,7 @@
         }
         
         func test_AnalyseList_loaddata() {
-            let py_sys = Python.import("sys")
-            py_sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
-            let analyses = AnalyseList().loaddata()
+            
         }
     }
     
