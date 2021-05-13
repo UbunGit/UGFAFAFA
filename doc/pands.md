@@ -30,3 +30,15 @@ labels=['20以下','20到40','40到60','60到80','80到100','100以上']
  
 result=pandas.cut(df.cost,bins=bins,right=False,labels=labels)
 ```
+
+# 总结数据信息
+```
+#数据之和df.sum()
+#数据中的最小值df.min()
+#数据中的最大值df.max()
+#最小值的索引df.idxmin()
+#最大值的索引df.idxmax()
+#数据统计信息，有四分位数，中位数等df.describe()
+#平均值df.mean()
+#中位数值df.median() 
+```

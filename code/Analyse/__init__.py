@@ -4,7 +4,6 @@
 import sys, json
 sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
 
-from .draw import *
 from .damrey import * 
 from .maline import * 
 
