@@ -45,3 +45,17 @@ result=pandas.cut(df.cost,bins=bins,right=False,labels=labels)
 # Kendall Tau相关系数data.corr('kendall')  
 # spearman秩相data.corr('spearman')     关  
 ```
+
+# 标准化 （Z-Score）
+x'=(x-mean)/std 原转换的数据为x，新数据为x′，mean和std为x所在列的均值和标准差
+标准化之后的数据是以0为均值，方差为1的正态分布。
+# 归一化
+x'=(x-min)/(max-min)，min和max为x所在列的最小值和最大值
+将数据规整到 [0，1] 区间内（Z-Score则没有类似区间）
+```
+from sklearn import preprocessing
+preprocessing.MinMaxScaler().fit_transform(x) # 归一到 [ 0，1 ] 
+preprocessing.MaxAbsScaler().fit_transform(x) # 归一到 [ -1，1 ] 
+```
+
+

@@ -18,16 +18,17 @@ def bspoint(data):
                     name="B",
                     coord = [str(data["date"]), data["bprice"]],
                     symbol_size = 12,
+                    value = str(round(data["signal"],2)),
                     itemstyle_opts = opts.ItemStyleOpts(color="#ec0000"),
                 )
             )
-            # print("bspoints and b "+str(data["date"])+" / "+str(data["bprice"]))
+            print("bspoints and b "+str(data["date"])+" / "+str(data["bprice"]))
             bspoints.append(
                 opts.MarkPointItem(
                     name="S",
                     coord = [str(int(data["sdate"])), data["sprice"]],
                     symbol_size = 12,
-                    value = str(round(data["earnings"],2)),
+                    value = str(round(data["signal"],2)),
                     itemstyle_opts = opts.ItemStyleOpts(
                         color="#00da3c" if data["earnings"]>0 else "#f47920",
                         area_color="#00da3c" if data["earnings"]>0 else "#f47920"

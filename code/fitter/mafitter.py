@@ -13,13 +13,10 @@ import matplotlib.pyplot as plt
 
 def masignal(data,ma):
     return (data["close"]-data["ma"+str(ma)])/data["ma"+str(ma)]
-def done(df,ma=5):
 
-    '''
-    获取股票数据
-    '''
-    print(df.info())
+def done(df,ma=5):
     
+    print(df.info())
     # 计算收盘价与ma比率
     df["close_ma_v"] = df.apply(masignal,axis=1,args=(ma,))
     df["close_s_1"] = df["close"].shift(-1)
@@ -37,11 +34,13 @@ if __name__ == '__main__':
     from Tusharedata import lib
 
     code = "600089.SH"
-    begin = "20140101"
+    begin = "20190101"
     end = "20210101"
     ma = 30
    
-      # 获取数据
+    '''
+    获取股票数据
+    '''
     df = load(code)
     print(df.info())
     lib.mas(df,[ma])

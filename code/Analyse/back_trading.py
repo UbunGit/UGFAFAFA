@@ -4,7 +4,7 @@
 import datetime  # For datetime objects
 import logging
 import pandas as pd
-
+logging.basicConfig(level=logging.WARN)  # 设置日志级别  
 class Store:
     bandans = 10000
     free = 0.998
@@ -25,7 +25,8 @@ def tadding(data,store):
     
     if store.order != None:
         # sell
-        if data[store.signal]<=0.5:
+        if data[store.signal] <= 0.5:
+            print(str(data["date"])+"seller ----")
             order = store.order
             order["sdate"] = data["date"]
             smoney = order["count"]*data["close"]
@@ -35,11 +36,12 @@ def tadding(data,store):
             order["free"] = smoney*(1-store.free)
             order["earnings"] = smoney-order["bmoney"]
             store.orders.append(order)
-            # print(str(data["date"])+"seller ----")
             store.order = None
             
     else:
+        # bug
         if data[store.signal]>0.8:
+            print(str(data["date"])+"buy ----")
             order = {}
             order["date"] = data["date"]
             count = int(store.bandans/(data["close"]*100)) *100
@@ -49,9 +51,9 @@ def tadding(data,store):
             order["count"] = count
             order["bprice"] = data["close"]
             store.order = order
-            # print(str(data["date"])+"buy ----")
+            
         
-    # print(str(data["date"])+"witting----")
+    print(str(data["date"])+"signal: "+str(data[store.signal]))
     assets = store.bandans+ 0 if store.order == None else store.order["count"]*data["close"]
     return assets
  
@@ -61,16 +63,16 @@ def back_trading(data, begin=None, end = None, signal="signal"):
 
     logging.debug("begin... back_trading")
     logging.debug("data:")
-    # logging.debug(data)
+    logging.debug(data.info())
    
     print("begin:"+str(begin))
     print("end:"+str(end))
     print("signal:"+signal)
     df = data
     if begin != None:
-        df = df[df["date"]>int(begin)]
+        df = df[df["date"] > str(begin)]
     if end != None:
-        df = df[df["date"]<=int(end)]
+        df = df[df["date"] <= int(end)]
     store = Store()
     store.signal = signal
   
@@ -101,15 +103,10 @@ if __name__ == '__main__':
     sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
     import chart.kline as kline
 
-    df = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/002028.SZ/result.csv")
+    df = pd.read_csv("/Users/admin/Documents/github/UGFAFAFA/data/tem/test.csv")
     print(df.info()) 
-    df = back_trading(df,begin="20200512",end="20210512")
-    # print(df.info()) 
-    # df = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/002028.SZ/result.csv")
-    # print(df.info()) 
-    # df = back_trading(df,begin="20210512",end="20210512")
-    # print(df.info()) 
-    # kline.kline(df).render("/Users/admin/Documents/github/UGFAFAFA/data/tem/testanalyse.html")
+    df = back_trading(df)
+    kline.kline(df).render("/Users/admin/Documents/github/UGFAFAFA/data/tem/line.html")
     
     # # df = df[["date","assets","sdate","signal","count"]]
     # df.to_csv("/Users/admin/Documents/github/UGFAFAFA/data/tem/test.csv")
