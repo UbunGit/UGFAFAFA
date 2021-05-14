@@ -3,15 +3,15 @@
 
 import os,sys
 import logging
-sys.path.append('./code')
+sys.path.append('../code')
 
 import unittest
-from Tusharedata import lib, loadDaily
+from Tusharedata import lib, daily
 class Test(unittest.TestCase):
 
     def test_pro_bar(self):
-        data = loadDaily(code="000002.SZ")
-        lib.rank(data,"close",2)
+        data = daily.load(code="000002.SZ")
+        print(data)
 
 if __name__ == "__main__":
     unittest.main()

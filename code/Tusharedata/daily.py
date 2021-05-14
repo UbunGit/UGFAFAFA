@@ -14,9 +14,8 @@ from matplotlib import pyplot as plt
 import logging
 from .db import session, DataCache
 from config import dataPath as root
-
-
-logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
+ts.set_token("8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195")
+logging.basicConfig(level=logging.INFO)  # 设置日志级别
 datapath = root
 
 def filempath(scode):
@@ -85,8 +84,8 @@ def load(code="000001.SZ"):
         return data
 
     except:
-        logging.error('load except:', e)
-        raise Exception(e)
+        logging.error('load except:', )
+        raise Exception()
 
 # 保存数据到本地
 def sd_save(code, data):
@@ -109,6 +108,8 @@ import unittest
 
 
 class TestStores(unittest.TestCase):
+    import sys
+    sys.path.append('../../code')
     code = '601138'
     type = 'SH'
 

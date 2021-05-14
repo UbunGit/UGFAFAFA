@@ -4,6 +4,7 @@
 import logging
 import talib as tl
 import pandas as pd
+import numpy as np
 logging.basicConfig(level=logging.NOTSET)  # 设置日志级别
 
 # 数据错位
@@ -52,7 +53,10 @@ def rank(data,column,axis):
     print(df[[key,key+"_standard"]])
     print(data[[key,key+"_standard"]])
 
-
+# 归一化到【0 ～ 1】
+max_min_scaler = lambda x : (x-np.min(x))/(np.max(x)-np.min(x))
+# 归一化到【-1 ～ 1】
+max_abs_scaler = lambda x : 2*((x-np.min(x))/(np.max(x)-np.min(x)))-1
 
 
 
