@@ -25,7 +25,7 @@ def tadding(data,store):
     
     if store.order != None:
         # sell
-        if data[store.signal] <= 0.5:
+        if data[store.signal] <= 0.6:
             print(str(data["date"])+"seller ----")
             order = store.order
             order["sdate"] = data["date"]
