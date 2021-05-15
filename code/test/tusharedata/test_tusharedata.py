@@ -10,7 +10,7 @@ from Tusharedata import lib, daily
 class Test(unittest.TestCase):
 
     def test_pro_bar(self):
-        data = daily.load(code="000002.SZ")
+        data = daily.load(code="300059.SZ")
         print(data)
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ import logging
 from .db import session, DataCache
 from config import dataPath as root
 ts.set_token("8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195")
-logging.basicConfig(level=logging.INFO)  # 设置日志级别
+logging.basicConfig(level=logging.DEBUG)  # 设置日志级别
 datapath = root
 
 def filempath(scode):
@@ -50,7 +50,7 @@ def load(code="000001.SZ"):
         # 1 如果没有数据记录，或文件不存在 下载
         if input == None or os.path.exists(datafile)==False:
             logging.debug(">>>>> 如果没有数据记录，或文件不存在 下载")
-            data = ts.pro_bar(ts_code=_code, adj='qfq')
+            data = ts.pro_bar(ts_code=_code, adj='qfq', ma=[5,10,20,30])
             if(data is None):
                 raise Exception("error：下载股票数据失败")
             data = data.rename(columns={'trade_date':'date'})
@@ -101,17 +101,14 @@ def sd_save(code, data):
     session.commit()
     logging.debug(">>>>> sd_save commit")
 
-
-
-
 import unittest
 
 
 class TestStores(unittest.TestCase):
     import sys
     sys.path.append('../../code')
-    code = '601138'
-    type = 'SH'
+    code = '300059.SZ'
+
 
     def setUp(self):
         logging.info ("setup...")
