@@ -12,6 +12,8 @@ class Store:
     orders = []
     order = None
     signal = "signal"
+    buyfix = 0.8
+    sellfix = 0.5
 
     def __init__(self): 
         self.bandans = 10000
@@ -25,8 +27,9 @@ def tadding(data,store):
     
     if store.order != None:
         # sell
-        if data[store.signal] <= 0.6:
-            print(str(data["date"])+"seller ----")
+
+        if data[store.signal]<=store.sellfix :
+
             order = store.order
             order["sdate"] = data["date"]
             smoney = order["count"]*data["close"]
@@ -40,8 +43,7 @@ def tadding(data,store):
             
     else:
         # bug
-        if data[store.signal]>0.8:
-            print(str(data["date"])+"buy ----")
+        if data[store.signal]>store.buyfix:
             order = {}
             order["date"] = data["date"]
             count = int(store.bandans/(data["close"]*100)) *100
@@ -59,7 +61,7 @@ def tadding(data,store):
  
 
 # 回测系统
-def back_trading(data, begin=None, end = None, signal="signal"):
+def back_trading(data, begin=None, end = None, signal="signal",  buyfix = 0.8, sellfix = 0.5):
 
     logging.debug("begin... back_trading")
     logging.debug("data:")
@@ -75,6 +77,8 @@ def back_trading(data, begin=None, end = None, signal="signal"):
         df = df[df["date"] <= int(end)]
     store = Store()
     store.signal = signal
+    store.buyfix = buyfix
+    store.sellfix = sellfix
   
     if df.empty:
         print("back_trading fitter data is empty ")
