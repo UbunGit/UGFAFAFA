@@ -1,182 +1,51 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# 海葵策略
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
-import sys,traceback
+# 导入本地文件
+import sys
+sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
+
 import os
-import json, logging
 import pandas as pd
 import numpy as np
+import talib as tlb
+import matplotlib.pyplot as plt
+from Tusharedata.daily import load
 
-sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
+def strategy(data,cerebro):
+    
+    if data["signal"]>0.5 and cerebro.position<=0:
+        bcount = int(cerebro.cash/int((data["close"]*100)))
+        bprice = data["close"]
+        return bcount,bprice,0,0
+    if data["signal"]<0.5 and cerebro.position>0:
+        scount = cerebro.position
+        sprice = data["close"]
+        return 0, 0, scount,sprice
+    return 0,0,0,0
 
-# 思路
-#  ·买入条件 收盘价大于均线
-#  ·卖出条件 收盘价小于均线
-# 版本修订
-# 1.0.0 创建
-version = "1.0.0"
-name = "haikui"
-des = "海葵 "
-creatTime = "2021-05-14"
-changeTime = "2021-05-14"
-params = [
-    {
-        "name":"ma",
-        "des":"均线",
-        "value":"5"
-    }
-]
-def info():
-    return {"name": name, "des": des, "params": params}
 
-from datetime import datetime
-import backtrader as bt
+# 加载数据
+ma = 30
+df = load(code="300059.SZ")
+df = df[df["date"] > "20210101"]
 from Tusharedata.lib import max_abs_scaler
+from Tusharedata.lib import mas
+mas(df,[5,10,20,30])
+df["signal_0"] = (df["close"]-df["ma"+str(ma)]) / df["ma"+str(ma)]
+df["signal_1"] = df[["signal_0"]].apply(max_abs_scaler)
+df["signal_2"] = (2*df["signal_1"])-1
+df["signal_3"] = -np.square(df["signal_2"]) + 1 
+df["signal_4"] = df["signal_0"]>0
+df["signal_4"] = df["signal_4"].astype("int")
+df["signal_4"] = (2*df["signal_4"])-1
+df["signal"] = df["signal_4"]*df["signal_3"]
 
-class Haikui(bt.Strategy):
-    params = (
-        ('maperiod',20),
-        ("printlog",False)
-    )
-    def log(self, txt, dt=None):
-        dt = dt or self.datas[0].datetime.date(0)
-        print('%s, %s' % (dt.isoformat(), txt))
-
-    def __init__(self):
-        self.log('__init__')
-        self.dataclose = self.datas[0].close
-        # self.ma20 =  self.datas[0].ma20
-        # 初始化待处理订单
-        self.order = None
-        self.buyprice = None
-        self.buycomm = None
-
-        self.sma = bt.indicators.SimpleMovingAverage(
-            self.datas[0], period=self.params.maperiod)
-
-        bt.indicators.ExponentialMovingAverage(self.datas[0], period=25)
-        bt.indicators.WeightedMovingAverage(self.datas[0], period=25,
-                                            subplot=True)
-        bt.indicators.StochasticSlow(self.datas[0])
-        bt.indicators.MACDHisto(self.datas[0])
-        rsi = bt.indicators.RSI(self.datas[0])
-        bt.indicators.SmoothedMovingAverage(rsi, period=10)
-        bt.indicators.ATR(self.datas[0], plot=False)
-
-    def signal(self):
-        arr = pd.Series([self.dataclose[0],self.dataclose[-1],self.dataclose[-2],self.dataclose[-3],self.dataclose[-4],self.dataclose[-5]]).rank()
-        signal = pd.Series([arr]).apply(max_abs_scaler)
-        print(signal[0].iloc[0])
-        return signal[0].iloc[0]
-
-    def next(self):
-        # Simply log the closing price of the series from the reference
-        self.log('Close, %.2f' % self.dataclose[0])
-        if self.order:
-            self.log(str(order))
-            return
-        signal = self.signal()
-        if signal > 0.5 and not self.position:
-            self.log('BUY CREATE, %.2f signal %f' % (self.dataclose[0], signal))
-            self.buy()
-        if (signal <-0.5 and self.position):
-            self.log('SELL CREATE, %.2f signal %f' % (self.dataclose[0], signal))
-            self.order = self.sell()
-
-    # 可选：跟踪交易指令（order）的状态。order具有提交，接受，买入/卖出执行和价格，已取消/拒绝等状态
-    def notify_order(self, order):
-        if order.status in [order.Submitted, order.Accepted]:
-            # Buy/Sell order submitted/accepted to/by broker - Nothing to do
-            return
-
-        # Check if an order has been completed
-        # Attention: broker could reject order if not enough cash
-        if order.status in [order.Completed]:
-            if order.isbuy():
-                self.log(
-                    '买入成功, 价格: %.2f, 成本: %.2f, 佣金 %.2f' %
-                    (order.executed.price,
-                     order.executed.value,
-                     order.executed.comm))
-
-                self.buyprice = order.executed.price
-                self.buycomm = order.executed.comm
-            else:  # Sell
-                self.log('卖出成功 EXECUTED, 成本: %.2f, Cost: %.2f, 佣金 %.2f' %
-                         (order.executed.price,
-                          order.executed.value,
-                          order.executed.comm))
-
-            self.bar_executed = len(self)
-
-        elif order.status in [order.Canceled, order.Margin, order.Rejected]:
-            self.log('Order Canceled/Margin/Rejected')
-
-        self.order = None
-    # 可选：跟踪交易的状态，任何已平仓的交易都将报告毛利和净利润。
-    def notify_trade(self, trade):
-        if not trade.isclosed:
-            return
-
-        self.log('营业利润 PROFIT, GROSS %.2f, NET %.2f' %
-                 (trade.pnl, trade.pnlcomm))
-
-    def stop(self):
-        self.log('期末总资金 %.2f' %
-                 (self.broker.getvalue()))
-    
-    
-
-
-
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-
-import unittest
-tindex = 1
-
-class Test(unittest.TestCase):
-
-    import os,sys
-    import logging
-    from matplotlib.dates import (HOURS_PER_DAY, MIN_PER_HOUR, SEC_PER_MIN,MONTHS_PER_YEAR, 
-        DAYS_PER_WEEK,SEC_PER_HOUR, SEC_PER_DAY,num2date, rrulewrapper, 
-        YearLocator,MicrosecondLocator)
-    sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
-    from Analyse.haikui import Haikui
-    
-    import backtrader as bt
-    import pandas as pd
-
-    @unittest.skipIf((tindex!=0 and tindex!=1), "reason")
-    def test_base(self):
-        from Tusharedata.daily import load as loaddata
-        df = loaddata(code="300059.SZ")
-        df = df[df["date"]>"20200101"]
-        df.index=pd.to_datetime(df.date)
-        df = df[['open','high','low','close','vol',"ma5","ma10","ma20","ma30"]]
-        
-        print(df)
-        cerebro = bt.Cerebro()
-        #broker设置策略
-        cerebro.addstrategy(Haikui)
-        #broker设置资金、手续费
-        cerebro.broker.setcash(10000.0)
-        cerebro.broker.setcommission(commission=0.001)
-        #设置买入设置，策略，数量
-        cerebro.addsizer(bt.sizers.FixedSize, stake=500) 
-        # 设置数据
-        data = bt.feeds.PandasData(dataname=df) 
-        cerebro.adddata(data)
-      
-        logging.debug('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
-        cerebro.run()
-        logging.debug('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
-        cerebro.plot(volume=False)
-
-if __name__ == "__main__":
-    unittest.main()
+# 加载回测系统
+from rolltrader.cerebro import Cerebro
+cerebro = Cerebro()
+cerebro.strategy = strategy
+cerebro.data = df
+edf = cerebro.run()
+df = df.join(edf)
+print(df[["cash","position"]])
