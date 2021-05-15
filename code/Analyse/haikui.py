@@ -35,6 +35,7 @@ def info():
 from datetime import datetime
 import backtrader as bt
 from Tusharedata.lib import max_abs_scaler
+
 class Haikui(bt.Strategy):
     params = (
         ('maperiod',20),
@@ -47,8 +48,14 @@ class Haikui(bt.Strategy):
     def __init__(self):
         self.log('__init__')
         self.dataclose = self.datas[0].close
+        # self.ma20 =  self.datas[0].ma20
         # 初始化待处理订单
         self.order = None
+        self.buyprice = None
+        self.buycomm = None
+
+        self.sma = bt.indicators.SimpleMovingAverage(
+            self.datas[0], period=self.params.maperiod)
 
         bt.indicators.ExponentialMovingAverage(self.datas[0], period=25)
         bt.indicators.WeightedMovingAverage(self.datas[0], period=25,
@@ -60,7 +67,7 @@ class Haikui(bt.Strategy):
         bt.indicators.ATR(self.datas[0], plot=False)
 
     def signal(self):
-        arr = pd.Series([self.dataclose[0],self.dataclose[-1],self.dataclose[-2]]).rank()
+        arr = pd.Series([self.dataclose[0],self.dataclose[-1],self.dataclose[-2],self.dataclose[-3],self.dataclose[-4],self.dataclose[-5]]).rank()
         signal = pd.Series([arr]).apply(max_abs_scaler)
         print(signal[0].iloc[0])
         return signal[0].iloc[0]
@@ -72,14 +79,14 @@ class Haikui(bt.Strategy):
             self.log(str(order))
             return
         signal = self.signal()
-        if (signal > 0.5):
+        if signal > 0.5 and not self.position:
             self.log('BUY CREATE, %.2f signal %f' % (self.dataclose[0], signal))
             self.buy()
-        if (signal <-0.5):
+        if (signal <-0.5 and self.position):
             self.log('SELL CREATE, %.2f signal %f' % (self.dataclose[0], signal))
             self.order = self.sell()
 
-
+    # 可选：跟踪交易指令（order）的状态。order具有提交，接受，买入/卖出执行和价格，已取消/拒绝等状态
     def notify_order(self, order):
         if order.status in [order.Submitted, order.Accepted]:
             # Buy/Sell order submitted/accepted to/by broker - Nothing to do
@@ -109,13 +116,17 @@ class Haikui(bt.Strategy):
             self.log('Order Canceled/Margin/Rejected')
 
         self.order = None
-    
+    # 可选：跟踪交易的状态，任何已平仓的交易都将报告毛利和净利润。
     def notify_trade(self, trade):
         if not trade.isclosed:
             return
 
         self.log('营业利润 PROFIT, GROSS %.2f, NET %.2f' %
                  (trade.pnl, trade.pnlcomm))
+
+    def stop(self):
+        self.log('期末总资金 %.2f' %
+                 (self.broker.getvalue()))
     
     
 
@@ -161,10 +172,11 @@ class Test(unittest.TestCase):
         # 设置数据
         data = bt.feeds.PandasData(dataname=df) 
         cerebro.adddata(data)
+      
         logging.debug('Starting Portfolio Value: %.2f' % cerebro.broker.getvalue())
         cerebro.run()
         logging.debug('Final Portfolio Value: %.2f' % cerebro.broker.getvalue())
-        cerebro.plot()
+        cerebro.plot(volume=False)
 
 if __name__ == "__main__":
     unittest.main()
