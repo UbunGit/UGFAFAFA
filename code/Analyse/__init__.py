@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sys, json
-sys.path.append('/Users/admin/Documents/GitHub/UGFAFAFA/code')
 
 from .damrey import * 
 from .maline import * 

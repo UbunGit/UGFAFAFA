@@ -7,7 +7,7 @@ import sys,traceback
 import os
 import json, logging
 import pandas as pd
-from .back_trading import back_trading
+# from .back_trading import back_trading
 from Tusharedata import lib, loadDaily
 from config import dataPath as root
 from file import mkdir

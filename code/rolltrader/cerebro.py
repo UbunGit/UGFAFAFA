@@ -49,7 +49,7 @@ class Cerebro:
             if(order["scount"]*order["sprice"]):
                 amount = order["scount"]*order["sprice"]
                 free = self.scomm(amount)
-                if self.position > order["scount"]:
+                if self.position >= order["scount"]:
                     self.cash = self.cash + (amount - free)
                     self.position = self.position - order["scount"]
                     
