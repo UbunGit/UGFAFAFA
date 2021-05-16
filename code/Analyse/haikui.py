@@ -15,11 +15,11 @@ from Tusharedata.daily import load
 
 def strategy(data,cerebro):
     
-    if data["signal"]>0.5 and cerebro.position<=0:
+    if data["signal"]>0.2 and cerebro.position<=0:
         bcount = int(cerebro.cash/int((data["close"]*100)))*100
         bprice = data["close"]
         return bcount,bprice,0,0
-    if data["signal"]<0.5 and cerebro.position>0:
+    if data["signal"]<-0.2 and cerebro.position>0:
         scount = cerebro.position
         sprice = data["close"]
         return 0, 0, scount,sprice
@@ -31,13 +31,21 @@ def signal(df,ma):
     from Tusharedata.lib import mas
     mas(df,[5,10,20,30])
     df["signal_0"] = (df["close"]-df["ma"+str(ma)]) / df["ma"+str(ma)]
-    df["signal_1"] = df[["signal_0"]].apply(max_abs_scaler)
-    df["signal_2"] = (2*df["signal_1"])-1
-    df["signal_3"] = -np.square(df["signal_2"]) + 1 
-    df["signal_4"] = df["signal_0"]>0
-    df["signal_4"] = df["signal_4"].astype("int")
-    df["signal_4"] = (2*df["signal_4"])-1
-    df["signal"] = df["signal_4"]*df["signal_3"]
+    # df["signal_0"] = df[["signal_0"]].apply(max_abs_scaler)
+  
+
+    df["signal_1"] = -np.square(df["signal_0"]) + 1 
+    df["signal_1"] = df[["signal_1"]].apply(max_abs_scaler)
+    def temfun(x):
+        return 1 if x>1.5 else -1
+
+    df["signal_1"] =  df["signal_0"].apply(temfun)
+
+    df["signal_2"] = df["close"]>df["ma"+str(ma)]
+    df["signal_2"] = df["signal_2"].astype("int")
+    df["signal_2"] = df[["signal_2"]].apply(max_abs_scaler)
+    df["signal"] =  df["signal_2"] * df["signal_1"]
+
 
 
 if __name__ == "__main__":
@@ -51,7 +59,7 @@ if __name__ == "__main__":
     # 加载数据
     ma = 30
     df = load(code="300059.SZ")
-    df = df[df["date"] > "20210101"]
+    df = df[df["date"] > "20170101"]
     df.index= pd.to_datetime(df["date"])
    
     signal(df,ma)

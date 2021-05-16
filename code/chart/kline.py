@@ -69,6 +69,25 @@ def maline(data,mas=[5,10,20,30]):
         )
     return line
 
+def maline(data,mas=[5,10,20,30]):
+    if data.empty:
+        return Line()
+    line = Line()
+    line.add_xaxis(data["date"].astype('str').values.tolist())
+    for item in mas:
+        key = "ma"+str(item)
+        if key not in data.columns.values.tolist():
+            continue
+        line.add_yaxis(
+            series_name="ma"+str(item),
+            y_axis=data["ma"+str(item)],
+            is_smooth=True,
+            is_hover_animation=False,
+            linestyle_opts=opts.LineStyleOpts(width=3, opacity=0.5),
+            label_opts=opts.LabelOpts(is_show=False),
+        )
+    return line
+
 def kline(data, title = "K线图", height = "250px"):
 
     logging.debug("kline begin")
