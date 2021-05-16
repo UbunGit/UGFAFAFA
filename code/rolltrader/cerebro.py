@@ -9,19 +9,35 @@ class Cerebro:
 
     def __init__(self):
 
+        
         def bcomm(amount):
+            '''
+            买入手续费
+            ''' 
             yongjin = 5 if amount*0.003<5 else amount*0.003
             yinhua = 0
             guohu = amount*0.0006
             return yongjin+yinhua+guohu
+
         def scomm(amount):
+            '''
+            计算买入手续费
+            ''' 
             yongjin = 5 if amount*0.003<5 else amount*0.003
             yinhua =  amount*0.001
             return yongjin+yinhua
             return 0
+
         def strategy(data,cerebro):
+            '''
+            策略方法 固定返回四个数字，分别对应买入数量，买入价格，卖出数量，卖出价格
+            '''
             return 0,0,0,0
+
         def log(msg):
+            '''
+            日志函数
+            '''
             pass
 
         self.bcomm = bcomm  #买入手续费计算公式
@@ -34,6 +50,9 @@ class Cerebro:
 
         self.position = 0 #持仓
         self.orders = list()
+
+        self.result = None
+        
       
     def run(self):
         def runapply(data,cerebro):
@@ -85,8 +104,14 @@ class Cerebro:
         orders = self.data.apply(runapply, axis=1,args=(self,))
         df = pd.DataFrame(orders.values.tolist())
         df.index= pd.to_datetime(orders.index)
+        self.result = df
         return df
-        
+
+    def pycharts(self):
+        from .pycharts import page
+        df = self.data.join(self.result)
+        return page(df,"回测数据图")
+
 import unittest
 tindex = 1
 
@@ -99,9 +124,6 @@ class Test(unittest.TestCase):
     def test_base(self):
         print("begin test")
         from Tusharedata.daily import load as loaddata
-      
-
-
         cerebro = Cerebro()
         df = loaddata(code="300059.SZ")
         df = df[df["date"]>"20200101"]

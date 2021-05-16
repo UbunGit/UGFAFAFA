@@ -50,7 +50,6 @@ def bspoint(data):
     data.apply(bs,axis=1)
     return bspoints
 
-
 def maline(data,mas=[5,10,20,30]):
     if data.empty:
         return Line()

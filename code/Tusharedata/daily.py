@@ -3,8 +3,8 @@
 
 # 目的
 # 创建股票前n天的收盘集合与后m天的收盘价
-import os
-import numpy, logging
+import os,logging
+import numpy
 import pandas
 import time,datetime
 import talib as tl

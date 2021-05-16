@@ -64,5 +64,9 @@ if __name__ == "__main__":
     cerebro.log = log
     edf = cerebro.run()
 
+    page = cerebro.pycharts()
+    path = page.render("./result.html")
+    print(path)
+    
     df = df.join(edf)
     print(df[["date","cash","position"]])

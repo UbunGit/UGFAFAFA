@@ -33,8 +33,6 @@ def bar(data,name = "bar", width = "100%",height="300px"):
     return bar
 
 
-
-
 if __name__ == '__main__':
     data = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/000001.SZ/result.csv",dtype={"sdate":"string"})
     bardata = data[data["earnings"].notnull() == True]
