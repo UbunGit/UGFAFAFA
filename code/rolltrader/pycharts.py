@@ -6,7 +6,6 @@ from pyecharts.faker import Faker
 import pandas as pd
 
 area = None
-
 datazoom = [opts.DataZoomOpts(
             pos_bottom="0px",
             range_start= 50.0,
@@ -14,11 +13,10 @@ datazoom = [opts.DataZoomOpts(
             )]
 
 def bspoint(data):
+    
     bspoints = []
     global bsArea 
     bsArea = []
-    
-    
  
     def bs(data):
         if data["bcount"] > 0:
@@ -95,13 +93,14 @@ def maline(data,mas=[5,10,20,30]):
             label_opts=opts.LabelOpts(is_show=False),
         )
     return line
-def signalLine(data):
-    if data.empty:
+
+def someline(data,lines):
+    if data.empty or lines==None or len(lines)==0:
         return Line()
     line = Line()
     xaxis = pd.Series(data.index).apply(lambda x: x.strftime("%Y-%m-%d")).to_list()
     line.add_xaxis(xaxis)
-   
+    
     line.add_yaxis(
         series_name="signal",
         y_axis=data["signal"],
@@ -120,7 +119,6 @@ def signalLine(data):
     )
     
     return line
-
 
 # 收益率
 def line_shouyi(data,name = "收益分布", width = "100%",height="300px"):
@@ -232,12 +230,12 @@ def kline(data, title = "K线图", height = "250px"):
 
 
 def page(data,name):
-    assets = lambda x: round((x["close"]*x["position"])+x["cash"],2)
-    data["assets"] = data.apply(assets, axis= 1)
+    
     # 页面所有图表
     page = Page(layout=Page.DraggablePageLayout)
+    page.page_title = name
     page.add(
-        signalLine(data),
+        
         kline(data=data),
         line_shouyi(data=data) 
     )

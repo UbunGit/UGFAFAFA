@@ -13,6 +13,10 @@ import talib as tlb
 import matplotlib.pyplot as plt
 from Tusharedata.daily import load
 
+'''
+股价与均线计较策略
+'''
+
 def strategy(data,cerebro):
     
     if data["signal"]>0.2 and cerebro.position<=0:
@@ -38,7 +42,6 @@ def signal(df,ma):
     df["signal_1"] = df[["signal_1"]].apply(max_abs_scaler)
     def temfun(x):
         return 1 if x>1.5 else -1
-
     df["signal_1"] =  df["signal_0"].apply(temfun)
 
     df["signal_2"] = df["close"]>df["ma"+str(ma)]
@@ -58,8 +61,9 @@ if __name__ == "__main__":
 
     # 加载数据
     ma = 30
-    df = load(code="300059.SZ")
-    df = df[df["date"] > "20170101"]
+    code = "300059.SZ"
+    df = load(code = code)
+    df = df[df["date"] > "20200101"]
     df.index= pd.to_datetime(df["date"])
    
     signal(df,ma)
@@ -70,11 +74,18 @@ if __name__ == "__main__":
     cerebro.strategy = strategy
     cerebro.data = df
     cerebro.log = log
-    edf = cerebro.run()
+    cerebro.run()
 
-    page = cerebro.pycharts()
+    from rolltrader.pycharts import someline
+    page = cerebro.pycharts(name = '海葵交易策略 {} {}'.format(code,ma))
+    page.add(
+        someline(cerebro.result,["signal"])
+    )
+
     path = page.render("./result.html")
     print(path)
+    
+
     
     df = df.join(edf)
     print(df[["date","cash","position"]])
