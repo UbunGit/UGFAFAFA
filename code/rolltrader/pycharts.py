@@ -94,30 +94,31 @@ def maline(data,mas=[5,10,20,30]):
         )
     return line
 
-def someline(data,lines):
+def someline(data,lines,name="someline"):
     if data.empty or lines==None or len(lines)==0:
         return Line()
     line = Line()
     xaxis = pd.Series(data.index).apply(lambda x: x.strftime("%Y-%m-%d")).to_list()
     line.add_xaxis(xaxis)
-    
-    line.add_yaxis(
-        series_name="signal",
-        y_axis=data["signal"],
-        is_smooth=True,
-        is_hover_animation=False,
-        linestyle_opts=opts.LineStyleOpts(width=3, opacity=0.5),
-        label_opts=opts.LabelOpts(is_show=False),
+    for item in lines:
+        line.add_yaxis(
+            series_name=item,
+            y_axis=data[item],
+            is_smooth=True,
+            is_hover_animation=False,
+            linestyle_opts=opts.LineStyleOpts(width=3, opacity=0.5),
+            label_opts=opts.LabelOpts(is_show=False),
+        )
+    line.set_global_opts(
+        title_opts=opts.TitleOpts(name),
+        tooltip_opts=opts.TooltipOpts(
+            trigger="axis",
+          
+            ),
+        toolbox_opts=opts.ToolboxOpts(is_show=True),
+        xaxis_opts=opts.AxisOpts(type_="category", boundary_gap=False),
+        datazoom_opts=datazoom,
     )
-    line.add_yaxis(
-        series_name="signal_0",
-        y_axis=data["signal_0"],
-        is_smooth=True,
-        is_hover_animation=False,
-        linestyle_opts=opts.LineStyleOpts(width=3, opacity=0.5),
-        label_opts=opts.LabelOpts(is_show=False),
-    )
-    
     return line
 
 # 收益率

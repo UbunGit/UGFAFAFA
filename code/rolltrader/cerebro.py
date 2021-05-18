@@ -5,12 +5,15 @@ from pyecharts.components import Table
 from pyecharts.options import ComponentTitleOpts
 from pyecharts import options as opts
 from pyecharts.charts import Line, Bar, Grid, Pie,Scatter
+
 class Describe:
 
-    def __init__(self,data):
+    def __init__(self,data,begincash):
+
         self.tradings = []
         self.trading = None
-
+        self.data = data
+        self.begincash = begincash
         # 最终收益
         self.endassets = None
         # 最大回撤
@@ -35,9 +38,9 @@ class Describe:
         # 开仓 - 清仓 列表
         self.positions = None
 
-        self.describe(data)
+        self.describe()
   
-    def describe(self,data):
+    def describe(self):
 
         def mapdescribe(item):
             
@@ -52,19 +55,30 @@ class Describe:
                     shouyi = item["assets"]-self.trading["assets"]
                     shouyiv = shouyi/self.trading["assets"]
                     self.trading["sdate"] = item.name.strftime("%Y-%m-%d")
+                    self.trading["assets_front"] = self.trading["assets"]
                     self.trading["assets"] = shouyi
                     self.trading["assetsv"] = shouyiv
                     self.tradings.append(self.trading)
                     self.trading = None
 
-        data.apply(mapdescribe,axis=1) 
+        
+        self.data.apply(mapdescribe,axis=1) 
+         #开仓次数
+        self.openpositions = len(self.tradings)
+        #清仓次数
+        self.clearance = self.openpositions if self.trading == None else (self.openpositions-1)
         # 如果最后没有清仓，添加到列表
         if self.trading != None:
+            shouyi = self.data.iloc[-1]["assets"]-self.trading["assets"]
+            shouyiv = shouyi/self.trading["assets"]
+            self.trading["sdate"] = self.data.iloc[-1].name.strftime("%Y-%m-%d")
+            self.trading["assets"] = shouyi
+            self.trading["assetsv"] = shouyiv
             self.tradings.append(self.trading)
         df = pd.DataFrame(self.tradings)
         # 最终收益
-        endser = data.iloc[-1]
-        self.endassets = (endser["cash"]+(endser["position"]*endser["close"])) /10000
+        endser = self.data.iloc[-1]
+        self.endassets = ((endser["cash"]+(endser["position"]*endser["close"])) /self.begincash)-1
         # 最大回撤
         minassets = df[df["assetsv"] == df["assetsv"].min()].iloc[0]
         self.minassets = {
@@ -81,12 +95,10 @@ class Describe:
         }
         #平均收益
         self.averageassets = df["assetsv"].mean()
-        #开仓次数
-        self.openpositions = len(self.tradings)
-        #清仓次数
-        self.clearance = self.openpositions if self.trading == None else (self.openpositions-1)
+       
 
         def cutassetsv(x):
+ 
             if x < -0.15:
                 return "<-15%"
             elif x < -0.1:
@@ -116,7 +128,8 @@ class Describe:
         self.positions = df
 
     # 结果分析图
-    def pycharts(self):
+    def table(self):
+
         table = Table()
         headers = ["项目", "数值", "开始时间", "结束时间"]
         rows = [
@@ -125,26 +138,24 @@ class Describe:
             ["平均收益", "{:.2f}%".format(self.averageassets*100),"",""],
             ["开仓次数", "{}".format(self.openpositions),"",""],
             ["清仓次数", "{}".format(self.clearance),"",""],
+            ["手续费", "{:.2f}".format(self.data["scomm"].sum()+self.data["bcomm"].sum()),"",""],
             ["最大收益", "{:.2f}%".format(self.maxassets["value"]*100),self.maxassets["begin"],self.maxassets["end"]],
             ["最大回撤", "{:.2f}%".format(self.minassets["value"]*100),self.minassets["begin"],self.minassets["end"]],
         ]
         table.add(headers, rows)
-
-        # piedata = pd.value_counts(self.positions["assetscut"]) 
-        # pie = Pie(init_opts=opts.InitOpts())
-        # pie.add(
-        #     [list(z) for z in zip(piedata.index, piedata.values.round(2))],
-        #     radius="40%",
-        #     center=["50%", "50%"],
-        # )
-
-        # grid = Grid(init_opts=opts.InitOpts())
-        # grid.add(
-        #     table, grid_opts=opts.GridOpts(pos_right="50%"), is_control_axis_index=True
-        # )
-        # grid.add(pie, grid_opts=opts.GridOpts(pos_left="50%"), is_control_axis_index=True)
         return table
- 
+    def pie(self):
+        piedata = self.positions["assetscut"].value_counts(normalize=True, ascending=True )
+        pie = Pie(init_opts=opts.InitOpts())
+        [print(list(z)) for z in zip(piedata.index, piedata.values.round(2))],
+        pie.add(
+            "pie",
+            data_pair = [list(z) for z in zip(piedata.index, piedata.values.round(2))],
+            radius="40%",
+            center=["50%", "50%"],
+        )
+        return pie
+
        
 
 class Cerebro:
@@ -194,8 +205,7 @@ class Cerebro:
         self.data = list() # 股票列表 pa.DataForm
 
         self.position = 0 #持仓
-        
-
+       
         self.result = None
 
          
@@ -250,14 +260,15 @@ class Cerebro:
             order["assets"] = round((data["close"]*order["position"])+order["cash"],2)
             self.log(order)
             return order
-
+        
+        self.begincash = self.cash
         df = pd.DataFrame()
         orders = self.data.apply(runapply, axis=1,args=(self,))
         df = pd.DataFrame(orders.values.tolist())
         df.index= pd.to_datetime(orders.index)
         self.result = self.data.join(df)
         
-        self.describe = Describe(self.result)
+        self.describe = Describe(self.result,self.begincash)
 
 
     def pycharts(self,name):
@@ -266,16 +277,12 @@ class Cerebro:
         '''
         from .pycharts import page
         repage = page(self.result,name)
-        deschart = self.describe.pycharts()
         repage.add(
-            deschart
+            self.describe.table(),
+            self.describe.pie()
         )
         return repage
     
-    
-
-
-
 
 
 import unittest

@@ -45,18 +45,17 @@ def mas(data, mas):
 # data 数据
 # column 类型
 # axis 多少天
-def rank(data,column,axis):
-    df = data
-    key = column+"_rank"
-    df[key] = df[column].rolling(axis+1).apply(lambda x: pd.Series(x).rank().iloc[-1])
-    df[key+"_standard"] = 2 * (df[key] - axis -1)/ axis + 1
-    print(df[[key,key+"_standard"]])
-    print(data[[key,key+"_standard"]])
+def rank(df,column,axis):
+  return df[column].rolling(axis+1).apply(lambda x: pd.Series(x).rank().iloc[-1])
+
 
 # 归一化到【0 ～ 1】
 max_min_scaler = lambda x : (x-np.min(x))/(np.max(x)-np.min(x))
 # 归一化到【-1 ～ 1】
-max_abs_scaler = lambda x : 2*((x-np.min(x))/(np.max(x)-np.min(x)))-1
+def max_abs_scaler(x):
+    r = 2*((x-np.min(x))/(np.max(x)-np.min(x)))-1
+    return r
+
 
 
 

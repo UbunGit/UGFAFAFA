@@ -148,4 +148,4 @@ if __name__ == '__main__':
     from Analyse.back_trading import back_trading
     df = pd.read_csv("/Users/admin/Documents/GitHub/UGFAFAFA/data/output/damrey/002028.SZ/result.csv")
     df = back_trading(df, begin=20200513,end=20210513,signal="signal")
-    print(kline(df).render("/Users/admin/Documents/github/UGFAFAFA/data/tem/result.html"))
+    print(kline(df).render("/Users/admin/Documents/github/UGFAFAFA/data/tem/kline000.html"))
