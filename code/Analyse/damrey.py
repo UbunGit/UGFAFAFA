@@ -123,8 +123,8 @@ def loaddata():
 
 
 code1 = "601865.SH"
-code2 = "002594.SZ"
-pct = 20
+code2 = "300059.SZ"
+pct = 3
 begin = "20200101"
 end = ""
 
