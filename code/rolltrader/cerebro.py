@@ -203,20 +203,27 @@ class Cerebro:
   
     # 购买
     def buy(self,code,date,count,price,free = 0):
+        if count<=200:
+            print("")
+            pass
         if np.isnan(price):
+            self.log("buy error"+str(date)+"price isnan")
             return False
         amount= count * price +free
         if self.cash < amount:
+            self.log("buy error 余额不足：{} 所需{}".format(self.cash,amount))
             return False
      
         self.cash = self.cash - amount
         store = self.store(code=code)
-        store.buy(date=date,count=count,price=price,free=free)
+        if store.buy(date=date,count=count,price=price,free=free):
+            self.log("buy  买入成功：数量{} 价格{}".format(count,price))
     
     # 卖出
     def seller(self,code,date,count,price,free = 0.0):
         if np.isnan(price):
             return False
+        
         store = self.store(code=code)
         if None == count:
                 count = store.count
@@ -302,14 +309,16 @@ class Cerebro:
             # df = pd.concat([df, item], axis=0)
             df = pd.merge(left=item,right=df,how="outer",left_index=True,right_index=True)
         for key in slist.keys():
+            
             item = slist[key]
-            item = item.rename(columns={'sdate':'date'})
-            item = item.rename(columns={'scount':'scount'+key})
-            item = item.rename(columns={'sprice':'sprice'+key})
-            item = item.rename(columns={'sfree':'sfree'+key})
-            item.set_index(["date"], inplace=True)
-            # df = pd.concat([df, item], axis=0)
-            df = pd.merge(left=item,right=df,how="outer",left_index=True,right_index=True)
+            if item.empty == False:
+                item = item.rename(columns={'sdate':'date'})
+                item = item.rename(columns={'scount':'scount'+key})
+                item = item.rename(columns={'sprice':'sprice'+key})
+                item = item.rename(columns={'sfree':'sfree'+key})
+                item.set_index(["date"], inplace=True)
+                # df = pd.concat([df, item], axis=0)
+                df = pd.merge(left=item,right=df,how="outer",left_index=True,right_index=True)
         
         df = pd.merge(left=data,right=df,how="outer",left_index=True,right_index=True)
         df = df.sort_index(axis=0)

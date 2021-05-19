@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import numpy as np
+
+
 class Store:
 
     def __init__(self):
@@ -14,7 +17,8 @@ class Store:
         self.zones = [] # 持仓记录
 
     def buy(self,date,count,price,free = 0):
-        
+        if np.isnan(price):
+            return False
         # 购买
         if self.count == 0:
             self.cash = (count*price)+free
@@ -39,7 +43,11 @@ class Store:
             count = self.count
         if self.count == 0:
             return False
+        if count<=0:
+            return False
         if count > self.count:
+            return False
+        if np.isnan(price):
             return False
         else:
             self.slist.append(
