@@ -16,17 +16,15 @@ from Tusharedata.daily import load
 '''
 股价与均线计较策略
 '''
-def strategy(data,cerebro):
-    
-    if data["signal"]>0.00 and cerebro.position<=0:
+def strategy(index,data,cerebro):
+    #code,date,count,price,free = 0
+    store = cerebro.store(code = data["code"])
+    if data["signal"]>0.00 and store.count<=0:
         bcount = int(cerebro.cash/int((data["close"]*100)))*100
-        bprice = data["close"]
-        return bcount,bprice,0,0
-    if data["signal"]<=0 and cerebro.position>0:
-        scount = cerebro.position
-        sprice = data["close"]
-        return 0, 0, scount,sprice
-    return 0,0,0,0
+        cerebro.buy(data["code"],date =data.name, count= bcount ,price = data["close"],free = 0)
+    if data["signal"]<=0 and store.count>=0:
+        cerebro.seller(code = data["code"],date = data.name,count = None, price= data["close"],free = 0)
+
 
 def signal(df,ma):
 
@@ -60,6 +58,7 @@ if __name__ == "__main__":
     code = "300059.SZ"
     df = load(code = code)
     df = df[df["date"] > "20160101"]
+    df = df.rename(columns={'ts_code':'code'})
     df.index= pd.to_datetime(df["date"])
    
     signal(df,ma)
@@ -71,6 +70,10 @@ if __name__ == "__main__":
     cerebro.data = df
     cerebro.log = log
     cerebro.run()
+    buylist = cerebro.buylist()
+    print(buylist)
+    close = df.rename(columns={'close':code})
+    cerebro.chartEarnings(close[code])
 
     from rolltrader.pycharts import someline
     page = cerebro.pycharts(name = '海葵交易策略 {} {}'.format(code,ma))

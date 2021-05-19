@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import pandas as pd
+import numpy as np
 from pyecharts.components import Table
 from pyecharts.options import ComponentTitleOpts
 from pyecharts import options as opts
 from pyecharts.charts import Line, Bar, Grid, Pie,Scatter
-
+from .store import Store
+from .free import bcomm,scomm
+from .pycharts import someline
 class Describe:
 
     def __init__(self,data,begincash):
@@ -165,25 +168,6 @@ class Cerebro:
 
     def __init__(self):
 
-        
-        def bcomm(amount):
-            '''
-            买入手续费
-            ''' 
-            yongjin = 5 if amount*0.003<5 else amount*0.003
-            yinhua = 0
-            guohu = amount*0.0006
-            return yongjin+yinhua+guohu
-
-        def scomm(amount):
-            '''
-            计算买入手续费
-            ''' 
-            yongjin = 5 if amount*0.003<5 else amount*0.003
-            yinhua =  amount*0.001
-            return yongjin+yinhua
-            return 0
-
         def strategy(data,cerebro):
             '''
             策略方法 固定返回四个数字，分别对应买入数量，买入价格，卖出数量，卖出价格
@@ -203,86 +187,165 @@ class Cerebro:
         self.log = log
         
         self.data = list() # 股票列表 pa.DataForm
-
-        self.position = 0 #持仓
        
         self.result = None
-
-         
+        self.stores = {}
+    
+        # 开始回测
+    
     def run(self):
         '''
         开始回测
         '''
-        def runapply(data,cerebro):
-          
-            order = {}
-            order["bcomm"] = 0
-            order["scomm"] = 0
-            order["berror"] = None
-            order["serror"] = None
-            order["bcount"], order["bprice"], order["scount"], order["sprice"] = self.strategy(data,cerebro)
-
-            # 卖出逻辑
-            if(order["scount"]*order["sprice"]):
-                amount = order["scount"]*order["sprice"]
-                free = self.scomm(amount)
-                if self.position >= order["scount"]:
-                    self.cash = self.cash + (amount - free)
-                    self.position = self.position - order["scount"]
-                    
-                else:
-                    order["serror"] = "持仓不足"
-                    # 持仓不足
-                    order["scount"] = 0
-                    order["sprice"] = 0
-                    order["scomm"] = 0
-
-                order["scomm"] = self.scomm(order["scount"]*order["sprice"])
-            # 买入逻辑
-
-            if(order["bcount"]*order["bprice"]):
-                amount = order["bcount"]*order["bprice"]
-                free = self.bcomm(amount)
-                if(self.cash - amount - free)<=0:
-                    # 余额不足
-                    order["berror"] = "余额不足"
-                    order["bcount"] = 0
-                    order["bprice"] = 0
-                    order["bcomm"] = 0
-                else:
-                    order["bcomm"] = free
-                    self.cash = self.cash - amount - free
-                    self.position = self.position + order["bcount"]
-            order["cash"] = self.cash
-            order["position"] = self.position
-            # 计算资产
- 
-            order["assets"] = round((data["close"]*order["position"])+order["cash"],2)
-            self.log(order)
-            return order
-        
         self.begincash = self.cash
-        df = pd.DataFrame()
-        orders = self.data.apply(runapply, axis=1,args=(self,))
-        df = pd.DataFrame(orders.values.tolist())
-        df.index= pd.to_datetime(orders.index)
-        self.result = self.data.join(df)
-        
-        self.describe = Describe(self.result,self.begincash)
-
-
-    def pycharts(self,name):
-        '''
-        画图
-        '''
-        from .pycharts import page
-        repage = page(self.result,name)
-        repage.add(
-            self.describe.table(),
-            self.describe.pie()
-        )
-        return repage
+        for index, row in self.data.iterrows():
+            self.strategy(index,row,self)
+  
+    # 购买
+    def buy(self,code,date,count,price,free = 0):
+        if np.isnan(price):
+            return False
+        amount= count * price +free
+        if self.cash < amount:
+            return False
+     
+        self.cash = self.cash - amount
+        store = self.store(code=code)
+        store.buy(date=date,count=count,price=price,free=free)
     
+    # 卖出
+    def seller(self,code,date,count,price,free = 0.0):
+        if np.isnan(price):
+            return False
+        store = self.store(code=code)
+        if None == count:
+                count = store.count
+        if store.seller(date=date,count=count,price=price,free=free) == True:
+            amount= count * price - free
+           
+            self.cash = self.cash + amount
+
+    # 根据编码获取持仓对象
+    def store(self,code):
+        if code in self.stores.keys():
+            store = self.stores[code]
+        else:
+            store = Store()
+            self.stores[code] = store
+        return self.stores[code]
+    # 获取购买列表
+    def buylist(self,codes=None):
+        
+        keys = []
+        if None == codes:
+            keys = self.stores.keys()
+        else:
+            for item in codes:
+                if item in self.stores.keys():
+                    keys.append(item)
+        list = {}    
+        for key in keys:
+            store = self.stores[key]
+            df = pd.DataFrame(store.blist)
+            list[key] = df
+
+        return list
+
+   
+     # 获取卖出列表
+    # 获取卖出列表
+    def selllist(self,codes=None):
+        
+        keys = []
+        if None == codes:
+            keys = self.stores.keys()
+        else:
+            for item in codes:
+                if item in self.stores.keys():
+                    keys.append(item)
+        list = {}     
+        for key in keys:
+            store = self.stores[key]
+            df = pd.DataFrame(store.slist)
+            list[key] = df
+        return list
+
+    # 获取持仓区间
+    def zonelist(self,codes=None):
+        keys = []
+        if None == codes:
+            keys = self.stores.keys()
+        else:
+            for item in codes:
+                if item in self.stores.keys():
+                    keys.append(item)
+        list = []    
+        for key in keys:
+            store = self.stores[key]
+            df = pd.DataFrame(store.zones)
+            list[key] = df
+        return list
+
+    # 获取收益曲线
+    def chartEarnings(self,data):
+
+        blist = self.buylist()
+        slist = self.selllist()
+        df = pd.DataFrame()
+        for key in blist.keys():
+            item = blist[key]
+            item = item.rename(columns={'bdate':'date'})
+            item = item.rename(columns={'bcount':'bcount'+key})
+            item = item.rename(columns={'bprice':'bprice'+key})
+            item = item.rename(columns={'bfree':'bfree'+key})
+            item.set_index(["date"], inplace=True)
+            # df = pd.concat([df, item], axis=0)
+            df = pd.merge(left=item,right=df,how="outer",left_index=True,right_index=True)
+        for key in slist.keys():
+            item = slist[key]
+            item = item.rename(columns={'sdate':'date'})
+            item = item.rename(columns={'scount':'scount'+key})
+            item = item.rename(columns={'sprice':'sprice'+key})
+            item = item.rename(columns={'sfree':'sfree'+key})
+            item.set_index(["date"], inplace=True)
+            # df = pd.concat([df, item], axis=0)
+            df = pd.merge(left=item,right=df,how="outer",left_index=True,right_index=True)
+        
+        df = pd.merge(left=data,right=df,how="outer",left_index=True,right_index=True)
+        df = df.sort_index(axis=0)
+        global g_cash
+        g_cash = self.begincash
+        df["cash"] = df.apply(earnings,axis = 1, args=(self.stores.keys(),))
+        keys = ["cash"]
+        for key in self.stores.keys():
+            keys.append(key)
+        for item in keys:
+            df[item] = df[item]/(df[item].iloc[0])
+        return someline(df,keys)
+   
+
+g_count = {}
+g_cash = 10000
+def earnings(data,codes=[]):
+    global g_count,g_cash
+    tcash = 0
+    for code in codes:
+        if code not in g_count.keys():
+            g_count[code] = 0
+    
+        bcount = 0 if np.isnan(data["bcount"+code]) else data["bcount"+code]
+        scount = 0 if np.isnan(data["scount"+code]) else data["scount"+code]
+        bfree = 0 if np.isnan(data["bfree"+code]) else data["bfree"+code]
+        sfree = 0 if np.isnan(data["sfree"+code]) else data["sfree"+code]
+        bprice = 0 if np.isnan(data["bprice"+code]) else data["bprice"+code]
+        sprice = 0 if np.isnan(data["sprice"+code]) else data["sprice"+code]
+
+        g_count[code] =  g_count[code] + bcount - scount
+        incash = sprice * scount -sfree
+        outcash = bcount * bprice - bfree
+        g_cash = g_cash + incash - outcash
+        tcash = tcash + g_count[code]* data[code]
+    return g_cash + tcash
 
 
 import unittest
@@ -299,6 +362,7 @@ class Test(unittest.TestCase):
         from Tusharedata.daily import load as loaddata
         cerebro = Cerebro()
         df = loaddata(code="300059.SZ")
+        df = df.rename(columns={'ts_code':'code'})
         df = df[df["date"]>"20200101"]
         df.index=pd.to_datetime(df.date)
         cerebro.data = df

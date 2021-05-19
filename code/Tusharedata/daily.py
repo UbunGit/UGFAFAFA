@@ -72,6 +72,7 @@ def load(code="000001.SZ"):
                 if(data is None):
                     raise Exception("error：下载股票数据失败")
                 data = data.rename(columns={'trade_date':'date'})
+                data = data.rename(columns={'ts_code':'code'})
                 data.to_csv(datafile)
                 input.value = time.time()
                 session.add(input)
