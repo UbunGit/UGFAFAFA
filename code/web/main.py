@@ -103,8 +103,6 @@ def chooseList():
             logging.error("获取推荐股票 Exception %s",e)
             return json.dumps({"code": -1,"data":str(e)})
       
- 
-
 @app.route('/run', methods=['POST'])
 def run():
     if request.method == 'POST' and request.form['code']:

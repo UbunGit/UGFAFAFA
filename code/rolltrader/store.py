@@ -3,6 +3,8 @@
 
 import numpy as np
 
+def log(msg):
+    pass
 
 class Store:
 
@@ -15,9 +17,11 @@ class Store:
         self.blist = [] # 买入记录
         self.slist = [] # 卖出记录
         self.zones = [] # 持仓记录
+        self.log = log
 
     def buy(self,date,count,price,free = 0):
         if np.isnan(price):
+            self.log("买入失败：price is nan")
             return False
         # 购买
         if self.count == 0:
@@ -38,36 +42,42 @@ class Store:
             }
         )
     
-    def seller(self,date, price, count = None,free=0):
+    def seller(self,date, price, count = None, free=0):
         if None == count:
             count = self.count
+        
         if self.count == 0:
+            self.log("卖出失败：没有持仓")
             return False
+            
         if count<=0:
+            self.log("卖出失败：卖出count<=0 count:{}".format(count))
             return False
         if count > self.count:
+            self.log("卖出失败：持仓不足 卖出:{} 持仓：{}".format(count,self.count))
             return False
         if np.isnan(price):
+            self.log("卖出失败：price is nan")
             return False
-        else:
-            self.slist.append(
-                {
-                    "sdate":date,
-                    "scount":count,
-                    "sprice":price,
-                    "sfree":free
-                }
-            )
-            self.cash = self.cash - free - (count*price)
-            self.count = self.count - count
-            if self.count == 0:
-                self.zone["end"]= date
-                self.zone["earnings"] = -self.cash
-                self.zone["earnings_v"] = -self.cash/self.cash_sum
-                self.zone = None
-                self.cash_sum = 0
-                self.cash = 0
-            return True
+        
+        self.slist.append(
+            {
+                "sdate":date,
+                "scount":count,
+                "sprice":price,
+                "sfree":free
+            }
+        )
+        self.cash = self.cash - free - (count*price)
+        self.count = self.count - count
+        if self.count == 0:
+            self.zone["end"]= date
+            self.zone["earnings"] = -self.cash
+            self.zone["earnings_v"] = -self.cash/self.cash_sum
+            self.zone = None
+            self.cash_sum = 0
+            self.cash = 0
+        return True
 
 
 if __name__ == "__main__":           

@@ -9,6 +9,7 @@ import sys
 sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
 
 import os
+import math
 import pandas as pd
 import numpy as np
 import talib as tlb
@@ -22,111 +23,85 @@ from rolltrader.free import bcomm,scomm
 '''
 def strategy(index,data,cerebro):
     #code,date,count,price,free = 0
-    
+    log(" --------strategy {} --------".format(data.name))
 
     store1 = cerebro.store(code = code1)
     store2 = cerebro.store(code = code2)
-    # if np.isnan(data["close"+code1])  or np.isnan(data["close"+code2]):
-    #     return
-    if data["signal"] == None:
-        cerebro.seller(
-            code = code1,
-            date = data.name,
-            count = store1.count,
-            price=data["open"+code1],
-            free=scomm(data["open"+code1]*store1.count)
-        )
-        cerebro.seller(
-            code = code2,
-            date = data.name,
-            count = store2.count,
-            price=data["open"+code2],
-            free=scomm(data["open"+code2]*store2.count)
-        )
-    if data["signal"] == code1 and store1.count<=0:
-        cerebro.seller(
-            code = code2,
-            date = data.name,
-            count = store2.count,
-            price=data["open"+code2],
-            free=scomm(data["open"+code2]*store2.count)
-        )
-        
-        bcount = int(cerebro.cash/int((data["open"+code1]*101)))*100
-        cerebro.buy(
-            code=code1,
-            date =data.name,
-            count= bcount,
-            price = data["open"+code1],
-            free = bcomm(data["open"+code1]*bcount)
-        )
-    if data["signal"] == code2 and store2.count<=0:
-        
-        cerebro.seller(
-            code = code1,
-            date = data.name,
-            count = store1.count,
-            price=data["open"+code1],
-            free=scomm(data["open"+code1]*store1.count)
-        )
-        price = 0 if np.isnan(data["open"+code2]) else data["open"+code2]
-        bcount = int(cerebro.cash/int((price*101)))*100
-        cerebro.buy(
-            code2,
-            date =data.name,
-            count= bcount,
-            price = data["open"+code2],
-            free = bcomm(data["open"+code2]*bcount)
-        )
+
+    if data["signal"] not in codes :
+        log("strategy signal==None 卖出全部 {}".format(data.name))
+        for item in codes:
+            store = cerebro.store(code = item)
+            cerebro.seller(
+                code = item,
+                date = data.name,
+                count = None,
+                price=data["open"+item],
+                free=scomm(data["open"+item]*store.count)
+            )
+    else:
+        for item in codes:
+            if data["signal"] != item:
+                store = cerebro.store(code = item)
+                cerebro.seller(
+                    code = item,
+                    date = data.name,
+                    count = None,
+                    price=data["open"+item],
+                    free=scomm(data["open"+item]*store.count)
+                )
+        code = data["signal"]
+        store = cerebro.store(code = code)
+        if math.isnan(data["open"+code]) == False:
+            bcount = int(cerebro.cash/int((data["open"+code]*101)))*100
+            cerebro.buy(
+                code=code,
+                date =data.name,
+                count= bcount,
+                price = data["open"+code],
+                free = bcomm(data["open"+code]*bcount)
+            )
+
+    log(" --------strategy end --------")
 
 def signal(df,pct = 20):
-    df["pct"+code1] = df["close"+code1].pct_change(periods=pct)
-    df["pct"+code2] = df["close"+code2].pct_change(periods=pct)
-    def signal(data):
-        if np.isnan(data["close"+code1])  or np.isnan(data["close"+code2]):
-            return None
-        if np.isnan(data["pct"+code1])  or np.isnan(data["pct"+code2]):
-            return None
-        if data["pct"+code1]<0 and data["pct"+code2]<0:
-            return None
-        if data["pct"+code1] > data["pct"+code2]:
-            return code1
-        else:
-            return code2
-    df["signal0"] = df.apply(signal, axis= 1)
+    pctkeys = []
+    for item in codes:
+        pctkey = "pct"+item
+        pctkeys.append(pctkey)
+        df[pctkey] = df["close"+item].pct_change(periods=pct)
+        
+    df["signal0"] = pd.DataFrame(df[pctkeys]).idxmax(axis=1).str.replace("pct", "")
     df["signal"] = df["signal0"].shift(1)
+    
     return df
 
 def loaddata():
-    df1 = load(code = code1)
-    df1 = df1[df1["date"] > "20140101"]
-    df1.index= pd.to_datetime(df1["date"])
-    # df1.set_index(["date"], inplace=True)
-    df1 = df1.rename(columns={'close':"close"+code1})
-    df1 = df1.rename(columns={'open':"open"+code1})
 
-    df2 = load(code = code2)
-    # df2.set_index(["date"], inplace=True)
-    df2 = df2[df2["date"] > "20140101"]
-    df2.index= pd.to_datetime(df2["date"])
-    df2 = df2.rename(columns={'close':"close"+code2})
-    df2 = df2.rename(columns={'open':"open"+code2})
-   
-    df = pd.merge(
-        left=df1[["close"+code1,"open"+code1]],
-        right=df2[["close"+code2,"open"+code2]],
-        left_index=True,
-        right_index=True,
-        how="left"
-    )
+    df = None
+    lastcode = None
+    for item in codes:
+        idf = load(code = item)
+        idf = idf[idf["date"] > begin]
+        idf.index= pd.to_datetime(idf["date"])
+        idf = idf.rename(columns={'close':"close"+item})
+        idf = idf.rename(columns={'open':"open"+item})
+        if lastcode == None:
+            df = idf[["close"+item,"open"+item]]
+        else:
+            df["close"+item] = idf["close"+item]
+            df["open"+item] = idf["open"+item]
+        lastcode = item
     return df
 
 
-code1 = "601865.SH"
-code2 = "300059.SZ"
+
+code1 = "000333.SZ"
+code2 = "600887.SH"
 pct = 3
-begin = "20200101"
+begin = "20190101"
 end = ""
+codes =["000333.SZ","600887.SH","000001.SZ","300059.SZ"]
 
 if __name__ == "__main__":
 
@@ -144,12 +119,14 @@ if __name__ == "__main__":
     cerebro.run()
     buylist = cerebro.buylist()
     print(buylist)
-    close = df.rename(columns={"close"+code1:code1})
-    close = close.rename(columns={"close"+code2:code2})
-    tdf = close[[code1,code2]]
+    close = df
+    for code in codes:
+        close = close.rename(columns={"close"+code:code})
+  
+    tdf = close[codes]
 
     cerebro.chartEarnings(tdf).render("../data/tem/002.html")
-    
+    cerebro.zonelist()
     print(cerebro.buylist())
     
 

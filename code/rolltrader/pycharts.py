@@ -103,7 +103,7 @@ def someline(data,lines,name="someline"):
     for item in lines:
         line.add_yaxis(
             series_name=item,
-            y_axis=data[item],
+            y_axis=data[item].round(decimals=2),
             is_smooth=True,
             is_hover_animation=False,
             linestyle_opts=opts.LineStyleOpts(width=3, opacity=0.5),

@@ -203,11 +203,9 @@ class Cerebro:
   
     # 购买
     def buy(self,code,date,count,price,free = 0):
-        if count<=200:
-            print("")
-            pass
+        self.log("[buy] code:{}, date:{} , count:{}, free:{}".format(code,date,count,price,free))
         if np.isnan(price):
-            self.log("buy error"+str(date)+"price isnan")
+            self.log("buy error price isnan")
             return False
         amount= count * price +free
         if self.cash < amount:
@@ -216,21 +214,22 @@ class Cerebro:
      
         self.cash = self.cash - amount
         store = self.store(code=code)
-        if store.buy(date=date,count=count,price=price,free=free):
+        if store.buy(date=date,count=count,price=price,free=free) == True:
             self.log("buy  买入成功：数量{} 价格{}".format(count,price))
     
     # 卖出
     def seller(self,code,date,count,price,free = 0.0):
-        if np.isnan(price):
-            return False
+        self.log("[seller] code:{}, date:{} , count:{}, free:{}".format(code,date,count,price,free))
         
         store = self.store(code=code)
         if None == count:
-                count = store.count
+            count = store.count
+        amount= count * price - free
         if store.seller(date=date,count=count,price=price,free=free) == True:
-            amount= count * price - free
-           
+            self.log("seller  卖出成功：数量{} 价格{}".format(count,price))
             self.cash = self.cash + amount
+        
+
 
     # 根据编码获取持仓对象
     def store(self,code):
@@ -238,6 +237,7 @@ class Cerebro:
             store = self.stores[code]
         else:
             store = Store()
+            store.log = self.log
             self.stores[code] = store
         return self.stores[code]
     # 获取购买列表
@@ -286,12 +286,20 @@ class Cerebro:
             for item in codes:
                 if item in self.stores.keys():
                     keys.append(item)
-        list = []    
+        list = {}    
         for key in keys:
             store = self.stores[key]
             df = pd.DataFrame(store.zones)
             list[key] = df
-        return list
+
+        df = pd.DataFrame()
+        for key in list.keys():
+            item = list[key]
+            item["code"]=key
+            df = pd.concat([df, item], axis=0)
+            print(df)
+        return df
+
 
     # 获取收益曲线
     def chartEarnings(self,data):
@@ -332,6 +340,8 @@ class Cerebro:
             df[item] = df[item]/(df[item].iloc[0])
         return someline(df,keys)
    
+ 
+        
 
 g_count = {}
 g_cash = 10000
