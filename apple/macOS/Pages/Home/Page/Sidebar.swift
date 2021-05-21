@@ -14,6 +14,7 @@ enum NavigationItem {
     case web
     case appicon
     case setting
+    case analyse
 }
 struct Sidebar: View {
     
@@ -58,7 +59,11 @@ struct Sidebar: View {
             }
             .tag(NavigationItem.web)
             
-        
+            NavigationLink(destination: AnalyseListView()) {
+                Label("我的策略", systemImage: "heart")
+            }
+            .tag(NavigationItem.analyse)
+            
             NavigationLink(destination: AppiconContentView()) {
                 Label("Appicon", systemImage: "heart")
             }

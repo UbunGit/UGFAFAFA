@@ -1,2 +1,44 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+import sys
+sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
+
+from flask import Flask, render_template
+from flask_socketio import SocketIO, emit
+import importlib
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@socketio.on('message')
+def handle_message(message):
+    socketio.emit('my response', message)
+ 
+@socketio.on('analyse')
+def handle_my_custom_event(json):
+    analyse = importlib.import_module("Analyse."+json["name"])
+    def log(msg):
+        socketio.emit(
+            'analyse', {
+                "code":1,
+                "data":msg
+            }
+        )
+    analyse.log = log
+    analyse.setup()
+    socketio.emit(
+        'analyse', {
+            "code":0,
+            "data":"end"
+        }
+    )
+    
+
+if __name__ == '__main__':
+    socketio.run(app)

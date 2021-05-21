@@ -17,7 +17,7 @@
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "main.py",
+                "FLASK_APP": "socket.py",
                 "FLASK_ENV": "development",
                 "FLASK_DEBUG": "0"
             },

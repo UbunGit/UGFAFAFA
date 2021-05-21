@@ -13,14 +13,14 @@ import talib as tlb
 import matplotlib.pyplot as plt
 from Tusharedata.daily import load
 
-def log(msf):
+def clog(msf):
     logging.debug(msf)
 
 # 加载数据
 ma = 10
 code = "600036.SH"
 begin = "20200101"
-clog = log
+log = clog
 
 
 
@@ -82,7 +82,7 @@ def setup(param=None):
     cerebro = Cerebro()
     cerebro.strategy = strategy
     cerebro.data = df
-    cerebro.log = clog
+    cerebro.log = log
     cerebro.run()
 
     from rolltrader.pycharts import someline

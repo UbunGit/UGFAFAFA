@@ -2,9 +2,12 @@ PODS:
   - Alamofire (5.4.1)
   - CocoaAsyncSocket (7.6.5)
   - PythonKit (1.0.1)
+  - Socket.IO-Client-Swift (15.2.0):
+    - Starscream (~> 3.1)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
+  - Starscream (3.1.1)
   - UGSwiftKit (1.0.1):
     - UGSwiftKit/Base (= 1.0.1)
   - UGSwiftKit/Appicon (1.0.1):
@@ -18,6 +21,7 @@ DEPENDENCIES:
   - Alamofire
   - CocoaAsyncSocket
   - PythonKit (from `/Users/admin/Documents/github/PythonKit`)
+  - Socket.IO-Client-Swift
   - SQLite.swift
   - UGSwiftKit (from `./UGSwiftKit`)
   - UGSwiftKit/Appicon (from `./UGSwiftKit`)
@@ -28,6 +32,9 @@ SPEC REPOS:
     - Alamofire
     - CocoaAsyncSocket
     - SQLite.swift
+  trunk:
+    - Socket.IO-Client-Swift
+    - Starscream
 
 EXTERNAL SOURCES:
   PythonKit:
@@ -39,9 +46,11 @@ SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   PythonKit: 80d7cc257e135961a0aa09d66198c6abdf8ebb19
+  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   UGSwiftKit: 89fe28b3d965a532eea1530132ed60ca6fdf34a5
 
-PODFILE CHECKSUM: 58dbac275b4855b689d56d23f9834e305aa95007
+PODFILE CHECKSUM: 7faadd4f40c2ebaaabb93583b72675ae1567432b
 
 COCOAPODS: 1.9.1
