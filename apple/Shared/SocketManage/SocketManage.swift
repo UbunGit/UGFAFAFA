@@ -21,17 +21,19 @@ let manager = SocketManager(socketURL: URL(string: "http://localhost:5000")!, co
 let scokeClient = manager.defaultSocket
 
 func processSocket(){
+    scokeClient.on("analyse") {  data, ack in
+    
+        print("socket analyse:[\(data)]")
 
-//
-//    scokeClient.on("currentAmount") {data, ack in
-//       print("currentAmount")
-//    }
+    }
+    scokeClient.on("log") {  data, ack in
+        print("socket log:[\(data)]")
+    }
+
     scokeClient.on("error") { data, ack in
-        print("scokeClient error")
+        print("socket error: [\(data)]")
     }
-    scokeClient.on("my response") { data, ack in
-        print("server_response")
-    }
+
 
     
     scokeClient.connect(timeoutAfter: 5) {
@@ -53,8 +55,7 @@ struct ScokeResult: Codable {
 
     var code:Int?
     var msg:String?
-//    var data:Codable
-    
+  
 }
 
 

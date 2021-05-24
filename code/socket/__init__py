@@ -15,6 +15,14 @@ socketio = SocketIO(app)
 @app.route('/')
 def index():
     return render_template('index.html')
+############# analyses 策略 http ##################
+@app.route('/analyses')
+def analyses():
+    from Analyse import analyses
+    analyses = analyses()
+    return analyses
+
+
 
 @socketio.on('message')
 def handle_message(message):

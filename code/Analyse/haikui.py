@@ -17,7 +17,7 @@ def clog(msf):
     logging.debug(msf)
 
 # 加载数据
-ma = 10
+ma = 20
 code = "600036.SH"
 begin = "20200101"
 log = clog
@@ -27,6 +27,35 @@ log = clog
 '''
 股价与均线计较策略
 '''
+name = "haikui"
+params = [
+        {
+        "name":"均线天数",
+        "key":"ma",
+        "value":20
+        },
+        {
+        "name":"开始时间",
+        "key":"begin",
+        "value":"20190101"
+        },
+        {
+        "name":"结束时间",
+        "key":"end",
+        "value":""
+        },
+        {
+        "name":"股票列表",
+        "codes":"end",
+        "value":["000333.SZ","600887.SH","000001.SZ","300059.SZ"]
+        },
+    ]
+def info():
+    return {
+        "name":name,
+        "params":params
+    }
+
 def strategy(index,data,cerebro):
 
     store = cerebro.store(code = data["code"])

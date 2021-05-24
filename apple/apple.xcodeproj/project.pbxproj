@@ -24,8 +24,8 @@
 		8428EC962647AEC00008CDFB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428EC952647AEC00008CDFB /* APIError.swift */; };
 		8428EC972647AEC00008CDFB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428EC952647AEC00008CDFB /* APIError.swift */; };
 		843488DA2657421F00EF2203 /* SocketManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843488D92657421F00EF2203 /* SocketManage.swift */; };
-		843488DD26574B0B00EF2203 /* AnalyseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843488DC26574B0B00EF2203 /* AnalyseListView.swift */; };
-		843488DE26574B5400EF2203 /* AnalyseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843488DC26574B0B00EF2203 /* AnalyseListView.swift */; };
+		843488DD26574B0B00EF2203 /* AnalyseParamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843488DC26574B0B00EF2203 /* AnalyseParamView.swift */; };
+		843488DE26574B5400EF2203 /* AnalyseParamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843488DC26574B0B00EF2203 /* AnalyseParamView.swift */; };
 		8446B446262EBEEF00D2AC8B /* ShareEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446B445262EBEEF00D2AC8B /* ShareEdit.swift */; };
 		8446B447262EBEEF00D2AC8B /* ShareEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446B445262EBEEF00D2AC8B /* ShareEdit.swift */; };
 		84540DB926352B8800ECFD9A /* AlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA126352B8800ECFD9A /* AlertData.swift */; };
@@ -158,7 +158,7 @@
 		841F3476262447300099B8CB /* mlma.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mlma.mlmodel; sourceTree = "<group>"; };
 		8428EC952647AEC00008CDFB /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIError.swift; path = "../../../swift-service/HttpServer/APIError.swift"; sourceTree = "<group>"; };
 		843488D92657421F00EF2203 /* SocketManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManage.swift; sourceTree = "<group>"; };
-		843488DC26574B0B00EF2203 /* AnalyseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseListView.swift; sourceTree = "<group>"; };
+		843488DC26574B0B00EF2203 /* AnalyseParamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseParamView.swift; sourceTree = "<group>"; };
 		8446B445262EBEEF00D2AC8B /* ShareEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEdit.swift; sourceTree = "<group>"; };
 		84540DA126352B8800ECFD9A /* AlertData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertData.swift; sourceTree = "<group>"; };
 		84540DA226352B8800ECFD9A /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 		843488DB26574AC900EF2203 /* Analyse */ = {
 			isa = PBXGroup;
 			children = (
-				843488DC26574B0B00EF2203 /* AnalyseListView.swift */,
+				843488DC26574B0B00EF2203 /* AnalyseParamView.swift */,
 			);
 			path = Analyse;
 			sourceTree = "<group>";
@@ -971,7 +971,7 @@
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
-				843488DD26574B0B00EF2203 /* AnalyseListView.swift in Sources */,
+				843488DD26574B0B00EF2203 /* AnalyseParamView.swift in Sources */,
 				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
 				84540DC326352B8800ECFD9A /* StoreStatus.swift in Sources */,
 				84726983261479CC00F92E66 /* ShareDetailView.swift in Sources */,
@@ -1019,7 +1019,7 @@
 				841F3478262447300099B8CB /* mlma.mlmodel in Sources */,
 				847268DF26130EC700F92E66 /* Share.swift in Sources */,
 				847269C02615B15F00F92E66 /* base.swift in Sources */,
-				843488DE26574B5400EF2203 /* AnalyseListView.swift in Sources */,
+				843488DE26574B5400EF2203 /* AnalyseParamView.swift in Sources */,
 				84540DC026352B8800ECFD9A /* Codable.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetail.swift in Sources */,
 				84540DC826352B8800ECFD9A /* Progress .swift in Sources */,
