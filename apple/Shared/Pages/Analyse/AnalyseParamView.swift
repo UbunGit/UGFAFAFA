@@ -17,7 +17,11 @@ struct Analyse:Codable {
         var name:String?
         var key:String?
         var value:String?
+        
+        static var _debug = Param(name: "均线", key:"ma" , value: "5")
     }
+    
+    static var _debug = Analyse(params: [Param._debug], name: "测试")
     
 }
 
@@ -29,9 +33,11 @@ class AnalyseParam: ObservableObject {
 }
 
 struct AnalyseParamView: View {
+    
     @ObservedObject var obser = AnalyseParam()
     @State var begin:Date = Date()
     @State var end:Date = Date()
+   
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
             HStack{
@@ -96,10 +102,16 @@ struct AnalyseParamView: View {
     /// 每个策略自己所需的参数
     var ownedParamView:some View{
         HStack{
-            ForEach(0..<obser.analyse?.params.count, id:\.self) {
-                
+        
+            ForEach(0..<(obser.analyse?.params.count ?? 0)) { index in
                 HStack{
-                    Text(obser.analyses.name)
+                    let params :Analyse.Param = obser.analyse?.params[index]
+                    Text(params.name)
+                        .padding()
+                    TextField("ee", text:$params.value)
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 0.5)
+                                       .stroke(Color("Text 2"), lineWidth: 1))
                 }
             }
             
@@ -109,6 +121,10 @@ struct AnalyseParamView: View {
 
 struct AnalyseParamView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalyseParamView()
+        
+        let analyseParam = AnalyseParam()
+        analyseParam.analyses = [Analyse._debug]
+        analyseParam.analyse = analyseParam.analyses.first
+        return AnalyseParamView(obser: analyseParam)
     }
 }
