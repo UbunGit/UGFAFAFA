@@ -33,23 +33,9 @@ params = [
         {
         "name":"动能天数",
         "key":"pct",
-        "value":3
+        "value":"3"
         },
-        {
-        "name":"开始时间",
-        "key":"begin",
-        "value":"20190101"
-        },
-        {
-        "name":"结束时间",
-        "key":"end",
-        "value":""
-        },
-        {
-        "name":"股票列表",
-        "codes":"end",
-        "value":["000333.SZ","600887.SH","000001.SZ","300059.SZ"]
-        },
+
     ]
 def info():
     return {

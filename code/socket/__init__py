@@ -20,7 +20,10 @@ def index():
 def analyses():
     from Analyse import analyses
     analyses = analyses()
-    return analyses
+    return {
+        "code":0,
+        "data":analyses 
+    }
 
 
 

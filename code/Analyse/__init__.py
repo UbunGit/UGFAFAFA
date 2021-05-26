@@ -4,14 +4,12 @@
 import sys, json
 
 from .damrey import * 
-from .maline import * 
+from .haikui import * 
 
 # 返回策略列表
 def analyses():
-    return  json.dumps(
-        [
-            damrey.info(),
-            maline.info()
-        ]
-        , ensure_ascii=False
-    )
+    return  [
+                damrey.info(),
+                haikui.info()
+            ] 
+    
