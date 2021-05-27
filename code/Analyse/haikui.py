@@ -38,6 +38,7 @@ params = [
 def info():
     return {
         "name":name,
+        "des":"海葵",
         "params":params
     }
 

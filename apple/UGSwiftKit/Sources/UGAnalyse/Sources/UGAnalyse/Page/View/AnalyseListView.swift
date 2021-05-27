@@ -74,9 +74,9 @@ struct AnalyseListView: View {
     
 }
 
-struct AnalyseCell:View {
+public struct AnalyseCell:View {
     @State var analyse: Analyse
-    var body: some View {
+    public var body: some View {
         HStack{
             Text(analyse.name)
             Text(analyse.des ?? "des is null")

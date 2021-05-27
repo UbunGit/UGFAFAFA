@@ -40,6 +40,7 @@ params = [
 def info():
     return {
         "name":name,
+        "des":"达维",
         "params":params
     }
 

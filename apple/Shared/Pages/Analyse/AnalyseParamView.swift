@@ -9,22 +9,6 @@ import SwiftUI
 import UGSwiftKit
 import Alamofire
 
-struct Analyse:Codable {
-    
-    var params:[Param] = []
-    var name:String = ""
-    
-    struct Param:Codable {
-        var name:String = ""
-        var key:String = ""
-        var value:String = ""
-        
-        static var _debug = Param(name: "均线", key:"ma" , value: "5")
-    }
-    
-    static var _debug = Analyse(params: [Param._debug], name: "测试")
-    
-}
 
 class AnalyseParam: ObservableObject {
     
@@ -32,7 +16,7 @@ class AnalyseParam: ObservableObject {
     @Published var analyse:Analyse = Analyse()
     
     func loaddata()  {
-        let url = "http://127.0.0.1:5000/analyses"
+        let url = "\(baseurl)/analyses"
      
         AF.request(url, method: .get, parameters: nil){ urlRequest in
             urlRequest.timeoutInterval = 5
@@ -55,14 +39,28 @@ struct AnalyseParamView: View {
     @ObservedObject var obser = AnalyseParam()
     @State var begin:Date = Date()
     @State var end:Date = Date()
+    
+    @State var isSheetSelectAnalyse = false
    
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
             HStack{
                 Text(obser.analyse.name)
                     .font(.title)
+                Text(" \(obser.analyse.des ?? "")")
+                    .font(.title)
                 Image(systemName: "chevron.forward")
             }
+            .sheet(isPresented: $isSheetSelectAnalyse, content: {
+                SheetWithCloseView {
+                    AnalyseSelectView(analyse: $obser.analyse, analyses: obser.analyses)
+                }
+                
+            })
+            .onTapGesture(perform: {
+                isSheetSelectAnalyse = true
+            })
+           
             Divider()
             Section{
                 Text("公共参数")
@@ -74,6 +72,7 @@ struct AnalyseParamView: View {
                     .font(.title2)
                 ownedParamView
             }
+            
             submit
             
         }
@@ -139,13 +138,22 @@ struct AnalyseParamView: View {
     }
     
     var submit:some View{
-        HStack{
-            Text("确认").onTapGesture {
-                print("\(obser.analyse)")
+        GeometryReader(content: { geometry in
+            HStack{
+                Text("确认").onTapGesture {
+                    print("\(obser.analyse)")
+                }
+                .foregroundColor(Color("Background 1"))
+                .padding()
+                .frame(width: geometry.size.width-20, height: 44, alignment: .center)
+                .background(Color("AccentColor"))
+                .cornerRadius(8)
+ 
             }
-        }
+        })
     }
 }
+
 struct InputParam:View {
     @Binding var param:Analyse.Param
     var body:some View{
