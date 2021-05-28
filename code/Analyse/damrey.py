@@ -118,9 +118,6 @@ def loaddata():
     return df
 
 
-
-
-
 if __name__ == "__main__":
 
     def log(msf):

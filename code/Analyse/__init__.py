@@ -3,13 +3,19 @@
 
 import sys, json
 
-from .damrey import * 
-from .haikui import * 
+from .damrey import info as  damreyInfo
+from .haikui import info as  haikuiInfo
 
 # 返回策略列表
 def analyses():
     return  [
-                damrey.info(),
-                haikui.info()
-            ] 
+                damreyInfo(),
+                haikuiInfo()
+            ]
+
+class Analyse:
+    
+    def info(self):
+        # 获取策略简介
+        pass
     
