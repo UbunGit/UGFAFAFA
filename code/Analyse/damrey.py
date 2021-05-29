@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 from Tusharedata.daily import load
 from rolltrader.cerebro import Cerebro
 from rolltrader.free import bcomm,scomm
+from .params import valueof
 
 '''
 两支股票轮动交易 
@@ -35,8 +36,8 @@ params = [
         "key":"pct",
         "value":"3"
         },
-
     ]
+
 def info():
     return {
         "name":name,
@@ -44,13 +45,12 @@ def info():
         "params":params
     }
 
+def log(msf):
+    logging.debug(msf)
+
 def strategy(index,data,cerebro):
     #code,date,count,price,free = 0
     log(" --------strategy {} --------".format(data.name))
-
-    store1 = cerebro.store(code = code1)
-    store2 = cerebro.store(code = code2)
-
     if data["signal"] not in codes :
         log("strategy signal==None 卖出全部 {}".format(data.name))
         for item in codes:
@@ -87,7 +87,9 @@ def strategy(index,data,cerebro):
 
     log(" --------strategy end --------")
 
-def signal(df,pct = 20):
+def signal(df,params):
+
+    pct = int(valueof(params,"pct"))
     pctkeys = []
     for item in codes:
         pctkey = "pct"+item
@@ -99,53 +101,8 @@ def signal(df,pct = 20):
     
     return df
 
-def loaddata():
-
-    df = None
-    lastcode = None
-    for item in codes:
-        idf = load(code = item)
-        idf = idf[idf["date"] > begin]
-        idf.index= pd.to_datetime(idf["date"])
-        idf = idf.rename(columns={'close':"close"+item})
-        idf = idf.rename(columns={'open':"open"+item})
-        if lastcode == None:
-            df = idf[["close"+item,"open"+item]]
-        else:
-            df["close"+item] = idf["close"+item]
-            df["open"+item] = idf["open"+item]
-        lastcode = item
-    return df
 
 
-if __name__ == "__main__":
-
-    def log(msf):
-        logging.debug(msf)
-
-    df = loaddata()
-    df = signal(df,pct=pct)
-    df.to_csv("../data/tem/002.csv")
-    cerebro = Cerebro()
-    cerebro.cash = 100000
-    cerebro.strategy = strategy
-    cerebro.data = df
-    cerebro.log = log
-    cerebro.run()
-    buylist = cerebro.buylist()
-    print(buylist)
-    close = df
-    for code in codes:
-        close = close.rename(columns={"close"+code:code})
-  
-    tdf = close[codes]
-
-    cerebro.chartEarnings(tdf).render("../data/tem/002.html")
-    cerebro.zonelist()
-    print(cerebro.buylist())
-    
-
-   
 
 
 

@@ -20,7 +20,7 @@ let manager = SocketManager(socketURL: URL(string: "http://localhost:5000")!, co
 
 let scokeClient = manager.defaultSocket
 
-func processSocket(){
+public func processSocket(){
     scokeClient.on("analyse") {  data, ack in
     
         print("socket analyse:[\(data)]")

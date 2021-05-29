@@ -39,8 +39,23 @@ struct AnalyseParamView: View {
     @ObservedObject var obser = AnalyseParam()
     @State var begin:Date = Date()
     @State var end:Date = Date()
-    
+   
     @State var isSheetSelectAnalyse = false
+    @State var isSheetSelectShare = false
+    
+    var codes:Binding<String>{
+        Binding<String>(
+            get:{
+                obser.analyse.codes.joined(separator: ",")
+            },
+            
+            set:{
+                let codes = $0.components(separatedBy: ",")
+                obser.analyse.codes = codes
+            }
+        )
+    }
+    
    
     var body: some View {
         VStack(alignment: .leading, spacing: 8){
@@ -53,6 +68,7 @@ struct AnalyseParamView: View {
             }
             .sheet(isPresented: $isSheetSelectAnalyse, content: {
                 SheetWithCloseView {
+                    
                     AnalyseSelectView(analyse: $obser.analyse, analyses: obser.analyses)
                 }
                 
@@ -76,13 +92,12 @@ struct AnalyseParamView: View {
             submit
             
         }
-        
-
         .textFieldStyle(PlainTextFieldStyle())
         .padding()
         .background(Color.white)
         .onAppear(){
             obser.loaddata()
+            processSocket()
         }
     }
     
@@ -107,10 +122,26 @@ struct AnalyseParamView: View {
             HStack{
                 Text("股票列表")
                     .padding()
-                TextField("ee", text: .constant("ee"))
+                TextField("股票列表", text: codes)
                     .padding()
                     .overlay(RoundedRectangle(cornerRadius: 0.5)
                                    .stroke(Color("Text 2"), lineWidth: 1))
+            }
+            .overlay(
+                Image(systemName: "plus.circle")
+                    .padding()
+                ,
+                alignment: .trailing
+            )
+            .sheet(isPresented: $isSheetSelectShare, content: {
+                SheetWithCloseView {
+                    
+                    SelectShareView(selects: $obser.analyse.codes)
+                }
+                
+            })
+            .onTapGesture {
+                isSheetSelectShare = true
             }
             
         }
@@ -141,7 +172,10 @@ struct AnalyseParamView: View {
         GeometryReader(content: { geometry in
             HStack{
                 Text("确认").onTapGesture {
-                    print("\(obser.analyse)")
+                    obser.analyse.begin = begin.toString("yyyyMMdd") ?? "20160101"
+                    obser.analyse.end = end.toString("yyyyMMdd") ?? ""
+                    let json = try? JSONEncoder().encode(obser.analyse)
+                    scokeClient.emit("analyse",with: [json as Any])
                 }
                 .foregroundColor(Color("Background 1"))
                 .padding()

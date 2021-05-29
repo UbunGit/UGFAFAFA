@@ -12,6 +12,14 @@ struct APIData<T:Codable>:Codable{
     var code:Int
     var message:String?
     var data:T?
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        code = try container.decode(Int.self, forKey: .code)
+        message = try container.decodeIfPresent(String.self, forKey: .message)
+        data = try container.decode(T.self, forKey: .data)
+        
+    }
 }
 
 extension DataRequest{

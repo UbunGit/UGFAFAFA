@@ -7,7 +7,7 @@
 
 import SwiftUI
 import UGSwiftKit
-import Alamofire
+
 
 
 struct AnalyseSelectView: View {
@@ -43,7 +43,7 @@ struct AnalyseSelectView: View {
         
         .padding([.top, .leading],40)
         .onAppear(){
-//            obser.loaddata(kewword: "")
+
         }
     }
 }

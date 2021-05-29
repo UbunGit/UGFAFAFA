@@ -18,6 +18,7 @@ struct ContentView: View {
         
         Sidebar()
             .onAppear(){
+                
             }
     }
  
