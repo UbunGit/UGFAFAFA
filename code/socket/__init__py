@@ -12,6 +12,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
+def log(msg):
+    socketio.emit(
+        'log', {
+            "code":1,
+            "data":msg
+        }
+    )
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -23,13 +31,7 @@ def handle_message(message):
 @socketio.on('analyse')
 def handle_my_custom_event(json):
     analyse = importlib.import_module("Analyse."+json["name"])
-    def log(msg):
-        socketio.emit(
-            'analyse', {
-                "code":1,
-                "data":msg
-            }
-        )
+    
     analyse.log = log
     analyse.setup()
     socketio.emit(
