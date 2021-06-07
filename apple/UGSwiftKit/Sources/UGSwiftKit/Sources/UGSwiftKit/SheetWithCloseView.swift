@@ -25,7 +25,7 @@ public struct SheetWithCloseView <Content: View>: View{
                 .onTapGesture {
                     presentationMode.wrappedValue.dismiss()
                 }
-        }
+        }.frame(minWidth: 300, idealWidth: 300, maxWidth: 300, minHeight: 300, idealHeight: 300, maxHeight: 300, alignment: .center)
         
     }
 }

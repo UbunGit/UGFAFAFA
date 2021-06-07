@@ -59,7 +59,7 @@ struct Sidebar: View {
             }
             .tag(NavigationItem.web)
             
-            NavigationLink(destination: AnalyseListView()) {
+            NavigationLink(destination: AnalyseParamView()) {
                 Label("我的策略", systemImage: "heart")
             }
             .tag(NavigationItem.analyse)

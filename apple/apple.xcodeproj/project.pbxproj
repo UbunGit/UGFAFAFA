@@ -23,9 +23,15 @@
 		8428EC942647AE110008CDFB /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8428EC932647AE110008CDFB /* PerfectSQLite */; };
 		8428EC962647AEC00008CDFB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428EC952647AEC00008CDFB /* APIError.swift */; };
 		8428EC972647AEC00008CDFB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428EC952647AEC00008CDFB /* APIError.swift */; };
+		842C7240265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */; };
+		842C7241265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */; };
+		842C7244265F3A6D0086FCD0 /* Analyse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C7243265F3A6D0086FCD0 /* Analyse.swift */; };
+		842C7245265F3A6D0086FCD0 /* Analyse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C7243265F3A6D0086FCD0 /* Analyse.swift */; };
+		842C7248265F3B840086FCD0 /* AnalyseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C7247265F3B840086FCD0 /* AnalyseCell.swift */; };
+		842C7249265F3B840086FCD0 /* AnalyseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C7247265F3B840086FCD0 /* AnalyseCell.swift */; };
 		843488DA2657421F00EF2203 /* SocketManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843488D92657421F00EF2203 /* SocketManage.swift */; };
-		843488DD26574B0B00EF2203 /* AnalyseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843488DC26574B0B00EF2203 /* AnalyseListView.swift */; };
-		843488DE26574B5400EF2203 /* AnalyseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843488DC26574B0B00EF2203 /* AnalyseListView.swift */; };
+		843488DD26574B0B00EF2203 /* AnalyseParamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843488DC26574B0B00EF2203 /* AnalyseParamView.swift */; };
+		843488DE26574B5400EF2203 /* AnalyseParamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843488DC26574B0B00EF2203 /* AnalyseParamView.swift */; };
 		8446B446262EBEEF00D2AC8B /* ShareEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446B445262EBEEF00D2AC8B /* ShareEdit.swift */; };
 		8446B447262EBEEF00D2AC8B /* ShareEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8446B445262EBEEF00D2AC8B /* ShareEdit.swift */; };
 		84540DB926352B8800ECFD9A /* AlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA126352B8800ECFD9A /* AlertData.swift */; };
@@ -105,6 +111,10 @@
 		8491D998263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		8491D999263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
 		8491D9A7263186B60035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
+		84B155152662219400B5DACD /* SelectShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B155142662219400B5DACD /* SelectShareView.swift */; };
+		84B155162662219400B5DACD /* SelectShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B155142662219400B5DACD /* SelectShareView.swift */; };
+		84B15518266224C400B5DACD /* GroupShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B15517266224C400B5DACD /* GroupShare.swift */; };
+		84B15519266224C400B5DACD /* GroupShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B15517266224C400B5DACD /* GroupShare.swift */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
 		84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */; };
@@ -157,8 +167,11 @@
 		841F335B2624062F0099B8CB /* MakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeData.swift; sourceTree = "<group>"; };
 		841F3476262447300099B8CB /* mlma.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mlma.mlmodel; sourceTree = "<group>"; };
 		8428EC952647AEC00008CDFB /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIError.swift; path = "../../../swift-service/HttpServer/APIError.swift"; sourceTree = "<group>"; };
+		842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseSelectView.swift; sourceTree = "<group>"; };
+		842C7243265F3A6D0086FCD0 /* Analyse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analyse.swift; sourceTree = "<group>"; };
+		842C7247265F3B840086FCD0 /* AnalyseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseCell.swift; sourceTree = "<group>"; };
 		843488D92657421F00EF2203 /* SocketManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManage.swift; sourceTree = "<group>"; };
-		843488DC26574B0B00EF2203 /* AnalyseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseListView.swift; sourceTree = "<group>"; };
+		843488DC26574B0B00EF2203 /* AnalyseParamView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseParamView.swift; sourceTree = "<group>"; };
 		8446B445262EBEEF00D2AC8B /* ShareEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEdit.swift; sourceTree = "<group>"; };
 		84540DA126352B8800ECFD9A /* AlertData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertData.swift; sourceTree = "<group>"; };
 		84540DA226352B8800ECFD9A /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -198,6 +211,8 @@
 		848929C92611872F00006D88 /* PythonManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonManage.swift; sourceTree = "<group>"; };
 		8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDSqliteProtocol.swift; sourceTree = "<group>"; };
 		8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlitInsterProtocol.swift; sourceTree = "<group>"; };
+		84B155142662219400B5DACD /* SelectShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectShareView.swift; sourceTree = "<group>"; };
+		84B15517266224C400B5DACD /* GroupShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupShare.swift; sourceTree = "<group>"; };
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
@@ -281,6 +296,23 @@
 			path = ML;
 			sourceTree = "<group>";
 		};
+		842C7242265F3A4A0086FCD0 /* Moden */ = {
+			isa = PBXGroup;
+			children = (
+				842C7243265F3A6D0086FCD0 /* Analyse.swift */,
+				84B15517266224C400B5DACD /* GroupShare.swift */,
+			);
+			path = Moden;
+			sourceTree = "<group>";
+		};
+		842C7246265F3B670086FCD0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				842C7247265F3B840086FCD0 /* AnalyseCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		843488D8265741F400EF2203 /* SocketManage */ = {
 			isa = PBXGroup;
 			children = (
@@ -292,7 +324,11 @@
 		843488DB26574AC900EF2203 /* Analyse */ = {
 			isa = PBXGroup;
 			children = (
-				843488DC26574B0B00EF2203 /* AnalyseListView.swift */,
+				842C7246265F3B670086FCD0 /* View */,
+				842C7242265F3A4A0086FCD0 /* Moden */,
+				843488DC26574B0B00EF2203 /* AnalyseParamView.swift */,
+				842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */,
+				84B155142662219400B5DACD /* SelectShareView.swift */,
 			);
 			path = Analyse;
 			sourceTree = "<group>";
@@ -957,6 +993,7 @@
 				84540DB926352B8800ECFD9A /* AlertData.swift in Sources */,
 				8446B446262EBEEF00D2AC8B /* ShareEdit.swift in Sources */,
 				84807DC325FB7A8900C8CB18 /* Persistence.swift in Sources */,
+				84B155152662219400B5DACD /* SelectShareView.swift in Sources */,
 				8472698A261479E700F92E66 /* ShareDetail.swift in Sources */,
 				841F3477262447300099B8CB /* mlma.mlmodel in Sources */,
 				840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */,
@@ -971,17 +1008,21 @@
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
-				843488DD26574B0B00EF2203 /* AnalyseListView.swift in Sources */,
+				843488DD26574B0B00EF2203 /* AnalyseParamView.swift in Sources */,
 				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
 				84540DC326352B8800ECFD9A /* StoreStatus.swift in Sources */,
+				84B15518266224C400B5DACD /* GroupShare.swift in Sources */,
 				84726983261479CC00F92E66 /* ShareDetailView.swift in Sources */,
 				84540DBB26352B8800ECFD9A /* Formatter.swift in Sources */,
+				842C7244265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				84540DC126352B8800ECFD9A /* UDID.swift in Sources */,
 				84540DBD26352B8800ECFD9A /* Date.swift in Sources */,
 				84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				8472689E261307F300F92E66 /* SharesListView.swift in Sources */,
 				847268A0261307F300F92E66 /* SharesList.swift in Sources */,
 				84540DC726352B8800ECFD9A /* Progress .swift in Sources */,
+				842C7248265F3B840086FCD0 /* AnalyseCell.swift in Sources */,
+				842C7240265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */,
 				8428EC962647AEC00008CDFB /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -994,8 +1035,11 @@
 				84565A6D261C6000009F9F7D /* Page.swift in Sources */,
 				841F334B2623FCAB0099B8CB /* MLMAOut.swift in Sources */,
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
+				842C7241265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */,
 				84726984261479CC00F92E66 /* ShareDetailView.swift in Sources */,
+				84B155162662219400B5DACD /* SelectShareView.swift in Sources */,
 				847DE74826575542009C98DF /* SocketManage.swift in Sources */,
+				842C7245265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
 				847269CF2615B28C00F92E66 /* ApiShare.swift in Sources */,
 				8472697426146A2400F92E66 /* SharesListView.swift in Sources */,
@@ -1004,7 +1048,9 @@
 				847268F626130F7600F92E66 /* Store.swift in Sources */,
 				84540DC226352B8800ECFD9A /* UDID.swift in Sources */,
 				84540DCA26352B8800ECFD9A /* SegmentedView.swift in Sources */,
+				84B15519266224C400B5DACD /* GroupShare.swift in Sources */,
 				84807DC425FB7A8900C8CB18 /* Persistence.swift in Sources */,
+				842C7249265F3B840086FCD0 /* AnalyseCell.swift in Sources */,
 				8428EC972647AEC00008CDFB /* APIError.swift in Sources */,
 				84807DBE25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */,
@@ -1019,7 +1065,7 @@
 				841F3478262447300099B8CB /* mlma.mlmodel in Sources */,
 				847268DF26130EC700F92E66 /* Share.swift in Sources */,
 				847269C02615B15F00F92E66 /* base.swift in Sources */,
-				843488DE26574B5400EF2203 /* AnalyseListView.swift in Sources */,
+				843488DE26574B5400EF2203 /* AnalyseParamView.swift in Sources */,
 				84540DC026352B8800ECFD9A /* Codable.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetail.swift in Sources */,
 				84540DC826352B8800ECFD9A /* Progress .swift in Sources */,

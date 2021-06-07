@@ -10,6 +10,11 @@ import Foundation
 public struct BaseError:Error {
     var code:Int
     var msg:String
+
+    public init(code:Int,msg:String) {
+        self.code = code
+        self.msg = msg
+    }
 }
 
 public struct UGPage<T:Codable>: Codable{
