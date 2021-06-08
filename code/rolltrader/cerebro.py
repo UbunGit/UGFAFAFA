@@ -147,6 +147,7 @@ class Describe:
         ]
         table.add(headers, rows)
         return table
+    
     def pie(self):
         piedata = self.positions["assetscut"].value_counts(normalize=True, ascending=True )
         pie = Pie(init_opts=opts.InitOpts())
@@ -158,8 +159,7 @@ class Describe:
             center=["50%", "50%"],
         )
         return pie
-
-       
+    
 
 class Cerebro:
     '''
@@ -228,8 +228,6 @@ class Cerebro:
         if store.seller(date=date,count=count,price=price,free=free) == True:
             self.log("seller  卖出成功：数量{} 价格{}".format(count,price))
             self.cash = self.cash + amount
-        
-
 
     # 根据编码获取持仓对象
     def store(self,code):
@@ -258,8 +256,7 @@ class Cerebro:
 
         return list
 
-   
-     # 获取卖出列表
+
     # 获取卖出列表
     def selllist(self,codes=None):
         
@@ -276,7 +273,6 @@ class Cerebro:
             df = pd.DataFrame(store.slist)
             list[key] = df
         return list
-
     # 获取持仓区间
     def zonelist(self,codes=None):
         keys = []
@@ -299,8 +295,6 @@ class Cerebro:
             df = pd.concat([df, item], axis=0)
             print(df)
         return df
-
-
     # 获取收益曲线
     def chartEarnings(self,data):
 
@@ -335,10 +329,10 @@ class Cerebro:
         df["cash"] = df.apply(earnings,axis = 1, args=(self.stores.keys(),))
         keys = ["cash"]
         for key in self.stores.keys():
-            keys.append(key)
+            keys.append("close"+key)
         for item in keys:
             df[item] = df[item]/(df[item].iloc[0])
-        return someline(df,keys)
+        return df
    
  
         
@@ -363,7 +357,7 @@ def earnings(data,codes=[]):
         incash = sprice * scount -sfree
         outcash = bcount * bprice - bfree
         g_cash = g_cash + incash - outcash
-        tcash = tcash + g_count[code]* data[code]
+        tcash = tcash + g_count[code]* data["close"+code]
     return g_cash + tcash
 
 
