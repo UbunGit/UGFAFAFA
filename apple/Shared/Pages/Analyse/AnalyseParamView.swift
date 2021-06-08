@@ -175,7 +175,7 @@ struct AnalyseParamView: View {
                     obser.analyse.begin = begin.toString("yyyyMMdd") ?? "20160101"
                     obser.analyse.end = end.toString("yyyyMMdd") ?? ""
                     let json = try? JSONEncoder().encode(obser.analyse)
-                    scokeClient.emit("analyse",with: [json as Any])
+                    scokeClient.emit("analyse1",with: [json as Any])
                 }
                 .foregroundColor(Color("Background 1"))
                 .padding()
