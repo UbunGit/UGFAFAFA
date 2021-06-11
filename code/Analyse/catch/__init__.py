@@ -74,8 +74,11 @@ class AnalyseBSRecords(Base):
 
     def delete(self, cache_id):
         records = self.query.filter_by(cache_id=cache_id).delete(synchronize_session=False)
-   
         session.commit()
+
+    def search(self,cache_id,code,type):
+        return  self.query.filter_by(cache_id=cache_id, code=code, type=type).all()
+
 
 # 持仓记录
 class AnalyseZoneRecords(Base):
@@ -90,8 +93,9 @@ class AnalyseZoneRecords(Base):
 
     def delete(self, cache_id):
         records = self.query.filter_by(cache_id=cache_id).delete(synchronize_session=False)
-   
         session.commit()
+    def search(self,cache_id,code):
+        return  self.query.filter_by(cache_id=cache_id, code=code).all()
 
 
 

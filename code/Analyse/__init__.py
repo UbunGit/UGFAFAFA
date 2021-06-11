@@ -146,18 +146,22 @@ class Analyse:
             df = load(code = code)
             df = df[df["date"] > self.begin]
             df.index= pd.to_datetime(df["date"])
-            kchart = kline(df)
+            buy = BSRecords().search(cache_id=id,code=code,type=1)
+            bdf = pd.DataFrame([x.__dict__ for x in buy]).drop('_sa_instance_state', 1) 
+            bdf.index= pd.to_datetime(bdf["date"])
+
+            sell = BSRecords().search(cache_id=id,code=code,type=2)
+            sdf = pd.DataFrame([x.__dict__ for x in sell]).drop('_sa_instance_state', 1)
+            sdf.index= pd.to_datetime(sdf["date"])
+
+            zone = ZoneRecords().search(cache_id=id,code=code)
+            zonedf = pd.DataFrame([x.__dict__ for x in zone]).drop('_sa_instance_state', 1).dropna(axis=0,how='any')
+
+            kchart = kline(df,buy=bdf,sell = sdf,zone=zonedf)
             klines.append(kchart)
             kchart.render("../data/analyse/chart/klines_"+code+str(id)+".html")
         
 
-            
-
-
-
-
-
-        
 
 if __name__ == "__main__":
 
