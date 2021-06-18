@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
 		840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840E2B9A2615DECC003A84C6 /* SroreCell.swift */; };
+		8416E877267B407B0058CBCD /* SFLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E876267B407B0058CBCD /* SFLineChartView.swift */; };
+		8416E878267B407E0058CBCD /* SFLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8416E876267B407B0058CBCD /* SFLineChartView.swift */; };
 		841DEFD42623351200AF6D7C /* Test_ML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841DEFD32623351200AF6D7C /* Test_ML.swift */; };
 		841F2ED6262017D90099B8CB /* PythonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F2ED5262017D90099B8CB /* PythonTest.swift */; };
 		841F31FB2623F6BA0099B8CB /* PythonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F2ED5262017D90099B8CB /* PythonTest.swift */; };
@@ -161,6 +163,7 @@
 		25FE6ADDE50ED540B221C130 /* Pods_apple__macOS_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_apple__macOS_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BD726DDCB5A4F80F32A27C1 /* Pods-apple (iOS).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-apple (iOS).debug.xcconfig"; path = "Target Support Files/Pods-apple (iOS)/Pods-apple (iOS).debug.xcconfig"; sourceTree = "<group>"; };
 		840E2B9A2615DECC003A84C6 /* SroreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SroreCell.swift; sourceTree = "<group>"; };
+		8416E876267B407B0058CBCD /* SFLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFLineChartView.swift; sourceTree = "<group>"; };
 		841DEFD32623351200AF6D7C /* Test_ML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_ML.swift; sourceTree = "<group>"; };
 		841F2ED5262017D90099B8CB /* PythonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonTest.swift; sourceTree = "<group>"; };
 		841F31D52623F1C20099B8CB /* MLMAOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLMAOut.swift; sourceTree = "<group>"; };
@@ -565,6 +568,7 @@
 				84807D9525FB7A8500C8CB18 /* Persistence.swift */,
 				84807D9125FB7A8500C8CB18 /* apple.xcdatamodeld */,
 				847269BE2615B15F00F92E66 /* base.swift */,
+				8416E876267B407B0058CBCD /* SFLineChartView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1013,6 +1017,7 @@
 				84540DC326352B8800ECFD9A /* StoreStatus.swift in Sources */,
 				84B15518266224C400B5DACD /* GroupShare.swift in Sources */,
 				84726983261479CC00F92E66 /* ShareDetailView.swift in Sources */,
+				8416E877267B407B0058CBCD /* SFLineChartView.swift in Sources */,
 				84540DBB26352B8800ECFD9A /* Formatter.swift in Sources */,
 				842C7244265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				84540DC126352B8800ECFD9A /* UDID.swift in Sources */,
@@ -1066,6 +1071,7 @@
 				847268DF26130EC700F92E66 /* Share.swift in Sources */,
 				847269C02615B15F00F92E66 /* base.swift in Sources */,
 				843488DE26574B5400EF2203 /* AnalyseParamView.swift in Sources */,
+				8416E878267B407E0058CBCD /* SFLineChartView.swift in Sources */,
 				84540DC026352B8800ECFD9A /* Codable.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetail.swift in Sources */,
 				84540DC826352B8800ECFD9A /* Progress .swift in Sources */,
