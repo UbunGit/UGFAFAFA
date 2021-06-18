@@ -14,8 +14,6 @@ enum SFPresentationType {
     case sheet
 }
 
-
-
 public class SFPersentationObservable: ObservableObject {
 
    

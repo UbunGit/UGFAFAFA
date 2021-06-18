@@ -71,7 +71,12 @@ def handle_my_custom_event(data):
     param = json.loads(data)
 
     analyse = Analyse(param["name"])
-    analyse.setup(begin=param["begin"],end=param["end"],codes=param["codes"],params=param["params"])
+    analyse.setup(
+        begin=param["begin"],
+        end=param["end"],
+        codes=param["codes"],
+        params=param["params"],
+        )
   
 
     

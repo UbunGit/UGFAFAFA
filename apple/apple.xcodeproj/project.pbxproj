@@ -25,6 +25,8 @@
 		8428EC942647AE110008CDFB /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8428EC932647AE110008CDFB /* PerfectSQLite */; };
 		8428EC962647AEC00008CDFB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428EC952647AEC00008CDFB /* APIError.swift */; };
 		8428EC972647AEC00008CDFB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428EC952647AEC00008CDFB /* APIError.swift */; };
+		8428ECFC267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */; };
+		8428ECFD267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */; };
 		842C7240265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */; };
 		842C7241265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */; };
 		842C7244265F3A6D0086FCD0 /* Analyse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C7243265F3A6D0086FCD0 /* Analyse.swift */; };
@@ -170,6 +172,7 @@
 		841F335B2624062F0099B8CB /* MakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeData.swift; sourceTree = "<group>"; };
 		841F3476262447300099B8CB /* mlma.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mlma.mlmodel; sourceTree = "<group>"; };
 		8428EC952647AEC00008CDFB /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIError.swift; path = "../../../swift-service/HttpServer/APIError.swift"; sourceTree = "<group>"; };
+		8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFCandleStickChartView.swift; sourceTree = "<group>"; };
 		842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseSelectView.swift; sourceTree = "<group>"; };
 		842C7243265F3A6D0086FCD0 /* Analyse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analyse.swift; sourceTree = "<group>"; };
 		842C7247265F3B840086FCD0 /* AnalyseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseCell.swift; sourceTree = "<group>"; };
@@ -297,6 +300,14 @@
 				841F335B2624062F0099B8CB /* MakeData.swift */,
 			);
 			path = ML;
+			sourceTree = "<group>";
+		};
+		8428ECF8267A3BEB0008CDFB /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */,
+			);
+			path = Charts;
 			sourceTree = "<group>";
 		};
 		842C7242265F3A4A0086FCD0 /* Moden */ = {
@@ -558,12 +569,12 @@
 		84807D9025FB7A8500C8CB18 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8428ECF8267A3BEB0008CDFB /* Charts */,
 				843488D8265741F400EF2203 /* SocketManage */,
 				84540D9F26352B8800ECFD9A /* UGKit */,
 				847269D32615B2B100F92E66 /* API */,
 				8472697C261478FC00F92E66 /* Pages */,
 				847268A82613088700F92E66 /* Moden */,
-				84E11EF5260DBC860012D151 /* TextField */,
 				84807D9325FB7A8500C8CB18 /* appleApp.swift */,
 				84807D9525FB7A8500C8CB18 /* Persistence.swift */,
 				84807D9125FB7A8500C8CB18 /* apple.xcdatamodeld */,
@@ -663,13 +674,6 @@
 				84E11EEB260DB2DB0012D151 /* SettingView.swift */,
 			);
 			path = Page;
-			sourceTree = "<group>";
-		};
-		84E11EF5260DBC860012D151 /* TextField */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = TextField;
 			sourceTree = "<group>";
 		};
 		84FA4E3325FBA9E600F93203 /* SocketServer */ = {
@@ -993,6 +997,7 @@
 			files = (
 				843488DA2657421F00EF2203 /* SocketManage.swift in Sources */,
 				84807DBF25FB7A8900C8CB18 /* appleApp.swift in Sources */,
+				8428ECFC267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */,
 				847268EF26130F6100F92E66 /* ApiShare.swift in Sources */,
 				84540DB926352B8800ECFD9A /* AlertData.swift in Sources */,
 				8446B446262EBEEF00D2AC8B /* ShareEdit.swift in Sources */,
@@ -1045,6 +1050,7 @@
 				84B155162662219400B5DACD /* SelectShareView.swift in Sources */,
 				847DE74826575542009C98DF /* SocketManage.swift in Sources */,
 				842C7245265F3A6D0086FCD0 /* Analyse.swift in Sources */,
+				8428ECFD267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
 				847269CF2615B28C00F92E66 /* ApiShare.swift in Sources */,
 				8472697426146A2400F92E66 /* SharesListView.swift in Sources */,

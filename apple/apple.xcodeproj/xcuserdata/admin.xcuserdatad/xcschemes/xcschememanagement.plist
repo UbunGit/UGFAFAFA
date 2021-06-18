@@ -4,16 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>UGCoder (iOS).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>11</integer>
-		</dict>
-		<key>UGCoder (macOS).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>13</integer>
-		</dict>
 		<key>apple (iOS).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -22,20 +12,7 @@
 		<key>apple (macOS).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
-	</dict>
-	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>84807DA225FB7A8900C8CB18</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>84807DB525FB7A8900C8CB18</key>
-		<dict>
-			<key>primary</key>
-			<true/>
+			<integer>17</integer>
 		</dict>
 	</dict>
 </dict>
