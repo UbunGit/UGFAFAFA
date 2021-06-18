@@ -23,6 +23,9 @@ class Store:
         if np.isnan(price):
             self.log("买入失败：price is nan")
             return False
+        if count==0:
+            self.log("买入数量为0")
+            return False
         # 购买
         if self.count == 0:
             self.cash = (count*price)+free

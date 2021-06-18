@@ -122,7 +122,7 @@ def someline(data,lines,name="someline"):
     return line
 
 # 收益率
-def line_shouyi(data,name = "收益分布", width = "100%",height="300px"):
+def line_shouyi(data, name = "收益分布", width = "100%",height="300px"):
     '''
     收益率与股价对比折线图·
     '''
@@ -132,7 +132,6 @@ def line_shouyi(data,name = "收益分布", width = "100%",height="300px"):
     xaxis = pd.Series(data.index).apply(lambda x: x.strftime("%Y-%m-%d")).to_list()
     line.add_xaxis(xaxis)
 
-  
     yaxis1 = (data["assets"]/data["assets"].iloc[1]).tolist()
     line.add_yaxis(
         series_name="资产",
@@ -168,8 +167,7 @@ def line_shouyi(data,name = "收益分布", width = "100%",height="300px"):
         xaxis_opts=opts.AxisOpts(type_="category", boundary_gap=False),
         datazoom_opts=datazoom,
     )
-    
-    
+
     return line
 
 
