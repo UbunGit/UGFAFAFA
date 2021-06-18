@@ -1,7 +1,7 @@
 //
 //  SelectShareView.swift
 //  apple
-//
+//  选择股票列表view
 //  Created by admin on 2021/5/29.
 //
 

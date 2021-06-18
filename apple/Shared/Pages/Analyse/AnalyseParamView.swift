@@ -1,7 +1,7 @@
 //
 //  AnalyseListView.swift
 //  apple (iOS)
-//
+//  策略参数view
 //  Created by admin on 2021/5/21.
 //
 

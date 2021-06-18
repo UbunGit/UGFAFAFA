@@ -1,12 +1,12 @@
 //
 //  AnalyseSelectView.swift
 //  apple
-//
+//  选择策略view
 //  Created by admin on 2021/5/27.
 //
 
 import SwiftUI
-import UGSwiftKit
+//import UGSwiftKit
 
 
 

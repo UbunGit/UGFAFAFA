@@ -39,8 +39,6 @@ public func processSocket(){
     scokeClient.connect(timeoutAfter: 5) {
         print("connect error")
     }
-    
-   
 }
 extension JSONDecoder{
     

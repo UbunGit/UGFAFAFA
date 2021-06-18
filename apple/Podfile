@@ -6,15 +6,19 @@ def common
   pod 'CocoaAsyncSocket'
   pod 'SQLite.swift'
   pod 'Alamofire'
+  pod 'Charts'
+  pod 'Socket.IO-Client-Swift'
+  pod 'UGSwiftKit', :path => './UGSwiftKit'
+
+  pod 'UGSwiftKit/UGAnalyse', :path => './UGSwiftKit'
+  
 #  pod 'SwiftUIKit', :path => './SwiftUIKit'
 end
 
 def macOS
-  pod 'Socket.IO-Client-Swift'
   pod 'PythonKit', :path => '/Users/admin/Documents/github/PythonKit'
-  pod 'UGSwiftKit', :path => './UGSwiftKit'
-  pod 'UGSwiftKit/Appicon', :path => './UGSwiftKit'
-  pod 'UGSwiftKit/UGAnalyse', :path => './UGSwiftKit'
+ 
+ pod 'UGSwiftKit/Appicon', :path => './UGSwiftKit'
 
 end
 

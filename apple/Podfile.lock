@@ -1,5 +1,8 @@
 PODS:
   - Alamofire (5.4.1)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - CocoaAsyncSocket (7.6.5)
   - PythonKit (1.0.1)
   - Socket.IO-Client-Swift (15.2.0):
@@ -19,6 +22,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - Charts
   - CocoaAsyncSocket
   - PythonKit (from `/Users/admin/Documents/github/PythonKit`)
   - Socket.IO-Client-Swift
@@ -30,6 +34,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Alamofire
+    - Charts
     - CocoaAsyncSocket
     - Socket.IO-Client-Swift
     - SQLite.swift
@@ -43,13 +48,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   PythonKit: 80d7cc257e135961a0aa09d66198c6abdf8ebb19
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
-  UGSwiftKit: 89fe28b3d965a532eea1530132ed60ca6fdf34a5
+  UGSwiftKit: d0cd808d5687b5b3a7a0e49722227bb5144c8191
 
-PODFILE CHECKSUM: 9d0db66b7ccb7ec7c2d25077795c8eb920deabc1
+PODFILE CHECKSUM: 6c25f306417737bea09b238aba20e167dc0bcac1
 
 COCOAPODS: 1.10.0
