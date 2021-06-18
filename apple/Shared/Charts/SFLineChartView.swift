@@ -11,9 +11,24 @@ import Charts
 
 
 #if os(iOS)
+struct SFLineChartView:UIViewRepresentable{
+    func makeUIView(context: Context) -> LineChartView {
+        return LineChartView()
+    }
+    
+    func updateUIView(_ uiView: LineChartView, context: Context) {
+        let data = LineChartData(dataSets: datasets)
+        uiView.data = data
+        forrmatLineChartView(chartView: uiView)
+        formateLineChartXaxis(axis: uiView.xAxis)
+        formateYAxis(axis: uiView.getAxis(.left))
+        formateYAxis(axis: uiView.getAxis(.right))
+        formateLegend(legend: uiView.legend)
+    }
+    
+    let datasets:[LineChartDataSet]
 
-
-
+}
 
 #else
 
@@ -34,7 +49,6 @@ struct SFLineChartView:NSViewRepresentable {
         formateLegend(legend: nsView.legend)
 
     }
-
 }
 
 #endif
@@ -63,11 +77,11 @@ extension SFLineChartView{
         axis.axisLineWidth = 1
         axis.gridLineWidth = 0.5
         axis.gridColor = .black.withAlphaComponent(0.2)
-        axis.labelTextColor = .labelColor
+//        axis.labelTextColor = .label
     }
     
     func formateYAxis(axis:Charts.YAxis) {
-        axis.labelTextColor = .labelColor
+//        axis.labelTextColor = .label
         axis.axisLineWidth = 1
         axis.gridLineWidth = 0.5
         axis.gridColor = .black.withAlphaComponent(0.1)

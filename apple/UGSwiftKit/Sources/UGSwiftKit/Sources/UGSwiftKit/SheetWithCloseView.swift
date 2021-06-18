@@ -18,14 +18,21 @@ public struct SheetWithCloseView <Content: View>: View{
         self.content = content()
     }
     public var body:some View{
-        ZStack(alignment: .topTrailing){
-            content
-           
-            CloseButton()
-                .onTapGesture {
-                    presentationMode.wrappedValue.dismiss()
+        GeometryReader(content: { geometry in
+            VStack(alignment: .center){
+                HStack{
+                    Spacer()
+                    CloseButton()
+                        .onTapGesture {
+                            presentationMode.wrappedValue.dismiss()
+                        }
                 }
-        }.frame(minWidth: 300, idealWidth: 300, maxWidth: 300, minHeight: 300, idealHeight: 300, maxHeight: 300, alignment: .center)
+               
+                content
+
+            }.frame(width: geometry.size.width, height: geometry.size.height, alignment: .trailing)
+        })
+  
         
     }
 }

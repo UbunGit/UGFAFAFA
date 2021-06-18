@@ -305,6 +305,7 @@
 		8428ECF8267A3BEB0008CDFB /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				8416E876267B407B0058CBCD /* SFLineChartView.swift */,
 				8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */,
 			);
 			path = Charts;
@@ -579,7 +580,6 @@
 				84807D9525FB7A8500C8CB18 /* Persistence.swift */,
 				84807D9125FB7A8500C8CB18 /* apple.xcdatamodeld */,
 				847269BE2615B15F00F92E66 /* base.swift */,
-				8416E876267B407B0058CBCD /* SFLineChartView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1266,7 +1266,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QPSW766MZ5;
+				DEVELOPMENT_TEAM = HQTXMU76N3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1275,7 +1275,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = UG.apple;
+				PRODUCT_BUNDLE_IDENTIFIER = UG.apple.001;
 				PRODUCT_NAME = apple;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
@@ -1290,7 +1290,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QPSW766MZ5;
+				DEVELOPMENT_TEAM = HQTXMU76N3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1299,7 +1299,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = UG.apple;
+				PRODUCT_BUNDLE_IDENTIFIER = UG.apple.001;
 				PRODUCT_NAME = apple;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;

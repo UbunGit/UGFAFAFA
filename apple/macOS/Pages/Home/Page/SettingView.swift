@@ -38,9 +38,7 @@ struct SettingView: View {
                 .fontWeight(.medium)
                 .opacity(0.4)
             VStack(alignment: .trailing){
-                
-                
-                
+ 
                 VStack {
                     HStack(){
                         Text("ip地址")

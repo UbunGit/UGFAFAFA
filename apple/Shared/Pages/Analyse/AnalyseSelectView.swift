@@ -11,45 +11,65 @@ import SwiftUI
 
 
 struct AnalyseSelectView: View {
+    
     @Environment(\.presentationMode) var presentationMode
- 
-    @Binding var analyse:Analyse
+    @Binding var selectIndex:Int
     @State var analyses:[Analyse]
+    @State var keyword=""
+    
+    var tableanalyses:[Analyse]{
+        if keyword.count>0  {
+            return analyses.filter { item in
+                item.name.contains(keyword)
+            }
+        }else{
+            return analyses
+        }
+    }
+    
     
     var body: some View {
         VStack{
-//            TextField("请输入搜索关键字", text: $obser.keyword)
-//                .searchStype()
-//                .onTapGesture {
-//                    obser.loaddata(kewword: obser.keyword)
-//                }
+            TextField("请输入搜索关键字", text: $keyword)
+                .searchStype()
+                .onTapGesture {
+                    
+            }
             ScrollView{
                 LazyVStack(alignment:.leading, content: {
-                    ForEach(0..<analyses.count, id: \.self) {
-                        let tanalyse = analyses[$0]
-                        AnalyseCell(analyse:tanalyse)
-                            .padding(/*@START_MENU_TOKEN@*/.all, 2.0/*@END_MENU_TOKEN@*/)
-                            .onTapGesture {
-                                self.analyse = tanalyse
-                                presentationMode.wrappedValue.dismiss()
-                            }
+                    
+                    ForEach(0..<tableanalyses.count, id: \.self) { index in
+                        
+                        AnalyseCell(
+                            analyse:tableanalyses[index],
+                            isSelect: (index == selectIndex)
+                        )
+
+                        .onTapGesture {
+                            
+                            self.selectIndex = self.analyses.firstIndex(where: { item in
+                                item.name == tableanalyses[index].name
+                            }) ?? 0
+                            presentationMode.wrappedValue.dismiss()
+                        }
                         
                     }
                 })
             }
-            
-           
         }
         
-        .padding([.top, .leading],40)
+        .padding()
         .onAppear(){
-
+            
+        }
+        .onDisappear(){
+            
         }
     }
 }
 
 struct AnalyseSelectView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalyseSelectView(analyse: .constant(Analyse()),analyses: [])
+        AnalyseSelectView(selectIndex: .constant(0), analyses: [])
     }
 }

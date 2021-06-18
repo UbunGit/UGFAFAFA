@@ -10,9 +10,14 @@ import CoreData
 
 
 struct ContentView: View {
-    
+   
     @Environment(\.presentationMode) private var viewContext
     @Environment(\.presentationMode) var presentationMode
+    
+    
+    init() {
+       print("init tabbar")
+    }
     var body: some View {
         TabView {
             SharesListView().tabItem {
@@ -27,10 +32,13 @@ struct ContentView: View {
                 Image(systemName: "heart")
                 Text("持仓")
             }
-            
-        
-            
-            
+            AnalyseParamView().tabItem {
+                Image(systemName: "heart")
+                Text("策略")
+            }
+        }
+        .onAppear(){
+            processSocket()
         }
     }
 }

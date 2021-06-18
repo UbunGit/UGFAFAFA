@@ -22,9 +22,7 @@ struct Analyse:Codable {
         var value:String = ""
         static var _debug = Param(name: "均线", key:"ma" , value: "5")
     }
-    
-    
-    
+
     static var _debug = Analyse(params: [Param._debug], name: "测试")
     
     enum CodingKeys: String, CodingKey {

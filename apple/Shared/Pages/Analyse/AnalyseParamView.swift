@@ -10,66 +10,80 @@ import UGSwiftKit
 import Alamofire
 
 
+
 class AnalyseParam: ObservableObject {
     
-    @Published var analyses:[Analyse] = []
-    @Published var analyse:Analyse = Analyse()
+    @Published var analyses:[Analyse]
+    @Published var selectIndex = 0
+    @Published var isloading = false
+    init() {
+        analyses = []
+        loaddata()
+    }
     
     func loaddata()  {
         let url = "\(baseurl)/analyses"
-     
+        isloading = true
         AF.request(url, method: .get, parameters: nil){ urlRequest in
             urlRequest.timeoutInterval = 5
         }.responseModel([Analyse].self) { result in
+            self.isloading = false
             switch result{
             case .success(let result):
                 self.analyses = result
-                self.analyse = self.analyses.first ?? Analyse()
+              
             case .failure(let error):
                 print("\(error)")
             }
         }
-        
     }
 
 }
 
+
+let analyseParam: AnalyseParam = AnalyseParam()
+
 struct AnalyseParamView: View {
-    
-    @ObservedObject var obser = AnalyseParam()
+   
+    @ObservedObject var obser:AnalyseParam
     @State var begin:Date = Date()
     @State var end:Date = Date()
    
     @State var isSheetSelectAnalyse = false
     @State var isSheetSelectShare = false
+    init() {
+        self.obser = analyseParam
+    }
     
     var codes:Binding<String>{
         Binding<String>(
             get:{
-                obser.analyse.codes.joined(separator: ",")
+                
+                selectAnalyses.codes.joined(separator: ",")
             },
             
             set:{
                 let codes = $0.components(separatedBy: ",")
-                obser.analyse.codes = codes
+                obser.analyses[obser.selectIndex].codes = codes
             }
         )
     }
     
    
     var body: some View {
+       
         VStack(alignment: .leading, spacing: 8){
             HStack{
-                Text(obser.analyse.name)
+                Text(selectAnalyses.name)
                     .font(.title)
-                Text(" \(obser.analyse.des ?? "")")
+                Text(" \(selectAnalyses.des ?? "")")
                     .font(.title)
                 Image(systemName: "chevron.forward")
             }
             .sheet(isPresented: $isSheetSelectAnalyse, content: {
                 SheetWithCloseView {
                     
-                    AnalyseSelectView(analyse: $obser.analyse, analyses: obser.analyses)
+                    AnalyseSelectView(selectIndex: $obser.selectIndex, analyses: obser.analyses)
                 }
                 
             })
@@ -94,11 +108,7 @@ struct AnalyseParamView: View {
         }
         .textFieldStyle(PlainTextFieldStyle())
         .padding()
-        .background(Color.white)
-        .onAppear(){
-            obser.loaddata()
-            processSocket()
-        }
+        .loading(isloading: obser.isloading)
     }
     
     /// 公共的参数view
@@ -136,7 +146,7 @@ struct AnalyseParamView: View {
             .sheet(isPresented: $isSheetSelectShare, content: {
                 SheetWithCloseView {
                     
-                    SelectShareView(selects: $obser.analyse.codes)
+                    SelectShareView(selects: $obser.analyses[obser.selectIndex].codes)
                 }
                 
             })
@@ -152,13 +162,13 @@ struct AnalyseParamView: View {
     var ownedParamView:some View{
      
         return  LazyVStack(content: {
-            ForEach((0..<obser.analyse.params.count), id: \.self) {index in
+            ForEach((0..<selectAnalyses.params.count), id: \.self) {index in
            
                 HStack{
                
-                    Text("\(obser.analyse.params[index].name)")
+                    Text("\(selectAnalyses.params[index].name)")
                         .padding()
-                    TextField("ee", text:$obser.analyse.params[index].value)
+                    TextField("ee", text:$obser.analyses[obser.selectIndex].params[index].value)
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 0.5)
                                        .stroke(Color("Text 2"), lineWidth: 1))
@@ -171,20 +181,31 @@ struct AnalyseParamView: View {
     var submit:some View{
         GeometryReader(content: { geometry in
             HStack{
-                Text("确认").onTapGesture {
-                    obser.analyse.begin = begin.toString("yyyyMMdd") ?? "20160101"
-                    obser.analyse.end = end.toString("yyyyMMdd") ?? ""
-                    let json = try? JSONEncoder().encode(obser.analyse)
-                    scokeClient.emit("analyse1",with: [json as Any])
-                }
-                .foregroundColor(Color("Background 1"))
-                .padding()
-                .frame(width: geometry.size.width-20, height: 44, alignment: .center)
-                .background(Color("AccentColor"))
-                .cornerRadius(8)
+                Text("确认")
+                    .foregroundColor(Color("Background 1"))
+                    .padding()
+                    .frame(width: geometry.size.width-20, height: 44, alignment: .center)
+                    .background(Color("AccentColor"))
+                    .cornerRadius(8)
+                    .onTapGesture {
+                        var data = selectAnalyses
+                        data.begin = begin.toString("yyyyMMdd") ?? "20160101"
+                        data.end = end.toString("yyyyMMdd") ?? ""
+                        let json = try? JSONEncoder().encode(data)
+                        scokeClient.emit("analyse1",with: [json as Any])
+                    }
  
             }
         })
+    }
+    
+    var selectAnalyses:Analyse{
+        if obser.analyses.count > obser.selectIndex{
+            return obser.analyses[obser.selectIndex]
+        }else{
+            return Analyse()
+        }
+        
     }
 }
 
@@ -209,7 +230,6 @@ struct AnalyseParamView_Previews: PreviewProvider {
         
         let analyseParam = AnalyseParam()
         analyseParam.analyses = [Analyse._debug]
-        analyseParam.analyse = analyseParam.analyses.first!
-        return AnalyseParamView(obser: analyseParam)
+        return AnalyseParamView()
     }
 }

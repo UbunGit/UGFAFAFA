@@ -16,7 +16,7 @@ let config : [String: Any] = ["log": true,
                               "compress": true,
                               "forcePolling": true,
                               "forceNew": true]
-let manager = SocketManager(socketURL: URL(string: "http://localhost:5000")!, config: [.log(true), .compress])
+let manager = SocketManager(socketURL: URL(string: baseurl)!, config: [.log(true), .compress])
 
 let scokeClient = manager.defaultSocket
 

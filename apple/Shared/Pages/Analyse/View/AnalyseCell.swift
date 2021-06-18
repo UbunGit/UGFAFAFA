@@ -9,14 +9,24 @@ import SwiftUI
 
 
 public struct AnalyseCell:View {
-    @State var analyse: Analyse
+    
+   
+    var analyse: Analyse
+    var isSelect:Bool
+    
+    init(analyse:Analyse,isSelect:Bool = false) {
+        self.analyse = analyse
+        self.isSelect = isSelect
+    }
+    
     public var body: some View {
         HStack(alignment:.bottom){
-            Text(analyse.name)
+            Text("\(analyse.name)")
+            Spacer()
             Text(analyse.des ?? "des is null")
         }
-        .padding(4)
-        .background(Color("Text 2"))
+        .padding()
+        .background(isSelect ? Color("AccentColor").opacity(0.1) : Color("Background 1"))
     }
 }
 

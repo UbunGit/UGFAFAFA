@@ -18,12 +18,12 @@ public extension View {
     
     func searchStype() -> some View {
         self.font(.title3)
-            .padding(8)
-            .background(Color("Text 2"))
-            .mask(RoundedRectangle(cornerRadius: 8, style: .continuous))
-            .padding(.vertical, 8)
+            .padding(4)
+            .background(Color("Background 1"))
+            .mask(RoundedRectangle(cornerRadius: 4, style: .continuous))
+            .padding(.vertical, 4)
             .overlay(
-                RoundedRectangle(cornerRadius: 20)
+                RoundedRectangle(cornerRadius: 8)
                     .stroke(Color("Text 2"), lineWidth: 1)
             )
             .overlay(
@@ -34,7 +34,5 @@ public extension View {
             )
             
     }
-    
-
-        
+      
 }
