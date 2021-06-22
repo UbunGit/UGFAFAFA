@@ -10,7 +10,6 @@ import UGSwiftKit
 import Alamofire
 
 
-
 class AnalyseParam: ObservableObject {
     
     @Published var analyses:[Analyse]
@@ -31,47 +30,55 @@ class AnalyseParam: ObservableObject {
             switch result{
             case .success(let result):
                 self.analyses = result
-              
+                
             case .failure(let error):
                 print("\(error)")
             }
         }
     }
-
+    
 }
 
 
 let analyseParam: AnalyseParam = AnalyseParam()
 
 struct AnalyseParamView: View {
-   
+    
     @ObservedObject var obser:AnalyseParam
     @State var begin:Date = Date()
     @State var end:Date = Date()
-   
+    
     @State var isSheetSelectAnalyse = false
     @State var isSheetSelectShare = false
+    /// 选中的策略
+    var selectAnalyses:Analyse{
+        if obser.analyses.count > obser.selectIndex{
+            return obser.analyses[obser.selectIndex]
+        }else{
+            return Analyse()
+        }
+    }
+    
     init() {
         self.obser = analyseParam
     }
     
-    var codes:Binding<String>{
-        Binding<String>(
+    var codes:Binding<[Analyse.Share]>{
+        Binding<[Analyse.Share]>(
             get:{
                 
-                selectAnalyses.codes.joined(separator: ",")
+                selectAnalyses.codes
             },
             
             set:{
-                let codes = $0.components(separatedBy: ",")
-                obser.analyses[obser.selectIndex].codes = codes
+                obser.analyses[obser.selectIndex].codes = $0
             }
         )
     }
     
-   
+    
     var body: some View {
-       
+        
         VStack(alignment: .leading, spacing: 8){
             HStack{
                 Text(selectAnalyses.name)
@@ -90,7 +97,7 @@ struct AnalyseParamView: View {
             .onTapGesture(perform: {
                 isSheetSelectAnalyse = true
             })
-           
+            
             Divider()
             Section{
                 Text("公共参数")
@@ -114,10 +121,10 @@ struct AnalyseParamView: View {
     /// 公共的参数view
     var commonParamView:some View{
         VStack(alignment: .leading, spacing: 8){
-   
+            
             DatePicker(
-                       selection: $begin,
-                       displayedComponents: [.date]){
+                selection: $begin,
+                displayedComponents: [.date]){
                 Text("开始时间")
                     .padding()
             }
@@ -128,56 +135,74 @@ struct AnalyseParamView: View {
                 Text("结束时间")
                     .padding()
             }
-
-            HStack{
+            
+            VStack{
                 Text("股票列表")
                     .padding()
-                TextField("股票列表", text: codes)
-                    .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 0.5)
-                                   .stroke(Color("Text 2"), lineWidth: 1))
-            }
-            .overlay(
-                Image(systemName: "plus.circle")
-                    .padding()
-                ,
-                alignment: .trailing
-            )
-            .sheet(isPresented: $isSheetSelectShare, content: {
-                SheetWithCloseView {
-                    
-                    SelectShareView(selects: $obser.analyses[obser.selectIndex].codes)
-                }
                 
-            })
-            .onTapGesture {
-                isSheetSelectShare = true
+                let rows: [GridItem] =
+                        Array(repeating: .init(.fixed(20)), count: 2)
+                ScrollView(.horizontal) {
+                    LazyHGrid(rows: rows, alignment: .top) {
+                        ForEach((0...79), id: \.self) {
+                            let codepoint = $0 + 0x1f600
+//                            let codepointString = String(format: "%02X", codepoint)
+//                            Text("\(codepointString)")
+//                                .font(.footnote)
+                            let emoji = String(Character(UnicodeScalar(codepoint)!))
+//
+                            HStack{
+                                Text("\(emoji)")
+                                //                                .font(.largeTitle)
+                            }.padding()
+                          
+                        }
+                    }
+                }
+                   
             }
+//            .overlay(
+//                Image(systemName: "plus.circle")
+//                    .padding()
+//                ,
+//                alignment: .trailing
+//            )
+//            .sheet(isPresented: $isSheetSelectShare, content: {
+//                SheetWithCloseView {
+//
+//                    SelectShareView(selects: $obser.analyses[obser.selectIndex].codes)
+//                }
+//
+//            })
+//            .onTapGesture {
+//                isSheetSelectShare = true
+//            }
             
         }
-     
+        
     }
     
     /// 每个策略自己所需的参数
     var ownedParamView:some View{
-     
+        
         return  LazyVStack(content: {
             ForEach((0..<selectAnalyses.params.count), id: \.self) {index in
-           
+                
                 HStack{
-               
+                    
                     Text("\(selectAnalyses.params[index].name)")
                         .padding()
                     TextField("ee", text:$obser.analyses[obser.selectIndex].params[index].value)
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 0.5)
-                                       .stroke(Color("Text 2"), lineWidth: 1))
+                                    .stroke(Color("Text 2"), lineWidth: 1))
                 }
             }
         })
-
+        
     }
     
+    /// 确认按钮
     var submit:some View{
         GeometryReader(content: { geometry in
             HStack{
@@ -194,19 +219,12 @@ struct AnalyseParamView: View {
                         let json = try? JSONEncoder().encode(data)
                         scokeClient.emit("analyse1",with: [json as Any])
                     }
- 
+                
             }
         })
     }
     
-    var selectAnalyses:Analyse{
-        if obser.analyses.count > obser.selectIndex{
-            return obser.analyses[obser.selectIndex]
-        }else{
-            return Analyse()
-        }
-        
-    }
+    
 }
 
 struct InputParam:View {
@@ -220,16 +238,18 @@ struct InputParam:View {
             TextField("ee", text:$param.value)
                 .padding()
                 .overlay(RoundedRectangle(cornerRadius: 0.5)
-                               .stroke(Color("Text 2"), lineWidth: 1))
+                            .stroke(Color("Text 2"), lineWidth: 1))
         }
     }
 }
 
+
+
+
 struct AnalyseParamView_Previews: PreviewProvider {
     static var previews: some View {
         
-        let analyseParam = AnalyseParam()
-        analyseParam.analyses = [Analyse._debug]
         return AnalyseParamView()
+            .preferredColorScheme(.dark)
     }
 }

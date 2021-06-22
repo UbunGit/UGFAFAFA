@@ -32,14 +32,13 @@ DEPENDENCIES:
   - UGSwiftKit/UGAnalyse (from `./UGSwiftKit`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Alamofire
+    - Charts
     - CocoaAsyncSocket
     - Socket.IO-Client-Swift
     - SQLite.swift
     - Starscream
-  trunk:
-    - Charts
 
 EXTERNAL SOURCES:
   PythonKit:
@@ -57,6 +56,6 @@ SPEC CHECKSUMS:
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   UGSwiftKit: d0cd808d5687b5b3a7a0e49722227bb5144c8191
 
-PODFILE CHECKSUM: c02589d5772f41618eb89ffe3ad9e7dc829f42f2
+PODFILE CHECKSUM: ead74097606824400a89068ea2dbc98d0f16f104
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0

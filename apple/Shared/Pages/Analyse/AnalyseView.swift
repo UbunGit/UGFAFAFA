@@ -2,35 +2,50 @@
 //  AnalyseView.swift
 //  apple
 //
-//  Created by admin on 2021/6/7.
+//  Created by admin on 2021/6/19.
 //
 
 import SwiftUI
 
-struct AnalyseView: View {
-    @State var ismenu = true
-    var body: some View {
+struct AnalyseView:View {
+    @State var isShowSetting = false
+    var body: some View{
+        NavigationView{
+            GeometryReader(content: { geometry in
+                HStack{
+                    
+                    AnalyseResultView()
+                        .frame(width: geometry.size.width)
+                        .offset(x: isShowSetting ? -geometry.size.width : 0)
+                    
+                    AnalyseParamView()
+                        
+                        .frame(width: geometry.size.width)
+                        .offset(x: isShowSetting ? -geometry.size.width : 0)
+                }
+//                .ignoresSafeArea(.all, edges: .bottom)
+                
+            })
+            .navigationTitle("策略")
+            .navigationBarItems(trailing:
+                                    Image(systemName: "wrench.and.screwdriver")
+                                    .onTapGesture {
+                                        withAnimation {
+                                            isShowSetting.toggle()
+                                        }
+                                        
+                                    }
+            )
+        }
         
-        GeometryReader(content: { geometry in
-            HStack{
-                AnalyseResultView()
-                    .frame(width: ismenu ? geometry.size.width*0.5 : geometry.size.width)
-                    .onTapGesture {
-                        withAnimation {
-                            ismenu.toggle()
-                        }
-                    }
-                Spacer()
-                AnalyseParamView()
-                    .frame(width: ismenu ? geometry.size.width*0.5 : 0)
-            }
-        })
         
     }
 }
 
 struct AnalyseView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalyseView()
+        
+        return AnalyseView()
+            .preferredColorScheme(.dark)
     }
 }

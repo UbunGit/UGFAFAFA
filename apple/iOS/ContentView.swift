@@ -32,8 +32,8 @@ struct ContentView: View {
                 Image(systemName: "heart")
                 Text("持仓")
             }
-            AnalyseParamView().tabItem {
-                Image(systemName: "heart")
+            AnalyseView().tabItem {
+                Image(systemName: "applescript")
                 Text("策略")
             }
         }

@@ -22,6 +22,12 @@ struct SFCandleStickChartView: UIViewRepresentable {
     func updateUIView(_ uiView: CandleStickChartView, context: Context) {
         let dataset = CandleChartDataSet(entries: entries)
         uiView.data = CandleChartData(dataSet: dataset)
+        uiView.xAxis.labelPosition = .bottom
+        forrmatLineChartView(chartView: uiView)
+        formateLineChartXaxis(axis: uiView.xAxis)
+        formateYAxis(axis: uiView.getAxis(.left))
+        formateYAxis(axis: uiView.getAxis(.right))
+        formateLegend(legend: uiView.legend)
         formateDataset(dataSet: dataset)
     }
     
@@ -32,14 +38,14 @@ struct SFCandleStickChartView: UIViewRepresentable {
         dataSet.increasingFilled = true
         dataSet.shadowColorSameAsCandle = true
     }
-
+    
 }
 
 #else
 
 struct SFCandleStickChartView: NSViewRepresentable {
     let entries:[CandleChartDataEntry]
-   
+    
     func makeNSView(context: Context) -> CandleStickChartView {
         return CandleStickChartView()
     }
@@ -47,17 +53,62 @@ struct SFCandleStickChartView: NSViewRepresentable {
     func updateNSView(_ nsView: CandleStickChartView, context: Context) {
         let dataset = CandleChartDataSet(entries: entries)
         nsView.data = CandleChartData(dataSet: dataset)
+        forrmatLineChartView(chartView: nsView)
+        formateLineChartXaxis(axis: nsView.xAxis)
+        formateYAxis(axis: nsView.getAxis(.left))
+        formateYAxis(axis: nsView.getAxis(.right))
+        formateLegend(legend: nsView.legend)
     }
-
+    
 }
 
 #endif
-//
-//extension SFCandleStickChartView{
-//    func formateDataset(dataSet:CandleChartDataSet) {
-//        dataSet.decreasingColor = .red2
-//    }
-//}
+extension SFCandleStickChartView{
+    
+    
+    func forrmatLineChartView(chartView:CandleStickChartView)  {
+        // 禁止Y轴的滚动与放大
+        chartView.scaleYEnabled = false
+        chartView.dragYEnabled = false
+        // 允许X轴的滚动与放大
+        chartView.dragXEnabled = true
+        chartView.scaleXEnabled = true
+        // X轴动画
+        chartView.animate(xAxisDuration: 0.35);
+        
+        // 边框
+        chartView.borderLineWidth = 0.5;
+        chartView.drawBordersEnabled = true
+ 
+    }
+    
+    func formateLineChartXaxis(axis:Charts.XAxis) {
+
+        axis.labelPosition = .bottom
+        axis.axisLineWidth = 1
+        axis.gridLineWidth = 0.5
+        axis.gridColor = .black.withAlphaComponent(0.2)
+//        axis.labelTextColor = .label
+    }
+    
+    func formateYAxis(axis:Charts.YAxis) {
+//        axis.labelTextColor = .label
+        axis.axisLineWidth = 1
+        axis.gridLineWidth = 0.5
+        axis.gridColor = .black.withAlphaComponent(0.1)
+    }
+    
+    func formateLegend(legend:Charts.Legend){
+        legend.horizontalAlignment = .center
+        legend.verticalAlignment = .top
+        legend.orientation = .horizontal
+        legend.drawInside = false
+        legend.xEntrySpace = 4
+        legend.yEntrySpace = 4
+        legend.yOffset = 10
+    }
+}
+
 
 
 
@@ -86,19 +137,18 @@ struct Datyly {
     }
     
     static var testdata:[Datyly]{
-        [
-            Datyly(date: "20210101", open: 1.00, close: 0.98, hight: 1.02, low: 0.97),
-            Datyly(date: "20210102", open: 0.98, close: 0.99, hight: 1.00, low: 0.98),
-            Datyly(date: "20210103", open: 1.00, close: 0.98, hight: 1.02, low: 0.97),
-            Datyly(date: "20210104", open: 1.00, close: 0.98, hight: 1.02, low: 0.97),
-            Datyly(date: "20210105", open: 1.00, close: 0.98, hight: 1.02, low: 0.97),
-            Datyly(date: "20210106", open: 1.00, close: 0.98, hight: 1.02, low: 0.97),
-            Datyly(date: "20210107", open: 1.00, close: 0.98, hight: 1.02, low: 0.97),
-            Datyly(date: "20210108", open: 1.00, close: 0.98, hight: 1.02, low: 0.97),
-            Datyly(date: "20210109", open: 1.00, close: 0.98, hight: 1.02, low: 0.97),
-            Datyly(date: "20210110", open: 1.00, close: 0.98, hight: 1.02, low: 0.97),
-            Datyly(date: "20210111", open: 1.00, close: 0.98, hight: 1.02, low: 0.97)
-        ]
+        let datylys = (0..<30).map { i -> Datyly in
+            
+            return Datyly(date: "\(20210101+i)",
+                          open: 1.00+Double(Double(arc4random_uniform(100))*0.01),
+                   close: 1.00+Double(Double(arc4random_uniform(100))*0.01),
+                   hight:1.00+Double(Double(arc4random_uniform(100))*0.01),
+                   low: 1.00+Double(Double(arc4random_uniform(100))*0.01)
+            )
+            
+        }
+        return datylys
+        
     }
     
 }

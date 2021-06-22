@@ -14,13 +14,17 @@ struct Analyse:Codable {
     
     var begin:String = ""
     var end:String = ""
-    var codes:[String] = []
+    var codes:[Analyse.Share] = []
    
     struct Param:Codable {
         var name:String = ""
         var key:String = ""
         var value:String = ""
         static var _debug = Param(name: "均线", key:"ma" , value: "5")
+    }
+    struct Share:Codable {
+        var code:String = ""
+        var name:String = ""
     }
 
     static var _debug = Analyse(params: [Param._debug], name: "测试")
@@ -48,8 +52,10 @@ extension Analyse{
         let tend = try container.decodeIfPresent(String.self, forKey: .end)
         begin = tend ?? ""
         
-        let tcodes = try container.decodeIfPresent([String].self, forKey: .codes)
-        codes = tcodes ?? ["000333.SZ","600887.SH","000001.SZ","300059.SZ"]
+        let tcodes = try container.decodeIfPresent([Share].self, forKey: .codes)
+        codes = tcodes ?? [
+            Share.init(code: "000333.SZ", name: "测试1")
+        ]
     }
 }
 

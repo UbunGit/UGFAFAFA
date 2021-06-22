@@ -119,6 +119,12 @@
 		84B155162662219400B5DACD /* SelectShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B155142662219400B5DACD /* SelectShareView.swift */; };
 		84B15518266224C400B5DACD /* GroupShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B15517266224C400B5DACD /* GroupShare.swift */; };
 		84B15519266224C400B5DACD /* GroupShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B15517266224C400B5DACD /* GroupShare.swift */; };
+		84C47CEB267DF5D6001A43C2 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CEA267DF5D6001A43C2 /* Screen.swift */; };
+		84C47CEC267DF5D6001A43C2 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CEA267DF5D6001A43C2 /* Screen.swift */; };
+		84C47CEE267DFC92001A43C2 /* AnalyseResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CED267DFC92001A43C2 /* AnalyseResultView.swift */; };
+		84C47CEF267DFC92001A43C2 /* AnalyseResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CED267DFC92001A43C2 /* AnalyseResultView.swift */; };
+		84C47CF1267DFD3C001A43C2 /* AnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */; };
+		84C47CF2267DFD3C001A43C2 /* AnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
 		84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */; };
@@ -219,6 +225,9 @@
 		8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlitInsterProtocol.swift; sourceTree = "<group>"; };
 		84B155142662219400B5DACD /* SelectShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectShareView.swift; sourceTree = "<group>"; };
 		84B15517266224C400B5DACD /* GroupShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupShare.swift; sourceTree = "<group>"; };
+		84C47CEA267DF5D6001A43C2 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
+		84C47CED267DFC92001A43C2 /* AnalyseResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseResultView.swift; sourceTree = "<group>"; };
+		84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseView.swift; sourceTree = "<group>"; };
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
@@ -342,6 +351,8 @@
 				842C7246265F3B670086FCD0 /* View */,
 				842C7242265F3A4A0086FCD0 /* Moden */,
 				843488DC26574B0B00EF2203 /* AnalyseParamView.swift */,
+				84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */,
+				84C47CED267DFC92001A43C2 /* AnalyseResultView.swift */,
 				842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */,
 				84B155142662219400B5DACD /* SelectShareView.swift */,
 			);
@@ -371,6 +382,7 @@
 			children = (
 				84540DA126352B8800ECFD9A /* AlertData.swift */,
 				84540DA226352B8800ECFD9A /* Formatter.swift */,
+				84C47CEA267DF5D6001A43C2 /* Screen.swift */,
 			);
 			path = unit;
 			sourceTree = "<group>";
@@ -1015,6 +1027,7 @@
 				847269BF2615B15F00F92E66 /* base.swift in Sources */,
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
+				84C47CEB267DF5D6001A43C2 /* Screen.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
 				843488DD26574B0B00EF2203 /* AnalyseParamView.swift in Sources */,
@@ -1024,6 +1037,7 @@
 				84726983261479CC00F92E66 /* ShareDetailView.swift in Sources */,
 				8416E877267B407B0058CBCD /* SFLineChartView.swift in Sources */,
 				84540DBB26352B8800ECFD9A /* Formatter.swift in Sources */,
+				84C47CEE267DFC92001A43C2 /* AnalyseResultView.swift in Sources */,
 				842C7244265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				84540DC126352B8800ECFD9A /* UDID.swift in Sources */,
 				84540DBD26352B8800ECFD9A /* Date.swift in Sources */,
@@ -1033,6 +1047,7 @@
 				84540DC726352B8800ECFD9A /* Progress .swift in Sources */,
 				842C7248265F3B840086FCD0 /* AnalyseCell.swift in Sources */,
 				842C7240265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */,
+				84C47CF1267DFD3C001A43C2 /* AnalyseView.swift in Sources */,
 				8428EC962647AEC00008CDFB /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1045,10 +1060,12 @@
 				84565A6D261C6000009F9F7D /* Page.swift in Sources */,
 				841F334B2623FCAB0099B8CB /* MLMAOut.swift in Sources */,
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
+				84C47CEC267DF5D6001A43C2 /* Screen.swift in Sources */,
 				842C7241265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */,
 				84726984261479CC00F92E66 /* ShareDetailView.swift in Sources */,
 				84B155162662219400B5DACD /* SelectShareView.swift in Sources */,
 				847DE74826575542009C98DF /* SocketManage.swift in Sources */,
+				84C47CEF267DFC92001A43C2 /* AnalyseResultView.swift in Sources */,
 				842C7245265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				8428ECFD267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
@@ -1079,6 +1096,7 @@
 				843488DE26574B5400EF2203 /* AnalyseParamView.swift in Sources */,
 				8416E878267B407E0058CBCD /* SFLineChartView.swift in Sources */,
 				84540DC026352B8800ECFD9A /* Codable.swift in Sources */,
+				84C47CF2267DFD3C001A43C2 /* AnalyseView.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetail.swift in Sources */,
 				84540DC826352B8800ECFD9A /* Progress .swift in Sources */,
 				8491D998263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */,
