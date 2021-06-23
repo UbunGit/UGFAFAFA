@@ -25,16 +25,15 @@ struct AnalyseResultView:View {
   
     var body: some View{
         VStack{
-            ScrollView(.vertical, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/, content: {
+            ScrollView(.vertical, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
                 SFLineChartView(datasets: chartset)
                     .frame(height: 300)
                 SFCandleStickChartView(entries: Datyly.datylyeEntry(datylys: Datyly.testdata))
                     .frame(height: 300)
                 SFLineChartView(datasets: chartset)
                     .frame(height: 300)
-                SFCandleStickChartView(entries: Datyly.datylyeEntry(datylys: Datyly.testdata))
-                    .frame(height: 300)
-            })
+        
+            }
         }
         
     }

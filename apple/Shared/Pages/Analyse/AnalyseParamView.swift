@@ -63,15 +63,16 @@ struct AnalyseParamView: View {
         self.obser = analyseParam
     }
     
-    var codes:Binding<[Analyse.Share]>{
-        Binding<[Analyse.Share]>(
+    var codes:Binding<String>{
+        Binding<String>(
             get:{
                 
-                selectAnalyses.codes
+                selectAnalyses.codes.joined(separator: ",")
             },
             
             set:{
-                obser.analyses[obser.selectIndex].codes = $0
+                let codes = $0.components(separatedBy: ",")
+                obser.analyses[obser.selectIndex].codes = codes
             }
         )
     }
@@ -79,47 +80,69 @@ struct AnalyseParamView: View {
     
     var body: some View {
         
-        VStack(alignment: .leading, spacing: 8){
-            HStack{
-                Text(selectAnalyses.name)
-                    .font(.title)
-                Text(" \(selectAnalyses.des ?? "")")
-                    .font(.title)
-                Image(systemName: "chevron.forward")
-            }
-            .sheet(isPresented: $isSheetSelectAnalyse, content: {
-                SheetWithCloseView {
-                    
-                    AnalyseSelectView(selectIndex: $obser.selectIndex, analyses: obser.analyses)
+        VStack(alignment:.leading){
+            VStack(alignment:.leading){
+                HStack(){
+                    Text(selectAnalyses.name)
+                        .font(.title)
+                    Text(" \(selectAnalyses.des ?? "")")
+                        .font(.title)
+                    Image(systemName: "chevron.forward")
                 }
-                
-            })
-            .onTapGesture(perform: {
-                isSheetSelectAnalyse = true
-            })
-            
-            Divider()
-            Section{
-                Text("公共参数")
-                    .font(.title2)
-                commonParamView
+                .sheet(isPresented: $isSheetSelectAnalyse, content: {
+                    SheetWithCloseView {
+
+                        AnalyseSelectView(selectIndex: $obser.selectIndex, analyses: obser.analyses)
+                    }
+
+                })
+                .onTapGesture(perform: {
+                    isSheetSelectAnalyse = true
+                })
+                Divider()
             }
-            Section{
-                Text("策略参数")
-                    .font(.title2)
-                ownedParamView
+            .padding()
+            VStack(alignment:.leading){
+
+                ScrollView(.vertical, showsIndicators: true) {
+
+                    VStack(alignment:.leading){
+                        Text("公共参数")
+                            .font(.title2)
+                        commonParamView
+                    }
+                    .padding()
+
+                    VStack(alignment:.leading){
+                        Text("策略参数")
+                            .font(.title2)
+                        ownedParamView
+                    }
+                    .padding()
+
+
+                }
+                .frame( minWidth: 0, maxWidth: .infinity)
+                .textFieldStyle(PlainTextFieldStyle())
+
             }
-            
-            submit
-            
+            Spacer()
+            CommitView()
+                .onTapGesture {
+                    var data = selectAnalyses
+                    data.begin = begin.toString("yyyyMMdd") ?? "20160101"
+                    data.end = end.toString("yyyyMMdd") ?? ""
+                    let json = try? JSONEncoder().encode(data)
+                    scokeClient.emit("analyse1",with: [json as Any])
+                }
+                .padding()
         }
-        .textFieldStyle(PlainTextFieldStyle())
-        .padding()
         .loading(isloading: obser.isloading)
     }
     
     /// 公共的参数view
     var commonParamView:some View{
+        
         VStack(alignment: .leading, spacing: 8){
             
             DatePicker(
@@ -135,49 +158,36 @@ struct AnalyseParamView: View {
                 Text("结束时间")
                     .padding()
             }
+          
             
-            VStack{
+            VStack(alignment:.leading){
                 Text("股票列表")
                     .padding()
-                
-                let rows: [GridItem] =
-                        Array(repeating: .init(.fixed(20)), count: 2)
-                ScrollView(.horizontal) {
-                    LazyHGrid(rows: rows, alignment: .top) {
-                        ForEach((0...79), id: \.self) {
-                            let codepoint = $0 + 0x1f600
-//                            let codepointString = String(format: "%02X", codepoint)
-//                            Text("\(codepointString)")
-//                                .font(.footnote)
-                            let emoji = String(Character(UnicodeScalar(codepoint)!))
-//
-                            HStack{
-                                Text("\(emoji)")
-                                //                                .font(.largeTitle)
-                            }.padding()
-                          
-                        }
-                    }
+                HStack{
+                    Text("股票列表")
+                        .padding()
+                    TextField("股票列表", text: codes)
+                        .padding()
+                        .overlay(RoundedRectangle(cornerRadius: 0.5)
+                                       .stroke(Color("Text 2"), lineWidth: 1))
                 }
-                   
+                .overlay(
+                    Image(systemName: "plus.circle")
+                        .padding()
+                    ,
+                    alignment: .trailing
+                )
+                .sheet(isPresented: $isSheetSelectShare, content: {
+                    SheetWithCloseView {
+                        
+                        SelectShareView(selects: $obser.analyses[obser.selectIndex].codes)
+                    }
+                    
+                })
+                .onTapGesture {
+                    isSheetSelectShare = true
+                }
             }
-//            .overlay(
-//                Image(systemName: "plus.circle")
-//                    .padding()
-//                ,
-//                alignment: .trailing
-//            )
-//            .sheet(isPresented: $isSheetSelectShare, content: {
-//                SheetWithCloseView {
-//
-//                    SelectShareView(selects: $obser.analyses[obser.selectIndex].codes)
-//                }
-//
-//            })
-//            .onTapGesture {
-//                isSheetSelectShare = true
-//            }
-            
         }
         
     }
@@ -201,30 +211,8 @@ struct AnalyseParamView: View {
         })
         
     }
-    
-    /// 确认按钮
-    var submit:some View{
-        GeometryReader(content: { geometry in
-            HStack{
-                Text("确认")
-                    .foregroundColor(Color("Background 1"))
-                    .padding()
-                    .frame(width: geometry.size.width-20, height: 44, alignment: .center)
-                    .background(Color("AccentColor"))
-                    .cornerRadius(8)
-                    .onTapGesture {
-                        var data = selectAnalyses
-                        data.begin = begin.toString("yyyyMMdd") ?? "20160101"
-                        data.end = end.toString("yyyyMMdd") ?? ""
-                        let json = try? JSONEncoder().encode(data)
-                        scokeClient.emit("analyse1",with: [json as Any])
-                    }
-                
-            }
-        })
-    }
-    
-    
+   
+
 }
 
 struct InputParam:View {

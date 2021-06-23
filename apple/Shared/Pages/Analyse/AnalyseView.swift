@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UGSwiftKit
 
 struct AnalyseView:View {
     @State var isShowSetting = false
@@ -13,17 +14,9 @@ struct AnalyseView:View {
         NavigationView{
             GeometryReader(content: { geometry in
                 HStack{
-                    
                     AnalyseResultView()
                         .frame(width: geometry.size.width)
-                        .offset(x: isShowSetting ? -geometry.size.width : 0)
-                    
-                    AnalyseParamView()
-                        
-                        .frame(width: geometry.size.width)
-                        .offset(x: isShowSetting ? -geometry.size.width : 0)
                 }
-//                .ignoresSafeArea(.all, edges: .bottom)
                 
             })
             .navigationTitle("策略")
@@ -36,6 +29,11 @@ struct AnalyseView:View {
                                         
                                     }
             )
+            .sheet(isPresented: $isShowSetting, content: {
+                SheetWithCloseView {
+                    AnalyseParamView()
+                } 
+            })
         }
         
         
