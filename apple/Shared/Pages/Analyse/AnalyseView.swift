@@ -10,6 +10,8 @@ import UGSwiftKit
 
 struct AnalyseView:View {
     @State var isShowSetting = false
+    @State var isShowHistory = false
+
     var body: some View{
         NavigationView{
             GeometryReader(content: { geometry in
@@ -21,19 +23,40 @@ struct AnalyseView:View {
             })
             .navigationTitle("策略")
             .navigationBarItems(trailing:
-                                    Image(systemName: "wrench.and.screwdriver")
-                                    .onTapGesture {
-                                        withAnimation {
-                                            isShowSetting.toggle()
-                                        }
+                                    HStack{
+                                        Image(systemName: "wrench.and.screwdriver")
+                                            .onTapGesture {
+                                                withAnimation {
+                                                    isShowSetting.toggle()
+                                                }
+                                                
+                                            }
+                                            .sheet(isPresented: $isShowSetting, content: {
+                                                SheetWithCloseView {
+                                                    AnalyseParamView()
+                                                }
+                                            })
+                                        
+                                        Image(systemName: "plus.circle")
+                                            .onTapGesture {
+                                                withAnimation {
+                                                    isShowHistory.toggle()
+                                                }
+                                                
+                                            }
+                                            .padding([.leading],10)
+                                            .sheet(isPresented: $isShowHistory, content: {
+                                                SheetWithCloseView {
+                                                    AnalyseHistoryView()
+                                                }
+                                            })
                                         
                                     }
+                                
             )
-            .sheet(isPresented: $isShowSetting, content: {
-                SheetWithCloseView {
-                    AnalyseParamView()
-                } 
-            })
+            
+           
+            
         }
         
         

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import os,time
+import os,time,json
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, Float,Date,DateTime
 from sqlalchemy import create_engine
@@ -27,7 +27,7 @@ class AnalyseCache(Base):
     __tablename__ = 'analyse_cache'                                                      
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String)
-    parmas = Column(String)
+    parameter = Column(String)
     begin = Column(DateTime)
     end = Column(DateTime)
     codes = Column(String)
@@ -37,11 +37,11 @@ class AnalyseCache(Base):
     # 先判断是否存在，创建分析缓存数据
     def create(self):
   
-        analyseCache = self.query.filter_by(name=self.name,parmas=str(self.parmas),begin=self.begin,end=self.end,codes=str(self.codes)).first()
+        analyseCache = self.query.filter_by(name=self.name,parameter=str(self.parameter),begin=self.begin,end=self.end,codes=str(self.codes)).first()
         if not analyseCache:
             analyseCache = self
-            analyseCache.parmas = parmas=str(self.parmas)
-            analyseCache.codes = parmas=str(self.codes)
+            analyseCache.parameter = str(self.parameter)
+            analyseCache.codes = str(self.codes)
             analyseCache.change_time = datetime.now()
             analyseCache.create_time = datetime.now()
             session.add(analyseCache)
@@ -51,6 +51,21 @@ class AnalyseCache(Base):
         self.id = analyseCache.id
         return self
     
+    def search(self,name):
+        acc_list = []
+        query_all = self.query.filter_by(name=name).all()
+        for item in query_all:
+            dic = item.__dict__
+            dic["begin"] = str(item.begin)
+            dic["end"] = str(item.end)
+            dic["parameter"] = eval(item.parameter)
+            dic["codes"] = eval(item.codes)
+            dic["createTime"] = str(item.create_time)
+            dic["changeTime"] = str(item.change_time)
+            dic.pop('_sa_instance_state')
+            
+            acc_list.append(dic)
+        return acc_list
 # bs记录
 class AnalyseBSRecords(Base):
     __tablename__ = 'analyse_bs_records'                                                      
@@ -77,6 +92,7 @@ class AnalyseBSRecords(Base):
         session.commit()
 
     def search(self,cache_id,code,type):
+        
         return  self.query.filter_by(cache_id=cache_id, code=code, type=type).all()
 
 

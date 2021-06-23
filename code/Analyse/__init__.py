@@ -43,7 +43,7 @@ class Analyse:
         begin=begin,
         end = end,
         codes=codes,
-        params=[
+        parameter=[
                     {
                         "name":"动能天数",
                         "key":"pct",
@@ -55,9 +55,9 @@ class Analyse:
         self.begin = begin
         self.end = end
         self.codes = codes
-        self.params = params
+        self.parameter = parameter
         self.data = self.loaddata()
-        analyse.signal(self.data,params=params)
+        analyse.signal(self.data,parameter=parameter)
         self.cerebro = Cerebro()
         self.cerebro.cash = 100000
         self.cerebro.strategy = analyse.strategy
@@ -94,7 +94,7 @@ class Analyse:
         records = Cache()
         records.codes = self.codes
         records.name = self.name
-        records.parmas = self.params
+        records.parameter = self.parameter
         records.begin = datetime.datetime.strptime(self.begin,'%Y%m%d')
         records.end = datetime.datetime.strptime(self.end,'%Y%m%d')
         records.create()

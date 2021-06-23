@@ -10,7 +10,7 @@ import Foundation
 public struct Analyse:Codable{
     public var name:String = ""
     public var des:String?
-    public var params:[Param] = []
+    public var parameter:[Param] = []
     
     public init() {}
     

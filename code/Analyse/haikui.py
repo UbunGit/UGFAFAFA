@@ -21,6 +21,7 @@ ma = 20
 code = "600036.SH"
 begin = "20200101"
 log = clog
+codes =["000333.SZ","600887.SH","000001.SZ","300059.SZ"]
 
 
 
@@ -28,7 +29,7 @@ log = clog
 股价与均线计较策略
 '''
 name = "haikui"
-params = [
+parameter = [
         {
         "name":"均线天数",
         "key":"ma",
@@ -40,7 +41,8 @@ def info():
     return {
         "name":name,
         "des":"海葵",
-        "params":params
+        "parameter":parameter,
+        "codes":codes
     }
 
 def strategy(index,data,cerebro):

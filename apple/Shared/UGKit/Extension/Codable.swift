@@ -30,6 +30,7 @@ extension DataRequest{
             switch response.result {
             case .success(let value):
                 do{
+                    print(value)
                     let apidata = try JSONDecoder().decode(APIData<T>.self, from: value)
                  
                     if apidata.code == 0 {

@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import sys,json
+import sys,json,logging
 sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
 
-from flask import Flask, render_template
+from flask import Flask, render_template,jsonify
+from flask import request
 from flask_socketio import SocketIO, emit
-import importlib
+from flask.json import JSONEncoder
 
+import importlib
 app = Flask(__name__)
+
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
 
@@ -45,6 +48,35 @@ def analyses():
         "data":analyses 
     }
 
+@app.route('/analyses/history')
+def analysesHistory():
+    # try:
+    from Analyse.catch import AnalyseCache
+    data = request_parse(request) 
+    history = AnalyseCache().search(name=data["name"])
+    
+    return {
+        "code":0,
+        "data":history
+    }
+    # except Exception as e:
+    #     logging.error(repr(e))
+    #     return {
+    #         "code":-1,
+    #         "data":str(e)
+    #     }
+   
+
+@app.route('/analyses/bslist')
+def analysesBSlist():
+    from Analyse.catch import AnalyseBSRecords
+    data = request_parse(request)
+    buylist = AnalyseBSRecords().search(id= data.id,code=data.code,type=1)
+    return {
+        "code":0,
+        "data":buylist 
+    }
+
 
 
 @socketio.on('message')
@@ -75,9 +107,17 @@ def handle_my_custom_event(data):
         begin=param["begin"],
         end=param["end"],
         codes=param["codes"],
-        params=param["params"],
+        parameter=param["parameter"],
         )
   
+def request_parse(req_data):
+    '''解析请求数据并以json形式返回'''
+    if req_data.method == 'POST':
+        data = req_data.json
+    elif req_data.method == 'GET':
+        data = req_data.args
+    return data
+
 
     
 

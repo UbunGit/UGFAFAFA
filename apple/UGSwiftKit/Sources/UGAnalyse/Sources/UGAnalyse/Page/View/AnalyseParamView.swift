@@ -20,7 +20,7 @@ class AnalyseParam: ObservableObject {
         
     }
     func indexofparam(index:Int) -> Analyse.Param {
-        return (analyse.params[index])
+        return (analyse.parameter[index])
     }
     
 }
@@ -87,9 +87,9 @@ struct AnalyseParamView: View {
                     
                 })
                 
-                ForEach(0..<store.analyse.params.count, id: \.self) {
+                ForEach(0..<store.analyse.parameter.count, id: \.self) {
                     
-                    ParamView(item: $store.analyse.params[$0])
+                    ParamView(item: $store.analyse.parameter[$0])
                 }
                 
             }

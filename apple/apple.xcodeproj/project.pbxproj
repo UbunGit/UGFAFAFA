@@ -127,8 +127,8 @@
 		84C47CF2267DFD3C001A43C2 /* AnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
-		84F8CB1F2682E81F00216A50 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8CB1E2682E81F00216A50 /* Test.swift */; };
-		84F8CB202682E81F00216A50 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8CB1E2682E81F00216A50 /* Test.swift */; };
+		84F8CB1F2682E81F00216A50 /* AnalyseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8CB1E2682E81F00216A50 /* AnalyseHistoryView.swift */; };
+		84F8CB202682E81F00216A50 /* AnalyseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8CB1E2682E81F00216A50 /* AnalyseHistoryView.swift */; };
 		84F8CB23268304D800216A50 /* CommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8CB22268304D800216A50 /* CommitView.swift */; };
 		84F8CB24268304D800216A50 /* CommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8CB22268304D800216A50 /* CommitView.swift */; };
 		84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */; };
@@ -235,7 +235,7 @@
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
-		84F8CB1E2682E81F00216A50 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		84F8CB1E2682E81F00216A50 /* AnalyseHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseHistoryView.swift; sourceTree = "<group>"; };
 		84F8CB22268304D800216A50 /* CommitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitView.swift; sourceTree = "<group>"; };
 		84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonCenter.swift; sourceTree = "<group>"; };
 		84FA4DF725FBA4EF00F93203 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -361,7 +361,7 @@
 				84C47CED267DFC92001A43C2 /* AnalyseResultView.swift */,
 				842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */,
 				84B155142662219400B5DACD /* SelectShareView.swift */,
-				84F8CB1E2682E81F00216A50 /* Test.swift */,
+				84F8CB1E2682E81F00216A50 /* AnalyseHistoryView.swift */,
 			);
 			path = Analyse;
 			sourceTree = "<group>";
@@ -1053,7 +1053,7 @@
 				84726983261479CC00F92E66 /* ShareDetailView.swift in Sources */,
 				8416E877267B407B0058CBCD /* SFLineChartView.swift in Sources */,
 				84540DBB26352B8800ECFD9A /* Formatter.swift in Sources */,
-				84F8CB1F2682E81F00216A50 /* Test.swift in Sources */,
+				84F8CB1F2682E81F00216A50 /* AnalyseHistoryView.swift in Sources */,
 				84C47CEE267DFC92001A43C2 /* AnalyseResultView.swift in Sources */,
 				842C7244265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				84540DC126352B8800ECFD9A /* UDID.swift in Sources */,
@@ -1119,7 +1119,7 @@
 				84540DC826352B8800ECFD9A /* Progress .swift in Sources */,
 				8491D998263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */,
 				8472697826146A2800F92E66 /* SharesList.swift in Sources */,
-				84F8CB202682E81F00216A50 /* Test.swift in Sources */,
+				84F8CB202682E81F00216A50 /* AnalyseHistoryView.swift in Sources */,
 				848929CE26118E5900006D88 /* PythonManage.swift in Sources */,
 				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,
 				84F8CB24268304D800216A50 /* CommitView.swift in Sources */,

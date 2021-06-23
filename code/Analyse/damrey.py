@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 from Tusharedata.daily import load
 from rolltrader.cerebro import Cerebro
 from rolltrader.free import bcomm,scomm
-from .params import valueof
+from .parameter import valueof
 
 '''
 两支股票轮动交易 
@@ -30,7 +30,7 @@ end = ""
 codes =["000333.SZ","600887.SH","000001.SZ","300059.SZ"]
 
 name = "damrey"
-params = [
+parameter = [
         {
         "name":"动能天数",
         "key":"pct",
@@ -42,7 +42,8 @@ def info():
     return {
         "name":name,
         "des":"达维",
-        "params":params
+        "parameter":parameter,
+        "codes":codes
     }
 
 def log(msf):
@@ -87,9 +88,9 @@ def strategy(index,data,cerebro):
 
     log(" --------strategy end --------")
 
-def signal(df,params):
+def signal(df,parameter):
 
-    pct = int(valueof(params,"pct"))
+    pct = int(valueof(parameter,"pct"))
     pctkeys = []
     for item in codes:
         pctkey = "pct"+item

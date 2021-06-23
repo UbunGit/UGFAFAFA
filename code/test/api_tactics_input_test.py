@@ -23,7 +23,7 @@ class Test(unittest.TestCase):
     def test_list(self):
   
         url = BaseUrl+'/tacticsinput/list'
-        response = requests.get(url=url,params={"id":1})
+        response = requests.get(url=url,parameter={"id":1})
         logging.info("-------------begin--------------")
         logging.info(response.status_code)
         logging.info(response.url)
@@ -45,7 +45,7 @@ class Test(unittest.TestCase):
     def test_detailed(self):
   
         url = BaseUrl+'/tacticsinput/detailed'
-        response = requests.get(url=url,params={"id":1})
+        response = requests.get(url=url,parameter={"id":1})
         logging.info("-------------begin--------------")
         logging.info(response.status_code)
         logging.info(response.url)

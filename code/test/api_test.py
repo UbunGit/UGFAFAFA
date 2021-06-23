@@ -29,7 +29,7 @@ class Test(unittest.TestCase):
         "begin":"2020-07-10",
         }
         url = BaseUrl+'/sharehistory'
-        response = requests.get(url=url,params= arg)
+        response = requests.get(url=url,parameter= arg)
         logging.info("-------------begin--------------")
         logging.info(response.status_code)
         logging.info(response.url)

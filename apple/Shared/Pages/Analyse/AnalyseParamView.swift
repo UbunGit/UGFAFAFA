@@ -17,7 +17,6 @@ class AnalyseParam: ObservableObject {
     @Published var isloading = false
     init() {
         analyses = []
-        loaddata()
     }
     
     func loaddata()  {
@@ -81,64 +80,69 @@ struct AnalyseParamView: View {
     var body: some View {
         
         VStack(alignment:.leading){
-            VStack(alignment:.leading){
-                HStack(){
-                    Text(selectAnalyses.name)
-                        .font(.title)
-                    Text(" \(selectAnalyses.des ?? "")")
-                        .font(.title)
-                    Image(systemName: "chevron.forward")
-                }
-                .sheet(isPresented: $isSheetSelectAnalyse, content: {
-                    SheetWithCloseView {
-
-                        AnalyseSelectView(selectIndex: $obser.selectIndex, analyses: obser.analyses)
+            ScrollView(.vertical, showsIndicators: true) {
+                VStack(alignment:.leading){
+                    HStack(){
+                        Text(selectAnalyses.name)
+                            .font(.title)
+                        Text(" \(selectAnalyses.des ?? "")")
+                            .font(.title)
+                        Image(systemName: "chevron.forward")
                     }
-
-                })
-                .onTapGesture(perform: {
-                    isSheetSelectAnalyse = true
-                })
-                Divider()
-            }
-            .padding()
-            VStack(alignment:.leading){
-
-                ScrollView(.vertical, showsIndicators: true) {
-
+                    .sheet(isPresented: $isSheetSelectAnalyse, content: {
+                        SheetWithCloseView {
+                            
+                            AnalyseSelectView(selectIndex: $obser.selectIndex, analyses: obser.analyses)
+                        }
+                        
+                    })
+                    .onTapGesture(perform: {
+                        isSheetSelectAnalyse = true
+                    })
+                    Divider()
+                }
+                .padding()
+                VStack(alignment:.leading){
+                    
+                    
+                    
                     VStack(alignment:.leading){
                         Text("公共参数")
                             .font(.title2)
                         commonParamView
                     }
                     .padding()
-
+                    
                     VStack(alignment:.leading){
                         Text("策略参数")
                             .font(.title2)
                         ownedParamView
                     }
                     .padding()
-
-
                 }
                 .frame( minWidth: 0, maxWidth: .infinity)
                 .textFieldStyle(PlainTextFieldStyle())
-
+                
+                Spacer()
+                CommitView()
+                    .onTapGesture {
+                        var data = selectAnalyses
+                        data.begin = begin.toString("yyyyMMdd") ?? "20160101"
+                        data.end = end.toString("yyyyMMdd") ?? ""
+                        let json = try? JSONEncoder().encode(data)
+                        scokeClient.emit("analyse1",with: [json as Any])
+                    }
+                    .padding()
+                
             }
-            Spacer()
-            CommitView()
-                .onTapGesture {
-                    var data = selectAnalyses
-                    data.begin = begin.toString("yyyyMMdd") ?? "20160101"
-                    data.end = end.toString("yyyyMMdd") ?? ""
-                    let json = try? JSONEncoder().encode(data)
-                    scokeClient.emit("analyse1",with: [json as Any])
-                }
-                .padding()
+           
         }
         .loading(isloading: obser.isloading)
+        .onAppear(){
+            obser.loaddata()
+        }
     }
+   
     
     /// 公共的参数view
     var commonParamView:some View{
@@ -149,33 +153,37 @@ struct AnalyseParamView: View {
                 selection: $begin,
                 displayedComponents: [.date]){
                 Text("开始时间")
-                    .padding()
+               
             }
             
             DatePicker(
                 selection: $end,
                 displayedComponents: [.date]){
                 Text("结束时间")
-                    .padding()
+                
             }
           
             
             VStack(alignment:.leading){
-                Text("股票列表")
-                    .padding()
+          
                 HStack{
                     Text("股票列表")
-                        .padding()
-                    TextField("股票列表", text: codes)
-                        .padding()
-                        .overlay(RoundedRectangle(cornerRadius: 0.5)
+                     
+                    TextEditor(text: codes)
+                        .frame(minHeight: 40, maxHeight: .infinity, alignment: .topLeading)
+                        
+                        .overlay(RoundedRectangle(cornerRadius: 0.1)
                                        .stroke(Color("Text 2"), lineWidth: 1))
+                        .padding()
+                    
                 }
+                
                 .overlay(
                     Image(systemName: "plus.circle")
                         .padding()
+                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                     ,
-                    alignment: .trailing
+                    alignment: .topTrailing
                 )
                 .sheet(isPresented: $isSheetSelectShare, content: {
                     SheetWithCloseView {
@@ -196,13 +204,13 @@ struct AnalyseParamView: View {
     var ownedParamView:some View{
         
         return  LazyVStack(content: {
-            ForEach((0..<selectAnalyses.params.count), id: \.self) {index in
+            ForEach((0..<selectAnalyses.parameter.count), id: \.self) {index in
                 
                 HStack{
                     
-                    Text("\(selectAnalyses.params[index].name)")
+                    Text("\(selectAnalyses.parameter[index].name)")
                         .padding()
-                    TextField("ee", text:$obser.analyses[obser.selectIndex].params[index].value)
+                    TextField("ee", text:$obser.analyses[obser.selectIndex].parameter[index].value)
                         .padding()
                         .overlay(RoundedRectangle(cornerRadius: 0.5)
                                     .stroke(Color("Text 2"), lineWidth: 1))
@@ -216,7 +224,7 @@ struct AnalyseParamView: View {
 }
 
 struct InputParam:View {
-    @Binding var param:Analyse.Param
+    @Binding var param:Analyse.Parameter
     var body:some View{
         
         HStack{

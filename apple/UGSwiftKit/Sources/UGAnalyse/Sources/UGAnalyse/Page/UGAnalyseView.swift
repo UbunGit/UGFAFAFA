@@ -14,7 +14,7 @@ public struct UGAnalyseView: View {
 //    @ObservedObject var store:UGAnalyse
     @State var isShowForm = true
     @State var isLoading = false
-    @StateObject var paramStore = AnalyseParam()
+    @StateObject var parametertore = AnalyseParam()
     @StateObject var klineStore = SWWebViewStore() // K线
     @StateObject var pieStore = SWWebViewStore() // 收益pie
     @StateObject var lineStore = SWWebViewStore() // 收益曲线
@@ -51,7 +51,7 @@ public struct UGAnalyseView: View {
                         }
                         
                 })
-                AnalyseParamView(store:paramStore)
+                AnalyseParamView(store:parametertore)
                 
                 HStack{
                     Button("开始分析", action: {
@@ -110,13 +110,13 @@ extension UGAnalyseView:PyRequest{
 //        DispatchQueue(label: "python").sync {
             
             var rparam:[String:String] = [:]
-            for item in paramStore.analyse.params {
+            for item in parametertore.analyse.parameter {
                 rparam[item.name] = item.value
             }
             let tdata = try! JSONEncoder().encode(rparam)
             let str = String(data: tdata, encoding: .utf8)!
-            let tplot = Python.import("Analyse.\(paramStore.analyse.name)")
-            tplot.analyse(code:paramStore.share.code,
+            let tplot = Python.import("Analyse.\(parametertore.analyse.name)")
+            tplot.analyse(code:parametertore.share.code,
                           param:str)
             
 //            DispatchQueue.main.async {
@@ -129,10 +129,10 @@ extension UGAnalyseView:PyRequest{
     // 回测
     func backtrade(){
         isLoading = true
-        backtrading(analyse: paramStore.analyse.name,
-                    code: paramStore.share.code,
-                    begin: paramStore.begin.toString("yyyyMMdd"),
-                    end: paramStore.end.toString("yyyyMMdd")) { result in
+        backtrading(analyse: parametertore.analyse.name,
+                    code: parametertore.share.code,
+                    begin: parametertore.begin.toString("yyyyMMdd"),
+                    end: parametertore.end.toString("yyyyMMdd")) { result in
             isLoading = false
             switch result{
             case .success(let pyobj):

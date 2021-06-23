@@ -49,11 +49,11 @@ def detailed():
                 f = open(pwd,'rb')
                 dtactics["code"] = f.read().decode(encoding='UTF-8',errors='strict')
                 f.close()
-            params = []
+            parameter = []
             tacticsInputs = session.query(TacticsInput).filter_by(tacticsId=tacticid)
             for data in tacticsInputs:
-                params.append(to_json(data,data.__class__)) 
-            dtactics["params"] = params
+                parameter.append(to_json(data,data.__class__)) 
+            dtactics["parameter"] = parameter
             return Response_headers(json.dumps({"code": 200, "data":dtactics}))
     except Exception as e:
         logging.error(str(e))
