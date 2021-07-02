@@ -10,7 +10,7 @@ import UGSwiftKit
 import Alamofire
 
 class AnalyseHistory: ObservableObject {
-    
+   
     @Published var analyses:[Analyse]
     @Published var historys:[Analyse]
     
@@ -75,8 +75,12 @@ class AnalyseHistory: ObservableObject {
 let analyseHistory = AnalyseHistory()
 
 struct AnalyseHistoryView: View {
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var obser:AnalyseHistory
-    init() {
+    @Binding var historyId:Int
+    
+    init(historyId:Binding<Int>) {
+        self._historyId = historyId
         self.obser = analyseHistory
     }
     var body: some View {
@@ -123,6 +127,12 @@ struct AnalyseHistoryView: View {
                         }
                         .padding()
                         .background(Color("AccentColor").opacity(0.1))
+                        .onTapGesture {
+                            
+                            self.historyId = item.id
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                        
                         
                     }
                 })
@@ -131,12 +141,13 @@ struct AnalyseHistoryView: View {
         }.onAppear(){
             
         }
+     
         
     }
 }
 
 struct AnalyseHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalyseHistoryView()
+        AnalyseHistoryView(historyId:.constant(-1) )
     }
 }

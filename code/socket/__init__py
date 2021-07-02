@@ -50,7 +50,7 @@ def analyses():
 
 @app.route('/analyses/history')
 def analysesHistory():
-    # try:
+    # 获取回测历史记录
     from Analyse.catch import AnalyseCache
     data = request_parse(request) 
     history = AnalyseCache().search(name=data["name"])
@@ -59,25 +59,34 @@ def analysesHistory():
         "code":0,
         "data":history
     }
-    # except Exception as e:
-    #     logging.error(repr(e))
-    #     return {
-    #         "code":-1,
-    #         "data":str(e)
-    #     }
-   
 
-@app.route('/analyses/bslist')
-def analysesBSlist():
+
+@app.route('/analyses/history/Details')
+def analysesHistoryDetails():
+    # 获取历史回测详细信息
     from Analyse.catch import AnalyseBSRecords
-    data = request_parse(request)
-    buylist = AnalyseBSRecords().search(id= data.id,code=data.code,type=1)
+    data = request_parse(request) 
+    bsRecord = AnalyseBSRecords().search(cache_id=data["cacheId"],code=data["code"])
     return {
         "code":0,
-        "data":buylist 
+        "data":{"bsRecord":bsRecord}
     }
 
 
+#############  ##################
+@app.route('/share/daily')
+def shareDaily():
+    #获取股票历史记录
+    from Tusharedata.daily import load
+    data = request_parse(request) 
+    df = load(data["code"])
+    if(data["date"]!= None):
+        df = df[df["date"]>data["date"]]
+    dailys = df.to_dict(orient="records")
+    return {
+        "code":0,
+        "data":dailys
+    }
 
 @socketio.on('message')
 def handle_message(message):

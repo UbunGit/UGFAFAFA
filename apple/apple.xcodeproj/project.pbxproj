@@ -23,8 +23,6 @@
 		841F3479262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
 		841F347A262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
 		8428EC942647AE110008CDFB /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8428EC932647AE110008CDFB /* PerfectSQLite */; };
-		8428EC962647AEC00008CDFB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428EC952647AEC00008CDFB /* APIError.swift */; };
-		8428EC972647AEC00008CDFB /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428EC952647AEC00008CDFB /* APIError.swift */; };
 		8428ECFC267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */; };
 		8428ECFD267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */; };
 		842C7240265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */; };
@@ -112,9 +110,8 @@
 		848929CE26118E5900006D88 /* PythonManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848929C92611872F00006D88 /* PythonManage.swift */; };
 		8491D952263003910035B7F8 /* CRUDSqliteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */; };
 		8491D953263003910035B7F8 /* CRUDSqliteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */; };
-		8491D998263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
-		8491D999263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
-		8491D9A7263186B60035B7F8 /* SqlitInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */; };
+		8491D998263180280035B7F8 /* SqliteInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqliteInsterProtocol.swift */; };
+		8491D999263180280035B7F8 /* SqliteInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqliteInsterProtocol.swift */; };
 		84B155152662219400B5DACD /* SelectShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B155142662219400B5DACD /* SelectShareView.swift */; };
 		84B155162662219400B5DACD /* SelectShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B155142662219400B5DACD /* SelectShareView.swift */; };
 		84B15518266224C400B5DACD /* GroupShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B15517266224C400B5DACD /* GroupShare.swift */; };
@@ -127,6 +124,16 @@
 		84C47CF2267DFD3C001A43C2 /* AnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
+		84ED04AA268EC66300164760 /* AnalyseCandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED04A9268EC66300164760 /* AnalyseCandleStickChartView.swift */; };
+		84ED04AB268EC66300164760 /* AnalyseCandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED04A9268EC66300164760 /* AnalyseCandleStickChartView.swift */; };
+		84ED04AD268EEDE700164760 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED04AC268EEDE700164760 /* Daily.swift */; };
+		84ED04AE268EEDE700164760 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED04AC268EEDE700164760 /* Daily.swift */; };
+		84ED04B0268EF06B00164760 /* SQLiteManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */; };
+		84ED04B4268EF13900164760 /* CRUDSqliteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */; };
+		84ED04B5268EF13900164760 /* SqliteInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqliteInsterProtocol.swift */; };
+		84ED04B7268EF19600164760 /* SqliteDeleteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED04B6268EF19600164760 /* SqliteDeleteProtocol.swift */; };
+		84ED04B8268EF19600164760 /* SqliteDeleteProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED04B6268EF19600164760 /* SqliteDeleteProtocol.swift */; };
+		84ED04C6268F078900164760 /* SqliteSelectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED04C5268F078900164760 /* SqliteSelectProtocol.swift */; };
 		84F8CB1F2682E81F00216A50 /* AnalyseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8CB1E2682E81F00216A50 /* AnalyseHistoryView.swift */; };
 		84F8CB202682E81F00216A50 /* AnalyseHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8CB1E2682E81F00216A50 /* AnalyseHistoryView.swift */; };
 		84F8CB23268304D800216A50 /* CommitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F8CB22268304D800216A50 /* CommitView.swift */; };
@@ -181,7 +188,6 @@
 		841F31D52623F1C20099B8CB /* MLMAOut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLMAOut.swift; sourceTree = "<group>"; };
 		841F335B2624062F0099B8CB /* MakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeData.swift; sourceTree = "<group>"; };
 		841F3476262447300099B8CB /* mlma.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = mlma.mlmodel; sourceTree = "<group>"; };
-		8428EC952647AEC00008CDFB /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = APIError.swift; path = "../../../swift-service/HttpServer/APIError.swift"; sourceTree = "<group>"; };
 		8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFCandleStickChartView.swift; sourceTree = "<group>"; };
 		842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseSelectView.swift; sourceTree = "<group>"; };
 		842C7243265F3A6D0086FCD0 /* Analyse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analyse.swift; sourceTree = "<group>"; };
@@ -226,7 +232,7 @@
 		84807DBC25FB7A8900C8CB18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		848929C92611872F00006D88 /* PythonManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonManage.swift; sourceTree = "<group>"; };
 		8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRUDSqliteProtocol.swift; sourceTree = "<group>"; };
-		8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlitInsterProtocol.swift; sourceTree = "<group>"; };
+		8491D997263180280035B7F8 /* SqliteInsterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteInsterProtocol.swift; sourceTree = "<group>"; };
 		84B155142662219400B5DACD /* SelectShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectShareView.swift; sourceTree = "<group>"; };
 		84B15517266224C400B5DACD /* GroupShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupShare.swift; sourceTree = "<group>"; };
 		84C47CEA267DF5D6001A43C2 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
@@ -235,6 +241,10 @@
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
+		84ED04A9268EC66300164760 /* AnalyseCandleStickChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnalyseCandleStickChartView.swift; path = ../../../../../../../../AnalyseCandleStickChartView.swift; sourceTree = "<group>"; };
+		84ED04AC268EEDE700164760 /* Daily.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daily.swift; sourceTree = "<group>"; };
+		84ED04B6268EF19600164760 /* SqliteDeleteProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteDeleteProtocol.swift; sourceTree = "<group>"; };
+		84ED04C5268F078900164760 /* SqliteSelectProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteSelectProtocol.swift; sourceTree = "<group>"; };
 		84F8CB1E2682E81F00216A50 /* AnalyseHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseHistoryView.swift; sourceTree = "<group>"; };
 		84F8CB22268304D800216A50 /* CommitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitView.swift; sourceTree = "<group>"; };
 		84FA4DE925FB9CCC00F93203 /* PythonCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PythonCenter.swift; sourceTree = "<group>"; };
@@ -331,6 +341,7 @@
 			children = (
 				842C7243265F3A6D0086FCD0 /* Analyse.swift */,
 				84B15517266224C400B5DACD /* GroupShare.swift */,
+				84ED04AC268EEDE700164760 /* Daily.swift */,
 			);
 			path = Moden;
 			sourceTree = "<group>";
@@ -339,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				842C7247265F3B840086FCD0 /* AnalyseCell.swift */,
+				84ED04A9268EC66300164760 /* AnalyseCandleStickChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -565,7 +577,6 @@
 		847269D32615B2B100F92E66 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				8428EC952647AEC00008CDFB /* APIError.swift */,
 				847268FA26130F8600F92E66 /* ApiStore.swift */,
 				847268D626130EB600F92E66 /* ApiShare.swift */,
 			);
@@ -590,6 +601,7 @@
 		84807D9025FB7A8500C8CB18 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				84ED04AF268EEF7400164760 /* Sqlite */,
 				8428ECF8267A3BEB0008CDFB /* Charts */,
 				843488D8265741F400EF2203 /* SocketManage */,
 				84540D9F26352B8800ECFD9A /* UGKit */,
@@ -664,8 +676,6 @@
 		8491D99626317FE20035B7F8 /* SqliteProtocol */ = {
 			isa = PBXGroup;
 			children = (
-				8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */,
-				8491D997263180280035B7F8 /* SqlitInsterProtocol.swift */,
 			);
 			path = SqliteProtocol;
 			sourceTree = "<group>";
@@ -673,7 +683,6 @@
 		84E11EB3260D8CF50012D151 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
-				84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -694,6 +703,18 @@
 				84E11EEB260DB2DB0012D151 /* SettingView.swift */,
 			);
 			path = Page;
+			sourceTree = "<group>";
+		};
+		84ED04AF268EEF7400164760 /* Sqlite */ = {
+			isa = PBXGroup;
+			children = (
+				84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */,
+				8491D951263003910035B7F8 /* CRUDSqliteProtocol.swift */,
+				8491D997263180280035B7F8 /* SqliteInsterProtocol.swift */,
+				84ED04B6268EF19600164760 /* SqliteDeleteProtocol.swift */,
+				84ED04C5268F078900164760 /* SqliteSelectProtocol.swift */,
+			);
+			path = Sqlite;
 			sourceTree = "<group>";
 		};
 		84F8CB21268304BE00216A50 /* CommitView */ = {
@@ -1024,9 +1045,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				843488DA2657421F00EF2203 /* SocketManage.swift in Sources */,
+				84ED04B0268EF06B00164760 /* SQLiteManage.swift in Sources */,
 				84807DBF25FB7A8900C8CB18 /* appleApp.swift in Sources */,
+				84ED04C6268F078900164760 /* SqliteSelectProtocol.swift in Sources */,
 				8428ECFC267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */,
 				847268EF26130F6100F92E66 /* ApiShare.swift in Sources */,
+				84ED04B4268EF13900164760 /* CRUDSqliteProtocol.swift in Sources */,
 				84540DB926352B8800ECFD9A /* AlertData.swift in Sources */,
 				8446B446262EBEEF00D2AC8B /* ShareEdit.swift in Sources */,
 				84807DC325FB7A8900C8CB18 /* Persistence.swift in Sources */,
@@ -1034,9 +1058,11 @@
 				8472698A261479E700F92E66 /* ShareDetail.swift in Sources */,
 				841F3477262447300099B8CB /* mlma.mlmodel in Sources */,
 				840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */,
+				84ED04AA268EC66300164760 /* AnalyseCandleStickChartView.swift in Sources */,
 				84540DCD26352B8800ECFD9A /* SearchView.swift in Sources */,
 				84FA4E4A25FBB8B900F93203 /* Socket.swift in Sources */,
 				84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */,
+				84ED04AD268EEDE700164760 /* Daily.swift in Sources */,
 				847268AB2613088700F92E66 /* Share.swift in Sources */,
 				84565AB6261C76CB009F9F7D /* ShareEditView.swift in Sources */,
 				84540DBF26352B8800ECFD9A /* Codable.swift in Sources */,
@@ -1048,6 +1074,7 @@
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
 				843488DD26574B0B00EF2203 /* AnalyseParamView.swift in Sources */,
 				8472689C261307F300F92E66 /* ShareCell.swift in Sources */,
+				84ED04B5268EF13900164760 /* SqliteInsterProtocol.swift in Sources */,
 				84540DC326352B8800ECFD9A /* StoreStatus.swift in Sources */,
 				84B15518266224C400B5DACD /* GroupShare.swift in Sources */,
 				84726983261479CC00F92E66 /* ShareDetailView.swift in Sources */,
@@ -1058,6 +1085,7 @@
 				842C7244265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				84540DC126352B8800ECFD9A /* UDID.swift in Sources */,
 				84540DBD26352B8800ECFD9A /* Date.swift in Sources */,
+				84ED04B7268EF19600164760 /* SqliteDeleteProtocol.swift in Sources */,
 				84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				8472689E261307F300F92E66 /* SharesListView.swift in Sources */,
 				847268A0261307F300F92E66 /* SharesList.swift in Sources */,
@@ -1066,7 +1094,6 @@
 				842C7248265F3B840086FCD0 /* AnalyseCell.swift in Sources */,
 				842C7240265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */,
 				84C47CF1267DFD3C001A43C2 /* AnalyseView.swift in Sources */,
-				8428EC962647AEC00008CDFB /* APIError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1085,6 +1112,8 @@
 				847DE74826575542009C98DF /* SocketManage.swift in Sources */,
 				84C47CEF267DFC92001A43C2 /* AnalyseResultView.swift in Sources */,
 				842C7245265F3A6D0086FCD0 /* Analyse.swift in Sources */,
+				84ED04AB268EC66300164760 /* AnalyseCandleStickChartView.swift in Sources */,
+				84ED04B8268EF19600164760 /* SqliteDeleteProtocol.swift in Sources */,
 				8428ECFD267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
 				847269CF2615B28C00F92E66 /* ApiShare.swift in Sources */,
@@ -1097,7 +1126,6 @@
 				84B15519266224C400B5DACD /* GroupShare.swift in Sources */,
 				84807DC425FB7A8900C8CB18 /* Persistence.swift in Sources */,
 				842C7249265F3B840086FCD0 /* AnalyseCell.swift in Sources */,
-				8428EC972647AEC00008CDFB /* APIError.swift in Sources */,
 				84807DBE25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				84FA4DEE25FB9FFB00F93203 /* PythonCenter.swift in Sources */,
 				84540DC426352B8800ECFD9A /* StoreStatus.swift in Sources */,
@@ -1114,10 +1142,11 @@
 				843488DE26574B5400EF2203 /* AnalyseParamView.swift in Sources */,
 				8416E878267B407E0058CBCD /* SFLineChartView.swift in Sources */,
 				84540DC026352B8800ECFD9A /* Codable.swift in Sources */,
+				84ED04AE268EEDE700164760 /* Daily.swift in Sources */,
 				84C47CF2267DFD3C001A43C2 /* AnalyseView.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetail.swift in Sources */,
 				84540DC826352B8800ECFD9A /* Progress .swift in Sources */,
-				8491D998263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */,
+				8491D998263180280035B7F8 /* SqliteInsterProtocol.swift in Sources */,
 				8472697826146A2800F92E66 /* SharesList.swift in Sources */,
 				84F8CB202682E81F00216A50 /* AnalyseHistoryView.swift in Sources */,
 				848929CE26118E5900006D88 /* PythonManage.swift in Sources */,
@@ -1134,7 +1163,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8491D9A7263186B60035B7F8 /* SqlitInsterProtocol.swift in Sources */,
 				84565ABB261C76D7009F9F7D /* ShareEditView.swift in Sources */,
 				847269CB2615B18F00F92E66 /* base.swift in Sources */,
 				84565A71261C6001009F9F7D /* Page.swift in Sources */,
@@ -1150,7 +1178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				847269C72615B18E00F92E66 /* base.swift in Sources */,
-				8491D999263180280035B7F8 /* SqlitInsterProtocol.swift in Sources */,
+				8491D999263180280035B7F8 /* SqliteInsterProtocol.swift in Sources */,
 				84565A75261C6001009F9F7D /* Page.swift in Sources */,
 				8472692C26132E8600F92E66 /* Store.swift in Sources */,
 				8491D953263003910035B7F8 /* CRUDSqliteProtocol.swift in Sources */,

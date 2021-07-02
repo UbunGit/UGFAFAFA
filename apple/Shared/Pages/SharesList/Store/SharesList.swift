@@ -8,6 +8,7 @@
 
 import SwiftUI
 import Alamofire
+import UGSwiftKit
 
 class SharesList: ObservableObject, StoreAlert{
     

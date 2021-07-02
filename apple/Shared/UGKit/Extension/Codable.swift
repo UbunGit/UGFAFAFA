@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import UGSwiftKit
 
 struct APIData<T:Codable>:Codable{
     var code:Int
@@ -17,7 +18,8 @@ struct APIData<T:Codable>:Codable{
         let container = try decoder.container(keyedBy: CodingKeys.self)
         code = try container.decode(Int.self, forKey: .code)
         message = try container.decodeIfPresent(String.self, forKey: .message)
-        data = try container.decode(T.self, forKey: .data)
+        data = try container.decodeIfPresent(T.self, forKey: .data)
+
         
     }
 }

@@ -7,7 +7,7 @@
 
 
 struct Analyse:Codable {
-    
+    var id:Int = 0
     var parameter:[Parameter] = []
     var name:String = ""
     var des:String?
@@ -37,6 +37,7 @@ struct Analyse:Codable {
     static var _debug = Analyse(parameter: [Parameter._debug], name: "测试")
     
     enum CodingKeys: String, CodingKey {
+        case id
         case parameter
         case name
         case des
@@ -54,6 +55,10 @@ extension Analyse{
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        let tid = try container.decodeIfPresent(Int.self, forKey: .id)
+        id = tid ?? 0
+       
         parameter = try container.decode([Analyse.Parameter].self, forKey: .parameter)
         name = try container.decode(String.self, forKey: .name)
         des = try container.decode(String.self, forKey: .name)

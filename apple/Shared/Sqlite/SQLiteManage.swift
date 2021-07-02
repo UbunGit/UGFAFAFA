@@ -13,10 +13,12 @@ var db = try? Connection(dbfile!)
 
 class SQLiteManage: NSObject {
     static func updatefile()  {
+        
         dbfile = UserDefaults.standard.string(forKey: "dbfile")
         db = try? Connection(dbfile!)
     }
 }
+
 extension Connection {
     
     public var userVersion: Int32 {

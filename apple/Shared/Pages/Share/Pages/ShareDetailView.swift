@@ -8,6 +8,7 @@
 
 import SwiftUI
 import UGSwiftKit
+
 struct ShareDetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
@@ -29,32 +30,30 @@ struct ShareDetailView: View {
         Segmented(id: 2, title: "已卖出", icon: nil)
     ]
     @State var selectTab:Segmented?
-    
-    
-    
+   
     @ViewBuilder
     var body: some View {
-        
-        UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
-            #if os(iOS)
-            content.listStyle(InsetGroupedListStyle())
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarTitle("\(store.share.name)")
-            
-            
-            #else
-            content.listStyle(PlainListStyle())
-            
-            #endif
-        }
-        
-        
-        .sheet(isPresented: self.$isSheet,onDismiss: {
-            print("999999")
-        }){
-            
-            ShareEditView(id: store.id)
-        }
+        Text("")
+//        UGPageView(loading: store.loading, alert: $store.isalert, title: store.alertData?.title, message: store.alertData?.msg){
+//            #if os(iOS)
+//            content.listStyle(InsetGroupedListStyle())
+//                .navigationBarTitleDisplayMode(.inline)
+//                .navigationBarTitle("\(store.share.name)")
+//
+//
+//            #else
+//            content.listStyle(PlainListStyle())
+//
+//            #endif
+//        }
+//
+//
+//        .sheet(isPresented: self.$isSheet,onDismiss: {
+//            print("999999")
+//        }){
+//
+//            ShareEditView(id: store.id)
+//        }
         
         
         

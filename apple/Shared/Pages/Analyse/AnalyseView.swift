@@ -11,12 +11,16 @@ import UGSwiftKit
 struct AnalyseView:View {
     @State var isShowSetting = false
     @State var isShowHistory = false
-
+    @State var historyId:Int=0
+    
+    
     var body: some View{
         NavigationView{
+            
             GeometryReader(content: { geometry in
                 HStack{
-                    AnalyseResultView()
+                    
+                    AnalyseResultView(historyId: $historyId)
                         .frame(width: geometry.size.width)
                 }
                 
@@ -47,19 +51,14 @@ struct AnalyseView:View {
                                             .padding([.leading],10)
                                             .sheet(isPresented: $isShowHistory, content: {
                                                 SheetWithCloseView {
-                                                    AnalyseHistoryView()
+                                                    AnalyseHistoryView(historyId: $historyId)
                                                 }
                                             })
                                         
                                     }
                                 
             )
-            
-           
-            
         }
-        
-        
     }
 }
 

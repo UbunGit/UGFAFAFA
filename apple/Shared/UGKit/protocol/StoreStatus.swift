@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UGSwiftKit
 
 public protocol StoreAlert: ObservableObject  {
 
