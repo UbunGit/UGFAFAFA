@@ -33,6 +33,10 @@ target 'apple (macOS)' do
   common
   macOS
 end
+target 'Tests macOS' do
+  common
+
+end
 
 target 'Tests macOS' do
   common

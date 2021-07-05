@@ -11,29 +11,45 @@ public protocol SqliteInsterProtocol:SqliteProtocol{
   
     func insert() throws -> Int?
     
-    static func insert(datas: [Self]) throws -> Int?
+    static func insert(datas: [Self], setKeys:[ModelKey]) throws -> Int?
 
 }
 
-extension SqliteInsterProtocol{
-    
+public extension SqliteInsterProtocol{
+ 
     func insert() throws -> Int? {
         return 0
     }
-    
-    static func insert(datas: [Self]) throws -> Int?{
-        for item in datas{
-            let tmt = "INSERT INTO \(item.tableName) (email) VALUES (?)"
-            print(tmt)
-//            let stmt = try item.sqliteCon?.prepare("INSERT INTO \(type(of: item)) (email) VALUES (?)")
+    static func insert(datas: [Self], setKeys:[ModelKey]) throws -> Int?{
+        if datas.count<=0 {
+            return 0
         }
-//        datas.forEach { item in
-////            let stmt = try sqliteCon?.prepare("INSERT INTO users (email) VALUES (?)")
-//        }
+        let str = setKeys.map { key in
+            return key.column
+        }.joined(separator: ",")
+        
+        var sql = "INSERT OR REPLACE INTO \(Self.tableName()) (\(str)) VALUES "
+        let values = datas.map { item in
+            
+            let value = setKeys.map { key -> String in
+                getKeypathValue(item, keyPath: key.keypath) ?? ""
+               
+            }.joined(separator: ",")
+            return "(\(value))"
+            
+        }.joined(separator: ",")
+        sql.append(values)
+            
+     
+
+        let stmt = try Self.sqliteCon().execute(sql)
+
         return 0
     }
     
 }
+
+
 
 
 

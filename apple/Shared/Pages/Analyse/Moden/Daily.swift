@@ -8,10 +8,11 @@
 import Foundation
 import Alamofire
 import UGSwiftKit
+import SQLite
 
-struct Daily:CRUDSqliteProtocol {
 
-    
+public struct Daily:CRUDSqliteProtocol {
+
     var code:String
     var date:String
     var amount:Float
@@ -30,7 +31,17 @@ struct Daily:CRUDSqliteProtocol {
         case high
   
     }
-    init(from decoder: Decoder) throws {
+    public init(){
+        code = "000000"
+        date = "20210701"
+        amount = Float(arc4random_uniform(100))*0.01
+        open = Float(arc4random_uniform(100))*0.01
+        close = Float(arc4random_uniform(100))*0.01
+        low = Float(arc4random_uniform(100))*0.01
+        high = Float(arc4random_uniform(100))*0.01
+    }
+    
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let tcode = try container.decodeIfPresent(String.self, forKey: .code)
         code = tcode ?? ""
@@ -43,10 +54,11 @@ struct Daily:CRUDSqliteProtocol {
         high = try container.decodeIfPresent(Float.self, forKey: .high) ?? 0
     }
     
+
     
 }
 /// 数据请求与组装
-extension Daily{
+public extension Daily{
     // 从服务器获取
     static func reqData(code:String, finesh:@escaping (BaseError) ->  ()) {
         let url = "\(baseurl)/share/daily"
@@ -60,16 +72,57 @@ extension Daily{
                 case .failure(let error):
                     finesh(.init(code: error.code, msg: error.msg))
                 case .success(let value):
-                    
-                    _ = try? Daily.insert(datas: value)
+                    print(value)
+                    do{
+                        _ = try Daily.insert(datas: value, setKeys:Self.sqlKeys)
+                    }
+                    catch {
+                        print("🐬 \(error)")
+                    }
+                   
                 }
             }
    
     }
-  
-    
-    static func dbData(code:String, finesh:@escaping (Result<[Daily], BaseError>) ->()){
-        finesh(.success([]))
-    }
+
     
 }
+
+/// sql
+extension Daily{
+    
+    static let sqlKeys = [
+        ModelKey.init(column: "code", keypath: \Self.code),
+        ModelKey.init(column: "date", keypath: \Self.date),
+        ModelKey.init(column: "amount", keypath: \Self.amount),
+        ModelKey.init(column: "open", keypath: \Self.open),
+        ModelKey.init(column: "close", keypath: \Self.close),
+        ModelKey.init(column: "low", keypath: \Self.low),
+        ModelKey.init(column: "high", keypath: \Self.high),
+    ]
+    
+    public static func tableName() -> String{
+       
+        let tableName = "\(Self.self)".lowercased()
+        let sql = """
+         CREATE TABLE IF NOT EXISTS "\(tableName)"(
+            "id" INTEGER PRIMARY KEY NOT NULL,
+            "code" TEXT,
+            "date" TEXT,
+            "amount" NUMERIC,
+            "open" NUMERIC,
+            "close" NUMERIC,
+            "low" NUMERIC,
+            "high" NUMERIC,
+            PRIMARY KEY("code","date")
+         )
+         """
+       _ = try! Self.sqliteCon().execute(sql)
+        
+        return tableName
+    }
+    
+
+}
+
+

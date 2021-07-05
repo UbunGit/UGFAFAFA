@@ -15,7 +15,7 @@ public protocol SqliteSelectProtocol:SqliteProtocol{
 
 extension SqliteSelectProtocol{
     
-    static func last() -> Self?{
+    public static func last() -> Self?{
         return nil
     }
 }
