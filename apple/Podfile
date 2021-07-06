@@ -24,8 +24,16 @@ end
 
 
 target 'apple (iOS)' do
-    
-    common
+  
+  pod 'DoraemonKit/Core'
+  pod 'DoraemonKit/WithGPS'
+  pod 'DoraemonKit/WithLoad'
+  pod 'DoraemonKit/WithLogger'
+  pod 'DoraemonKit/WithDatabase'
+  pod 'DoraemonKit/WithMLeaksFinder'
+  pod 'DoraemonKit/WithWeex'
+  
+  common
 end
 
 
@@ -33,12 +41,8 @@ target 'apple (macOS)' do
   common
   macOS
 end
-target 'Tests macOS' do
-  common
+#target 'Tests macOS' do
+#  common
+#
+#end
 
-end
-
-target 'Tests macOS' do
-  common
-
-end

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DoraemonKit
 
 @main
 struct appleApp: App {
@@ -17,6 +18,10 @@ struct appleApp: App {
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .font(.callout)
                 .foregroundColor(Color("Text 5"))
+                .onAppear(){
+                    DoraemonManager.shareInstance().install(withPid: "db4146378948b4a04e74c1172ce45590")
+                  
+                }
             
         }
     }

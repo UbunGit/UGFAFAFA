@@ -29,7 +29,6 @@ public struct Daily:CRUDSqliteProtocol {
         case close
         case low
         case high
-  
     }
     public init(){
         code = "000000"
@@ -60,7 +59,7 @@ public struct Daily:CRUDSqliteProtocol {
 /// 数据请求与组装
 public extension Daily{
     // 从服务器获取
-    static func reqData(code:String, finesh:@escaping (BaseError) ->  ()) {
+    static func reqData(code:String, finesh:@escaping (BaseError?) ->  ()) {
         let url = "\(baseurl)/share/daily"
         let lastDate:String = Daily.last()?.date ?? "20210620"
         let param = ["code":code,
@@ -74,18 +73,16 @@ public extension Daily{
                 case .success(let value):
                     print(value)
                     do{
-                        _ = try Daily.insert(datas: value, setKeys:Self.sqlKeys)
+                        _ = try Daily.insert(datas: value, keys:Self.sqlKeys, model: .Replace)
+                        finesh(nil)
                     }
                     catch {
-                        print("🐬 \(error)")
+                        finesh(.init(code: -1, msg: "db error \(error)"))
                     }
-                   
+                    
                 }
             }
-   
     }
-
-    
 }
 
 /// sql
@@ -106,7 +103,6 @@ extension Daily{
         let tableName = "\(Self.self)".lowercased()
         let sql = """
          CREATE TABLE IF NOT EXISTS "\(tableName)"(
-            "id" INTEGER PRIMARY KEY NOT NULL,
             "code" TEXT,
             "date" TEXT,
             "amount" NUMERIC,
@@ -122,7 +118,7 @@ extension Daily{
         return tableName
     }
     
-
+ 
 }
 
 

@@ -18,6 +18,7 @@ public protocol SqliteProtocol:Codable{
     static func sqliteFile() -> String
     static func sqliteCon() -> Connection
     static func tableName() -> String
+    static func table() -> Table
     
  
 }
@@ -43,10 +44,12 @@ extension SqliteProtocol{
         print("sqllitefile:\(sqllitefile)")
         return  sqllitefile
     }
+    
     public static func sqliteCon() -> Connection{
         
         return try! Connection(Self.sqliteFile())
     }
+    
     public static func tableName() -> String{
         let  id = Expression<Int64>.init("uId")
         let tableName = "\(Self.self)".lowercased()
@@ -57,6 +60,11 @@ extension SqliteProtocol{
          
         }))
         return tableName
+    }
+    
+    public static func table() -> Table{
+        return Table(Self.tableName())
+        
     }
 
     static func getKeypathValue(_ instance: Any, keyPath: AnyKeyPath) -> String? {
@@ -83,7 +91,6 @@ extension SqliteProtocol{
 }
 
 public struct ModelKey {
-    
     var column:String
     var keypath:AnyKeyPath
 }

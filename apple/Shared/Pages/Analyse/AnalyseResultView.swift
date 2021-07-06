@@ -22,6 +22,7 @@ class AnalyseResult: ObservableObject {
         self.earning = Earning.testDatas
     }
 }
+
 let analyseResult = AnalyseResult()
 struct AnalyseResultView:View {
     @ObservedObject var obser = analyseResult
@@ -34,7 +35,7 @@ struct AnalyseResultView:View {
            
             ScrollView(.vertical, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
                 ForEach(0..<codes.count, id: \.self) { index in
-                    AnalyseCandleStickChartView(code: $codes[index], entries: Datyly.datylyeEntry(datylys: Datyly.testdata))
+                    AnalyseCandleStickChartView(code: $codes[index])
                         .frame(height: 300)
                        
                     

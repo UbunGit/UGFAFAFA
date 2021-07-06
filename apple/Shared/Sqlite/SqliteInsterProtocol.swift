@@ -7,31 +7,33 @@
 
 import Foundation
 
+public enum CRUDInsertModel:String {
+    case None = "" // 直接插入
+    case Replace = "OR REPLACE" // 替换
+    case Ignore = "OR IGNORE" // 忽略
+}
+
 public protocol SqliteInsterProtocol:SqliteProtocol{
-  
-    func insert() throws -> Int?
+
     
-    static func insert(datas: [Self], setKeys:[ModelKey]) throws -> Int?
+    static func insert(datas: [Self], keys:[ModelKey], model:CRUDInsertModel) throws
 
 }
 
 public extension SqliteInsterProtocol{
- 
-    func insert() throws -> Int? {
-        return 0
-    }
-    static func insert(datas: [Self], setKeys:[ModelKey]) throws -> Int?{
+   
+    static func insert(datas: [Self], keys:[ModelKey], model:CRUDInsertModel = .None) throws {
         if datas.count<=0 {
-            return 0
+            return
         }
-        let str = setKeys.map { key in
+        let str = keys.map { key in
             return key.column
         }.joined(separator: ",")
         
-        var sql = "INSERT OR REPLACE INTO \(Self.tableName()) (\(str)) VALUES "
+        var sql = "INSERT \(model.rawValue) INTO \(Self.tableName()) (\(str)) VALUES "
         let values = datas.map { item in
             
-            let value = setKeys.map { key -> String in
+            let value = keys.map { key -> String in
                 getKeypathValue(item, keyPath: key.keypath) ?? ""
                
             }.joined(separator: ",")
@@ -39,12 +41,9 @@ public extension SqliteInsterProtocol{
             
         }.joined(separator: ",")
         sql.append(values)
-            
-     
+        print(sql)
+        try Self.sqliteCon().execute(sql)
 
-        let stmt = try Self.sqliteCon().execute(sql)
-
-        return 0
     }
     
 }
