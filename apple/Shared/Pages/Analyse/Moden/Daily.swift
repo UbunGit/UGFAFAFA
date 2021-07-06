@@ -61,7 +61,7 @@ public extension Daily{
     // 从服务器获取
     static func reqData(code:String, finesh:@escaping (BaseError?) ->  ()) {
         let url = "\(baseurl)/share/daily"
-        let lastDate:String = Daily.last()?.date ?? "20210620"
+        let lastDate:String = Daily.last()?.date ?? "20200620"
         let param = ["code":code,
                      "date": lastDate]
      

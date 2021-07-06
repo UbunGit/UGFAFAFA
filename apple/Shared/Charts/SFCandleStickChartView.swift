@@ -8,19 +8,41 @@
 import SwiftUI
 import Charts
 
+class SFCandleStickChart: ObservableObject {
+    
+    @State var chartView:CandleStickChartView
+    var entries:[CandleChartDataEntry]{
+        get{
+            return []
+        }
+    }
+    init() {
+        self.chartView = CandleStickChartView()
+    }
+    
+}
+
 #if os(iOS)
 
 
 struct SFCandleStickChartView: UIViewRepresentable {
     
-    let entries:[CandleChartDataEntry]
+    @ObservedObject var obser:SFCandleStickChart
     
+    var entries:[CandleChartDataEntry]{
+        get{
+            return obser.entries
+        }
+    }
+  
     func makeUIView(context: Context) -> CandleStickChartView {
-        return CandleStickChartView()
+
+        return obser.chartView
     }
     
     func updateUIView(_ uiView: CandleStickChartView, context: Context) {
         let dataset = CandleChartDataSet(entries: entries)
+        dataset.label = "pppp"
         uiView.data = CandleChartData(dataSet: dataset)
         uiView.xAxis.labelPosition = .bottom
         forrmatLineChartView(chartView: uiView)
@@ -44,10 +66,17 @@ struct SFCandleStickChartView: UIViewRepresentable {
 #else
 
 struct SFCandleStickChartView: NSViewRepresentable {
-    let entries:[CandleChartDataEntry]
+    
+    @ObservedObject var obser:SFCandleStickChart
+    
+    var entries:[CandleChartDataEntry]{
+        get{
+            return obser.entries
+        }
+    }
     
     func makeNSView(context: Context) -> CandleStickChartView {
-        return CandleStickChartView()
+        return chartView
     }
     
     func updateNSView(_ nsView: CandleStickChartView, context: Context) {
@@ -79,6 +108,8 @@ extension SFCandleStickChartView{
         // 边框
         chartView.borderLineWidth = 0.5;
         chartView.drawBordersEnabled = true
+        
+   
  
     }
     
@@ -88,6 +119,8 @@ extension SFCandleStickChartView{
         axis.axisLineWidth = 1
         axis.gridLineWidth = 0.5
         axis.gridColor = .black.withAlphaComponent(0.2)
+        axis.labelCount = 3
+        axis.labelRotationAngle = -1
         
 //        axis.labelTextColor = .label
     }
@@ -115,7 +148,7 @@ extension SFCandleStickChartView{
 
 struct SFCandleStickChartView_Previews: PreviewProvider {
     static var previews: some View {
-        SFCandleStickChartView(entries: Datyly.datylyeEntry(datylys: Datyly.testdata))
+        SFCandleStickChartView(obser: SFCandleStickChart())
     }
 }
 

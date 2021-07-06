@@ -33,8 +33,6 @@
 		84540DBA26352B8800ECFD9A /* AlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA126352B8800ECFD9A /* AlertData.swift */; };
 		84540DBB26352B8800ECFD9A /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA226352B8800ECFD9A /* Formatter.swift */; };
 		84540DBC26352B8800ECFD9A /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA226352B8800ECFD9A /* Formatter.swift */; };
-		84540DBD26352B8800ECFD9A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA426352B8800ECFD9A /* Date.swift */; };
-		84540DBE26352B8800ECFD9A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA426352B8800ECFD9A /* Date.swift */; };
 		84540DBF26352B8800ECFD9A /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA526352B8800ECFD9A /* Codable.swift */; };
 		84540DC026352B8800ECFD9A /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA526352B8800ECFD9A /* Codable.swift */; };
 		84540DC126352B8800ECFD9A /* UDID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84540DA626352B8800ECFD9A /* UDID.swift */; };
@@ -166,7 +164,6 @@
 		8446B445262EBEEF00D2AC8B /* ShareEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEdit.swift; sourceTree = "<group>"; };
 		84540DA126352B8800ECFD9A /* AlertData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertData.swift; sourceTree = "<group>"; };
 		84540DA226352B8800ECFD9A /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
-		84540DA426352B8800ECFD9A /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		84540DA526352B8800ECFD9A /* Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		84540DA626352B8800ECFD9A /* UDID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDID.swift; sourceTree = "<group>"; };
 		84540DA826352B8800ECFD9A /* StoreStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreStatus.swift; sourceTree = "<group>"; };
@@ -372,7 +369,6 @@
 		84540DA326352B8800ECFD9A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				84540DA426352B8800ECFD9A /* Date.swift */,
 				84540DA526352B8800ECFD9A /* Codable.swift */,
 				84540DA626352B8800ECFD9A /* UDID.swift */,
 			);
@@ -974,7 +970,6 @@
 				84C47CEE267DFC92001A43C2 /* AnalyseResultView.swift in Sources */,
 				842C7244265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				84540DC126352B8800ECFD9A /* UDID.swift in Sources */,
-				84540DBD26352B8800ECFD9A /* Date.swift in Sources */,
 				84ED04B7268EF19600164760 /* SqliteDeleteProtocol.swift in Sources */,
 				84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				8472689E261307F300F92E66 /* SharesListView.swift in Sources */,
@@ -1025,7 +1020,6 @@
 				8446B447262EBEEF00D2AC8B /* ShareEdit.swift in Sources */,
 				84540DBA26352B8800ECFD9A /* AlertData.swift in Sources */,
 				84565ABA261C76D7009F9F7D /* ShareEditView.swift in Sources */,
-				84540DBE26352B8800ECFD9A /* Date.swift in Sources */,
 				841F3478262447300099B8CB /* mlma.mlmodel in Sources */,
 				847268DF26130EC700F92E66 /* Share.swift in Sources */,
 				847269C02615B15F00F92E66 /* base.swift in Sources */,

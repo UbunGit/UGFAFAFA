@@ -42,7 +42,7 @@ struct AnalyseResultView:View {
                 }
                 SFLineChartView(datasets: chartset)
                     .frame(height: 300)
-                SFCandleStickChartView(entries: Datyly.datylyeEntry(datylys: Datyly.testdata))
+                SFCandleStickChartView(obser: SFCandleStickChart())
                     .frame(height: 300)
                 SFLineChartView(datasets: chartset)
                     .frame(height: 300)

@@ -16,10 +16,10 @@ struct Store: Codable, Identifiable,Equatable {
     var share_id:Int
     var price:Float = 0.00
     var num:Int = 0
-    var day:String? = Date().toString(dateFormat: "yyyy-MM-dd")
+    var day:String? = Date().toString("yyyy-MM-dd")
     var state:Int? = 0 //0 ->买入 1->卖出
     var outprice:Float? = 0.00
-    var outday:String? = Date().toString(dateFormat: "yyyy-MM-dd")
+    var outday:String? = Date().toString("yyyy-MM-dd")
     var fee:Float? = 0.00
     
 }

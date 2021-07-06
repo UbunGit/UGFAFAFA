@@ -7,33 +7,53 @@
 
 import SwiftUI
 import Charts
-class AnalyseCandleStickChart: ObservableObject{
+
+class AnalyseCandleStickChart: SFCandleStickChart{
     
-    @Published var dailys:[Daily] = []
-    var entries:[CandleChartDataEntry]{
+    override var entries:[CandleChartDataEntry]{
         get{
             Daily.datylyeEntry(datylys: dailys)
         }
     }
     
-    func reloadDailys(code:String) {
-        
-        Daily.reqData(code: code) { error in
-            
-            self.dailys =  try! Daily.select(keys: {
-                Daily.sqlKeys
-            }, fitter: {
-                "code=\"\(code)\""
-            }, orderby: {
-                "date"
-            }, limit: {
-                100
-            }, offset: {
-                1
-            })
+    var code:String = ""{
+        didSet{
+            Daily.reqData(code: code) { error in
+                print("error")
+            }
+      
         }
-       
     }
+    
+    var xAxisValue:[String]{
+        get{
+            let values =  dailys.map { item in
+                return item.date.toDate("yyyyMMdd")?.toString("yyyy-MM-dd") ?? "--"
+            }
+            return values
+        }
+    }
+    
+    var dailys:[Daily]{
+        let dailys = try! Daily.select(keys: {
+            Daily.sqlKeys
+        }, fitter: {
+            "code=\"\(code)\""
+        }, orderby: {
+            "date"
+        }, limit: {
+            100
+        }, offset: {
+            1
+        })
+        let values =  dailys.map { item in
+            return item.date.toDate("yyyyMMdd")?.toString("yyyy-MM-dd") ?? "--"
+        }
+        
+        chartView.xAxis.valueFormatter = IndexAxisValueFormatter.init(values: values)
+        return dailys
+    }
+
     
 }
 
@@ -44,15 +64,17 @@ struct AnalyseCandleStickChartView:View {
     var body: some View{
         VStack{
             Text(code)
-            SFCandleStickChartView(entries: obser.entries)
+            SFCandleStickChartView(obser: obser)
                
+              
         }
         .onChange(of: code, perform: { value in
-            obser.reloadDailys(code: code)
+            obser.code = code
         })
       
     }
 }
+
 
 extension Daily{
     static func datylyeEntry(datylys:[Daily])->[CandleChartDataEntry]{
@@ -69,6 +91,9 @@ extension Daily{
         }
     }
 }
+
+
+
 
 
 struct AnalyseCandleStickChartView_Previews: PreviewProvider {
