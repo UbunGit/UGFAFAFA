@@ -1,4 +1,4 @@
-#source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 use_frameworks!
 def common
@@ -25,13 +25,13 @@ end
 
 target 'apple (iOS)' do
   
-  pod 'DoraemonKit/Core'
-  pod 'DoraemonKit/WithGPS'
-  pod 'DoraemonKit/WithLoad'
-  pod 'DoraemonKit/WithLogger'
-  pod 'DoraemonKit/WithDatabase'
-  pod 'DoraemonKit/WithMLeaksFinder'
-  pod 'DoraemonKit/WithWeex'
+#  pod 'DoraexmonKit/Core'
+#  pod 'DoraemonKit/WithGPS'
+#  pod 'DoraemonKit/WithLoad'
+#  pod 'DoraemonKit/WithLogger'
+#  pod 'DoraemonKit/WithDatabase'
+#  pod 'DoraemonKit/WithMLeaksFinder'
+#  pod 'DoraemonKit/WithWeex'
   
   common
 end

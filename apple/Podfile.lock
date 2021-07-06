@@ -4,36 +4,9 @@ PODS:
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
   - CocoaAsyncSocket (7.6.5)
-  - CocoaLumberjack (3.6.1):
-    - CocoaLumberjack/Core (= 3.6.1)
-  - CocoaLumberjack/Core (3.6.1)
-  - DoraemonKit/Core (3.0.0)
-  - DoraemonKit/WithDatabase (3.0.0):
-    - DoraemonKit/Core
-    - YYDebugDatabase
-  - DoraemonKit/WithGPS (3.0.0):
-    - DoraemonKit/Core
-  - DoraemonKit/WithLoad (3.0.0):
-    - DoraemonKit/Core
-  - DoraemonKit/WithLogger (3.0.0):
-    - CocoaLumberjack
-    - DoraemonKit/Core
-  - DoraemonKit/WithMLeaksFinder (3.0.0):
-    - DoraemonKit/Core
-  - DoraemonKit/WithWeex (3.0.0):
-    - DoraemonKit/Core
-    - WeexSDK
-    - WXDevtool
-  - FMDB (2.7.5):
-    - FMDB/standard (= 2.7.5)
-  - FMDB/standard (2.7.5)
-  - GCDWebServer (3.5.4):
-    - GCDWebServer/Core (= 3.5.4)
-  - GCDWebServer/Core (3.5.4)
   - PythonKit (1.0.1)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
-  - SocketRocket (0.5.1)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
@@ -46,25 +19,11 @@ PODS:
   - UGSwiftKit/UGAnalyse (1.0.1):
     - PythonKit
     - UGSwiftKit/Base
-  - WeexSDK (0.28.0)
-  - WXDevtool (0.24.0):
-    - SocketRocket
-    - WeexSDK
-  - YYDebugDatabase (2.1.0):
-    - FMDB
-    - GCDWebServer
 
 DEPENDENCIES:
   - Alamofire
   - Charts
   - CocoaAsyncSocket
-  - DoraemonKit/Core
-  - DoraemonKit/WithDatabase
-  - DoraemonKit/WithGPS
-  - DoraemonKit/WithLoad
-  - DoraemonKit/WithLogger
-  - DoraemonKit/WithMLeaksFinder
-  - DoraemonKit/WithWeex
   - PythonKit (from `/Users/admin/Documents/github/PythonKit`)
   - Socket.IO-Client-Swift
   - SQLite.swift
@@ -73,22 +32,13 @@ DEPENDENCIES:
   - UGSwiftKit/UGAnalyse (from `./UGSwiftKit`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Alamofire
     - Charts
     - CocoaAsyncSocket
     - Socket.IO-Client-Swift
     - SQLite.swift
     - Starscream
-  trunk:
-    - CocoaLumberjack
-    - DoraemonKit
-    - FMDB
-    - GCDWebServer
-    - SocketRocket
-    - WeexSDK
-    - WXDevtool
-    - YYDebugDatabase
 
 EXTERNAL SOURCES:
   PythonKit:
@@ -100,20 +50,12 @@ SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
-  CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
-  DoraemonKit: 4ad75a74374d836425e947f0f891157cacfdcf46
-  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
-  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   PythonKit: 80d7cc257e135961a0aa09d66198c6abdf8ebb19
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
-  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   UGSwiftKit: d0cd808d5687b5b3a7a0e49722227bb5144c8191
-  WeexSDK: 78861d2f8b78f67e30580c15a54f5b420456db39
-  WXDevtool: 95b70c73c06fc3299d65bd53ba4b3e0b0087f3cb
-  YYDebugDatabase: e684a7f79fca2e3673a23347cefb822f911f3124
 
-PODFILE CHECKSUM: b861adaf9de3f980a05b583b0707e99fa6163552
+PODFILE CHECKSUM: bb6af71e728bf164cb4f6f34ce65637ac41b8ccc
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0

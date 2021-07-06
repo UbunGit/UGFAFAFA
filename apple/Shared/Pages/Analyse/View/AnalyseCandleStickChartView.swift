@@ -17,7 +17,9 @@ class AnalyseCandleStickChart: ObservableObject{
     }
     
     func reloadDailys(code:String) {
+        
         Daily.reqData(code: code) { error in
+            
             self.dailys =  try! Daily.select(keys: {
                 Daily.sqlKeys
             }, fitter: {
@@ -54,13 +56,15 @@ struct AnalyseCandleStickChartView:View {
 
 extension Daily{
     static func datylyeEntry(datylys:[Daily])->[CandleChartDataEntry]{
-        return datylys.map { item in
+        return datylys.enumerated().map { (index,item) in
+           
             return CandleChartDataEntry(
-                x:Double(datylys.i),
+                x:Double(index),
                 shadowH: Double(item.high),
                 shadowL: Double(item.low),
                 open: Double(item.open),
-                close: Double(item.close)
+                close: Double(item.close),
+                data: item
             )
         }
     }

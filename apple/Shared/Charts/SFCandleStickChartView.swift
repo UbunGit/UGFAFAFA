@@ -88,6 +88,7 @@ extension SFCandleStickChartView{
         axis.axisLineWidth = 1
         axis.gridLineWidth = 0.5
         axis.gridColor = .black.withAlphaComponent(0.2)
+        
 //        axis.labelTextColor = .label
     }
     
