@@ -1,23 +1,23 @@
 //
-//  SFCandleStickChartView.swift
+//  SFCombinedChartView.swift
 //  apple
 //
-//  Created by admin on 2021/6/16.
+//  Created by admin on 2021/7/7.
 //
 
 import SwiftUI
 import Charts
 
-class SFCandleStickChart: ObservableObject,ChartViewDelegate {
+class SFCombinedChart: ObservableObject,ChartViewDelegate {
     
-    @State var chartView:CandleStickChartView
+    @State var chartView:CombinedChartView
     
     init() {
-        self.chartView = CandleStickChartView()
+        self.chartView = CombinedChartView()
         self.chartView.delegate = self
     }
     
-    func updateChartView(chartView:CandleStickChartView) {
+    func updateChartView(chartView:CombinedChartView) {
         styleXAxis()
         stylexYAxis(axis: chartView.getAxis(.left))
         stylexYAxis(axis: chartView.getAxis(.right))
@@ -75,20 +75,18 @@ class SFCandleStickChart: ObservableObject,ChartViewDelegate {
 #if os(iOS)
 
 
-struct SFCandleStickChartView: UIViewRepresentable {
+struct SFCombinedChartView: UIViewRepresentable {
     
-    @ObservedObject var obser:SFCandleStickChart
+    @ObservedObject var obser:SFCombinedChart
     
-    func makeUIView(context: Context) -> CandleStickChartView {
+    func makeUIView(context: Context) -> CombinedChartView {
 
         return obser.chartView
     }
     
-    func updateUIView(_ uiView: CandleStickChartView, context: Context) {
+    func updateUIView(_ uiView: CombinedChartView, context: Context) {
         obser.updateChartView(chartView: uiView)
-     
-//        formateYAxis(axis: uiView.getAxis(.left))
-//        formateYAxis(axis: uiView.getAxis(.right))
+
    
         
     }
@@ -99,7 +97,7 @@ struct SFCandleStickChartView: UIViewRepresentable {
 
 #else
 
-struct SFCandleStickChartView: NSViewRepresentable {
+struct SFCombinedChartView: NSViewRepresentable {
     
     @ObservedObject var obser:SFCandleStickChart
   
@@ -116,43 +114,9 @@ struct SFCandleStickChartView: NSViewRepresentable {
 
 #endif
 
-struct SFCandleStickChartView_Previews: PreviewProvider {
+struct SFCombinedChartView_Previews: PreviewProvider {
     static var previews: some View {
-        SFCandleStickChartView(obser: SFCandleStickChart())
+        SFCombinedChartView(obser: SFCombinedChart())
     }
 }
 
-struct Datyly {
-    var date:String
-    var open:Double
-    var close:Double
-    var hight:Double
-    var low:Double
-    static func datylyeEntry(datylys:[Datyly])->[CandleChartDataEntry]{
-        return datylys.map { item in
-            return CandleChartDataEntry(
-                x:Double(item.date)!,
-                shadowH: item.hight,
-                shadowL: item.low,
-                open: item.open,
-                close: item.close
-            )
-        }
-    }
-    
-    static var testdata:[Datyly]{
-        let datylys = (0..<30).map { i -> Datyly in
-            
-            return Datyly(date: "\(20210101+i)",
-                          open: 1.00+Double(Double(arc4random_uniform(100))*0.01),
-                   close: 1.00+Double(Double(arc4random_uniform(100))*0.01),
-                   hight:1.00+Double(Double(arc4random_uniform(100))*0.01),
-                   low: 1.00+Double(Double(arc4random_uniform(100))*0.01)
-            )
-            
-        }
-        return datylys
-        
-    }
-    
-}

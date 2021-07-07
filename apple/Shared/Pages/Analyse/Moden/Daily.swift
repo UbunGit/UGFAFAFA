@@ -46,11 +46,16 @@ public struct Daily:CRUDSqliteProtocol {
         code = tcode ?? ""
         let tdate = try container.decodeIfPresent(String.self, forKey: .date)
         date = tdate ?? ""
-        amount = try container.decodeIfPresent(Float.self, forKey: .amount) ?? 0
-        open = try container.decodeIfPresent(Float.self, forKey: .open) ?? 0
-        close = try container.decodeIfPresent(Float.self, forKey: .close) ?? 0
-        low = try container.decodeIfPresent(Float.self, forKey: .low) ?? 0
-        high = try container.decodeIfPresent(Float.self, forKey: .high) ?? 0
+        let tamount = try container.decodeIfPresent(Float.self, forKey: .amount)
+        let topen = try container.decodeIfPresent(Float.self, forKey: .open)
+        let tclose = try container.decodeIfPresent(Float.self, forKey: .close)
+        let tlow = try container.decodeIfPresent(Float.self, forKey: .low)
+        let thigh = try container.decodeIfPresent(Float.self, forKey: .high)
+        amount = tamount ?? 0
+        open = topen ?? 0
+        close = tclose ?? 0
+        low = tlow ?? 0
+        high = thigh ?? 0
     }
     
 
@@ -61,14 +66,18 @@ public extension Daily{
     // 从服务器获取
     static func reqData(code:String, finesh:@escaping (BaseError?) ->  ()) {
         let url = "\(baseurl)/share/daily"
-        let lastDate:String = Daily.last()?.date ?? "20200620"
+        let lastDate:String = Daily.last(code: code)?.date ?? "20130101"
+        if lastDate == Date.init().toString("yyyyMMdd")  {
+            finesh(nil)
+        }
         let param = ["code":code,
                      "date": lastDate]
-     
+        
         AF.request(url, method: .get, parameters: param)
             .responseModel([Daily].self) { result in
                 switch result{
                 case .failure(let error):
+                    print("\(url) \n \(param) \n \(error)")
                     finesh(.init(code: error.code, msg: error.msg))
                 case .success(let value):
                     print(value)
@@ -116,6 +125,21 @@ extension Daily{
        _ = try! Self.sqliteCon().execute(sql)
         
         return tableName
+    }
+    
+    static func last(code:String) -> Self?{
+        let dailys = try! Self.select(keys: {
+            Daily.sqlKeys
+        }, fitter: {
+            "code=\"\(code)\""
+        }, orderby: {
+            "date DESC"
+        }, limit: {
+            1
+        }, offset: {
+            0
+        })
+        return dailys.last
     }
     
  

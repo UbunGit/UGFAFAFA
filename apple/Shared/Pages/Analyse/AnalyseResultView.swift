@@ -37,6 +37,9 @@ struct AnalyseResultView:View {
                 ForEach(0..<codes.count, id: \.self) { index in
                     AnalyseCandleStickChartView(code: $codes[index])
                         .frame(height: 300)
+                    
+                    AnalyseKLineChartView(code: $codes[index])
+                        .frame(height: 300)
                        
                     
                 }

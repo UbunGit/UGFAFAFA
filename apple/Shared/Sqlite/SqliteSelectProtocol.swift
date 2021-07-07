@@ -10,7 +10,6 @@ import Foundation
 // MARK: DELETE
 public protocol SqliteSelectProtocol:SqliteProtocol{
     
-    static func last() -> Self?
     
     static func select(
         keys:()->[ModelKey],
@@ -23,9 +22,7 @@ public protocol SqliteSelectProtocol:SqliteProtocol{
 
 public extension SqliteSelectProtocol{
     
-    static func last() -> Self?{
-        return nil
-    }
+   
     
     static func select(
         keys:()->[ModelKey],

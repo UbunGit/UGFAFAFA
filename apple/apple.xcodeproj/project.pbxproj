@@ -51,6 +51,10 @@
 		84565A6D261C6000009F9F7D /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565A68261C5F15009F9F7D /* Page.swift */; };
 		84565AB6261C76CB009F9F7D /* ShareEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditView.swift */; };
 		84565ABA261C76D7009F9F7D /* ShareEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84565AB5261C76CB009F9F7D /* ShareEditView.swift */; };
+		8457327E2695BB610072A837 /* SFCombinedChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457327D2695BB610072A837 /* SFCombinedChartView.swift */; };
+		8457327F2695BB610072A837 /* SFCombinedChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457327D2695BB610072A837 /* SFCombinedChartView.swift */; };
+		845732812695BC700072A837 /* AnalyseKLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732802695BC6F0072A837 /* AnalyseKLineChartView.swift */; };
+		845732822695BC700072A837 /* AnalyseKLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732802695BC6F0072A837 /* AnalyseKLineChartView.swift */; };
 		8472689C261307F300F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
 		8472689E261307F300F92E66 /* SharesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListView.swift */; };
 		847268A0261307F300F92E66 /* SharesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* SharesList.swift */; };
@@ -173,6 +177,8 @@
 		845410E02636C3FF00ECFD9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84565A68261C5F15009F9F7D /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		84565AB5261C76CB009F9F7D /* ShareEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEditView.swift; sourceTree = "<group>"; };
+		8457327D2695BB610072A837 /* SFCombinedChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFCombinedChartView.swift; sourceTree = "<group>"; };
+		845732802695BC6F0072A837 /* AnalyseKLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseKLineChartView.swift; sourceTree = "<group>"; };
 		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		84726899261307F300F92E66 /* SharesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesListView.swift; sourceTree = "<group>"; };
 		8472689B261307F300F92E66 /* SharesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesList.swift; sourceTree = "<group>"; };
@@ -292,6 +298,7 @@
 			children = (
 				8416E876267B407B0058CBCD /* SFLineChartView.swift */,
 				8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */,
+				8457327D2695BB610072A837 /* SFCombinedChartView.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -311,6 +318,7 @@
 			children = (
 				842C7247265F3B840086FCD0 /* AnalyseCell.swift */,
 				849E4AA6269435EF007179C7 /* AnalyseCandleStickChartView.swift */,
+				845732802695BC6F0072A837 /* AnalyseKLineChartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -932,6 +940,7 @@
 			files = (
 				843488DA2657421F00EF2203 /* SocketManage.swift in Sources */,
 				84ED04B0268EF06B00164760 /* SQLiteManage.swift in Sources */,
+				845732812695BC700072A837 /* AnalyseKLineChartView.swift in Sources */,
 				84807DBF25FB7A8900C8CB18 /* appleApp.swift in Sources */,
 				84ED04C6268F078900164760 /* SqliteSelectProtocol.swift in Sources */,
 				8428ECFC267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */,
@@ -951,6 +960,7 @@
 				84ED04AD268EEDE700164760 /* Daily.swift in Sources */,
 				847268AB2613088700F92E66 /* Share.swift in Sources */,
 				84565AB6261C76CB009F9F7D /* ShareEditView.swift in Sources */,
+				8457327E2695BB610072A837 /* SFCombinedChartView.swift in Sources */,
 				84540DBF26352B8800ECFD9A /* Codable.swift in Sources */,
 				847269BF2615B15F00F92E66 /* base.swift in Sources */,
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
@@ -1021,12 +1031,14 @@
 				84540DBA26352B8800ECFD9A /* AlertData.swift in Sources */,
 				84565ABA261C76D7009F9F7D /* ShareEditView.swift in Sources */,
 				841F3478262447300099B8CB /* mlma.mlmodel in Sources */,
+				845732822695BC700072A837 /* AnalyseKLineChartView.swift in Sources */,
 				847268DF26130EC700F92E66 /* Share.swift in Sources */,
 				847269C02615B15F00F92E66 /* base.swift in Sources */,
 				843488DE26574B5400EF2203 /* AnalyseParamView.swift in Sources */,
 				8416E878267B407E0058CBCD /* SFLineChartView.swift in Sources */,
 				84540DC026352B8800ECFD9A /* Codable.swift in Sources */,
 				84ED04AE268EEDE700164760 /* Daily.swift in Sources */,
+				8457327F2695BB610072A837 /* SFCombinedChartView.swift in Sources */,
 				84C47CF2267DFD3C001A43C2 /* AnalyseView.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetail.swift in Sources */,
 				84540DC826352B8800ECFD9A /* Progress .swift in Sources */,

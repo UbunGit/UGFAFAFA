@@ -1,15 +1,15 @@
 //
-//  AnalyseCandleStickChartView.swift
+//  AnalyseKLineChartView.swift
 //  apple
 //
-//  Created by admin on 2021/7/2.
+//  Created by admin on 2021/7/7.
 //
 
 import SwiftUI
 import Charts
 
-class AnalyseCandleStickChart: SFCandleStickChart{
-
+class AnalyseKLineChart: SFCombinedChart {
+    
     @Published var dailys:[Daily] = []
     @Published var x_date:String = Date.init().toString("yyyyMMdd") ?? ""{
         didSet{
@@ -26,15 +26,22 @@ class AnalyseCandleStickChart: SFCandleStickChart{
     }
     
     
-    override func updateChartView(chartView: CandleStickChartView) {
+    override func updateChartView(chartView: CombinedChartView) {
         super .updateChartView(chartView: chartView)
-        chartView.data = CandleChartData(dataSet: dataSet)
+        let combinedata = CombinedChartData()
+       
+        combinedata.lineData = LineChartData(dataSet: lineDataSet)
+        combinedata.candleData = CandleChartData(dataSet: dataSet)
+        chartView.data = combinedata
+        
+
         chartView.setVisibleXRange(minXRange: 30, maxXRange: 30)
         let index:Double = Double( dailys.firstIndex {
            return $0.date == x_date
         } ?? 0)
         chartView.moveViewToX(index)
     }
+    
     var maxcount:Int{
         Int(chartView.bounds.size.width/4)
     }
@@ -46,6 +53,13 @@ class AnalyseCandleStickChart: SFCandleStickChart{
         styleDataSet(dataSet: dataset)
         return dataset
         
+    }
+    var lineDataSet:LineChartDataSet{
+        let dataset = LineChartDataSet(entries: Daily.maDataEntry(ma:10, datylys: dailys))
+        
+        dataset.mode = .cubicBezier
+        dataset.drawCirclesEnabled = false
+        return dataset
     }
     func dbDaily() {
         var tdate:String = (x_date.toDate("yyyyMMdd")?.addingTimeInterval(-30*24*60*60).toString("yyyyMMdd"))!
@@ -109,17 +123,14 @@ class AnalyseCandleStickChart: SFCandleStickChart{
         x_date = dailys[lowestdata].date
         print(x_date)
     }
-
 }
-
-struct AnalyseCandleStickChartView:View {
+struct AnalyseKLineChartView: View {
     @Binding var code:String
-    @StateObject var obser = AnalyseCandleStickChart()
-    
-    var body: some View{
+    @StateObject var obser = AnalyseKLineChart()
+    var body: some View {
         VStack{
            
-            SFCandleStickChartView(obser: obser)
+            SFCombinedChartView(obser: obser)
         }
         .onChange(of: code, perform: { value in
             obser.code = code
@@ -127,41 +138,12 @@ struct AnalyseCandleStickChartView:View {
         .onAppear(){
             obser.code = code
         }
-      
+        
     }
 }
 
-
-extension Daily{
-    static func candleChartDataEntry(datylys:[Daily])->[CandleChartDataEntry]{
-        return datylys.enumerated().map { (index,item) in
-           
-            return CandleChartDataEntry(
-                x:Double(index),
-                shadowH: Double(item.high),
-                shadowL: Double(item.low),
-                open: Double(item.open),
-                close: Double(item.close),
-                data: item
-            )
-        }
-    }
-    
-    static func maDataEntry(ma:Int,datylys:[Daily])->[ChartDataEntry]{
-        return datylys.enumerated().map { (index,item) in
-            var sum = item.close
-            if index>ma{
-                let tsum = datylys[index-ma..<index].reduce(0) { $0 + $1.close }
-                sum = tsum/Float(ma)
-            }
-            return ChartDataEntry(x: Double(index), y: Double(sum),  data: item)
-        }
-    }
-    
-}
-
-struct AnalyseCandleStickChartView_Previews: PreviewProvider {
+struct AnalyseKLineChartView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalyseCandleStickChartView(code: .constant("000001.SZ"))
+        AnalyseKLineChartView(code: .constant("0"))
     }
 }
