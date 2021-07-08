@@ -8,39 +8,84 @@
 import UIKit
 import Charts
 import SnapKit
+import UGSwiftKit
 
-class AnalyseResultVC: UIViewController {
+ class AnalyseChartsView: UIView{
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override init(frame: CGRect) {
+        super .init(frame: frame)
         makeUI()
         makeLaout()
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+  
+    
+    var delegate:ChartViewDelegate?{
+        set{
+            kChartView.delegate = newValue
+        }
+        get{
+            kChartView.delegate
+        }
+    }
+    
+    var kdata:[Daily] = []{
+        didSet{
+            
+            kChartView.notifyDataSetChanged()
+        }
+    }
+    var bsPoints:[BSModen] = []{
+        didSet{
+            kChartView.notifyDataSetChanged()
+        }
+    }
+ 
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView.init()
         scrollView.backgroundColor = .red
         return scrollView
     }()
+    
     lazy var kChartView: CombinedChartView = {
         let kChartView = CombinedChartView()
+        kChartView.backgroundColor = .yellow
         return kChartView
     }()
 
-    
-  
 
 }
 
-extension AnalyseResultVC{
+extension AnalyseChartsView{
     func makeUI()  {
-        view.backgroundColor = .white
-        view.addSubview(scrollView)
+        backgroundColor = .white
+        addSubview(scrollView)
         scrollView.addSubview(kChartView)
     }
     func makeLaout() {
-        scrollView.snp.makeConstraints { snp in
-            snp.edges.equalTo(0)
-        }
+      
+   
         
     }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        scrollView.snp.makeConstraints { snp in
+            snp.edges.equalTo(self)
+        }
+        kChartView.snp.remakeConstraints{ snp in
+            snp.top.equalTo(scrollView).offset(20)
+            snp.height.equalTo(300)
+            snp.width.equalTo(scrollView)
+            
+        }
+        self.snp.makeConstraints { snp in
+            snp.edges.equalTo(0)
+        }
+    }
+    
 }

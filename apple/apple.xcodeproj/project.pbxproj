@@ -65,6 +65,8 @@
 		84573290269703EE0072A837 /* AnalyseKLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457328E269703EE0072A837 /* AnalyseKLineChart.swift */; };
 		84573293269711CA0072A837 /* AnalyseResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573292269711CA0072A837 /* AnalyseResultVC.swift */; };
 		84573294269711CA0072A837 /* AnalyseResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573292269711CA0072A837 /* AnalyseResultVC.swift */; };
+		84573296269719B30072A837 /* SFUIAnalyseChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573295269719B30072A837 /* SFUIAnalyseChartsView.swift */; };
+		84573297269719B30072A837 /* SFUIAnalyseChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573295269719B30072A837 /* SFUIAnalyseChartsView.swift */; };
 		8472689C261307F300F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
 		8472689E261307F300F92E66 /* SharesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListView.swift */; };
 		847268A0261307F300F92E66 /* SharesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* SharesList.swift */; };
@@ -192,6 +194,7 @@
 		8457328A2696FFAC0072A837 /* SFBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFBarChartView.swift; sourceTree = "<group>"; };
 		8457328E269703EE0072A837 /* AnalyseKLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseKLineChart.swift; sourceTree = "<group>"; };
 		84573292269711CA0072A837 /* AnalyseResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseResultVC.swift; sourceTree = "<group>"; };
+		84573295269719B30072A837 /* SFUIAnalyseChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFUIAnalyseChartsView.swift; sourceTree = "<group>"; };
 		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		84726899261307F300F92E66 /* SharesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesListView.swift; sourceTree = "<group>"; };
 		8472689B261307F300F92E66 /* SharesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesList.swift; sourceTree = "<group>"; };
@@ -333,6 +336,7 @@
 				842C7247265F3B840086FCD0 /* AnalyseCell.swift */,
 				845732802695BC6F0072A837 /* AnalyseKLineChartView.swift */,
 				845732872696FB990072A837 /* BSPointView.swift */,
+				84573295269719B30072A837 /* SFUIAnalyseChartsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -996,6 +1000,7 @@
 				8457327E2695BB610072A837 /* SFCombinedChartView.swift in Sources */,
 				84540DBF26352B8800ECFD9A /* Codable.swift in Sources */,
 				847269BF2615B15F00F92E66 /* base.swift in Sources */,
+				84573296269719B30072A837 /* SFUIAnalyseChartsView.swift in Sources */,
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				8457328B2696FFAC0072A837 /* SFBarChartView.swift in Sources */,
@@ -1073,6 +1078,7 @@
 				847268DF26130EC700F92E66 /* Share.swift in Sources */,
 				847269C02615B15F00F92E66 /* base.swift in Sources */,
 				843488DE26574B5400EF2203 /* AnalyseParamView.swift in Sources */,
+				84573297269719B30072A837 /* SFUIAnalyseChartsView.swift in Sources */,
 				8416E878267B407E0058CBCD /* SFLineChartView.swift in Sources */,
 				84573290269703EE0072A837 /* AnalyseKLineChart.swift in Sources */,
 				84540DC026352B8800ECFD9A /* Codable.swift in Sources */,

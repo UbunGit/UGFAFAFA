@@ -7,13 +7,11 @@
 
 import SwiftUI
 import Charts
+import UGSwiftKit
 
 
 
 
-class AnalyseAmountChart: SFBarChart {
-
-}
 
 
 struct AnalyseKLineChartView: View {
@@ -21,6 +19,7 @@ struct AnalyseKLineChartView: View {
     @Binding var code:String
     @Binding var cacheId:Int
     @StateObject var obser = AnalyseKLineChart()
+    @StateObject var bobser = SFUIAnalyseCharts()
 //    @StateObject var amountObser = AnalyseAmountChart(bsPoint:.co)
     
     var body: some View {
@@ -29,7 +28,9 @@ struct AnalyseKLineChartView: View {
             SFCombinedChartView(obser: obser)
                 .frame( height: 400)
             
-//            SFBarChartView(obser: amountObser)
+            SFUIAnalyseChartsView(obser: bobser)
+        
+                .frame(width: KWidth, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
   
             BSPointView(bspoint: $obser.bspoint)
             .padding()
@@ -39,10 +40,14 @@ struct AnalyseKLineChartView: View {
         .onChange(of: code, perform: { value in
             obser.code = code
             obser.cacheId = cacheId
+            bobser.code = code
+            bobser.cacheId = cacheId
         })
         .onAppear(){
             obser.code = code
             obser.cacheId = cacheId
+            bobser.code = code
+            bobser.cacheId = cacheId
         }
         
     }
