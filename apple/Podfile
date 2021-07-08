@@ -19,18 +19,23 @@ pod 'PythonKit', :path => '/Users/admin/Documents/github/PythonKit'
 pod 'UGSwiftKit/Appicon', :path => './UGSwiftKit'
 end
 
+def iOS
+  pod 'SnapKit'
+end
+
 
 target 'apple (iOS)' do
   
-#  pod 'DoraexmonKit/Core'
-#  pod 'DoraemonKit/WithGPS'
-#  pod 'DoraemonKit/WithLoad'
-#  pod 'DoraemonKit/WithLogger'
-#  pod 'DoraemonKit/WithDatabase'
-#  pod 'DoraemonKit/WithMLeaksFinder'
-#  pod 'DoraemonKit/WithWeex'
+  pod 'DoraemonKit/Core', :git => "https://gitee.com/yixiangboy/DoraemonKit.git", :tag => '3.0.2', :configurations => ['Debug'] #必选
+  pod 'DoraemonKit/WithLogger', :git => "https://gitee.com/yixiangboy/DoraemonKit.git", :tag => '3.0.2', :configurations => ['Debug'] #可选
+#  pod 'DoraemonKit/WithGPS', :git => "https://gitee.com/yixiangboy/DoraemonKit.git", :tag => '3.0.2', :configurations => ['Debug'] #可选
+  pod 'DoraemonKit/WithLoad', :git => "https://gitee.com/yixiangboy/DoraemonKit.git", :tag => '3.0.2', :configurations => ['Debug'] #可选
+  pod 'DoraemonKit/WithDatabase', :git => "https://gitee.com/yixiangboy/DoraemonKit.git", :tag => '3.0.2', :configurations => ['Debug'] #可选
+  pod 'DoraemonKit/WithMLeaksFinder', :git => "https://gitee.com/yixiangboy/DoraemonKit.git", :tag => '3.0.2', :configurations => ['Debug'] #可选
+#  pod 'DoraemonKit/WithWeex', :git => "https://gitee.com/yixiangboy/DoraemonKit.git", :tag => '3.0.2', :configurations => ['Debug'] #可选
   
   common
+  iOS
 end
 
 

@@ -76,13 +76,10 @@ let analyseHistory = AnalyseHistory()
 
 struct AnalyseHistoryView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var obser:AnalyseHistory
-    @Binding var historyId:Int
+    @ObservedObject var obser:AnalyseHistory = analyseHistory
+    @Binding var history:Analyse
     
-    init(historyId:Binding<Int>) {
-        self._historyId = historyId
-        self.obser = analyseHistory
-    }
+ 
     var body: some View {
         VStack{
         
@@ -129,7 +126,7 @@ struct AnalyseHistoryView: View {
                         .background(Color("AccentColor").opacity(0.1))
                         .onTapGesture {
                             
-                            self.historyId = item.id
+                            self.history = item
                             presentationMode.wrappedValue.dismiss()
                         }
                         
@@ -148,6 +145,6 @@ struct AnalyseHistoryView: View {
 
 struct AnalyseHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalyseHistoryView(historyId:.constant(-1) )
+        AnalyseHistoryView(history:.constant(Analyse()) )
     }
 }

@@ -91,9 +91,27 @@ class AnalyseBSRecords(Base):
         records = self.query.filter_by(cache_id=cache_id).delete(synchronize_session=False)
         session.commit()
 
-    def search(self,cache_id,code,type):
-        
-        return  self.query.filter_by(cache_id=cache_id, code=code, type=type).all()
+    def search(self,cache_id,code,type=None):
+        list = []
+        if type == None:
+            query_all = self.query.filter_by(cache_id=cache_id, code=code).all()
+        else:
+            query_all = self.query.filter_by(cache_id=cache_id, code=code, type=type).all()
+
+        for item in query_all:
+            dic = item.__dict__
+            dic["id"] = item.id
+            dic["cacheId"] = item.cache_id
+            dic["code"] = item.code
+            dic["date"] = str(item.date).strftime("%Y%m%d")
+            dic["count"] = item.count
+            dic["price"] = item.price
+            dic["free"] = item.free
+            dic["type"] = item.type
+            dic.pop('cache_id')
+            dic.pop('_sa_instance_state')
+            list.append(dic)
+        return list
 
 
 # 持仓记录

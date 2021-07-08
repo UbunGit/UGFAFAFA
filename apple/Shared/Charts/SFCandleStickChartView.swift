@@ -32,6 +32,7 @@ class SFCandleStickChart: ObservableObject,ChartViewDelegate {
         axis.labelPosition = .bottom
         axis.labelPosition = .bottom
         axis.axisLineWidth = 1
+      
         axis.gridLineWidth = 0.5
         axis.gridColor = .black.withAlphaComponent(0.2)
         axis.labelCount = 3

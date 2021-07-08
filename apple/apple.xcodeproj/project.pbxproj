@@ -55,6 +55,16 @@
 		8457327F2695BB610072A837 /* SFCombinedChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457327D2695BB610072A837 /* SFCombinedChartView.swift */; };
 		845732812695BC700072A837 /* AnalyseKLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732802695BC6F0072A837 /* AnalyseKLineChartView.swift */; };
 		845732822695BC700072A837 /* AnalyseKLineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732802695BC6F0072A837 /* AnalyseKLineChartView.swift */; };
+		845732852696CC5E0072A837 /* BSModen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732842696CC5E0072A837 /* BSModen.swift */; };
+		845732862696CC5E0072A837 /* BSModen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732842696CC5E0072A837 /* BSModen.swift */; };
+		845732882696FB990072A837 /* BSPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732872696FB990072A837 /* BSPointView.swift */; };
+		845732892696FB990072A837 /* BSPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732872696FB990072A837 /* BSPointView.swift */; };
+		8457328B2696FFAC0072A837 /* SFBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457328A2696FFAC0072A837 /* SFBarChartView.swift */; };
+		8457328C2696FFAC0072A837 /* SFBarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457328A2696FFAC0072A837 /* SFBarChartView.swift */; };
+		8457328F269703EE0072A837 /* AnalyseKLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457328E269703EE0072A837 /* AnalyseKLineChart.swift */; };
+		84573290269703EE0072A837 /* AnalyseKLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457328E269703EE0072A837 /* AnalyseKLineChart.swift */; };
+		84573293269711CA0072A837 /* AnalyseResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573292269711CA0072A837 /* AnalyseResultVC.swift */; };
+		84573294269711CA0072A837 /* AnalyseResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573292269711CA0072A837 /* AnalyseResultVC.swift */; };
 		8472689C261307F300F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
 		8472689E261307F300F92E66 /* SharesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListView.swift */; };
 		847268A0261307F300F92E66 /* SharesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* SharesList.swift */; };
@@ -91,8 +101,6 @@
 		8491D998263180280035B7F8 /* SqliteInsterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8491D997263180280035B7F8 /* SqliteInsterProtocol.swift */; };
 		849E4A9E2692E482007179C7 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E4A9D2692E482007179C7 /* Tests_iOS.swift */; };
 		849E4AA52692E4BA007179C7 /* SqliteTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E4A872692E285007179C7 /* SqliteTest.swift */; };
-		849E4AA7269435EF007179C7 /* AnalyseCandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E4AA6269435EF007179C7 /* AnalyseCandleStickChartView.swift */; };
-		849E4AA8269435EF007179C7 /* AnalyseCandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849E4AA6269435EF007179C7 /* AnalyseCandleStickChartView.swift */; };
 		84B155152662219400B5DACD /* SelectShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B155142662219400B5DACD /* SelectShareView.swift */; };
 		84B155162662219400B5DACD /* SelectShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B155142662219400B5DACD /* SelectShareView.swift */; };
 		84B15518266224C400B5DACD /* GroupShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B15517266224C400B5DACD /* GroupShare.swift */; };
@@ -179,6 +187,11 @@
 		84565AB5261C76CB009F9F7D /* ShareEditView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareEditView.swift; sourceTree = "<group>"; };
 		8457327D2695BB610072A837 /* SFCombinedChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFCombinedChartView.swift; sourceTree = "<group>"; };
 		845732802695BC6F0072A837 /* AnalyseKLineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseKLineChartView.swift; sourceTree = "<group>"; };
+		845732842696CC5E0072A837 /* BSModen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSModen.swift; sourceTree = "<group>"; };
+		845732872696FB990072A837 /* BSPointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSPointView.swift; sourceTree = "<group>"; };
+		8457328A2696FFAC0072A837 /* SFBarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFBarChartView.swift; sourceTree = "<group>"; };
+		8457328E269703EE0072A837 /* AnalyseKLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseKLineChart.swift; sourceTree = "<group>"; };
+		84573292269711CA0072A837 /* AnalyseResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseResultVC.swift; sourceTree = "<group>"; };
 		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		84726899261307F300F92E66 /* SharesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesListView.swift; sourceTree = "<group>"; };
 		8472689B261307F300F92E66 /* SharesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesList.swift; sourceTree = "<group>"; };
@@ -207,7 +220,6 @@
 		849E4A9B2692E482007179C7 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		849E4A9D2692E482007179C7 /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
 		849E4A9F2692E482007179C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		849E4AA6269435EF007179C7 /* AnalyseCandleStickChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyseCandleStickChartView.swift; sourceTree = "<group>"; };
 		84B155142662219400B5DACD /* SelectShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectShareView.swift; sourceTree = "<group>"; };
 		84B15517266224C400B5DACD /* GroupShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupShare.swift; sourceTree = "<group>"; };
 		84C47CEA267DF5D6001A43C2 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
@@ -299,6 +311,7 @@
 				8416E876267B407B0058CBCD /* SFLineChartView.swift */,
 				8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */,
 				8457327D2695BB610072A837 /* SFCombinedChartView.swift */,
+				8457328A2696FFAC0072A837 /* SFBarChartView.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -309,6 +322,7 @@
 				842C7243265F3A6D0086FCD0 /* Analyse.swift */,
 				84B15517266224C400B5DACD /* GroupShare.swift */,
 				84ED04AC268EEDE700164760 /* Daily.swift */,
+				845732842696CC5E0072A837 /* BSModen.swift */,
 			);
 			path = Moden;
 			sourceTree = "<group>";
@@ -317,8 +331,8 @@
 			isa = PBXGroup;
 			children = (
 				842C7247265F3B840086FCD0 /* AnalyseCell.swift */,
-				849E4AA6269435EF007179C7 /* AnalyseCandleStickChartView.swift */,
 				845732802695BC6F0072A837 /* AnalyseKLineChartView.swift */,
+				845732872696FB990072A837 /* BSPointView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -334,6 +348,7 @@
 		843488DB26574AC900EF2203 /* Analyse */ = {
 			isa = PBXGroup;
 			children = (
+				8457328D269703D40072A837 /* Obser */,
 				842C7246265F3B670086FCD0 /* View */,
 				842C7242265F3A4A0086FCD0 /* Moden */,
 				843488DC26574B0B00EF2203 /* AnalyseParamView.swift */,
@@ -440,6 +455,22 @@
 				841F3476262447300099B8CB /* mlma.mlmodel */,
 			);
 			path = MAResources;
+			sourceTree = "<group>";
+		};
+		8457328D269703D40072A837 /* Obser */ = {
+			isa = PBXGroup;
+			children = (
+				8457328E269703EE0072A837 /* AnalyseKLineChart.swift */,
+			);
+			path = Obser;
+			sourceTree = "<group>";
+		};
+		84573291269711740072A837 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				84573292269711CA0072A837 /* AnalyseResultVC.swift */,
+			);
+			path = Swift;
 			sourceTree = "<group>";
 		};
 		845C233F262877D500308C2A /* Pages */ = {
@@ -569,6 +600,7 @@
 		84807D9025FB7A8500C8CB18 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				84573291269711740072A837 /* Swift */,
 				84ED04AF268EEF7400164760 /* Sqlite */,
 				8428ECF8267A3BEB0008CDFB /* Charts */,
 				843488D8265741F400EF2203 /* SocketManage */,
@@ -953,18 +985,21 @@
 				8472698A261479E700F92E66 /* ShareDetail.swift in Sources */,
 				841F3477262447300099B8CB /* mlma.mlmodel in Sources */,
 				840E2B9B2615DECC003A84C6 /* SroreCell.swift in Sources */,
-				849E4AA7269435EF007179C7 /* AnalyseCandleStickChartView.swift in Sources */,
+				845732852696CC5E0072A837 /* BSModen.swift in Sources */,
 				84540DCD26352B8800ECFD9A /* SearchView.swift in Sources */,
 				84FA4E4A25FBB8B900F93203 /* Socket.swift in Sources */,
 				84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */,
 				84ED04AD268EEDE700164760 /* Daily.swift in Sources */,
 				847268AB2613088700F92E66 /* Share.swift in Sources */,
+				84573293269711CA0072A837 /* AnalyseResultVC.swift in Sources */,
 				84565AB6261C76CB009F9F7D /* ShareEditView.swift in Sources */,
 				8457327E2695BB610072A837 /* SFCombinedChartView.swift in Sources */,
 				84540DBF26352B8800ECFD9A /* Codable.swift in Sources */,
 				847269BF2615B15F00F92E66 /* base.swift in Sources */,
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
+				8457328B2696FFAC0072A837 /* SFBarChartView.swift in Sources */,
+				845732882696FB990072A837 /* BSPointView.swift in Sources */,
 				84C47CEB267DF5D6001A43C2 /* Screen.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
@@ -984,6 +1019,7 @@
 				84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				8472689E261307F300F92E66 /* SharesListView.swift in Sources */,
 				847268A0261307F300F92E66 /* SharesList.swift in Sources */,
+				8457328F269703EE0072A837 /* AnalyseKLineChart.swift in Sources */,
 				84540DC726352B8800ECFD9A /* Progress .swift in Sources */,
 				84F8CB23268304D800216A50 /* CommitView.swift in Sources */,
 				842C7248265F3B840086FCD0 /* AnalyseCell.swift in Sources */,
@@ -997,6 +1033,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */,
+				84573294269711CA0072A837 /* AnalyseResultVC.swift in Sources */,
 				84565A6D261C6000009F9F7D /* Page.swift in Sources */,
 				841F334B2623FCAB0099B8CB /* MLMAOut.swift in Sources */,
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
@@ -1006,13 +1043,14 @@
 				84B155162662219400B5DACD /* SelectShareView.swift in Sources */,
 				847DE74826575542009C98DF /* SocketManage.swift in Sources */,
 				84C47CEF267DFC92001A43C2 /* AnalyseResultView.swift in Sources */,
+				845732892696FB990072A837 /* BSPointView.swift in Sources */,
 				842C7245265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				84ED04B8268EF19600164760 /* SqliteDeleteProtocol.swift in Sources */,
 				8428ECFD267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */,
+				8457328C2696FFAC0072A837 /* SFBarChartView.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
 				847269CF2615B28C00F92E66 /* ApiShare.swift in Sources */,
 				8472697426146A2400F92E66 /* SharesListView.swift in Sources */,
-				849E4AA8269435EF007179C7 /* AnalyseCandleStickChartView.swift in Sources */,
 				84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */,
 				84540DBC26352B8800ECFD9A /* Formatter.swift in Sources */,
 				847268F626130F7600F92E66 /* Store.swift in Sources */,
@@ -1036,6 +1074,7 @@
 				847269C02615B15F00F92E66 /* base.swift in Sources */,
 				843488DE26574B5400EF2203 /* AnalyseParamView.swift in Sources */,
 				8416E878267B407E0058CBCD /* SFLineChartView.swift in Sources */,
+				84573290269703EE0072A837 /* AnalyseKLineChart.swift in Sources */,
 				84540DC026352B8800ECFD9A /* Codable.swift in Sources */,
 				84ED04AE268EEDE700164760 /* Daily.swift in Sources */,
 				8457327F2695BB610072A837 /* SFCombinedChartView.swift in Sources */,
@@ -1051,6 +1090,7 @@
 				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,
 				841F335C2624062F0099B8CB /* MakeData.swift in Sources */,
+				845732862696CC5E0072A837 /* BSModen.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

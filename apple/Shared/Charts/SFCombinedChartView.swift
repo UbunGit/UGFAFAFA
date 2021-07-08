@@ -13,6 +13,7 @@ class SFCombinedChart: ObservableObject,ChartViewDelegate {
     @State var chartView:CombinedChartView
     
     init() {
+   
         self.chartView = CombinedChartView()
         self.chartView.delegate = self
     }
@@ -87,12 +88,8 @@ struct SFCombinedChartView: UIViewRepresentable {
     func updateUIView(_ uiView: CombinedChartView, context: Context) {
         obser.updateChartView(chartView: uiView)
 
-   
-        
     }
-    
- 
-    
+
 }
 
 #else

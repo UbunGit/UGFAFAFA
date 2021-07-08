@@ -41,7 +41,7 @@ extension SqliteProtocol{
     
     public static func sqliteFile() -> String{
         let sqllitefile = UserDefaults.standard.string(forKey: "dbfile") ?? "\(sqlitePath())/sqlite.db"
-        print("sqllitefile:\(sqllitefile)")
+//        print("sqllitefile:\(sqllitefile)")
         return  sqllitefile
     }
     

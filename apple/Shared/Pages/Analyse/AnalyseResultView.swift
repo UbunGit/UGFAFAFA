@@ -27,35 +27,30 @@ let analyseResult = AnalyseResult()
 struct AnalyseResultView:View {
     @ObservedObject var obser = analyseResult
     @Binding var historyId:Int
-    @State var codes = ["000001.SZ"]
+    @Binding var codes:[String]
 
     var body: some View{
         
         VStack{
            
             ScrollView(.vertical, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
-                ForEach(0..<codes.count, id: \.self) { index in
-                    AnalyseCandleStickChartView(code: $codes[index])
-                        .frame(height: 300)
+                let count = codes.count>0 ? 1 : 0
+                ForEach(0..<count, id: \.self) { index in
+              
                     
-                    AnalyseKLineChartView(code: $codes[index])
-                        .frame(height: 300)
+                    AnalyseKLineChartView(code: $codes[index], cacheId:$historyId)
+                        .frame(height: 600)
                        
                     
                 }
-                SFLineChartView(datasets: chartset)
-                    .frame(height: 300)
-                SFCandleStickChartView(obser: SFCandleStickChart())
-                    .frame(height: 300)
-                SFLineChartView(datasets: chartset)
-                    .frame(height: 300)
+        
         
             }
         }
         .onChange(of: historyId, perform: { value in
             analyseResult.reqdata()
-            codes[0] = (codes[0]=="000003.SZ") ? "000001.SZ" : "000003.SZ"
         })
+     
       
        
         
@@ -77,7 +72,7 @@ struct AnalyseResultView:View {
 
 struct AnalyseResultView_Previews: PreviewProvider {
     static var previews: some View {
-        AnalyseResultView(historyId: .constant(0))
+        AnalyseResultView(historyId: .constant(0), codes: .constant(["000001.SZ"]))
     }
 }
 

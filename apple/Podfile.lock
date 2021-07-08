@@ -4,7 +4,28 @@ PODS:
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
   - CocoaAsyncSocket (7.6.5)
+  - CocoaLumberjack (3.7.2):
+    - CocoaLumberjack/Core (= 3.7.2)
+  - CocoaLumberjack/Core (3.7.2)
+  - DoraemonKit/Core (3.0.2)
+  - DoraemonKit/WithDatabase (3.0.2):
+    - DoraemonKit/Core
+    - YYDebugDatabase
+  - DoraemonKit/WithLoad (3.0.2):
+    - DoraemonKit/Core
+  - DoraemonKit/WithLogger (3.0.2):
+    - CocoaLumberjack
+    - DoraemonKit/Core
+  - DoraemonKit/WithMLeaksFinder (3.0.2):
+    - DoraemonKit/Core
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - GCDWebServer (3.5.4):
+    - GCDWebServer/Core (= 3.5.4)
+  - GCDWebServer/Core (3.5.4)
   - PythonKit (1.0.1)
+  - SnapKit (5.0.1)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
   - SQLite.swift (0.12.2):
@@ -19,12 +40,21 @@ PODS:
   - UGSwiftKit/UGAnalyse (1.0.1):
     - PythonKit
     - UGSwiftKit/Base
+  - YYDebugDatabase (2.1.0):
+    - FMDB
+    - GCDWebServer
 
 DEPENDENCIES:
   - Alamofire
   - Charts
   - CocoaAsyncSocket
+  - DoraemonKit/Core (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
+  - DoraemonKit/WithDatabase (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
+  - DoraemonKit/WithLoad (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
+  - DoraemonKit/WithLogger (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
+  - DoraemonKit/WithMLeaksFinder (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
   - PythonKit (from `/Users/admin/Documents/github/PythonKit`)
+  - SnapKit
   - Socket.IO-Client-Swift
   - SQLite.swift
   - UGSwiftKit (from `./UGSwiftKit`)
@@ -39,23 +69,43 @@ SPEC REPOS:
     - Socket.IO-Client-Swift
     - SQLite.swift
     - Starscream
+  trunk:
+    - CocoaLumberjack
+    - FMDB
+    - GCDWebServer
+    - SnapKit
+    - YYDebugDatabase
 
 EXTERNAL SOURCES:
+  DoraemonKit:
+    :git: https://gitee.com/yixiangboy/DoraemonKit.git
+    :tag: 3.0.2
   PythonKit:
     :path: "/Users/admin/Documents/github/PythonKit"
   UGSwiftKit:
     :path: "./UGSwiftKit"
 
+CHECKOUT OPTIONS:
+  DoraemonKit:
+    :git: https://gitee.com/yixiangboy/DoraemonKit.git
+    :tag: 3.0.2
+
 SPEC CHECKSUMS:
   Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
+  DoraemonKit: 0740089a373899c8d462df9ee824fcdd97a68da3
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   PythonKit: 80d7cc257e135961a0aa09d66198c6abdf8ebb19
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
   UGSwiftKit: d0cd808d5687b5b3a7a0e49722227bb5144c8191
+  YYDebugDatabase: e684a7f79fca2e3673a23347cefb822f911f3124
 
-PODFILE CHECKSUM: 874590477c441b3c77bcd1e8c77301129f88e78a
+PODFILE CHECKSUM: e1d31ec2ea3e6e748e4a31f98d6bc1e7d91d1394
 
 COCOAPODS: 1.9.1
