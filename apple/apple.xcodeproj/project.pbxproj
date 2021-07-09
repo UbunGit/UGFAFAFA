@@ -73,6 +73,13 @@
 		8457329D269819AA0072A837 /* ZoneModen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457329B269819AA0072A837 /* ZoneModen.swift */; };
 		8457329F269829120072A837 /* ZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457329E269829120072A837 /* ZoneView.swift */; };
 		845732A0269829120072A837 /* ZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457329E269829120072A837 /* ZoneView.swift */; };
+		845732A3269832040072A837 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A2269832040072A837 /* Signal.swift */; };
+		845732A4269832040072A837 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A2269832040072A837 /* Signal.swift */; };
+		845732A6269834920072A837 /* Kirogi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A5269834920072A837 /* Kirogi.swift */; };
+		845732A7269834920072A837 /* Kirogi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A5269834920072A837 /* Kirogi.swift */; };
+		845732A9269835A20072A837 /* Cerebro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A8269835A20072A837 /* Cerebro.swift */; };
+		845732AA269835A20072A837 /* Cerebro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A8269835A20072A837 /* Cerebro.swift */; };
+		845732AC269839130072A837 /* SignalTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732AB269839130072A837 /* SignalTest.swift */; };
 		8472689C261307F300F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
 		8472689E261307F300F92E66 /* SharesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListView.swift */; };
 		847268A0261307F300F92E66 /* SharesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* SharesList.swift */; };
@@ -204,6 +211,10 @@
 		845732982697DE4B0072A837 /* SFUIAnalyseCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFUIAnalyseCharts.swift; sourceTree = "<group>"; };
 		8457329B269819AA0072A837 /* ZoneModen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneModen.swift; sourceTree = "<group>"; };
 		8457329E269829120072A837 /* ZoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneView.swift; sourceTree = "<group>"; };
+		845732A2269832040072A837 /* Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
+		845732A5269834920072A837 /* Kirogi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kirogi.swift; sourceTree = "<group>"; };
+		845732A8269835A20072A837 /* Cerebro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cerebro.swift; sourceTree = "<group>"; };
+		845732AB269839130072A837 /* SignalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalTest.swift; sourceTree = "<group>"; };
 		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		84726899261307F300F92E66 /* SharesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesListView.swift; sourceTree = "<group>"; };
 		8472689B261307F300F92E66 /* SharesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesList.swift; sourceTree = "<group>"; };
@@ -489,6 +500,16 @@
 			path = Swift;
 			sourceTree = "<group>";
 		};
+		845732A1269831C60072A837 /* Signal */ = {
+			isa = PBXGroup;
+			children = (
+				845732A2269832040072A837 /* Signal.swift */,
+				845732A8269835A20072A837 /* Cerebro.swift */,
+				845732A5269834920072A837 /* Kirogi.swift */,
+			);
+			path = Signal;
+			sourceTree = "<group>";
+		};
 		845C233F262877D500308C2A /* Pages */ = {
 			isa = PBXGroup;
 			children = (
@@ -616,6 +637,7 @@
 		84807D9025FB7A8500C8CB18 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				845732A1269831C60072A837 /* Signal */,
 				84573291269711740072A837 /* Swift */,
 				84ED04AF268EEF7400164760 /* Sqlite */,
 				8428ECF8267A3BEB0008CDFB /* Charts */,
@@ -698,6 +720,7 @@
 			isa = PBXGroup;
 			children = (
 				849E4A872692E285007179C7 /* SqliteTest.swift */,
+				845732AB269839130072A837 /* SignalTest.swift */,
 				849E4A9D2692E482007179C7 /* Tests_iOS.swift */,
 				849E4A9F2692E482007179C7 /* Info.plist */,
 			);
@@ -987,6 +1010,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8457329F269829120072A837 /* ZoneView.swift in Sources */,
+				845732A3269832040072A837 /* Signal.swift in Sources */,
 				843488DA2657421F00EF2203 /* SocketManage.swift in Sources */,
 				84ED04B0268EF06B00164760 /* SQLiteManage.swift in Sources */,
 				845732812695BC700072A837 /* AnalyseKLineChartView.swift in Sources */,
@@ -1005,6 +1029,7 @@
 				845732852696CC5E0072A837 /* BSModen.swift in Sources */,
 				84540DCD26352B8800ECFD9A /* SearchView.swift in Sources */,
 				84FA4E4A25FBB8B900F93203 /* Socket.swift in Sources */,
+				845732A6269834920072A837 /* Kirogi.swift in Sources */,
 				84FA4DF825FBA4F400F93203 /* ContentView.swift in Sources */,
 				84ED04AD268EEDE700164760 /* Daily.swift in Sources */,
 				847268AB2613088700F92E66 /* Share.swift in Sources */,
@@ -1020,6 +1045,7 @@
 				845732882696FB990072A837 /* BSPointView.swift in Sources */,
 				845732992697DE4B0072A837 /* SFUIAnalyseCharts.swift in Sources */,
 				84C47CEB267DF5D6001A43C2 /* Screen.swift in Sources */,
+				845732A9269835A20072A837 /* Cerebro.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
 				843488DD26574B0B00EF2203 /* AnalyseParamView.swift in Sources */,
@@ -1053,11 +1079,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				840E2B9C2615DECC003A84C6 /* SroreCell.swift in Sources */,
+				845732AA269835A20072A837 /* Cerebro.swift in Sources */,
 				84573294269711CA0072A837 /* AnalyseResultVC.swift in Sources */,
 				84565A6D261C6000009F9F7D /* Page.swift in Sources */,
 				841F334B2623FCAB0099B8CB /* MLMAOut.swift in Sources */,
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
 				84C47CEC267DF5D6001A43C2 /* Screen.swift in Sources */,
+				845732A4269832040072A837 /* Signal.swift in Sources */,
 				842C7241265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */,
 				84726984261479CC00F92E66 /* ShareDetailView.swift in Sources */,
 				84B155162662219400B5DACD /* SelectShareView.swift in Sources */,
@@ -1101,6 +1129,7 @@
 				84ED04AE268EEDE700164760 /* Daily.swift in Sources */,
 				8457327F2695BB610072A837 /* SFCombinedChartView.swift in Sources */,
 				84C47CF2267DFD3C001A43C2 /* AnalyseView.swift in Sources */,
+				845732A7269834920072A837 /* Kirogi.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetail.swift in Sources */,
 				84540DC826352B8800ECFD9A /* Progress .swift in Sources */,
 				8457329D269819AA0072A837 /* ZoneModen.swift in Sources */,
@@ -1125,6 +1154,7 @@
 			files = (
 				849E4A9E2692E482007179C7 /* Tests_iOS.swift in Sources */,
 				849E4AA52692E4BA007179C7 /* SqliteTest.swift in Sources */,
+				845732AC269839130072A837 /* SignalTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
