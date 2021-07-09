@@ -21,7 +21,29 @@ public class Cerebro {
         balance = cash
     }
 
-    func buy(code:String, price:Float, count:Int, free:(()->(Float))? = nil) -> Bool {
+    func buy(code:String,
+             date:St,
+             price:Float,
+             count:Int,
+             free:(()->(Float))? = nil
+    ) -> Bool {
+        let money = price * Float(count) + ((free == nil) ? 0.0 : free!())
+        guard cash >= money else {
+            loging("余额不足")
+            return false
+        }
+        var bspoint = BSModen()
+   
+        bspoint.code = code
+        date = date
+        cacheId = 0
+        count = 0
+        price = 0
+        free = 0
+        type = 0
+        
+        
+
         return false
     }
     func seller() -> Bool {
