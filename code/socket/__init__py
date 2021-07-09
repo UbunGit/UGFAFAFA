@@ -65,11 +65,16 @@ def analysesHistory():
 def analysesHistoryDetails():
     # 获取历史回测详细信息
     from Analyse.catch import AnalyseBSRecords
+    from Analyse.catch import AnalyseZoneRecords
     data = request_parse(request) 
-    bsRecord = AnalyseBSRecords().search(cache_id=data["cacheId"],code=data["code"])
+    bsRecord = AnalyseBSRecords().search(cache_id=data["cacheId"])
+    zone = AnalyseZoneRecords().search(cache_id=data["cacheId"])
     return {
         "code":0,
-        "data":{"bsRecord":bsRecord}
+        "data":{
+            "bsRecord":bsRecord,
+            "zone":zone
+            }
     }
 
 

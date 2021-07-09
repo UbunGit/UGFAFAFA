@@ -16,46 +16,25 @@ import UGSwiftKit
     override init(frame: CGRect) {
         super .init(frame: frame)
         makeUI()
-        makeLaout()
+  
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-  
-    
-    var delegate:ChartViewDelegate?{
-        set{
-            kChartView.delegate = newValue
-        }
-        get{
-            kChartView.delegate
-        }
-    }
-    
-    var kdata:[Daily] = []{
-        didSet{
-            
-            kChartView.notifyDataSetChanged()
-        }
-    }
-    var bsPoints:[BSModen] = []{
-        didSet{
-            kChartView.notifyDataSetChanged()
-        }
-    }
- 
-    lazy var scrollView: UIScrollView = {
-        let scrollView = UIScrollView.init()
-        scrollView.backgroundColor = .red
-        return scrollView
-    }()
+
     
     lazy var kChartView: CombinedChartView = {
         let kChartView = CombinedChartView()
-        kChartView.backgroundColor = .yellow
+    
         return kChartView
+    }()
+    
+    lazy var amountChartView: BarChartView = {
+        let amountChartView = BarChartView()
+
+        return amountChartView
     }()
 
 
@@ -63,24 +42,24 @@ import UGSwiftKit
 
 extension AnalyseChartsView{
     func makeUI()  {
-        backgroundColor = .white
-        addSubview(scrollView)
-        scrollView.addSubview(kChartView)
+  
+        addSubview(kChartView)
+        addSubview(amountChartView)
     }
-    func makeLaout() {
-      
-   
-        
-    }
+  
     override func layoutSubviews() {
         super.layoutSubviews()
-        scrollView.snp.makeConstraints { snp in
-            snp.edges.equalTo(self)
-        }
+     
         kChartView.snp.remakeConstraints{ snp in
-            snp.top.equalTo(scrollView).offset(20)
-            snp.height.equalTo(300)
-            snp.width.equalTo(scrollView)
+            snp.top.equalTo(self).offset(0)
+            snp.height.equalTo(self).multipliedBy(0.7)
+            snp.width.equalTo(self)
+            
+        }
+        amountChartView.snp.remakeConstraints{ snp in
+            snp.top.equalTo(kChartView.snp.bottom).offset(0)
+            snp.height.equalTo(self).multipliedBy(0.3)
+            snp.width.equalTo(self)
             
         }
         self.snp.makeConstraints { snp in

@@ -8,118 +8,89 @@
 import SwiftUI
 import Charts
 
-class SFUIAnalyseCharts:ObservableObject,ChartViewDelegate {
-    
-    var chartView: AnalyseChartsView
-    @Published var dailys:[Daily] = []
-    @Published var bspoint:[BSModen] = []
-    @Published var x_mindate:String = Date.init().toString("yyyyMMdd") ?? ""{
-        didSet{
-            dbDaily()
-        }
-    }
-   
-    var code:String = ""{
-        didSet{
-            Daily.reqData(code: code) { error in
-                print("error")
-            }
-      
-        }
-    }
-    var cacheId:Int = 0{
-        didSet{
-            AnalyseDetails.reqData(code: code, cacheId: cacheId) { error in
-                print("error")
-            }
-            dbDaily()
-        }
-    }
-    
-    
-    func updateChartView(chartView: CombinedChartView) {
-        guard dailys.count>0 else {
-            return
-        }
-       
-        chartView.setVisibleXRange(minXRange: 30, maxXRange: 30)
-       
-        chartView.getAxis(.right).labelCount = 3
-        let combinedata = CombinedChartData()
-//        let tlinDataSets =  lineDataSets + zoneDataSet(datylys: dailys)
 
-//        combinedata.lineData = LineChartData(dataSets: tlinDataSets)
-        combinedata.candleData = CandleChartData(dataSet: dataSet)
-//        combinedata.barData = BarChartData(dataSets: amountDataSet(datylys: dailys))
-//        combinedata.scatterData = bsScatterData(datylys: dailys)
-        chartView.data = combinedata
-        
-       
-        
-        let index:Double = Double( dailys.firstIndex {
-           return $0.date == x_mindate
-        } ?? 0)
-        chartView.moveViewToX(index)
-    }
-
-    init() {
-   
-        self.chartView = AnalyseChartsView()
-        self.chartView.delegate = self
-    }
-    func updateChartView(chartView:AnalyseChartsView) {
-
-        let combinedata = CombinedChartData()
-//        let tlinDataSets =  lineDataSets + zoneDataSet(datylys: dailys)
-
-//        combinedata.lineData = LineChartData(dataSets: tlinDataSets)
-        combinedata.candleData = CandleChartData(dataSet: dataSet)
-//        combinedata.barData = BarChartData(dataSets: amountDataSet(datylys: dailys))
-//        combinedata.scatterData = bsScatterData(datylys: dailys)
-        chartView.kChartView.data = combinedata
-    }
-
-    
-}
 extension SFUIAnalyseCharts{
+   
     
-  
     
-    var maxcount:Int{
-        Int(chartView.bounds.size.width/4)
+    var lineDataSets:[LineChartDataSet]{
+        
+        let dataset5 = LineChartDataSet(entries: maDataSets(ma:5, datylys: dailys),label: "5")
+        dataset5.mode = .cubicBezier
+        dataset5.drawCirclesEnabled = false
+        dataset5.drawFilledEnabled = false
+        dataset5.drawValuesEnabled = false
+        dataset5.fillColor = .yellow.withAlphaComponent(0.1)
+        dataset5.colors = [.yellow]
+
+        let dataset10 = LineChartDataSet(entries: maDataSets(ma:10, datylys: dailys),label: "10")
+        dataset10.mode = .cubicBezier
+        dataset10.drawCirclesEnabled = false
+        dataset10.drawValuesEnabled = false
+
+
+
+        return [dataset5,dataset10]
     }
     
-    var dataSet:CandleChartDataSet{
+    func maDataSets(ma:Int,datylys:[Daily]) -> [ChartDataEntry] {
+        return datylys.enumerated().map { (index,item) in
+           
+            var sum = item.close
+            if index>ma{
+                let tsum = datylys[index-ma..<index].reduce(0) { $0 + $1.close }
+                sum = tsum/Float(ma)
+            }
+            return ChartDataEntry(x: Double(index), y: Double(sum),  data: item)
+        }
+    }
+    
+    func zoneDataSet(datylys:[Daily])->[LineChartDataSet]{
+      
+        if (datylys.count <= 0) {
+            return []
+        }
+        return zones.map { zone in
+            
+            let begin:Int = datylys.firstIndex { $0.date==zone.begin } ?? 0
+            let end:Int = datylys.firstIndex { $0.date==zone.end }  ?? datylys.count-1
+            
+            let entrys = datylys[begin...end].enumerated().map { (index,item) in
+                
+                return ChartDataEntry(x: Double(index+begin), y: Double(item.close),  data: item)
+            }
+
+            let dataSet = LineChartDataSet(entries: entrys,label: "zone")
+            dataSet.mode = .cubicBezier
+            dataSet.drawCirclesEnabled = false
+            dataSet.drawFilledEnabled = true
+            dataSet.drawValuesEnabled = false
+            dataSet.fillColor =  (datylys[begin].close<=datylys[end].close) ? .red.withAlphaComponent(0.3) : .green.withAlphaComponent(0.3)
+            dataSet.colors = (datylys[begin].close>datylys[end].close) ? [.green] :[.red]
+            return dataSet
+        }
+    }
+    
+    func bsScatterData(datylys:[Daily]) -> ScatterChartData{
+        
+        
+        var colors:[NSUIColor] = []
+        let entrys = bspoint.enumerated().map { (index, item) -> ChartDataEntry in
+            colors.append(item.type==1 ? .orange : .blue)
+            let sort:Int = datylys.firstIndex {$0.date == item.date} ?? 0
        
-        let dataset = CandleChartDataSet(entries: candleChartDataEntry(datylys: dailys))
-        styleDataSet(dataSet: dataset)
+            return  ChartDataEntry(x: Double(sort), y: Double(datylys[sort].high))
+            
+        }
+        let dataSet = ScatterChartDataSet(entries: entrys)
+        dataSet.colors = colors
+        dataSet.setScatterShape(.circle)
     
-        return dataset
+        return ScatterChartData(dataSet:dataSet)
         
     }
-    
-//    var lineDataSets:[LineChartDataSet]{
-        
-//        let dataset5 = LineChartDataSet(entries: maDataSets(ma:5, datylys: dailys),label: "5")
-//        dataset5.mode = .cubicBezier
-//        dataset5.drawCirclesEnabled = false
-//        dataset5.drawFilledEnabled = false
-//        dataset5.drawValuesEnabled = false
-//        dataset5.fillColor = .yellow.withAlphaComponent(0.1)
-//        dataset5.colors = [.yellow]
-//
-//        let dataset10 = LineChartDataSet(entries: maDataSets(ma:10, datylys: dailys),label: "10")
-//        dataset10.mode = .cubicBezier
-//        dataset10.drawCirclesEnabled = false
-//        dataset10.drawValuesEnabled = false
-//
-//
-//
-//        return [dataset5,dataset10]
-//    }
-    
-    func dbDaily() {
-        var tdate:String = (x_mindate.toDate("yyyyMMdd")?.addingTimeInterval(-30*24*60*60).toString("yyyyMMdd"))!
+    func updataDbdata()  {
+        var tdate:String = (x_mindate.toDate("yyyyMMdd")?.addingTimeInterval(-60*24*60*60).toString("yyyyMMdd"))!
         if dailys.count == 0 {
             tdate = (x_mindate.toDate("yyyyMMdd")?.addingTimeInterval(-99*24*60*60).toString("yyyyMMdd"))!
         }
@@ -131,13 +102,15 @@ extension SFUIAnalyseCharts{
         }, orderby: {
             "date"
         }, limit: {
-            100
+            90
         }, offset: {
             0
         })
         
-        let mindate:String = dailys.first?.date ?? Date.init().toString("yyyyMMdd")!
-        let maxdate:String = dailys.last?.date ?? Date.init().toString("yyyyMMdd")!
+//        let mindate:String = dailys.first?.date ?? Date.init().toString("yyyyMMdd")!
+        let mindate = x_mindate
+        let maxdate = x_maxData
+
         bspoint = try! BSModen.select(
             keys: {
                 BSModen.sqlKeys
@@ -151,7 +124,27 @@ extension SFUIAnalyseCharts{
                 nil
             })
         
+        zones = try! ZoneModen.select(
+            keys: {
+                ZoneModen.sqlKeys
+            }, fitter: {
+                "code=\"\(code)\" and cacheId=\(cacheId) and end>=\"\(mindate)\" and begin<=\"\(maxdate)\""
+            }, orderby: {
+                "begin"
+            }, limit: {
+                nil
+            }, offset: {
+                nil
+            })
+        
+        let index:Double = Double( dailys.firstIndex {
+           return $0.date == cacheDate
+        } ?? 0)
+        
+        kChartView.moveViewToX(index)
     }
+    
+
     
     /// 样式
     func styleDataSet(dataSet:CandleChartDataSet) {
@@ -162,41 +155,12 @@ extension SFUIAnalyseCharts{
         dataSet.increasingFilled = true
         dataSet.shadowColorSameAsCandle = true
     }
-    func styleXAxis() {
+  
+    
    
-        let xaxis = chartView.kChartView.xAxis
-        xaxis.valueFormatter = IndexAxisValueFormatter.init(
-            values:dailys.map { $0.date.toDate("yyyyMMdd")?.toString("yyyy-MM-dd") ?? "--" }
-        )
-        xaxis.axisMaximum = Double(dailys.count+1)
-
-    }
     
-    /// delegate
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
- 
-    }
-    // 图表缩放
-    func chartScaled(_ chartView: ChartViewBase, scaleX: CGFloat, scaleY: CGFloat) {
-        print("scaleX:\(scaleX)")
-        print("scaleY:\(scaleY)")
-    }
-    // 图标被移动
-    func chartTranslated(_ chartView: ChartViewBase, dX: CGFloat, dY: CGFloat) {
-
-    }
-    
-    func chartViewDidEndPanning(_ chartView: ChartViewBase) {
-        var lowestdata:Int = Int(self.chartView.kChartView.lowestVisibleX)
-    
-        if (lowestdata <= 0 && lowestdata >= dailys.count ) {
-            lowestdata = 1
-        }
-        x_mindate = dailys[lowestdata].date
-        print(x_mindate)
-    }
-    func candleChartDataEntry(datylys:[Daily])->[CandleChartDataEntry]{
-        return datylys.enumerated().map { (index,item) in
+    func candleChartDataSet(datylys:[Daily])->CandleChartDataSet{
+        let entries =  datylys.enumerated().map { (index,item) in
            
             return CandleChartDataEntry(
                 x:Double(index),
@@ -207,6 +171,23 @@ extension SFUIAnalyseCharts{
                 data: item
             )
         }
+        let dataset = CandleChartDataSet(entries: entries)
+        styleDataSet(dataSet: dataset)
+
+        return dataset
+    }
+    func amountDataSet(datylys:[Daily]) -> [BarChartDataSet] {
+        var barColors:[NSUIColor] = []
+        let entrys = dailys.enumerated().map { (index,item) -> BarChartDataEntry in
+            let entry = BarChartDataEntry(x: Double(index), y: Double(item.amount/100000))
+            barColors.append((item.open >= item.close) ? .green : .red)
+            return entry
+        }
+        let dataSet = BarChartDataSet(entries: entrys, label: "amount")
+        dataSet.axisDependency = .right;
+        dataSet.colors = barColors
+        dataSet.drawValuesEnabled = false
+        return [dataSet]
     }
 }
 

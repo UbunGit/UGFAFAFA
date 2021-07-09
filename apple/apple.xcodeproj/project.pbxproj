@@ -67,6 +67,12 @@
 		84573294269711CA0072A837 /* AnalyseResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573292269711CA0072A837 /* AnalyseResultVC.swift */; };
 		84573296269719B30072A837 /* SFUIAnalyseChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573295269719B30072A837 /* SFUIAnalyseChartsView.swift */; };
 		84573297269719B30072A837 /* SFUIAnalyseChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84573295269719B30072A837 /* SFUIAnalyseChartsView.swift */; };
+		845732992697DE4B0072A837 /* SFUIAnalyseCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732982697DE4B0072A837 /* SFUIAnalyseCharts.swift */; };
+		8457329A2697DE4B0072A837 /* SFUIAnalyseCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732982697DE4B0072A837 /* SFUIAnalyseCharts.swift */; };
+		8457329C269819AA0072A837 /* ZoneModen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457329B269819AA0072A837 /* ZoneModen.swift */; };
+		8457329D269819AA0072A837 /* ZoneModen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457329B269819AA0072A837 /* ZoneModen.swift */; };
+		8457329F269829120072A837 /* ZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457329E269829120072A837 /* ZoneView.swift */; };
+		845732A0269829120072A837 /* ZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457329E269829120072A837 /* ZoneView.swift */; };
 		8472689C261307F300F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
 		8472689E261307F300F92E66 /* SharesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListView.swift */; };
 		847268A0261307F300F92E66 /* SharesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472689B261307F300F92E66 /* SharesList.swift */; };
@@ -195,6 +201,9 @@
 		8457328E269703EE0072A837 /* AnalyseKLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseKLineChart.swift; sourceTree = "<group>"; };
 		84573292269711CA0072A837 /* AnalyseResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseResultVC.swift; sourceTree = "<group>"; };
 		84573295269719B30072A837 /* SFUIAnalyseChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFUIAnalyseChartsView.swift; sourceTree = "<group>"; };
+		845732982697DE4B0072A837 /* SFUIAnalyseCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFUIAnalyseCharts.swift; sourceTree = "<group>"; };
+		8457329B269819AA0072A837 /* ZoneModen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneModen.swift; sourceTree = "<group>"; };
+		8457329E269829120072A837 /* ZoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneView.swift; sourceTree = "<group>"; };
 		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		84726899261307F300F92E66 /* SharesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesListView.swift; sourceTree = "<group>"; };
 		8472689B261307F300F92E66 /* SharesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesList.swift; sourceTree = "<group>"; };
@@ -326,6 +335,7 @@
 				84B15517266224C400B5DACD /* GroupShare.swift */,
 				84ED04AC268EEDE700164760 /* Daily.swift */,
 				845732842696CC5E0072A837 /* BSModen.swift */,
+				8457329B269819AA0072A837 /* ZoneModen.swift */,
 			);
 			path = Moden;
 			sourceTree = "<group>";
@@ -336,6 +346,7 @@
 				842C7247265F3B840086FCD0 /* AnalyseCell.swift */,
 				845732802695BC6F0072A837 /* AnalyseKLineChartView.swift */,
 				845732872696FB990072A837 /* BSPointView.swift */,
+				8457329E269829120072A837 /* ZoneView.swift */,
 				84573295269719B30072A837 /* SFUIAnalyseChartsView.swift */,
 			);
 			path = View;
@@ -465,6 +476,7 @@
 			isa = PBXGroup;
 			children = (
 				8457328E269703EE0072A837 /* AnalyseKLineChart.swift */,
+				845732982697DE4B0072A837 /* SFUIAnalyseCharts.swift */,
 			);
 			path = Obser;
 			sourceTree = "<group>";
@@ -974,6 +986,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8457329F269829120072A837 /* ZoneView.swift in Sources */,
 				843488DA2657421F00EF2203 /* SocketManage.swift in Sources */,
 				84ED04B0268EF06B00164760 /* SQLiteManage.swift in Sources */,
 				845732812695BC700072A837 /* AnalyseKLineChartView.swift in Sources */,
@@ -1005,6 +1018,7 @@
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				8457328B2696FFAC0072A837 /* SFBarChartView.swift in Sources */,
 				845732882696FB990072A837 /* BSPointView.swift in Sources */,
+				845732992697DE4B0072A837 /* SFUIAnalyseCharts.swift in Sources */,
 				84C47CEB267DF5D6001A43C2 /* Screen.swift in Sources */,
 				847268AD2613088700F92E66 /* Store.swift in Sources */,
 				84540DC926352B8800ECFD9A /* SegmentedView.swift in Sources */,
@@ -1022,6 +1036,7 @@
 				84540DC126352B8800ECFD9A /* UDID.swift in Sources */,
 				84ED04B7268EF19600164760 /* SqliteDeleteProtocol.swift in Sources */,
 				84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
+				8457329C269819AA0072A837 /* ZoneModen.swift in Sources */,
 				8472689E261307F300F92E66 /* SharesListView.swift in Sources */,
 				847268A0261307F300F92E66 /* SharesList.swift in Sources */,
 				8457328F269703EE0072A837 /* AnalyseKLineChart.swift in Sources */,
@@ -1069,6 +1084,7 @@
 				84540DC426352B8800ECFD9A /* StoreStatus.swift in Sources */,
 				8491D952263003910035B7F8 /* CRUDSqliteProtocol.swift in Sources */,
 				84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */,
+				845732A0269829120072A837 /* ZoneView.swift in Sources */,
 				84540DCE26352B8800ECFD9A /* SearchView.swift in Sources */,
 				8446B447262EBEEF00D2AC8B /* ShareEdit.swift in Sources */,
 				84540DBA26352B8800ECFD9A /* AlertData.swift in Sources */,
@@ -1087,6 +1103,7 @@
 				84C47CF2267DFD3C001A43C2 /* AnalyseView.swift in Sources */,
 				8472698B261479E700F92E66 /* ShareDetail.swift in Sources */,
 				84540DC826352B8800ECFD9A /* Progress .swift in Sources */,
+				8457329D269819AA0072A837 /* ZoneModen.swift in Sources */,
 				8491D998263180280035B7F8 /* SqliteInsterProtocol.swift in Sources */,
 				8472697826146A2800F92E66 /* SharesList.swift in Sources */,
 				84F8CB202682E81F00216A50 /* AnalyseHistoryView.swift in Sources */,
@@ -1096,6 +1113,7 @@
 				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,
 				841F335C2624062F0099B8CB /* MakeData.swift in Sources */,
+				8457329A2697DE4B0072A837 /* SFUIAnalyseCharts.swift in Sources */,
 				845732862696CC5E0072A837 /* BSModen.swift in Sources */,
 				84807DC225FB7A8900C8CB18 /* ContentView.swift in Sources */,
 			);

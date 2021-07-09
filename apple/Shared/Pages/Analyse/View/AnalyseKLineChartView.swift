@@ -9,45 +9,44 @@ import SwiftUI
 import Charts
 import UGSwiftKit
 
-
-
-
-
-
 struct AnalyseKLineChartView: View {
     
     @Binding var code:String
     @Binding var cacheId:Int
-    @StateObject var obser = AnalyseKLineChart()
-    @StateObject var bobser = SFUIAnalyseCharts()
+
+    @StateObject var obser = SFUIAnalyseCharts()
 //    @StateObject var amountObser = AnalyseAmountChart(bsPoint:.co)
     
     var body: some View {
         VStack{
-           
-            SFCombinedChartView(obser: obser)
-                .frame( height: 400)
+      
             
-            SFUIAnalyseChartsView(obser: bobser)
-        
+            SFUIAnalyseChartsView(obser: obser)
+                
                 .frame(width: KWidth, height: 300, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-  
+            
             BSPointView(bspoint: $obser.bspoint)
-            .padding()
+                .padding()
+                .frame(width: KWidth, height: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            ZoneView(zones: $obser.zones)
+                .padding()
+                .frame(width: KWidth, height: 100, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
            
             
         }
         .onChange(of: code, perform: { value in
             obser.code = code
+  
+        })
+        .onChange(of: cacheId, perform: { value in
+          
             obser.cacheId = cacheId
-            bobser.code = code
-            bobser.cacheId = cacheId
+    
         })
         .onAppear(){
             obser.code = code
             obser.cacheId = cacheId
-            bobser.code = code
-            bobser.cacheId = cacheId
+       
         }
         
     }

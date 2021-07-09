@@ -13,6 +13,7 @@ import UGSwiftKit
 struct AnalyseDetails:Codable {
     
     var bsRecord:[BSModen]
+    var zone:[ZoneModen]
     
     static func reqData(code:String, cacheId:Int, finesh:@escaping (BaseError?) ->  ()){
         if  BSModen.last(id: cacheId) != nil {
@@ -32,6 +33,7 @@ struct AnalyseDetails:Codable {
                     print("\(url) \n \(param) \n \(value)")
                     do{
                         _ = try BSModen.insert(datas: value.bsRecord, keys:BSModen.sqlKeys, model: .Replace)
+                        _ = try ZoneModen.insert(datas: value.zone, keys: ZoneModen.sqlKeys, model: .Replace)
                         finesh(nil)
                     }
                     catch {
