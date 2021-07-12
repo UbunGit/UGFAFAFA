@@ -9,7 +9,7 @@ import SwiftUI
 import Alamofire
 class SelectShare: ObservableObject{
     
-    @Published var shares:[GroupShare] = []
+    @Published var shares:[StockBasic] = []
     @Published var selects:[String] = []
     init() {
         loaddata()
@@ -20,7 +20,7 @@ class SelectShare: ObservableObject{
         
         AF.request(url, method: .get, parameters: nil){ urlRequest in
             urlRequest.timeoutInterval = 5
-        }.responseModel([GroupShare].self) { result in
+        }.responseModel([StockBasic].self) { result in
             switch result{
             case .success(let result):
                 self.shares = result
@@ -50,7 +50,7 @@ struct SelectShareView: View {
     @Binding var selects:[String]
     @State var keyword = ""
     
-    var searchShares:[GroupShare]{
+    var searchShares:[StockBasic]{
         if keyword.count>0  {
             return  obser.shares.filter { item in
                 item.code.contains(keyword) || item.name.contains(keyword)
@@ -101,11 +101,11 @@ struct SelectShareView: View {
 
 struct SelectShareCell: View {
     
-    init(share:GroupShare,isSelect:Bool = false) {
+    init(share:StockBasic,isSelect:Bool = false) {
         self.share = share
         self.isSelect = isSelect
     }
-    let share:GroupShare
+    let share:StockBasic
     let isSelect:Bool
     var body: some View {
         HStack{

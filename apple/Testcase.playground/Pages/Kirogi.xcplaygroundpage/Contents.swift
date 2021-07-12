@@ -25,6 +25,7 @@ let testdata:[Daily] = [
  鸿雁 根据ma均线相交计算买卖时机
  */
 struct Kirogi:SchemeProtocol {
+    
     typealias T = Daily
     
     var datas: [Daily]
@@ -94,5 +95,7 @@ PlaygroundPage.current.setLiveView(SFLineChartView(data:cdatas))
 //let kirogi = Kirogi(datas:testdata)
 //let signal = signal_values(closes: closes, ma:kirogi.ma)
 //print(sin)
+
+PlaygroundPage.current.needsIndefiniteExecution = true
 
 

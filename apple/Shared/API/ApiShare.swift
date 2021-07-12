@@ -11,39 +11,7 @@ import Alamofire
 
 
 extension Share{
-//    /**
-//     获取列表
-//     */
-//    static func stores(finesh:@escaping  (NSError?, [Store]?) ->  ()) {
-//
-//        let issql = UserDefaults.standard.bool(forKey: "isSql")
-//        if issql {
-//            Store.db_stores(finesh: finesh)
-//        }else{
-//            Store.db_stores(finesh: finesh)
-//        }
-//    }
-//
-//    /**新增/修改*/
-//    func store(finesh:@escaping  (NSError?, Store?) ->  ()) {
-//
-//        let issql = UserDefaults.standard.bool(forKey: "isSql")
-//        if issql {
-//            self.db_store(id: (id != 0) ? id : nil, finesh: finesh)
-//        }else{
-//            self.api_store(id: (id != 0) ? id : nil, finesh: finesh)
-//        }
-//    }
-//
-//    func delete(finesh:@escaping  (NSError?) ->  ()) {
-//
-//        let issql = UserDefaults.standard.bool(forKey: "isSql")
-//        if issql {
-//            self.db_delete(id:id,finesh: finesh)
-//        }else{
-//            self.api_delete(id:id,finesh: finesh)
-//        }
-//    }
+
 }
 
 // MARK: HTTP

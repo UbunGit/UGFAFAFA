@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct GroupShare:Codable {
+public struct StockBasic:Codable {
     
     var name:String = ""
     var code:String = ""
@@ -22,5 +22,4 @@ struct GroupShare:Codable {
         case industry
         case market
     }
-  
 }
