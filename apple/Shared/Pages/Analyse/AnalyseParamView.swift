@@ -130,7 +130,7 @@ struct AnalyseParamView: View {
                         data.begin = begin.toString("yyyyMMdd") ?? "20160101"
                         data.end = end.toString("yyyyMMdd") ?? ""
                         let json = try? JSONEncoder().encode(data)
-                        scokeClient.emit("analyse1",with: [json as Any])
+//                        scokeClient.emit("analyse1",with: [json as Any])
                     }
                     .padding()
                 

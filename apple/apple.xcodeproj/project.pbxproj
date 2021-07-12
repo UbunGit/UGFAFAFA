@@ -73,8 +73,8 @@
 		8457329D269819AA0072A837 /* ZoneModen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457329B269819AA0072A837 /* ZoneModen.swift */; };
 		8457329F269829120072A837 /* ZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457329E269829120072A837 /* ZoneView.swift */; };
 		845732A0269829120072A837 /* ZoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8457329E269829120072A837 /* ZoneView.swift */; };
-		845732A3269832040072A837 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A2269832040072A837 /* Signal.swift */; };
-		845732A4269832040072A837 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A2269832040072A837 /* Signal.swift */; };
+		845732A3269832040072A837 /* SchemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A2269832040072A837 /* SchemeProtocol.swift */; };
+		845732A4269832040072A837 /* SchemeProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A2269832040072A837 /* SchemeProtocol.swift */; };
 		845732A6269834920072A837 /* Kirogi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A5269834920072A837 /* Kirogi.swift */; };
 		845732A7269834920072A837 /* Kirogi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A5269834920072A837 /* Kirogi.swift */; };
 		845732A9269835A20072A837 /* Cerebro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845732A8269835A20072A837 /* Cerebro.swift */; };
@@ -211,7 +211,7 @@
 		845732982697DE4B0072A837 /* SFUIAnalyseCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFUIAnalyseCharts.swift; sourceTree = "<group>"; };
 		8457329B269819AA0072A837 /* ZoneModen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneModen.swift; sourceTree = "<group>"; };
 		8457329E269829120072A837 /* ZoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoneView.swift; sourceTree = "<group>"; };
-		845732A2269832040072A837 /* Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signal.swift; sourceTree = "<group>"; };
+		845732A2269832040072A837 /* SchemeProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemeProtocol.swift; sourceTree = "<group>"; };
 		845732A5269834920072A837 /* Kirogi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kirogi.swift; sourceTree = "<group>"; };
 		845732A8269835A20072A837 /* Cerebro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cerebro.swift; sourceTree = "<group>"; };
 		845732AB269839130072A837 /* SignalTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalTest.swift; sourceTree = "<group>"; };
@@ -503,7 +503,7 @@
 		845732A1269831C60072A837 /* Signal */ = {
 			isa = PBXGroup;
 			children = (
-				845732A2269832040072A837 /* Signal.swift */,
+				845732A2269832040072A837 /* SchemeProtocol.swift */,
 				845732A8269835A20072A837 /* Cerebro.swift */,
 				845732A5269834920072A837 /* Kirogi.swift */,
 			);
@@ -1010,7 +1010,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8457329F269829120072A837 /* ZoneView.swift in Sources */,
-				845732A3269832040072A837 /* Signal.swift in Sources */,
+				845732A3269832040072A837 /* SchemeProtocol.swift in Sources */,
 				843488DA2657421F00EF2203 /* SocketManage.swift in Sources */,
 				84ED04B0268EF06B00164760 /* SQLiteManage.swift in Sources */,
 				845732812695BC700072A837 /* AnalyseKLineChartView.swift in Sources */,
@@ -1085,7 +1085,7 @@
 				841F334B2623FCAB0099B8CB /* MLMAOut.swift in Sources */,
 				84807DC025FB7A8900C8CB18 /* appleApp.swift in Sources */,
 				84C47CEC267DF5D6001A43C2 /* Screen.swift in Sources */,
-				845732A4269832040072A837 /* Signal.swift in Sources */,
+				845732A4269832040072A837 /* SchemeProtocol.swift in Sources */,
 				842C7241265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */,
 				84726984261479CC00F92E66 /* ShareDetailView.swift in Sources */,
 				84B155162662219400B5DACD /* SelectShareView.swift in Sources */,
@@ -1388,7 +1388,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HQTXMU76N3;
+				DEVELOPMENT_TEAM = K3H3VBJLB3;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1410,7 +1410,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HQTXMU76N3;
+				DEVELOPMENT_TEAM = K3H3VBJLB3;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (

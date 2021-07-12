@@ -7,8 +7,3 @@
 
 import Foundation
 
-struct Kirogi {
-    
-    var codes:[Share]
-    
-}

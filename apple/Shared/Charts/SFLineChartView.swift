@@ -12,6 +12,30 @@ import Charts
 
 #if os(iOS)
 struct SFLineChartView:UIViewRepresentable{
+  
+    let data:[[Double]]
+    
+    var datasets:[LineChartDataSet]{
+        
+         data.map { item in
+            
+            let enytys = item.enumerated().map {
+                ChartDataEntry.init(x: Double($0), y: $1)
+            }
+            let dataset = LineChartDataSet(entries: enytys)
+            let color = colors[Int(arc4random()) % colors.count]
+            dataset.setColor(color)
+            dataset.mode = .cubicBezier
+            dataset.drawCirclesEnabled = false
+            dataset.drawFilledEnabled = false
+            dataset.drawValuesEnabled = false
+            
+            return dataset
+        }
+    
+      
+    }
+    
     func makeUIView(context: Context) -> LineChartView {
         return LineChartView()
     }
@@ -26,7 +50,9 @@ struct SFLineChartView:UIViewRepresentable{
         formateLegend(legend: uiView.legend)
     }
     
-    let datasets:[LineChartDataSet]
+    
+    
+  
 
 }
 
@@ -139,9 +165,9 @@ struct SFLineChartView_Previews: PreviewProvider {
             chartset.lineWidth = 2
             return chartset
         }
-        SFLineChartView(datasets: dasets)
-            .preferredColorScheme(.light)
-            .environment(\.sizeCategory, .small)
-            
+//        SFLineChartView(data:[(0...4),(0...8)])
+//            .preferredColorScheme(.light)
+//            .environment(\.sizeCategory, .small)
+//
     }
 }
