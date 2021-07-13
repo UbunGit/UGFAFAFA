@@ -27,6 +27,8 @@ class Test(unittest.TestCase):
         data = base.search("思")
         print(data)
 
+
+
    
 
 if __name__ == "__main__":

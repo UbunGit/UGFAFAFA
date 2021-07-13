@@ -95,9 +95,8 @@ extension SFUIAnalyseCharts{
             tdate = (x_mindate.toDate("yyyyMMdd")?.addingTimeInterval(-99*24*60*60).toString("yyyyMMdd"))!
         }
         
-        dailys = try! Daily.select(keys: {
-            Daily.sqlKeys
-        }, fitter: {
+        dailys = try! Daily.select(
+        fitter: {
             "code=\"\(code)\" and date>\"\(tdate)\""
         }, orderby: {
             "date"
@@ -112,9 +111,7 @@ extension SFUIAnalyseCharts{
         let maxdate = x_maxData
 
         bspoint = try! BSModen.select(
-            keys: {
-                BSModen.sqlKeys
-            }, fitter: {
+            fitter: {
                 "code=\"\(code)\" and cacheId=\(cacheId) and date>=\"\(mindate)\" and date<=\"\(maxdate)\""
             }, orderby: {
                 "date"
@@ -125,9 +122,7 @@ extension SFUIAnalyseCharts{
             })
         
         zones = try! ZoneModen.select(
-            keys: {
-                ZoneModen.sqlKeys
-            }, fitter: {
+             fitter: {
                 "code=\"\(code)\" and cacheId=\(cacheId) and end>=\"\(mindate)\" and begin<=\"\(maxdate)\""
             }, orderby: {
                 "begin"

@@ -27,9 +27,10 @@ def log(msg):
 def index():
     return render_template('index.html')
 
-############# base 策略 http ##################
+############# base  http ##################
 @app.route('/base')
 def base():
+    # 获取股票列表
     from Tusharedata.base import search
     bases = search(keyword="")
     return {

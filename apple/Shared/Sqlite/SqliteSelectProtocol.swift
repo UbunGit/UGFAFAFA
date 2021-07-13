@@ -12,12 +12,15 @@ public protocol SqliteSelectProtocol:SqliteProtocol{
     
     
     static func select(
-        keys:()->[ModelKey],
+        keys:[ModelKey],
         fitter:() -> (String?),
         orderby:() -> (String?),
         limit:() -> (Int?),
         offset:()->(Int?)
     ) throws -> [Self]
+    
+    static func last(column:String, isDesc:Bool) ->Self?
+
 }
 
 public extension SqliteSelectProtocol{
@@ -25,14 +28,14 @@ public extension SqliteSelectProtocol{
    
     
     static func select(
-        keys:()->[ModelKey],
+        keys:[ModelKey] = Self.sqlKeys,
         fitter:() -> (String?),
         orderby:() -> (String?),
         limit:() -> (Int?),
         offset:()->(Int?)
     ) throws -> [Self]{
         
-        let str = keys().map { key in
+        let str = keys.map { key in
             return key.column
         }.joined(separator: ",")
         
@@ -63,4 +66,26 @@ public extension SqliteSelectProtocol{
        
         return result
     }
+    
+    static func last(column:String, isDesc:Bool) ->Self?{
+        
+        var orderStr = column
+        if isDesc {
+            orderStr.append(" desc")
+        }
+       let results = try? Self.select(keys: Self.sqlKeys) {
+            nil
+        } orderby: {
+            orderStr
+        } limit: {
+            0
+        } offset: {
+            1
+        }
+        
+        return results?.last
+
+    }
+    
+    
 }

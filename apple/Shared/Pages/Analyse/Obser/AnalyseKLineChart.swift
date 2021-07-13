@@ -98,10 +98,7 @@ class AnalyseKLineChart: SFCombinedChart {
         if dailys.count == 0 {
             tdate = (x_mindate.toDate("yyyyMMdd")?.addingTimeInterval(-99*24*60*60).toString("yyyyMMdd"))!
         }
-        
-        dailys = try! Daily.select(keys: {
-            Daily.sqlKeys
-        }, fitter: {
+        dailys = try! Daily.select(fitter: {
             "code=\"\(code)\" and date>\"\(tdate)\""
         }, orderby: {
             "date"
@@ -111,12 +108,12 @@ class AnalyseKLineChart: SFCombinedChart {
             0
         })
         
+       
+        
         let mindate:String = dailys.first?.date ?? Date.init().toString("yyyyMMdd")!
         let maxdate:String = dailys.last?.date ?? Date.init().toString("yyyyMMdd")!
         bspoint = try! BSModen.select(
-            keys: {
-                BSModen.sqlKeys
-            }, fitter: {
+            fitter: {
                 "code=\"\(code)\" and cacheId=\(cacheId) and date>=\"\(mindate)\" and date<=\"\(maxdate)\""
             }, orderby: {
                 "date"

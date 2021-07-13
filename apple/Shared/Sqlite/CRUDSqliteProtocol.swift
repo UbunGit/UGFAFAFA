@@ -14,6 +14,7 @@ public typealias CRUDSqliteProtocol = SqliteProtocol & SqliteDeleteProtocol & Sq
 
 public protocol SqliteProtocol:Codable{
 
+    static var sqlKeys:[ModelKey] {get set}
     static func sqlitePath() -> String
     static func sqliteFile() -> String
     static func sqliteCon() -> Connection

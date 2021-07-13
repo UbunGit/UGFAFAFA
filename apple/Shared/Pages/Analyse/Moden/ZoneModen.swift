@@ -10,7 +10,9 @@ import SQLite
 import Alamofire
 import UGSwiftKit
 
-struct ZoneModen:CRUDSqliteProtocol {
+struct ZoneModen {
+  
+    
     
     var id:Double
     var cacheId:Int
@@ -67,9 +69,9 @@ struct ZoneModen:CRUDSqliteProtocol {
 
 }
 
-extension ZoneModen{
+extension ZoneModen:CRUDSqliteProtocol{
     
-    static let sqlKeys = [
+    static var sqlKeys = [
         ModelKey.init(column: "id", keypath: \Self.id),
         ModelKey.init(column: "code", keypath: \Self.code),
         ModelKey.init(column: "cacheId", keypath: \Self.cacheId),
@@ -101,9 +103,7 @@ extension ZoneModen{
     }
     
     static func last(id:Int) -> Self?{
-        let dailys = try! Self.select(keys: {
-            BSModen.sqlKeys
-        }, fitter: {
+        let dailys = try? Self.select(fitter: {
             "id=\(id)"
         }, orderby: {
             "id"
@@ -112,6 +112,7 @@ extension ZoneModen{
         }, offset: {
             0
         })
-        return dailys.last
+       
+        return dailys?.last
     }
 }

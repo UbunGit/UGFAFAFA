@@ -11,7 +11,7 @@ import UGSwiftKit
 import SQLite
 
 
-public struct Daily:CRUDSqliteProtocol {
+public struct Daily {
 
     var code:String
     var date:String
@@ -95,9 +95,9 @@ public extension Daily{
 }
 
 /// sql
-extension Daily{
+extension Daily:CRUDSqliteProtocol{
     
-    static let sqlKeys = [
+    public static var sqlKeys = [
         ModelKey.init(column: "code", keypath: \Self.code),
         ModelKey.init(column: "date", keypath: \Self.date),
         ModelKey.init(column: "amount", keypath: \Self.amount),
@@ -128,9 +128,7 @@ extension Daily{
     }
     
     static func last(code:String) -> Self?{
-        let dailys = try! Self.select(keys: {
-            Daily.sqlKeys
-        }, fitter: {
+        let dailys = try? Self.select(fitter: {
             "code=\"\(code)\""
         }, orderby: {
             "date DESC"
@@ -139,7 +137,8 @@ extension Daily{
         }, offset: {
             0
         })
-        return dailys.last
+       
+        return dailys?.last
     }
     
  

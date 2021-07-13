@@ -19,7 +19,7 @@ def updateTime():
         return None
 
 # 搜索股票列表
-def search(keyword):
+def search(keyword = None):
     if os.path.exists(filepath)==False:
         return None
     df = pd.read_csv(filepath , index_col=0).rename(columns={'ts_code':'code'})
@@ -33,5 +33,10 @@ def reload():
     else:
         data.to_csv(filepath)
         return data
-       
+# # 更新数据        
+# def update():
+
+
+
+
         

@@ -14,6 +14,7 @@ public struct StockBasic:Codable {
     var area:String = ""
     var industry:String = ""
     var market:String = ""
+    var changeTime:String = ""
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -21,5 +22,6 @@ public struct StockBasic:Codable {
         case area
         case industry
         case market
+        case changeTime
     }
 }

@@ -45,7 +45,7 @@ struct AnalyseDetails:Codable {
     }
 }
 
-struct BSModen:CRUDSqliteProtocol {
+struct BSModen {
     
     var id:Double
     var cacheId:Int
@@ -105,9 +105,9 @@ struct BSModen:CRUDSqliteProtocol {
 }
 
 
-extension BSModen{
+extension BSModen: CRUDSqliteProtocol{
     
-    static let sqlKeys = [
+    static var sqlKeys = [
         ModelKey.init(column: "id", keypath: \Self.id),
         ModelKey.init(column: "code", keypath: \Self.code),
         ModelKey.init(column: "date", keypath: \Self.date),
@@ -140,9 +140,7 @@ extension BSModen{
     }
     
     static func last(id:Int) -> Self?{
-        let dailys = try! Self.select(keys: {
-            BSModen.sqlKeys
-        }, fitter: {
+        let dailys = try? Self.select(fitter: {
             "id=\(id)"
         }, orderby: {
             "id"
@@ -151,6 +149,7 @@ extension BSModen{
         }, offset: {
             0
         })
-        return dailys.last
+   
+        return dailys?.last
     }
 }

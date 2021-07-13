@@ -9,13 +9,19 @@ import Foundation
 import SQLite
 
 extension StockBasic:CRUDSqliteProtocol{
+   
+    
+ 
+    
 
-    static let sqlKeys = [
+    public static var sqlKeys = [
         ModelKey.init(column: "name", keypath: \Self.name),
         ModelKey.init(column: "code", keypath: \Self.code),
         ModelKey.init(column: "area", keypath: \Self.area),
         ModelKey.init(column: "industry", keypath: \Self.industry),
         ModelKey.init(column: "market", keypath: \Self.market),
+        ModelKey.init(column: "changeTime", keypath: \Self.changeTime),
+        
     ]
     
     public static func tableName() -> String{
@@ -28,6 +34,7 @@ extension StockBasic:CRUDSqliteProtocol{
             "area" NUMERIC,
             "industry" TEXT,
             "market" TEXT,
+            "changeTime" TEXT,
             PRIMARY KEY("code")
          )
          """
@@ -35,4 +42,8 @@ extension StockBasic:CRUDSqliteProtocol{
         
         return tableName
     }
+    
+   
+    
+    
 }
