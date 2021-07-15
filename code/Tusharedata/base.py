@@ -6,6 +6,7 @@ import pandas as pd
 import tushare as ts
 from .db import session, DataCache
 from config import dataPath as root
+
 ts.set_token("8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195")
 filepath = os.path.join(root,"tushare", 'base.csv')
 key = "tusharedata.base"
@@ -33,8 +34,8 @@ def reload():
     else:
         data.to_csv(filepath)
         return data
-# # 更新数据        
-# def update():
+# 更新数据        
+def updatedb():
 
 
 
