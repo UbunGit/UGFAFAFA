@@ -50,23 +50,31 @@ class StockBasic(Base):
         new_dic.pop('_sa_instance_state')
         new_dic[changeTime] = self.changeTime.strftime("%Y%m%d")
         return new_dic
-
-    def createorupdate(self,datas):
-   
-        for x in datas:
-            x["changeTime"] = datetime.now()
-        table = Table('stock_basic', metadata, autoload=True)
-        i = table.insert().prefix_with('OR IGNORE')
-        stmt = session.execute(i, datas)
-        session.commit()
-        return stmt
+    # 更新股票列表
+    def createorupdate(self,datas,ignore=True):
+        try:
+            for x in datas:
+                x["changeTime"] = datetime.now()
+            prefix = 'OR IGNORE' if ignore==True else 'OR REPLACE'
+            table = Table('stock_basic', metadata, autoload=True)
+            i = table.insert().prefix_with('OR IGNORE')
+            stmt = session.execute(i, datas)
+            session.commit()
+        except:
+            session.rollback()
+        finally:
+            session.close()
+        
 
     # 获取最后一个更新数据
     def last(self, column="changeTime", isdesc=True):
-        if isdesc==True:
-            return session.query(StockBasic).order_by(desc(column)). first()
-        else:
-            return session.query(StockBasic).order_by(column). first()
+        try:
+            if isdesc==True:
+                return session.query(StockBasic).order_by(desc(column)). first()
+            else:
+                return session.query(StockBasic).order_by(column). first()
+        finally:
+            session.close()
 
 Base.metadata.create_all(bind=engine)
 
