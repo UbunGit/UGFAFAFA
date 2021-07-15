@@ -34,6 +34,7 @@ class DataCache(Base):
     key = Column(String(), comment='key')
     value = Column(String(), comment='value')
 
+# 股票列表
 class StockBasic(Base):
 
     __tablename__ = 'stock_basic'
@@ -48,7 +49,7 @@ class StockBasic(Base):
     def to_dic(self):
         new_dic = self.__dict__
         new_dic.pop('_sa_instance_state')
-        new_dic[changeTime] = self.changeTime.strftime("%Y%m%d")
+        new_dic["changeTime"] = self.changeTime.strftime("%Y%m%d")
         return new_dic
 
     def createorupdate(self,datas):
@@ -68,8 +69,37 @@ class StockBasic(Base):
         else:
             return session.query(StockBasic).order_by(column). first()
 
+# 基金列表
+class ETFBase(Base):
+    __tablename__ = 'etf_base'
+
+    code=Column(String(), primary_key=True)
+    name=Column(String(), comment='ETF名称')
+    changeTime=Column(String(), comment='更新时间')
+
+    def to_db(self, datas):
+        try:
+            for x in datas:
+                x["changeTime"] = datetime.now().strftime("%Y%m%d")
+            table = Table('etf_base', metadata, autoload=True)
+            i = table.insert().prefix_with('OR IGNORE')
+            session.execute(i, datas)
+            session.commit()
+        except:
+            session.rollback()
+        finally:
+            session.close()
+
+     # 获取最后一个
+    def last(self, column="changeTime", isdesc=True):
+        if isdesc==True:
+            return session.query(ETFBase).order_by(desc(column)). first()
+        else:
+            return session.query(ETFBase).order_by(column).first()
+
+
 Base.metadata.create_all(bind=engine)
 
-sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
+
 
     
