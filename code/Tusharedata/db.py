@@ -44,7 +44,8 @@ class StockBasic(Base):
     area=Column(String(),  comment='地区')
     industry=Column(String(),  comment='所属行业')
     market=Column(String(),  comment='市场类型（主板/创业板/科创板/CDR')
-    changeTime=Column(String(), comment='更新时间')
+    changeTime=Column(DateTime, comment='更新时间')
+  
 
     def to_dic(self):
         new_dic = self.__dict__
@@ -65,7 +66,19 @@ class StockBasic(Base):
             session.rollback()
         finally:
             session.close()
-        
+    
+    # 查找晚与changeTime包含keyword的数据
+    def fitter(self, keyword="", changeTime=""):
+        reqster= session.query(StockBasic).filter(
+            StockBasic.changeTime > datetime.strptime(changeTime,'%Y%m%d')
+            ).filter(
+                StockBasic.code.like("%"+keyword+"%" or StockBasic.name.like("%"+keyword+"%" ))
+            ).all() 
+ 
+        rlist = []
+        for item in reqster:
+            rlist.append(item.to_dic())
+        return rlist
 
     # 获取最后一个更新数据
     def last(self, column="changeTime", isdesc=True):
@@ -78,32 +91,54 @@ class StockBasic(Base):
             session.close()
 
 # 基金列表
-class ETFBase(Base):
-    __tablename__ = 'etf_base'
+class ETFBasic(Base):
+    __tablename__ = 'etf_basic'
 
     code=Column(String(), primary_key=True)
     name=Column(String(), comment='ETF名称')
-    changeTime=Column(String(), comment='更新时间')
+    changeTime=Column(DateTime, comment='更新时间')
+
+    def to_dic(self):
+        new_dic = self.__dict__
+        new_dic.pop('_sa_instance_state')
+        new_dic["changeTime"] = self.changeTime.strftime("%Y%m%d")
+        return new_dic
 
     def to_db(self, datas):
         try:
             for x in datas:
-                x["changeTime"] = datetime.now().strftime("%Y%m%d")
-            table = Table('etf_base', metadata, autoload=True)
+                x["changeTime"] = datetime.now()
+            table = Table('etf_basic', metadata, autoload=True)
             i = table.insert().prefix_with('OR IGNORE')
             session.execute(i, datas)
             session.commit()
-        except:
+        except Exception as e:
+            print(e)
             session.rollback()
         finally:
             session.close()
 
      # 获取最后一个
+    
+     # 查找晚与changeTime包含keyword的数据
+    
+    def fitter(self, keyword="", changeTime=""):
+        reqster= session.query(ETFBasic).filter(
+            ETFBasic.changeTime > datetime.strptime(changeTime,'%Y%m%d')
+            ).filter(
+                ETFBasic.code.like("%"+keyword+"%" or ETFBasic.name.like("%"+keyword+"%" ))
+            ).all() 
+ 
+        rlist = []
+        for item in reqster:
+            rlist.append(item.to_dic())
+        return rlist
+
     def last(self, column="changeTime", isdesc=True):
         if isdesc==True:
-            return session.query(ETFBase).order_by(desc(column)). first()
+            return session.query(ETFBasic).order_by(desc(column)). first()
         else:
-            return session.query(ETFBase).order_by(column).first()
+            return session.query(ETFBasic).order_by(column).first()
 
 
 Base.metadata.create_all(bind=engine)

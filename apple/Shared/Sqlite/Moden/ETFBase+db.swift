@@ -1,21 +1,16 @@
 //
-//  StockBasic+db.swift
+//  ETFBase+db.swift
 //  apple
 //
-//  Created by admin on 2021/7/12.
+//  Created by admin on 2021/7/15.
 //
 
 import Foundation
-import SQLite
-
-extension StockBasic:CRUDSqliteProtocol{
+extension ETFBasic:CRUDSqliteProtocol{
 
     public static var sqlKeys = [
         ModelKey.init(column: "name", keypath: \Self.name),
         ModelKey.init(column: "code", keypath: \Self.code),
-        ModelKey.init(column: "area", keypath: \Self.area),
-        ModelKey.init(column: "industry", keypath: \Self.industry),
-        ModelKey.init(column: "market", keypath: \Self.market),
         ModelKey.init(column: "changeTime", keypath: \Self.changeTime),
         
     ]
@@ -27,9 +22,6 @@ extension StockBasic:CRUDSqliteProtocol{
          CREATE TABLE IF NOT EXISTS "\(tableName)"(
             "name" TEXT,
             "code" TEXT,
-            "area" NUMERIC,
-            "industry" TEXT,
-            "market" TEXT,
             "changeTime" TEXT,
             PRIMARY KEY("code")
          )

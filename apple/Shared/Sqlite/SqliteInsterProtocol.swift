@@ -22,7 +22,7 @@ public protocol SqliteInsterProtocol:SqliteProtocol{
 
 public extension SqliteInsterProtocol{
    
-    static func insert(datas: [Self], keys:[ModelKey], model:CRUDInsertModel = .None) throws {
+    static func insert(datas: [Self], keys:[ModelKey]=Self.sqlKeys, model:CRUDInsertModel = .None) throws {
         if datas.count<=0 {
             return
         }

@@ -12,13 +12,13 @@ def filempath(name):
     return  os.path.join(root,"akshare",name+'.csv')
 
 def update(isNeed=False):
-    last = db.ETFBase().last()
+    last = db.ETFBasic().last()
     overdue = False # 数据是否过期
     if last== None:
         overdue = True
     else:  
         # 比较时间超过7天更新一次  
-        enddata = datetime.strptime(last.changeTime,'%Y%m%d')
+        enddata = last.changeTime
         overdue = (datetime.now()-enddata).seconds > 7*24*60*60
 
     if (overdue or isNeed)==True:
@@ -26,7 +26,7 @@ def update(isNeed=False):
         df = ak.fund_em_etf_fund_daily()
         df = df.rename(columns={'基金代码':'code','基金简称':'name'})
         datas = df.to_dict(orient="records")
-        db.ETFBase().to_db(datas=datas)
+        db.ETFBasic().to_db(datas=datas)
     else:
         print ("ETF列表无需更新")
 

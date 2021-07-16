@@ -4,7 +4,7 @@
 import os,sys
 import pandas as pd
 import tushare as ts
-from .db import session, DataCache
+from .db import StockBasic
 from config import dataPath as root
 
 ts.set_token("8631d6ca5dccdcd4b9e0eed7286611e40507c7eba04649c0eee71195")
@@ -19,12 +19,8 @@ def updateTime():
     else:
         return None
 
-# 搜索股票列表
-def search(keyword = None):
-    if os.path.exists(filepath)==False:
-        return None
-    df = pd.read_csv(filepath , index_col=0).rename(columns={'ts_code':'code'})
-    return df.to_dict(orient="records")
+    
+    
 
 # 下载数据
 def reload():
@@ -36,6 +32,7 @@ def reload():
         return data
 # 更新数据        
 def updatedb():
+    pass
 
 
 

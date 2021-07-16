@@ -124,6 +124,12 @@
 		84B155162662219400B5DACD /* SelectShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B155142662219400B5DACD /* SelectShareView.swift */; };
 		84B15518266224C400B5DACD /* StockBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B15517266224C400B5DACD /* StockBasic.swift */; };
 		84B15519266224C400B5DACD /* StockBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B15517266224C400B5DACD /* StockBasic.swift */; };
+		84B81844269FF8DB003C928E /* ETFBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81841269FF4B1003C928E /* ETFBasic.swift */; };
+		84B81845269FF8DC003C928E /* ETFBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81841269FF4B1003C928E /* ETFBasic.swift */; };
+		84B81847269FF9AC003C928E /* ETFBase+db.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81846269FF9AC003C928E /* ETFBase+db.swift */; };
+		84B81848269FF9AC003C928E /* ETFBase+db.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B81846269FF9AC003C928E /* ETFBase+db.swift */; };
+		84B8184B269FFA3E003C928E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8184A269FFA3E003C928E /* Notification.swift */; };
+		84B8184C269FFA3E003C928E /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B8184A269FFA3E003C928E /* Notification.swift */; };
 		84C47CEB267DF5D6001A43C2 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CEA267DF5D6001A43C2 /* Screen.swift */; };
 		84C47CEC267DF5D6001A43C2 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CEA267DF5D6001A43C2 /* Screen.swift */; };
 		84C47CEE267DFC92001A43C2 /* AnalyseResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CED267DFC92001A43C2 /* AnalyseResultView.swift */; };
@@ -251,6 +257,9 @@
 		84A839B0269C533800F3C78C /* StockBasic+db.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StockBasic+db.swift"; sourceTree = "<group>"; };
 		84B155142662219400B5DACD /* SelectShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectShareView.swift; sourceTree = "<group>"; };
 		84B15517266224C400B5DACD /* StockBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockBasic.swift; sourceTree = "<group>"; };
+		84B81841269FF4B1003C928E /* ETFBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETFBasic.swift; sourceTree = "<group>"; };
+		84B81846269FF9AC003C928E /* ETFBase+db.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ETFBase+db.swift"; sourceTree = "<group>"; };
+		84B8184A269FFA3E003C928E /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		84C47CEA267DF5D6001A43C2 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		84C47CED267DFC92001A43C2 /* AnalyseResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseResultView.swift; sourceTree = "<group>"; };
 		84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseView.swift; sourceTree = "<group>"; };
@@ -644,6 +653,7 @@
 		84807D9025FB7A8500C8CB18 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				84B81849269FFA0D003C928E /* Notification */,
 				845732A1269831C60072A837 /* Signal */,
 				84573291269711740072A837 /* Swift */,
 				84ED04AF268EEF7400164760 /* Sqlite */,
@@ -738,6 +748,7 @@
 			isa = PBXGroup;
 			children = (
 				84B15517266224C400B5DACD /* StockBasic.swift */,
+				84B81841269FF4B1003C928E /* ETFBasic.swift */,
 			);
 			path = Moden;
 			sourceTree = "<group>";
@@ -746,8 +757,17 @@
 			isa = PBXGroup;
 			children = (
 				84A839B0269C533800F3C78C /* StockBasic+db.swift */,
+				84B81846269FF9AC003C928E /* ETFBase+db.swift */,
 			);
 			path = Moden;
+			sourceTree = "<group>";
+		};
+		84B81849269FFA0D003C928E /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				84B8184A269FFA3E003C928E /* Notification.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		84E11ED6260D91E80012D151 /* Home */ = {
@@ -1035,6 +1055,7 @@
 			files = (
 				8457329F269829120072A837 /* ZoneView.swift in Sources */,
 				845732A3269832040072A837 /* SchemeProtocol.swift in Sources */,
+				84B8184B269FFA3E003C928E /* Notification.swift in Sources */,
 				843488DA2657421F00EF2203 /* SocketManage.swift in Sources */,
 				84ED04B0268EF06B00164760 /* SQLiteManage.swift in Sources */,
 				845732812695BC700072A837 /* AnalyseKLineChartView.swift in Sources */,
@@ -1044,6 +1065,7 @@
 				8428ECFC267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */,
 				847268EF26130F6100F92E66 /* ApiShare.swift in Sources */,
 				84ED04B4268EF13900164760 /* CRUDSqliteProtocol.swift in Sources */,
+				84B81844269FF8DB003C928E /* ETFBasic.swift in Sources */,
 				84540DB926352B8800ECFD9A /* AlertData.swift in Sources */,
 				8446B446262EBEEF00D2AC8B /* ShareEdit.swift in Sources */,
 				84A839AC269C4BE000F3C78C /* Api_Stock.swift in Sources */,
@@ -1086,6 +1108,7 @@
 				84C47CEE267DFC92001A43C2 /* AnalyseResultView.swift in Sources */,
 				842C7244265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				84540DC126352B8800ECFD9A /* UDID.swift in Sources */,
+				84B81847269FF9AC003C928E /* ETFBase+db.swift in Sources */,
 				84ED04B7268EF19600164760 /* SqliteDeleteProtocol.swift in Sources */,
 				84807DBD25FB7A8900C8CB18 /* apple.xcdatamodeld in Sources */,
 				8457329C269819AA0072A837 /* ZoneModen.swift in Sources */,
@@ -1120,9 +1143,11 @@
 				845732892696FB990072A837 /* BSPointView.swift in Sources */,
 				842C7245265F3A6D0086FCD0 /* Analyse.swift in Sources */,
 				84ED04B8268EF19600164760 /* SqliteDeleteProtocol.swift in Sources */,
+				84B81845269FF8DC003C928E /* ETFBasic.swift in Sources */,
 				8428ECFD267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */,
 				8457328C2696FFAC0072A837 /* SFBarChartView.swift in Sources */,
 				847269D42615B2CA00F92E66 /* ApiStore.swift in Sources */,
+				84B8184C269FFA3E003C928E /* Notification.swift in Sources */,
 				847269CF2615B28C00F92E66 /* ApiShare.swift in Sources */,
 				8472697426146A2400F92E66 /* SharesListView.swift in Sources */,
 				84FA4E3E25FBAA9100F93203 /* SockerServer.swift in Sources */,
@@ -1166,6 +1191,7 @@
 				84F8CB202682E81F00216A50 /* AnalyseHistoryView.swift in Sources */,
 				848929CE26118E5900006D88 /* PythonManage.swift in Sources */,
 				84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */,
+				84B81848269FF9AC003C928E /* ETFBase+db.swift in Sources */,
 				84F8CB24268304D800216A50 /* CommitView.swift in Sources */,
 				8472697026146A2100F92E66 /* ShareCell.swift in Sources */,
 				848929A8260DDA7200006D88 /* SQLiteManage.swift in Sources */,

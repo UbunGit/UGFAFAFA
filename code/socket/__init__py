@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import sys,json,logging
+
+from werkzeug.datastructures import K
 sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
 
 from flask import Flask, render_template,jsonify
@@ -28,11 +30,27 @@ def index():
     return render_template('index.html')
 
 ############# base  http ##################
-@app.route('/base')
-def base():
+@app.route('/store/basic')
+def store_basic():
     # 获取股票列表
-    from Tusharedata.base import search
-    bases = search(keyword="")
+    from Tusharedata import db
+    data = request_parse(request)
+    keyword = data["keyword"]
+    changeTime = data["changeTime"]
+    bases = db.StockBasic().fitter(keyword=keyword,changeTime=changeTime)
+    return {
+        "code":0,
+        "data":bases 
+    }
+
+@app.route('/etf/basic')
+def store_basic():
+    # 获取etf列表
+    from Tusharedata import db
+    data = request_parse(request)
+    keyword = data["keyword"]
+    changeTime = data["changeTime"]
+    bases = db.ETFBasic().fitter(keyword=keyword,changeTime=changeTime)
     return {
         "code":0,
         "data":bases 

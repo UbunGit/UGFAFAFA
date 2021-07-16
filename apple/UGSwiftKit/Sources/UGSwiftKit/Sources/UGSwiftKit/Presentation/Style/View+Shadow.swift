@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
-public extension View {
 
-    func shadow(_ style: ShadowStyle) -> some View {
+extension View {
+
+    public func shadow(_ style: ShadowStyle) -> some View {
         shadow(
             color: style.color,
             radius: style.radius,
@@ -16,7 +17,7 @@ public extension View {
             y: style.y)
     }
     
-    func searchStype() -> some View {
+    public func searchStype() -> some View {
         self.font(.title3)
             .padding(4)
             .background(Color("Background 1"))
