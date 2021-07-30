@@ -78,9 +78,9 @@ public extension SqliteSelectProtocol{
         } orderby: {
             orderStr
         } limit: {
-            0
-        } offset: {
             1
+        } offset: {
+            0
         }
         
         return results?.last

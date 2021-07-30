@@ -2,8 +2,9 @@
 
 import Foundation
 import UGSwiftKit
+import PlaygroundSupport
 
-func update(finesh:(_ finesh:BaseError?)->()){
+func update(finesh:@escaping (_ finesh:BaseError?)->()){
     var werror:BaseError?
     let group = DispatchGroup()
     group.enter()
@@ -11,6 +12,7 @@ func update(finesh:(_ finesh:BaseError?)->()){
         if error != nil {
             werror = error
         }
+        group.leave()
     }
     
     group.enter()
@@ -18,11 +20,12 @@ func update(finesh:(_ finesh:BaseError?)->()){
         if error != nil {
             werror = error
         }
+        group.leave()
     }
    
     group.notify(queue: .main) {
         print("all requests come back")
-//        finesh(werror)
+        finesh(werror)
     }
 
     
@@ -31,6 +34,7 @@ update { error in
     if error==nil {
         print("OK")
     }else{
-        print("ERROR")
+        print(error)
     }
+    PlaygroundPage.current.needsIndefiniteExecution = true
 }

@@ -8,15 +8,14 @@
 
 import SwiftUI
 
+
 struct SharesListView: View {
     
     @ObservedObject var store =  SharesList()
     @State var storeid:Int?
     @State var isNavigation = false
     @State var isSheet = false
- 
-    
-    
+
     @ViewBuilder
     var body: some View {
         
@@ -84,8 +83,6 @@ struct SharesListView: View {
            
             
         }
-
-      
         .onAppear(){
             store.update()
         }

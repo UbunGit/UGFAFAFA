@@ -136,6 +136,8 @@
 		84C47CEF267DFC92001A43C2 /* AnalyseResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CED267DFC92001A43C2 /* AnalyseResultView.swift */; };
 		84C47CF1267DFD3C001A43C2 /* AnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */; };
 		84C47CF2267DFD3C001A43C2 /* AnalyseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */; };
+		84C7DFF626A2A2FF0007B93B /* DataManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7DFF526A2A2FF0007B93B /* DataManageView.swift */; };
+		84C7DFF826A2AB350007B93B /* UpdateSeverDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C7DFF726A2AB350007B93B /* UpdateSeverDataView.swift */; };
 		84E11EEC260DB2DB0012D151 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EEB260DB2DB0012D151 /* SettingView.swift */; };
 		84E11EF1260DB3460012D151 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E11EF0260DB3460012D151 /* Sidebar.swift */; };
 		84ED04AD268EEDE700164760 /* Daily.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ED04AC268EEDE700164760 /* Daily.swift */; };
@@ -263,6 +265,8 @@
 		84C47CEA267DF5D6001A43C2 /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		84C47CED267DFC92001A43C2 /* AnalyseResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseResultView.swift; sourceTree = "<group>"; };
 		84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseView.swift; sourceTree = "<group>"; };
+		84C7DFF526A2A2FF0007B93B /* DataManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManageView.swift; sourceTree = "<group>"; };
+		84C7DFF726A2AB350007B93B /* UpdateSeverDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSeverDataView.swift; sourceTree = "<group>"; };
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
@@ -591,6 +595,7 @@
 		8472697C261478FC00F92E66 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				84C7DFF426A2A2E20007B93B /* DataManage */,
 				843488DB26574AC900EF2203 /* Analyse */,
 				847269802614798000F92E66 /* Share */,
 				84726895261307F300F92E66 /* SharesList */,
@@ -768,6 +773,15 @@
 				84B8184A269FFA3E003C928E /* Notification.swift */,
 			);
 			path = Notification;
+			sourceTree = "<group>";
+		};
+		84C7DFF426A2A2E20007B93B /* DataManage */ = {
+			isa = PBXGroup;
+			children = (
+				84C7DFF526A2A2FF0007B93B /* DataManageView.swift */,
+				84C7DFF726A2AB350007B93B /* UpdateSeverDataView.swift */,
+			);
+			path = DataManage;
 			sourceTree = "<group>";
 		};
 		84E11ED6260D91E80012D151 /* Home */ = {
@@ -1090,6 +1104,7 @@
 				847268FB26130F8600F92E66 /* ApiStore.swift in Sources */,
 				84565A69261C5F15009F9F7D /* Page.swift in Sources */,
 				8457328B2696FFAC0072A837 /* SFBarChartView.swift in Sources */,
+				84C7DFF626A2A2FF0007B93B /* DataManageView.swift in Sources */,
 				845732882696FB990072A837 /* BSPointView.swift in Sources */,
 				845732992697DE4B0072A837 /* SFUIAnalyseCharts.swift in Sources */,
 				84C47CEB267DF5D6001A43C2 /* Screen.swift in Sources */,
@@ -1116,6 +1131,7 @@
 				847268A0261307F300F92E66 /* SharesList.swift in Sources */,
 				8457328F269703EE0072A837 /* AnalyseKLineChart.swift in Sources */,
 				84540DC726352B8800ECFD9A /* Progress .swift in Sources */,
+				84C7DFF826A2AB350007B93B /* UpdateSeverDataView.swift in Sources */,
 				84F8CB23268304D800216A50 /* CommitView.swift in Sources */,
 				842C7248265F3B840086FCD0 /* AnalyseCell.swift in Sources */,
 				842C7240265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */,

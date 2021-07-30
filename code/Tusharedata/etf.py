@@ -31,4 +31,3 @@ def update(isNeed=False):
         print ("ETF列表无需更新")
 
 
-update()

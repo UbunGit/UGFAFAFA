@@ -1,13 +1,58 @@
 PODS:
   - Alamofire (5.4.3)
+  - BlocksKit (2.2.7):
+    - BlocksKit/All (= 2.2.7)
+  - BlocksKit/All (2.2.7):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/QuickLook
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.7)
+  - BlocksKit/DynamicDelegate (2.2.7)
+  - BlocksKit/MessageUI (2.2.7):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/QuickLook (2.2.7):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.7):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
   - Charts (3.6.0):
     - Charts/Core (= 3.6.0)
   - Charts/Core (3.6.0)
   - CocoaAsyncSocket (7.6.5)
+  - CocoaLumberjack (3.7.2):
+    - CocoaLumberjack/Core (= 3.7.2)
+  - CocoaLumberjack/Core (3.7.2)
+  - DoraemonKit/Core (3.0.2)
+  - DoraemonKit/WithDatabase (3.0.2):
+    - DoraemonKit/Core
+    - YYDebugDatabase
+  - DoraemonKit/WithLoad (3.0.2):
+    - DoraemonKit/Core
+  - DoraemonKit/WithLogger (3.0.2):
+    - CocoaLumberjack
+    - DoraemonKit/Core
+  - DoraemonKit/WithMLeaksFinder (3.0.2):
+    - DoraemonKit/Core
+  - DoraemonKit/WithWeex (3.0.2):
+    - DoraemonKit/Core
+    - WeexSDK
+    - WXDevtool
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - GCDWebServer (3.5.4):
+    - GCDWebServer/Core (= 3.5.4)
+  - GCDWebServer/Core (3.5.4)
+  - HandyJSON (5.0.2)
   - PythonKit (1.0.1)
   - SnapKit (5.0.1)
   - Socket.IO-Client-Swift (16.0.1):
     - Starscream (~> 4.0)
+  - SocketRocket (0.5.1)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
@@ -20,11 +65,26 @@ PODS:
   - UGSwiftKit/UGAnalyse (1.0.1):
     - PythonKit
     - UGSwiftKit/Base
+  - WeexSDK (0.30.0)
+  - WXDevtool (0.24.0):
+    - SocketRocket
+    - WeexSDK
+  - YYDebugDatabase (2.1.0):
+    - FMDB
+    - GCDWebServer
 
 DEPENDENCIES:
   - Alamofire
+  - BlocksKit (from `https://github.com/ubunfork/BlocksKit`)
   - Charts
   - CocoaAsyncSocket
+  - DoraemonKit/Core (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
+  - DoraemonKit/WithDatabase (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
+  - DoraemonKit/WithLoad (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
+  - DoraemonKit/WithLogger (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
+  - DoraemonKit/WithMLeaksFinder (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
+  - DoraemonKit/WithWeex (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
+  - HandyJSON
   - PythonKit (from `/Users/admin/Documents/github/PythonKit`)
   - SnapKit
   - Socket.IO-Client-Swift
@@ -38,28 +98,59 @@ SPEC REPOS:
     - Alamofire
     - Charts
     - CocoaAsyncSocket
+    - CocoaLumberjack
+    - FMDB
+    - GCDWebServer
+    - HandyJSON
     - SnapKit
     - Socket.IO-Client-Swift
+    - SocketRocket
     - SQLite.swift
     - Starscream
+    - WeexSDK
+    - WXDevtool
+    - YYDebugDatabase
 
 EXTERNAL SOURCES:
+  BlocksKit:
+    :git: https://github.com/ubunfork/BlocksKit
+  DoraemonKit:
+    :git: https://gitee.com/yixiangboy/DoraemonKit.git
+    :tag: 3.0.2
   PythonKit:
     :path: "/Users/admin/Documents/github/PythonKit"
   UGSwiftKit:
     :path: "./UGSwiftKit"
 
+CHECKOUT OPTIONS:
+  BlocksKit:
+    :commit: 8d298a639e859b7f85240a1bd7bf934d288d820d
+    :git: https://github.com/ubunfork/BlocksKit
+  DoraemonKit:
+    :git: https://gitee.com/yixiangboy/DoraemonKit.git
+    :tag: 3.0.2
+
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  BlocksKit: 4e4b198b89d9db19472efd83b485cae31f4f482d
   Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
+  DoraemonKit: 0740089a373899c8d462df9ee824fcdd97a68da3
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   PythonKit: 80d7cc257e135961a0aa09d66198c6abdf8ebb19
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
+  SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   UGSwiftKit: d0cd808d5687b5b3a7a0e49722227bb5144c8191
+  WeexSDK: 8e01e33244f51cb11f9f000b5200d93de5f4fa97
+  WXDevtool: 95b70c73c06fc3299d65bd53ba4b3e0b0087f3cb
+  YYDebugDatabase: e684a7f79fca2e3673a23347cefb822f911f3124
 
-PODFILE CHECKSUM: 01819308f4888ef866fdfd0eb942fcf58817025f
+PODFILE CHECKSUM: 7f3e02ca84e175f0e252cc10ae9cf52894751ea4
 
 COCOAPODS: 1.10.0

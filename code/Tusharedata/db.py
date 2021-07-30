@@ -53,7 +53,7 @@ class StockBasic(Base):
         new_dic["changeTime"] = self.changeTime.strftime("%Y%m%d")
         return new_dic
     # 更新股票列表
-    def createorupdate(self,datas,ignore=True):
+    def to_db(self,datas,ignore=True):
         try:
             for x in datas:
                 x["changeTime"] = datetime.now()
@@ -69,6 +69,7 @@ class StockBasic(Base):
     
     # 查找晚与changeTime包含keyword的数据
     def fitter(self, keyword="", changeTime=""):
+        changeTime = changeTime if changeTime!="" else "17500101"
         reqster= session.query(StockBasic).filter(
             StockBasic.changeTime > datetime.strptime(changeTime,'%Y%m%d')
             ).filter(
@@ -123,6 +124,7 @@ class ETFBasic(Base):
      # 查找晚与changeTime包含keyword的数据
     
     def fitter(self, keyword="", changeTime=""):
+        changeTime = changeTime if changeTime!="" else "17500101"
         reqster= session.query(ETFBasic).filter(
             ETFBasic.changeTime > datetime.strptime(changeTime,'%Y%m%d')
             ).filter(
