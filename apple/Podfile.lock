@@ -48,7 +48,6 @@ PODS:
     - GCDWebServer/Core (= 3.5.4)
   - GCDWebServer/Core (3.5.4)
   - HandyJSON (5.0.2)
-  - PythonKit (1.0.1)
   - SnapKit (5.0.1)
   - Socket.IO-Client-Swift (16.0.1):
     - Starscream (~> 4.0)
@@ -59,11 +58,8 @@ PODS:
   - Starscream (4.0.4)
   - UGSwiftKit (1.0.1):
     - UGSwiftKit/Base (= 1.0.1)
-  - UGSwiftKit/Appicon (1.0.1):
-    - UGSwiftKit/Base
   - UGSwiftKit/Base (1.0.1)
   - UGSwiftKit/UGAnalyse (1.0.1):
-    - PythonKit
     - UGSwiftKit/Base
   - WeexSDK (0.30.0)
   - WXDevtool (0.24.0):
@@ -85,16 +81,14 @@ DEPENDENCIES:
   - DoraemonKit/WithMLeaksFinder (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
   - DoraemonKit/WithWeex (from `https://gitee.com/yixiangboy/DoraemonKit.git`, tag `3.0.2`)
   - HandyJSON
-  - PythonKit (from `/Users/admin/Documents/github/PythonKit`)
   - SnapKit
   - Socket.IO-Client-Swift
   - SQLite.swift
   - UGSwiftKit (from `./UGSwiftKit`)
-  - UGSwiftKit/Appicon (from `./UGSwiftKit`)
   - UGSwiftKit/UGAnalyse (from `./UGSwiftKit`)
 
 SPEC REPOS:
-  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - Charts
     - CocoaAsyncSocket
@@ -117,8 +111,6 @@ EXTERNAL SOURCES:
   DoraemonKit:
     :git: https://gitee.com/yixiangboy/DoraemonKit.git
     :tag: 3.0.2
-  PythonKit:
-    :path: "/Users/admin/Documents/github/PythonKit"
   UGSwiftKit:
     :path: "./UGSwiftKit"
 
@@ -140,17 +132,16 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  PythonKit: 80d7cc257e135961a0aa09d66198c6abdf8ebb19
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
-  UGSwiftKit: d0cd808d5687b5b3a7a0e49722227bb5144c8191
+  UGSwiftKit: c7591f603555a307f718912a86dfc03a94847c67
   WeexSDK: 8e01e33244f51cb11f9f000b5200d93de5f4fa97
   WXDevtool: 95b70c73c06fc3299d65bd53ba4b3e0b0087f3cb
   YYDebugDatabase: e684a7f79fca2e3673a23347cefb822f911f3124
 
-PODFILE CHECKSUM: 7f3e02ca84e175f0e252cc10ae9cf52894751ea4
+PODFILE CHECKSUM: 97fe5537d5a67912c60d74c5d336e24255e72a2f
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.9.1

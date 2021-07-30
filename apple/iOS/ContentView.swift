@@ -14,7 +14,7 @@ class Content: ObservableObject {
     @Published var msg:String?
     init() {
      
-        notif.addObserver(self, selector: #selector(alertMsg), name: NSNotification.ns_msg, object: nil)
+        notif.addObserver(self, selector: #selector(alertMsg), name: NSNotification.nf_msg, object: nil)
       
     }
     @objc func alertMsg(notif:NSNotification)  {
@@ -83,9 +83,7 @@ struct ContentView: View {
     }
  
 }
-extension NSNotification{
-    static let ns_msg = Notification.Name.init("msg")
-}
+
 
 
 struct ContentView_Previews: PreviewProvider {

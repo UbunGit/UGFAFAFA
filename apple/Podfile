@@ -1,4 +1,4 @@
-source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+#source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 use_frameworks!
 def common
@@ -12,12 +12,11 @@ def common
   pod 'UGSwiftKit/UGAnalyse', :path => './UGSwiftKit'
   pod 'HandyJSON'
   pod 'BlocksKit', :git => "https://github.com/ubunfork/BlocksKit"
-  
-#  pod 'SwiftUIKit', :path => './SwiftUIKit'
+
 end
 
 def macOS
-pod 'PythonKit', :path => '/Users/admin/Documents/github/PythonKit'
+#pod 'PythonKit'
 pod 'UGSwiftKit/Appicon', :path => './UGSwiftKit'
 end
 
@@ -40,10 +39,13 @@ target 'apple (iOS)' do
   iOS
 end
 
+target 'Demo' do
+  pod 'UGSwiftKit', :path => './UGSwiftKit'
+end
+
 
 target 'apple (macOS)' do
-  common
-  macOS
+  pod 'UGSwiftKit', :path => './UGSwiftKit'
 end
 #target 'Tests macOS' do
 #  common

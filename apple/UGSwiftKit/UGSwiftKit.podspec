@@ -42,7 +42,7 @@ Pod::Spec.new do |s|
   
   s.subspec 'UGAnalyse' do |spec|
     spec.ios.dependency 'UGSwiftKit/Base'
-    spec.dependency 'PythonKit'
+#    spec.dependency 'PythonKit'
     spec.source_files = 'Sources/UGAnalyse/Sources/**/*.swift'
     spec.resource = ['Sources/Appicon/resources/**/*.xcassets']
 

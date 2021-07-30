@@ -15,7 +15,7 @@ extension ETFBasic:CRUDSqliteProtocol{
         
     ]
     
-    public static func tableName() -> String{
+    public func tableName() -> String{
        
         let tableName = "\(Self.self)".lowercased()
         let sql = """

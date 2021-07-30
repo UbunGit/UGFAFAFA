@@ -7,6 +7,7 @@
 
 import Foundation
 import Charts
+import UGSwiftKit
 class AnalyseKLineChart: SFCombinedChart {
     
     @Published var dailys:[Daily] = []
@@ -212,6 +213,7 @@ extension AnalyseKLineChart{
         
         
         var colors:[NSUIColor] = []
+      
         let entrys = bspoint.enumerated().map { (index, item) -> ChartDataEntry in
             colors.append(item.type==1 ? .orange : .blue)
             let sort:Int = datylys.firstIndex {$0.date == item.date} ?? 0

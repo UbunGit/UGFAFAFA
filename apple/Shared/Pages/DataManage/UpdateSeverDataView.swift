@@ -40,7 +40,7 @@ struct UpdateDataModen {
                     if error != nil {
                         print("\(error)")
                     }
-                    notif.post(name: NSNotification.ns_msg, object: "error test")
+                    notif.post(name: NSNotification.nf_msg, object: "error test")
                     notif.post(name: NSNotification.nf_updatelist, object: nil)
                    
                 }
@@ -49,9 +49,7 @@ struct UpdateDataModen {
     }
 }
 
-extension NSNotification{
-    static let nf_updatelist = Notification.Name.init("updatelist")
-}
+
 class UpdateSeverData: ObservableObject {
     @Published var updatelist = UpdateDataModen.list()
     init() {

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import PythonKit
+
 
 
 class PythonTest: XCTestCase {
