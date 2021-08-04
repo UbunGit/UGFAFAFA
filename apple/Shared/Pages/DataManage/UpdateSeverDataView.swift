@@ -15,49 +15,58 @@ struct UpdateDataModen {
     var name:String
     var end:()->(String?)
     var closures:()->()
+    var isloading = false
     var endStr:String{
         end() ?? "--"
     }
     
-    static func list() -> [UpdateDataModen] {
-        [
-            UpdateDataModen(name: "股票列表", end: {
-                StockBasic.last(column: "changeTime", isDesc: true)?.changeTime
-            }, closures: {
-                updateStockBase { error in
-                    if error != nil {
-                        notif.alert(error?.msg ?? "error")
-                    }
-                    notif.post(name: NSNotification.nf_updatelist, object: nil)
-                   
-                }
-            }),
-            
-            UpdateDataModen(name: "ETF列表", end: {
-                ETFBasic.last(column: "changeTime", isDesc: true)?.changeTime
-            }, closures: {
-                updateETFBase { error in
-                    if error != nil {
-                        notif.alert(error?.msg ?? "error")
-                    }
-                   
-                    notif.post(name: NSNotification.nf_updatelist, object: nil)
-                   
-                }
-            })
-        ]
-    }
 }
 
 
 class UpdateSeverData: ObservableObject {
-    @Published var updatelist = UpdateDataModen.list()
+    @Published var updatelist:[UpdateDataModen] = []
+    @Published var isLoading = false
     init() {
-        
+        updatelistData()
         notif.addObserver(self, selector: #selector(updatelistData), name: NSNotification.nf_updatelist, object: nil)
     }
     @objc func updatelistData() {
-        updatelist = UpdateDataModen.list()
+        updatelist = [
+            UpdateDataModen(
+                name: "股票列表",
+                end: {
+                    StockBasic.last(column: "changeTime", isDesc: true)?.changeTime
+                },
+                closures: {
+                    self.isLoading = true
+                    updateStockBase { error in
+                        self.isLoading = false
+                        if error != nil {
+                            notif.alert(error?.msg ?? "error")
+                        }
+                        notif.post(name: NSNotification.nf_updatelist, object: nil)
+                        
+                    }
+                }),
+            
+            UpdateDataModen(
+                name: "ETF列表",
+                end: {
+                    ETFBasic.last(column: "changeTime", isDesc: true)?.changeTime
+                },
+                closures: {
+                    self.isLoading = true
+                    updateETFBase { error in
+                        self.isLoading = false
+                        if error != nil {
+                            notif.alert(error?.msg ?? "error")
+                        }
+                        
+                        notif.post(name: NSNotification.nf_updatelist, object: nil)
+                        
+                    }
+                })
+        ]
     }
 }
 
@@ -76,6 +85,7 @@ struct UpdateSeverDataView: View {
                                 .font(.caption2)
                         }
                         .padding()
+                        
                         .onTapGesture {
                             obser.updatelist[index].closures()
                             
@@ -83,11 +93,10 @@ struct UpdateSeverDataView: View {
                         
                     }
                 }
+                .listStyle(InsetGroupedListStyle())
             }
-            
-            
         }
-        .loading(isloading: isloading)
+        .loading(isloading: obser.isLoading)
     }
     
     func updateBase(finesh:@escaping (_ finesh:BaseError?)->()){
@@ -109,17 +118,17 @@ struct UpdateSeverDataView: View {
             }
             group.leave()
         }
-       
+        
         group.notify(queue: .main) {
             print("all requests come back")
             finesh(werror)
             isloading = false
-
+            
         }
-
+        
         
     }
-   
+    
 }
 
 struct UpdateBaseView_Previews: PreviewProvider {
