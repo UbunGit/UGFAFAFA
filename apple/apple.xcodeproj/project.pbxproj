@@ -16,7 +16,7 @@
 		841F335C2624062F0099B8CB /* MakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841F335B2624062F0099B8CB /* MakeData.swift */; };
 		841F3477262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
 		841F3478262447300099B8CB /* mlma.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 841F3476262447300099B8CB /* mlma.mlmodel */; };
-		8428EC942647AE110008CDFB /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 8428EC932647AE110008CDFB /* SwiftPackageProductDependency */; };
+		8428EC942647AE110008CDFB /* PerfectSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 8428EC932647AE110008CDFB /* PerfectSQLite */; };
 		8428ECFC267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */; };
 		8428ECFD267A3CE10008CDFB /* SFCandleStickChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428ECFB267A3CE10008CDFB /* SFCandleStickChartView.swift */; };
 		842C7240265F376C0086FCD0 /* AnalyseSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C723F265F376B0086FCD0 /* AnalyseSelectView.swift */; };
@@ -85,7 +85,6 @@
 		8459C49C26B3BF7E008ECFD4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C49B26B3BF7E008ECFD4 /* ContentView.swift */; };
 		8459C49E26B3BF81008ECFD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8459C49D26B3BF81008ECFD4 /* Assets.xcassets */; };
 		8459C4A126B3BF81008ECFD4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8459C4A026B3BF81008ECFD4 /* Preview Assets.xcassets */; };
-		8459C4A726B3BFDB008ECFD4 /* TostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C4A626B3BFDB008ECFD4 /* TostView.swift */; };
 		8459C4A926B3C1CC008ECFD4 /* NotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8459C4A826B3C1CC008ECFD4 /* NotificationCenter.swift */; };
 		8472689C261307F300F92E66 /* ShareCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726897261307F300F92E66 /* ShareCell.swift */; };
 		8472689E261307F300F92E66 /* SharesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84726899261307F300F92E66 /* SharesListView.swift */; };
@@ -245,7 +244,6 @@
 		8459C49D26B3BF81008ECFD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8459C4A026B3BF81008ECFD4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8459C4A226B3BF81008ECFD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8459C4A626B3BFDB008ECFD4 /* TostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TostView.swift; sourceTree = "<group>"; };
 		8459C4A826B3C1CC008ECFD4 /* NotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCenter.swift; sourceTree = "<group>"; };
 		84726897261307F300F92E66 /* ShareCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareCell.swift; sourceTree = "<group>"; };
 		84726899261307F300F92E66 /* SharesListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharesListView.swift; sourceTree = "<group>"; };
@@ -287,6 +285,7 @@
 		84C47CF0267DFD3C001A43C2 /* AnalyseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyseView.swift; sourceTree = "<group>"; };
 		84C7DFF526A2A2FF0007B93B /* DataManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManageView.swift; sourceTree = "<group>"; };
 		84C7DFF726A2AB350007B93B /* UpdateSeverDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateSeverDataView.swift; sourceTree = "<group>"; };
+		84C7DFFA26B6471D0007B93B /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		84E11EEB260DB2DB0012D151 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		84E11EF0260DB3460012D151 /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 		84E11F2D260DCEEF0012D151 /* SQLiteManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteManage.swift; sourceTree = "<group>"; };
@@ -329,7 +328,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8428EC942647AE110008CDFB /* BuildFile in Frameworks */,
+				8428EC942647AE110008CDFB /* PerfectSQLite in Frameworks */,
 				8489294E260C5C8500006D88 /* Pods_apple__macOS_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -573,7 +572,6 @@
 		8459C49826B3BF7D008ECFD4 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				8459C4A626B3BFDB008ECFD4 /* TostView.swift */,
 				8459C49926B3BF7D008ECFD4 /* DemoApp.swift */,
 				8459C49B26B3BF7E008ECFD4 /* ContentView.swift */,
 				8459C49D26B3BF81008ECFD4 /* Assets.xcassets */,
@@ -706,6 +704,7 @@
 		84807D8B25FB7A8500C8CB18 = {
 			isa = PBXGroup;
 			children = (
+				84C7DFF926B647070007B93B /* Playground */,
 				845410CB2636C15700ECFD9A /* MAResources */,
 				845410CA2636C13C00ECFD9A /* resources */,
 				84807D9025FB7A8500C8CB18 /* Shared */,
@@ -851,6 +850,14 @@
 			path = DataManage;
 			sourceTree = "<group>";
 		};
+		84C7DFF926B647070007B93B /* Playground */ = {
+			isa = PBXGroup;
+			children = (
+				84C7DFFA26B6471D0007B93B /* MyPlayground.playground */,
+			);
+			path = Playground;
+			sourceTree = "<group>";
+		};
 		84E11ED6260D91E80012D151 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -971,7 +978,7 @@
 			);
 			name = "apple (macOS)";
 			packageProductDependencies = (
-				8428EC932647AE110008CDFB /* SwiftPackageProductDependency */,
+				8428EC932647AE110008CDFB /* PerfectSQLite */,
 			);
 			productName = "apple (macOS)";
 			productReference = 84807DA325FB7A8900C8CB18 /* apple.app */;
@@ -1029,7 +1036,7 @@
 			);
 			mainGroup = 84807D8B25FB7A8500C8CB18;
 			packageReferences = (
-				8428EC922647AE110008CDFB /* RemoteSwiftPackageReference */,
+				8428EC922647AE110008CDFB /* XCRemoteSwiftPackageReference "Perfect-SQLite" */,
 			);
 			productRefGroup = 84807D9C25FB7A8900C8CB18 /* Products */;
 			projectDirPath = "";
@@ -1204,7 +1211,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8459C4A926B3C1CC008ECFD4 /* NotificationCenter.swift in Sources */,
-				8459C4A726B3BFDB008ECFD4 /* TostView.swift in Sources */,
 				8459C49C26B3BF7E008ECFD4 /* ContentView.swift in Sources */,
 				8459C49A26B3BF7D008ECFD4 /* DemoApp.swift in Sources */,
 			);
@@ -1745,7 +1751,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8428EC922647AE110008CDFB /* RemoteSwiftPackageReference */ = {
+		8428EC922647AE110008CDFB /* XCRemoteSwiftPackageReference "Perfect-SQLite" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/PerfectlySoft/Perfect-SQLite.git";
 			requirement = {
@@ -1756,9 +1762,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8428EC932647AE110008CDFB /* SwiftPackageProductDependency */ = {
+		8428EC932647AE110008CDFB /* PerfectSQLite */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8428EC922647AE110008CDFB /* RemoteSwiftPackageReference */;
+			package = 8428EC922647AE110008CDFB /* XCRemoteSwiftPackageReference "Perfect-SQLite" */;
 			productName = PerfectSQLite;
 		};
 /* End XCSwiftPackageProductDependency section */

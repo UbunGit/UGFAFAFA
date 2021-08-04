@@ -10,36 +10,13 @@ import CoreData
 import UGSwiftKit
 import BlocksKit
 
-class Content: ObservableObject {
-    @Published var msg:String?
-    init() {
-     
-        notif.addObserver(self, selector: #selector(alertMsg), name: NSNotification.nf_msg, object: nil)
-      
-    }
-    @objc func alertMsg(notif:NSNotification)  {
-        let moonAnimation = Animation.easeInOut.speed(3)
-        withAnimation(moonAnimation) {
-      
-       
-            msg = notif.object as? String
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            withAnimation(moonAnimation) {
-                self.msg = nil
-            }
-            
-        }
-    }
-}
 
 struct ContentView: View {
    
     
     @Environment(\.presentationMode) private var viewContext
     @Environment(\.presentationMode) var presentationMode
-    @StateObject var obser = Content()
+    @StateObject var obser = UGTostObser()
     
     init() {
        print("init tabbar")
@@ -67,11 +44,7 @@ struct ContentView: View {
                
             }
             if obser.msg != nil{
-                Text(obser.msg ?? "")
-                    .foregroundColor(.white)
-                    .frame(width: KWidth, height: 64, alignment: .center)
-                    .background(Color("Secondary"))
-                    .padding()
+                UGTostView(msg:obser.msg)
             }
             
             

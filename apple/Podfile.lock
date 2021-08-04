@@ -88,7 +88,7 @@ DEPENDENCIES:
   - UGSwiftKit/UGAnalyse (from `./UGSwiftKit`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - Alamofire
     - Charts
     - CocoaAsyncSocket
@@ -142,6 +142,6 @@ SPEC CHECKSUMS:
   WXDevtool: 95b70c73c06fc3299d65bd53ba4b3e0b0087f3cb
   YYDebugDatabase: e684a7f79fca2e3673a23347cefb822f911f3124
 
-PODFILE CHECKSUM: 97fe5537d5a67912c60d74c5d336e24255e72a2f
+PODFILE CHECKSUM: e5b2fd93f742da8c35442211cf47d59cbdebbec5
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0

@@ -58,7 +58,7 @@ public extension View {
         if isPresented == true {
             content()
                 .opacity(1)
-                .toastStyle(style)
+//                .toastStyle(style)
         }
     }
 }

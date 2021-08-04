@@ -11,7 +11,6 @@ import UGSwiftKit
 
 public extension NSNotification{
     static let nf_updatelist = Notification.Name.init("updatelist")
-    static let nf_msg = Notification.Name.init("msg")
 }
 
 // 更新股票数据库

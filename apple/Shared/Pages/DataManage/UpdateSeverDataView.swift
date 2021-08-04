@@ -26,7 +26,7 @@ struct UpdateDataModen {
             }, closures: {
                 updateStockBase { error in
                     if error != nil {
-                        print("\(error)")
+                        notif.alert(error?.msg ?? "error")
                     }
                     notif.post(name: NSNotification.nf_updatelist, object: nil)
                    
@@ -38,9 +38,9 @@ struct UpdateDataModen {
             }, closures: {
                 updateETFBase { error in
                     if error != nil {
-                        print("\(error)")
+                        notif.alert(error?.msg ?? "error")
                     }
-                    notif.post(name: NSNotification.nf_msg, object: "error test")
+                   
                     notif.post(name: NSNotification.nf_updatelist, object: nil)
                    
                 }

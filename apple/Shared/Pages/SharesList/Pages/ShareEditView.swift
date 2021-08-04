@@ -16,7 +16,7 @@ struct ShareEditView: View,SFPresentation {
   
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var store:ShareEdit
-    @State var context = SFToastObservable()
+//    @State var context = SFToastObservable()
     @ObservedObject var loadingObser = SFLoadingObservable()
     
     init(id:Int) {
@@ -57,12 +57,12 @@ struct ShareEditView: View,SFPresentation {
             store.loadData { (error) in
                 disLoading()
                 if((error) != nil){
-                    context.present(Text(error!.msg).any())
+//                    context.present(Text(error!.msg).any())
                 }
             }
 
         }
-        .toast(context: context)
+//        .toast(context: context)
         .loading(context: loadingObser)
         
     }

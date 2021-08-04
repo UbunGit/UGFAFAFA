@@ -15,7 +15,7 @@ struct ShareDetailView: View {
     
     
     @ObservedObject var store:ShareDetail
-    @State var context = SFToastObservable()
+//    @State var context = SFToastObservable()
     @State var isSheet = false
     @State var sheetCount = 0
     
