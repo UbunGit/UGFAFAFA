@@ -4,8 +4,6 @@
 import os
 import configparser
 
-
-
 #获取config配置文件
 def getConfig(section, key):
     config = configparser.ConfigParser()
