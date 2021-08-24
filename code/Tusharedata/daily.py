@@ -30,6 +30,7 @@ def sd_local(code="000001.SZ"):
     datafile = filempath(_code)
     if os.path.exists(datafile):
         temdata = pandas.read_csv(datafile ,dtype={"date":"string"}, index_col=0)
+        temdata = temdata.rename(columns={'ts_code':'code'})
         temdata = temdata.sort_values(by='date')
         if len(temdata)>0:
             return temdata
@@ -80,6 +81,7 @@ def load(code="000001.SZ"):
                 logging.debug("更新完成")
 
         data = sd_local( code = _code)
+       
         data = data.sort_values(by='date')
         logging.debug(">>>>> load return data")
         return data

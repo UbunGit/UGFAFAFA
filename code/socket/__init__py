@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*-
 
 import sys,json,logging
-
+import numpy as np
 sys.path.append("/Users/admin/Documents/github/UGFAFAFA/code/")
 
 from flask import Flask, render_template,jsonify
 from flask import request
 from flask_socketio import SocketIO, emit
 from flask.json import JSONEncoder
+
 
 import importlib
 app = Flask(__name__)
@@ -106,17 +107,34 @@ def analysesHistoryDetails():
 #############  ##################
 @app.route('/share/daily')
 def shareDaily():
-    #获取股票历史记录
-    from Tusharedata.daily import load
-    data = request_parse(request) 
-    df = load(data["code"])
-    if(data["date"]!= None):
-        df = df[df["date"]>data["date"]]
-    dailys = df.to_dict(orient="records")
-    return {
-        "code":0,
-        "data":dailys
-    }
+    try:
+        #获取股票历史记录
+        from Tusharedata.daily import load
+        data = request_parse(request) 
+        df = load(data["code"])
+      
+        # if(data["date"]!= None):
+        #     df = df[df["date"]>data["date"]]
+        df = df.where(df.notnull(), None)
+        dailys = df.to_dict(orient="records")
+        # result = []
+        # for item in dailys:
+        #     dic = {}
+        #     dic["code"] =  item["ts_code"]
+        #     dic["date"] =  item["date"]
+        #     dic["open"] = item["open"] if item["open"] == np.nan else None
+        #     result.append(dic)
+
+        return {
+            "code":0,
+            "data":dailys
+        }
+    except  Exception as e:
+        print(e)
+        return {
+            "code":-1,
+            "msg":"error" 
+        }
 
 @socketio.on('message')
 def handle_message(message):

@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "axios": "^0.21.1",
-    "v-charts": "^1.19.0"
-  }
-}
