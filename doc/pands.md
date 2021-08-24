@@ -57,5 +57,8 @@ from sklearn import preprocessing
 preprocessing.MinMaxScaler().fit_transform(x) # 归一到 [ 0，1 ] 
 preprocessing.MaxAbsScaler().fit_transform(x) # 归一到 [ -1，1 ] 
 ```
-
-
+# 利用pandas向一个csv文件追加写入数据
+```
+df.to_csv('my_csv.csv', mode='a', header=False）
+```
+to_csv()方法mode默认为w，我们加上mode='a'，便可以追加写入数据。
